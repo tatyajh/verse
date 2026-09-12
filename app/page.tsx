@@ -113,16 +113,15 @@ export default function Home() {
         <div className="wrap">
           <div className={s.llave}>
             <div className={s.llaveTexto}>
-              <p className="label muted">El símbolo</p>
-              <h2 className={s.llaveTitulo}>Detrás del encaje.</h2>
+              <h2 className={s.llaveTitulo}>Versé</h2>
               <p>
-                Aparece en los herrajes, en el sello del empaque y en cada pieza de la
-                casa: el detalle que hace reconocible a Versé sin necesidad de una
-                etiqueta a la vista.
+                Donde tú y tu sombra se reconocen. Donde lo que ves y lo que eres danzan en el mismo espacio, finalmente en paz.
               </p>
               <p className={s.cita}>
-                Sentirse bien con una misma no debería depender de una ocasión, de otra
-                persona o de que alguien vea lo que llevamos puesto.
+                No somos una sola verdad. Somos el diálogo entre lo que contradice y lo que completa.
+              </p>
+              <p className={s.cita}>
+                Aquí tu dualidad es sagrada.
               </p>
             </div>
             <KeyReveal />
