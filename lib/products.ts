@@ -198,6 +198,8 @@ export const PRODUCTS: Product[] = [
   { slug: "aurora-solsticio", nombre: "Solsticio", tonalidad: "nocturna", tipo: "complemento", tallas: ["Única"] },
 
   // ---------- Diurna Conjuntos ----------
+  // Nota: Los nombres de los conjuntos diurnos (Alba, Escarcha, Celestial, Rocío)
+  // están listos para confirmación final con la marca. Modificar según sea necesario.
   {
     slug: "aurora-alba",
     nombre: "Alba",
