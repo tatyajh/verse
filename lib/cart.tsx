@@ -145,7 +145,9 @@ export function useCart() {
     () =>
       lineas.flatMap((l): ResolvedLine[] => {
         const producto = getProduct(l.slug);
-        if (!producto) return [];
+        // Sin precio confirmado no debería haber llegado al carrito (la UI de
+        // compra lo impide), pero por seguridad de tipos no se le calcula total.
+        if (!producto || producto.precio === undefined) return [];
         return [{ ...l, producto, subtotal: producto.precio * l.cantidad }];
       }),
     [lineas],

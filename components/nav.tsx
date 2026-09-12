@@ -79,6 +79,9 @@ export default function Nav() {
         <Link href="/coleccion" className="link">
           Colección
         </Link>
+        <Link href="/aurora" className="link">
+          Aurora
+        </Link>
         <Link href="/#lineas" className={`link ${s.oculto}`}>
           Líneas
         </Link>

@@ -32,8 +32,21 @@
   color: var(--muted);
 }
 
+.miga {
+  display: flex;
+  gap: 0.6rem;
+}
+
 .migas a:hover {
   color: var(--fg);
+}
+
+.incluye {
+  color: var(--muted);
+}
+
+.proximamente {
+  color: var(--accent);
 }
 
 .nombre {

@@ -8,10 +8,46 @@ import { useEffect, useRef } from "react";
  * Versé todavía no tiene fotografía de producto. Un rectángulo gris diría
  * "falta algo"; esto dice "esto es la marca". Cada pieza recibe un grabado
  * propio —sembrado con su slug, idéntico entre recargas— dibujado en
- * hairlines rose gold sobre noche: festón, roseta y retícula de tul.
+ * hairlines sobre un fondo de dos tonos: festón, roseta y retícula de tul.
+ *
+ * La paleta por defecto es la noche del sitio. Aurora trae las suyas
+ * propias (ver lib/products.ts) para que sus dos tonalidades se noten
+ * incluso sin foto todavía.
  *
  * Cuando existan fotos, <ProductImage> usa la foto y esto desaparece solo.
  */
+
+export type PaletaGrabado = {
+  fondo: string;
+  fondo2: string;
+  /** "r, g, b" — el trazo del encaje. */
+  trazo: string;
+  /** "r, g, b" — hacia dónde cierra la viñeta de los bordes. */
+  vineta: string;
+};
+
+export const PALETA_NOCHE: PaletaGrabado = {
+  fondo: "#140e0e",
+  fondo2: "#241a1a",
+  trazo: "201, 143, 111",
+  vineta: "20, 14, 14",
+};
+
+/** Noche Boreal / Petróleo Aurora / Violeta Pulsar — del moodboard de Aurora. */
+export const PALETA_AURORA_NOCTURNA: PaletaGrabado = {
+  fondo: "#080d18",
+  fondo2: "#12484b",
+  trazo: "138, 111, 158",
+  vineta: "8, 13, 24",
+};
+
+/** Crema Lunar / Lila Celestial, con el trazo en Morado Abismo para contraste. */
+export const PALETA_AURORA_DIURNA: PaletaGrabado = {
+  fondo: "#f4eee5",
+  fondo2: "#c7b8cd",
+  trazo: "43, 28, 61",
+  vineta: "199, 184, 205",
+};
 
 function semilla(texto: string): number {
   let h = 2166136261;
@@ -34,20 +70,23 @@ function prng(estado: number): () => number {
   };
 }
 
-const NOCHE = "#140e0e";
-const NOCHE_2 = "#241a1a";
-const ROSE = "201, 143, 111";
-
-function dibujar(ctx: CanvasRenderingContext2D, w: number, h: number, slug: string) {
+function dibujar(
+  ctx: CanvasRenderingContext2D,
+  w: number,
+  h: number,
+  slug: string,
+  paleta: PaletaGrabado,
+) {
   const r = prng(semilla(slug));
   const min = Math.min(w, h);
+  const trazo = paleta.trazo;
 
   ctx.clearRect(0, 0, w, h);
 
-  // Fondo: noche con una veladura hacia el centro alto, como luz rasante.
+  // Fondo: dos tonos con una veladura hacia el centro alto, como luz rasante.
   const fondo = ctx.createLinearGradient(0, 0, w * 0.4, h);
-  fondo.addColorStop(0, NOCHE_2);
-  fondo.addColorStop(1, NOCHE);
+  fondo.addColorStop(0, paleta.fondo2);
+  fondo.addColorStop(1, paleta.fondo);
   ctx.fillStyle = fondo;
   ctx.fillRect(0, 0, w, h);
 
@@ -61,7 +100,7 @@ function dibujar(ctx: CanvasRenderingContext2D, w: number, h: number, slug: stri
   ctx.save();
   ctx.translate(w / 2, h / 2);
   ctx.rotate(giro);
-  ctx.strokeStyle = `rgba(${ROSE}, 0.075)`;
+  ctx.strokeStyle = `rgba(${trazo}, 0.075)`;
   const alcance = Math.hypot(w, h);
   ctx.beginPath();
   for (let x = -alcance; x <= alcance; x += paso) {
@@ -82,7 +121,7 @@ function dibujar(ctx: CanvasRenderingContext2D, w: number, h: number, slug: stri
   alturas.forEach((f, i) => {
     const y = h * f;
     const radio = w / (7 + Math.floor(r() * 5));
-    ctx.strokeStyle = `rgba(${ROSE}, ${0.34 - i * 0.07})`;
+    ctx.strokeStyle = `rgba(${trazo}, ${0.34 - i * 0.07})`;
     ctx.beginPath();
     for (let x = -radio; x < w + radio; x += radio * 2) {
       ctx.moveTo(x, y);
@@ -91,7 +130,7 @@ function dibujar(ctx: CanvasRenderingContext2D, w: number, h: number, slug: stri
     ctx.stroke();
 
     // Puntos de picot colgando de cada valle.
-    ctx.fillStyle = `rgba(${ROSE}, ${0.3 - i * 0.08})`;
+    ctx.fillStyle = `rgba(${trazo}, ${0.3 - i * 0.08})`;
     for (let x = radio; x < w; x += radio * 2) {
       ctx.beginPath();
       ctx.arc(x, y + radio * 0.34, ctx.lineWidth * 1.5, 0, Math.PI * 2);
@@ -108,7 +147,7 @@ function dibujar(ctx: CanvasRenderingContext2D, w: number, h: number, slug: stri
   coronas.forEach((k, i) => {
     const radio = min * k;
     const desfase = i * (Math.PI / petalos);
-    ctx.strokeStyle = `rgba(${ROSE}, ${0.48 - i * 0.13})`;
+    ctx.strokeStyle = `rgba(${trazo}, ${0.48 - i * 0.13})`;
     for (let p = 0; p < petalos; p++) {
       const a = desfase + (p * Math.PI * 2) / petalos;
       ctx.beginPath();
@@ -126,7 +165,7 @@ function dibujar(ctx: CanvasRenderingContext2D, w: number, h: number, slug: stri
   });
 
   // Corazón de la roseta.
-  ctx.strokeStyle = `rgba(${ROSE}, 0.6)`;
+  ctx.strokeStyle = `rgba(${trazo}, 0.6)`;
   ctx.beginPath();
   ctx.arc(cx, cy, min * 0.022, 0, Math.PI * 2);
   ctx.stroke();
@@ -140,13 +179,13 @@ function dibujar(ctx: CanvasRenderingContext2D, w: number, h: number, slug: stri
     h / 2,
     Math.hypot(w, h) * 0.62,
   );
-  vineta.addColorStop(0, "rgba(20, 14, 14, 0)");
-  vineta.addColorStop(1, "rgba(20, 14, 14, 0.92)");
+  vineta.addColorStop(0, `rgba(${paleta.vineta}, 0)`);
+  vineta.addColorStop(1, `rgba(${paleta.vineta}, 0.92)`);
   ctx.fillStyle = vineta;
   ctx.fillRect(0, 0, w, h);
 
   // Filete interior: el marco del grabado.
-  ctx.strokeStyle = `rgba(${ROSE}, 0.28)`;
+  ctx.strokeStyle = `rgba(${trazo}, 0.28)`;
   ctx.lineWidth = Math.max(1, min * 0.0018);
   const m = min * 0.045;
   ctx.strokeRect(m, m, w - m * 2, h - m * 2);
@@ -154,9 +193,11 @@ function dibujar(ctx: CanvasRenderingContext2D, w: number, h: number, slug: stri
 
 export default function LaceCanvas({
   slug,
+  paleta = PALETA_NOCHE,
   className,
 }: {
   slug: string;
+  paleta?: PaletaGrabado;
   className?: string;
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -177,7 +218,7 @@ export default function LaceCanvas({
       lienzo.width = Math.round(width * dpr);
       lienzo.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      dibujar(ctx, width, height, slug);
+      dibujar(ctx, width, height, slug, paleta);
     };
 
     const reprogramar = () => {
@@ -192,7 +233,15 @@ export default function LaceCanvas({
       if (frame) cancelAnimationFrame(frame);
       ro.disconnect();
     };
-  }, [slug]);
+  }, [slug, paleta]);
 
-  return <canvas ref={ref} className={className} aria-hidden="true" />;
+  return (
+    <canvas
+      ref={ref}
+      className={className}
+      aria-hidden="true"
+      // color de fondo inmediato: evita el parpadeo antes de que pinte el canvas
+      style={{ background: paleta.fondo }}
+    />
+  );
 }

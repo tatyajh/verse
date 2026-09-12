@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Panel from "@/components/panel";
 import ProductCard from "@/components/product-card";
-import { LINEAS, PRODUCTS, type Linea } from "@/lib/products";
+import { esAurora, LINEAS, PRODUCTS, type Linea } from "@/lib/products";
 import s from "./coleccion.module.css";
 
 export const metadata: Metadata = {
@@ -20,7 +20,9 @@ export default async function Coleccion(props: PageProps<"/coleccion">) {
   const crudo = Array.isArray(query.linea) ? query.linea[0] : query.linea;
   const activa = esLinea(crudo) ? crudo : null;
 
-  const piezas = activa ? PRODUCTS.filter((p) => p.linea === activa) : PRODUCTS;
+  // Aurora es una colección aparte (ver /aurora), no entra en este catálogo.
+  const catalogo = PRODUCTS.filter((p) => !esAurora(p));
+  const piezas = activa ? catalogo.filter((p) => !esAurora(p) && p.linea === activa) : catalogo;
   const info = activa ? LINEAS.find((l) => l.id === activa)! : null;
 
   return (

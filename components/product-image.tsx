@@ -1,11 +1,14 @@
 import Image from "next/image";
-import LaceCanvas from "./lace-canvas";
-import type { Product } from "@/lib/products";
+import LaceCanvas, { PALETA_AURORA_DIURNA, PALETA_AURORA_NOCTURNA } from "./lace-canvas";
+import { esAurora, type Product } from "@/lib/products";
 
 /**
  * Una sola puerta para la imagen de producto: si la pieza ya tiene fotografía
  * se usa; si no, se dibuja su grabado. Añadir fotos después es agregar `image`
  * en products.ts — ningún componente cambia.
+ *
+ * Las piezas de Aurora dibujan su grabado con la paleta de su tonalidad, para
+ * que Nocturna y Diurna se noten incluso antes de tener fotografía real.
  */
 export default function ProductImage({
   producto,
@@ -31,5 +34,12 @@ export default function ProductImage({
       />
     );
   }
-  return <LaceCanvas slug={producto.slug} className={className} />;
+
+  const paleta = esAurora(producto)
+    ? producto.tonalidad === "diurna"
+      ? PALETA_AURORA_DIURNA
+      : PALETA_AURORA_NOCTURNA
+    : undefined;
+
+  return <LaceCanvas slug={producto.slug} paleta={paleta} className={className} />;
 }

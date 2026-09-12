@@ -2,7 +2,7 @@ import Link from "next/link";
 import Panel from "@/components/panel";
 import ProductCard from "@/components/product-card";
 import KeyReveal from "@/components/key-reveal";
-import { LINEAS, PRODUCTS } from "@/lib/products";
+import { LINEAS, productsByLinea } from "@/lib/products";
 import s from "./home.module.css";
 
 const DETALLE = [
@@ -33,9 +33,7 @@ const DETALLE = [
 ];
 
 export default function Home() {
-  const destacados = LINEAS.map(
-    (linea) => PRODUCTS.find((p) => p.linea === linea.id)!,
-  );
+  const destacados = LINEAS.map((linea) => productsByLinea(linea.id)[0]);
 
   return (
     <>

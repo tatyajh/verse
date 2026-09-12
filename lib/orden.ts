@@ -35,7 +35,9 @@ export function calcularTotales(items: ItemPedido[]): Totales {
 
   for (const item of items) {
     const producto = getProduct(item.slug);
-    if (!producto) continue;
+    // Sin precio confirmado (piezas de Aurora todavía sin publicar) no se
+    // cobra nada por esa línea; la UI de compra tampoco deja añadirlas.
+    if (!producto || producto.precio === undefined) continue;
     const cantidad = Math.min(Math.max(Math.floor(item.cantidad), 1), 9);
     subtotal += producto.precio * cantidad;
     piezas += cantidad;

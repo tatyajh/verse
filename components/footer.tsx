@@ -20,8 +20,13 @@ export default function Footer() {
           </div>
 
           <div className={s.col}>
-            <h3 className="label">Líneas</h3>
+            <h3 className="label">Colecciones</h3>
             <ul>
+              <li>
+                <Link href="/aurora" className="link">
+                  Aurora
+                </Link>
+              </li>
               {LINEAS.map((l) => (
                 <li key={l.id}>
                   <Link href={`/coleccion?linea=${l.id}`} className="link">
@@ -68,7 +73,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://instagram.com/verseintimates"
+                  href="https://instagram.com/verse_intimates"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="link"

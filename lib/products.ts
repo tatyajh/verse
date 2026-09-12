@@ -1,3 +1,5 @@
+import { PALETA_AURORA_DIURNA, PALETA_AURORA_NOCTURNA, type PaletaGrabado } from "@/components/lace-canvas";
+
 /**
  * Catálogo — fuente única de verdad.
  *
@@ -6,43 +8,70 @@
  *
  * El servidor SIEMPRE recalcula totales desde aquí: nada de lo que llegue
  * del navegador decide cuánto se cobra.
+ *
+ * Dos formas de catálogo conviven aquí:
+ *  - Las tres líneas originales (diario/ritual/velada), un espectro.
+ *  - La colección Aurora, aparte: dos tonalidades (nocturna/diurna) que
+ *    cruzan con el tipo de pieza (conjunto/body/complemento). Ver más abajo.
  */
 
 export type Linea = "diario" | "ritual" | "velada";
 
 export type Talla = "XS" | "S" | "M" | "L" | "XL" | "Única";
 
-/**
- * Un modo/mood de una pieza: no es una variante que se compre por separado,
- * es una manera distinta de sentir la misma prenda. Por ahora solo Aurora
- * lo trae, como la pieza que la marca eligió para mostrar sus dos versiones.
- */
-export type Modo = {
-  nombre: string;
-  sensacion: string;
-  colores: { nombre: string; hex: string }[];
-};
-
-export type Product = {
+type Comun = {
   slug: string;
   nombre: string;
-  linea: Linea;
-  /** Pesos colombianos, sin decimales. */
-  precio: number;
-  resumen: string;
-  descripcion: string;
+  /**
+   * Pesos colombianos, sin decimales. Ausente = todavía no hay precio
+   * confirmado; el storefront lo muestra como "por confirmar" y no deja
+   * añadir la pieza al carrito.
+   */
+  precio?: number;
+  /**
+   * resumen/descripcion ausentes = todavía no hay copy real para la pieza.
+   * No se rellenan con texto inventado: mejor no decir nada que describir
+   * mal una prenda que Versé todavía no ha definido.
+   */
+  resumen?: string;
+  descripcion?: string;
   /**
    * Ficha técnica de composición (uso interno: producción, no venta). A
    * quien compra no le interesa el desglose en %; nunca se renderiza en el
    * storefront. Vive aquí solo como referencia para quien produce la pieza.
    */
-  materiales: string[];
-  cuidado: string;
+  materiales?: string[];
+  cuidado?: string;
   tallas: Talla[];
   /** Ruta a fotografía real. Mientras no exista, se dibuja el grabado de encaje. */
   image?: string;
-  modos?: Modo[];
 };
+
+export type LineaProduct = Comun & {
+  coleccion?: undefined;
+  linea: Linea;
+};
+
+export type Tonalidad = "nocturna" | "diurna";
+export type TipoPieza = "conjunto" | "body" | "complemento";
+
+export type AuroraProduct = Comun & {
+  coleccion: "aurora";
+  tonalidad: Tonalidad;
+  tipo: TipoPieza;
+  /**
+   * Solo en conjuntos: cuántas piezas trae (3 o 4, según si incluye liguero
+   * u otro complemento). Es la única certeza que hay todavía sobre el
+   * contenido del set — no se inventa cuáles son esas piezas.
+   */
+  piezas?: number;
+};
+
+export type Product = LineaProduct | AuroraProduct;
+
+export function esAurora(p: Product): p is AuroraProduct {
+  return p.coleccion === "aurora";
+}
 
 export type LineaInfo = {
   id: Linea;
@@ -79,45 +108,53 @@ export const LINEAS: LineaInfo[] = [
   },
 ];
 
+export type TonalidadInfo = {
+  id: Tonalidad;
+  nombre: string;
+  sensacion: string;
+  paleta: { nombre: string; hex: string }[];
+  grabado: PaletaGrabado;
+};
+
+/** Las dos tonalidades de Aurora — el moodboard que envió la marca. */
+export const TONALIDADES: TonalidadInfo[] = [
+  {
+    id: "nocturna",
+    nombre: "Nocturna",
+    sensacion: "Profundidad, misterio, magnetismo",
+    paleta: [
+      { nombre: "Noche boreal", hex: "#080D18" },
+      { nombre: "Negro eclipse", hex: "#111111" },
+      { nombre: "Petróleo aurora", hex: "#12484B" },
+      { nombre: "Morado abismo", hex: "#2B1C3D" },
+      { nombre: "Violeta pulsar", hex: "#5D4772" },
+    ],
+    grabado: PALETA_AURORA_NOCTURNA,
+  },
+  {
+    id: "diurna",
+    nombre: "Diurna",
+    sensacion: "Calma, feminidad, luz etérea",
+    paleta: [
+      { nombre: "Azul escarcha", hex: "#9EADB9" },
+      { nombre: "Verde niebla", hex: "#AAB9AC" },
+      { nombre: "Lila celestial", hex: "#C7B8CD" },
+      { nombre: "Rosa boreal", hex: "#D2A2B2" },
+      { nombre: "Crema lunar", hex: "#F4EEE5" },
+    ],
+    grabado: PALETA_AURORA_DIURNA,
+  },
+];
+
+export const TIPO_LABEL: Record<TipoPieza, string> = {
+  conjunto: "Conjunto",
+  body: "Body",
+  complemento: "Complemento",
+};
+
 const TALLAS: Talla[] = ["XS", "S", "M", "L", "XL"];
 
-export const PRODUCTS: Product[] = [
-  {
-    slug: "aurora",
-    nombre: "Aurora",
-    linea: "diario",
-    precio: 129000,
-    resumen: "Bralette sin aro en algodón peinado con ribete de encaje francés.",
-    descripcion:
-      "La pieza que te pones sin pensarlo. Copa suave sin varilla ni relleno, banda elástica ancha que sostiene sin marcar, y un ribete de encaje francés en el escote que aparece solo cuando la camisa se abre un botón.",
-    materiales: ["Algodón peinado 92%, elastano 8%", "Encaje francés en escote y espalda", "Reguladores en rose gold mate"],
-    cuidado: "Lavado a mano en agua fría. Secar a la sombra, sin retorcer.",
-    tallas: TALLAS,
-    modos: [
-      {
-        nombre: "Luminosa",
-        sensacion: "Calma, feminidad, luz etérea",
-        colores: [
-          { nombre: "Azul escarcha", hex: "#9EADB9" },
-          { nombre: "Verde niebla", hex: "#AAB9AC" },
-          { nombre: "Lila celestial", hex: "#C7B8CD" },
-          { nombre: "Rosa boreal", hex: "#D2A2B2" },
-          { nombre: "Crema lunar", hex: "#F4EEE5" },
-        ],
-      },
-      {
-        nombre: "Nocturna",
-        sensacion: "Profundidad, misterio, magnetismo",
-        colores: [
-          { nombre: "Noche boreal", hex: "#080D18" },
-          { nombre: "Negro eclipse", hex: "#111111" },
-          { nombre: "Petróleo aurora", hex: "#12484B" },
-          { nombre: "Morado abismo", hex: "#2B1C3D" },
-          { nombre: "Violeta pulsar", hex: "#5D4772" },
-        ],
-      },
-    ],
-  },
+const LINEA_PRODUCTS: LineaProduct[] = [
   {
     slug: "brume",
     nombre: "Brume",
@@ -180,16 +217,68 @@ export const PRODUCTS: Product[] = [
   },
 ];
 
+/**
+ * Aurora — colección aparte de las tres líneas de arriba, con su propia
+ * identidad (ver /app/aurora). Veinte piezas: diez por tonalidad, y dentro
+ * de cada tonalidad cuatro conjuntos, tres bodies y tres complementos.
+ *
+ * Todavía no hay copy, precio ni ficha de materiales reales para ninguna de
+ * estas veinte piezas — solo nombre, tipo y tonalidad son ciertos. Los
+ * conjuntos sí traen `piezas` (3 o 4, según si incluyen liguero u otro
+ * complemento) porque eso lo confirmó la marca; el resto se deja vacío a
+ * propósito en vez de inventarlo. Además, cada pieza de un conjunto podrá
+ * comprarse por separado más adelante — este catálogo todavía no lo modela
+ * (ver memoria del proyecto), así que por ahora el conjunto vive como una
+ * sola entrada.
+ */
+const AURORA_PRODUCTS: AuroraProduct[] = [
+  // ---------- Nocturna ----------
+  { slug: "aurora-eclipse", nombre: "Eclipse", coleccion: "aurora", tonalidad: "nocturna", tipo: "conjunto", piezas: 4, tallas: TALLAS },
+  { slug: "aurora-abismo", nombre: "Abismo", coleccion: "aurora", tonalidad: "nocturna", tipo: "conjunto", piezas: 4, tallas: TALLAS },
+  { slug: "aurora-pulsar", nombre: "Pulsar", coleccion: "aurora", tonalidad: "nocturna", tipo: "conjunto", piezas: 3, tallas: TALLAS },
+  { slug: "aurora-nebula", nombre: "Nébula", coleccion: "aurora", tonalidad: "nocturna", tipo: "conjunto", piezas: 3, tallas: TALLAS },
+  { slug: "aurora-medianoche", nombre: "Medianoche", coleccion: "aurora", tonalidad: "nocturna", tipo: "body", tallas: TALLAS },
+  { slug: "aurora-umbra", nombre: "Umbra", coleccion: "aurora", tonalidad: "nocturna", tipo: "body", tallas: TALLAS },
+  { slug: "aurora-onix", nombre: "Ónix", coleccion: "aurora", tonalidad: "nocturna", tipo: "body", tallas: TALLAS },
+  { slug: "aurora-penumbra", nombre: "Penumbra", coleccion: "aurora", tonalidad: "nocturna", tipo: "complemento", tallas: ["Única"] },
+  { slug: "aurora-grafito", nombre: "Grafito", coleccion: "aurora", tonalidad: "nocturna", tipo: "complemento", tallas: ["Única"] },
+  { slug: "aurora-solsticio", nombre: "Solsticio", coleccion: "aurora", tonalidad: "nocturna", tipo: "complemento", tallas: ["Única"] },
+
+  // ---------- Diurna ----------
+  { slug: "aurora-alba", nombre: "Alba", coleccion: "aurora", tonalidad: "diurna", tipo: "conjunto", piezas: 4, tallas: TALLAS },
+  { slug: "aurora-escarcha", nombre: "Escarcha", coleccion: "aurora", tonalidad: "diurna", tipo: "conjunto", piezas: 3, tallas: TALLAS },
+  { slug: "aurora-celestial", nombre: "Celestial", coleccion: "aurora", tonalidad: "diurna", tipo: "conjunto", piezas: 4, tallas: TALLAS },
+  { slug: "aurora-rocio", nombre: "Rocío", coleccion: "aurora", tonalidad: "diurna", tipo: "conjunto", piezas: 3, tallas: TALLAS },
+  { slug: "aurora-niebla", nombre: "Niebla", coleccion: "aurora", tonalidad: "diurna", tipo: "body", tallas: TALLAS },
+  { slug: "aurora-lunar", nombre: "Lunar", coleccion: "aurora", tonalidad: "diurna", tipo: "body", tallas: TALLAS },
+  { slug: "aurora-cristal", nombre: "Cristal", coleccion: "aurora", tonalidad: "diurna", tipo: "body", tallas: TALLAS },
+  { slug: "aurora-perla", nombre: "Perla", coleccion: "aurora", tonalidad: "diurna", tipo: "complemento", tallas: ["Única"] },
+  { slug: "aurora-vapor", nombre: "Vapor", coleccion: "aurora", tonalidad: "diurna", tipo: "complemento", tallas: ["Única"] },
+  { slug: "aurora-marfil", nombre: "Marfil", coleccion: "aurora", tonalidad: "diurna", tipo: "complemento", tallas: ["Única"] },
+];
+
+export const PRODUCTS: Product[] = [...LINEA_PRODUCTS, ...AURORA_PRODUCTS];
+
 export function getProduct(slug: string): Product | undefined {
   return PRODUCTS.find((p) => p.slug === slug);
 }
 
 export function productsByLinea(linea: Linea): Product[] {
-  return PRODUCTS.filter((p) => p.linea === linea);
+  return PRODUCTS.filter((p): p is LineaProduct => !esAurora(p) && p.linea === linea);
 }
 
 export function getLinea(id: Linea): LineaInfo {
   const linea = LINEAS.find((l) => l.id === id);
   if (!linea) throw new Error(`Línea desconocida: ${id}`);
   return linea;
+}
+
+export function auroraPorTonalidad(tonalidad: Tonalidad): AuroraProduct[] {
+  return PRODUCTS.filter((p): p is AuroraProduct => esAurora(p) && p.tonalidad === tonalidad);
+}
+
+export function getTonalidad(id: Tonalidad): TonalidadInfo {
+  const t = TONALIDADES.find((t) => t.id === id);
+  if (!t) throw new Error(`Tonalidad desconocida: ${id}`);
+  return t;
 }

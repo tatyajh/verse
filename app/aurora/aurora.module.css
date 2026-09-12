@@ -1,0 +1,158 @@
+/* Aurora tiene su propia identidad tonal —no la del sitio—, así que la
+   página define sus propios tokens locales, uno por tonalidad, con las
+   paletas exactas de la marca. El selector incluye [data-panel] para pesar
+   más que la regla global del mismo atributo (que solo existe aquí para
+   que <Nav/> detecte de qué color pintarse al pasar por encima). */
+
+.pagina[data-panel] {
+  --bg: #140e0e;
+  --bg-2: #1e1516;
+  --fg: #e9e3db;
+  --muted: #9c8a8c;
+  --line: rgb(233 227 219 / 0.18);
+  --accent: #b76e79; /* Rosa Oro — el acento cruzado del moodboard de Aurora */
+  --line-fuerte: rgb(233 227 219 / 0.34);
+
+  background: linear-gradient(180deg, var(--bg-2), var(--bg) 60%);
+  color: var(--fg);
+  transition:
+    background-color 0.7s ease,
+    color 0.7s ease;
+  padding-block: clamp(3.5rem, 8vw, 6rem) clamp(4rem, 9vw, 7rem);
+}
+
+.pagina[data-panel][data-tonalidad="diurna"] {
+  --bg: #f4eee5;
+  --bg-2: #c7b8cd;
+  --fg: #2b1c3d;
+  --muted: #6f5f74;
+  --line: rgb(43 28 61 / 0.16);
+  --line-fuerte: rgb(43 28 61 / 0.32);
+  --accent: #b76e79;
+}
+
+.cabecera {
+  display: grid;
+  gap: 1.3rem;
+  max-width: 60ch;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.eyebrow {
+  color: var(--accent);
+}
+
+.titulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(3.5rem, 11vw, 8rem);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+}
+
+.intro {
+  color: var(--muted);
+  font-size: var(--t-m);
+  max-width: 46ch;
+}
+
+/* El toggle es la navegación principal de esta página: grande, no un filtro discreto. */
+.toggle {
+  display: flex;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.toggle button {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  color: var(--muted);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.4s var(--ease-umbral),
+    border-color 0.4s var(--ease-umbral);
+}
+
+.toggle button:hover {
+  color: var(--fg);
+}
+
+.toggleActivo {
+  color: var(--fg) !important;
+  border-bottom-color: var(--accent) !important;
+}
+
+.mood {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1.5rem;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.sensacion {
+  font-family: var(--font-body), Georgia, serif;
+  font-style: italic;
+  font-size: var(--t-m);
+}
+
+.swatches {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.swatch {
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid var(--line);
+}
+
+.grupo {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.grupoCinta {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.grupoTitulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: 1.4rem;
+  color: var(--fg);
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 3vw, 2.2rem);
+}
+
+@media (max-width: 860px) {
+  .rejilla {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .rejilla {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .toggle {
+    gap: 1.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pagina {
+    transition: none;
+  }
+}
