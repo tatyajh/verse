@@ -5,6 +5,7 @@ import Panel from "@/components/panel";
 import ProductImage from "@/components/product-image";
 import ProductCard from "@/components/product-card";
 import Comprar from "@/components/comprar";
+import ModosPieza from "@/components/modos-pieza";
 import { getLinea, getProduct, PRODUCTS } from "@/lib/products";
 import s from "./producto.module.css";
 
@@ -89,6 +90,8 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
                 </p>
               </div>
             </div>
+
+            {producto.modos && <ModosPieza modos={producto.modos} />}
           </div>
         </article>
 

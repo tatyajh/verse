@@ -12,6 +12,17 @@ export type Linea = "diario" | "ritual" | "velada";
 
 export type Talla = "XS" | "S" | "M" | "L" | "XL" | "Única";
 
+/**
+ * Un modo/mood de una pieza: no es una variante que se compre por separado,
+ * es una manera distinta de sentir la misma prenda. Por ahora solo Aurora
+ * lo trae, como la pieza que la marca eligió para mostrar sus dos versiones.
+ */
+export type Modo = {
+  nombre: string;
+  sensacion: string;
+  colores: { nombre: string; hex: string }[];
+};
+
 export type Product = {
   slug: string;
   nombre: string;
@@ -25,6 +36,7 @@ export type Product = {
   tallas: Talla[];
   /** Ruta a fotografía real. Mientras no exista, se dibuja el grabado de encaje. */
   image?: string;
+  modos?: Modo[];
 };
 
 export type LineaInfo = {
@@ -76,6 +88,30 @@ export const PRODUCTS: Product[] = [
     materiales: ["Algodón peinado 92%, elastano 8%", "Encaje francés en escote y espalda", "Reguladores en rose gold mate"],
     cuidado: "Lavado a mano en agua fría. Secar a la sombra, sin retorcer.",
     tallas: TALLAS,
+    modos: [
+      {
+        nombre: "Luminosa",
+        sensacion: "Calma, feminidad, luz etérea",
+        colores: [
+          { nombre: "Azul escarcha", hex: "#9EADB9" },
+          { nombre: "Verde niebla", hex: "#AAB9AC" },
+          { nombre: "Lila celestial", hex: "#C7B8CD" },
+          { nombre: "Rosa boreal", hex: "#D2A2B2" },
+          { nombre: "Crema lunar", hex: "#F4EEE5" },
+        ],
+      },
+      {
+        nombre: "Nocturna",
+        sensacion: "Profundidad, misterio, magnetismo",
+        colores: [
+          { nombre: "Noche boreal", hex: "#080D18" },
+          { nombre: "Negro eclipse", hex: "#111111" },
+          { nombre: "Petróleo aurora", hex: "#12484B" },
+          { nombre: "Morado abismo", hex: "#2B1C3D" },
+          { nombre: "Violeta pulsar", hex: "#5D4772" },
+        ],
+      },
+    ],
   },
   {
     slug: "brume",
