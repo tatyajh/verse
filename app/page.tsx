@@ -40,10 +40,7 @@ const DETALLE = [
   },
 ];
 
-const SLUGS_DESTACADOS = ["aurora-eclipse", "aurora-alba", "aurora-onix"] as const;
-
 export default function Home() {
-  const destacados = SLUGS_DESTACADOS.map((slug) => getProduct(slug)!);
 
   return (
     <>
@@ -138,29 +135,7 @@ export default function Home() {
         </div>
       </Panel>
 
-      {/* 4 — Tres piezas de Aurora, desfasadas para que no lean como catálogo. */}
-      <Panel tono="seda" seam={false}>
-        <div className="wrap">
-          <div className={s.destacadoCinta}>
-            <h2 className={s.destacadoTitulo}>De la colección Aurora</h2>
-            <Link href="/aurora" className="label link">
-              Ver las veinte piezas
-            </Link>
-          </div>
-          <div className={s.vitrina}>
-            {destacados.map((producto, i) => (
-              <ProductCard
-                key={producto.slug}
-                producto={producto}
-                priority={i === 0}
-                sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 33vw"
-              />
-            ))}
-          </div>
-        </div>
-      </Panel>
-
-      {/* 5 — La llave: el único momento interactivo del sitio. */}
+      {/* 4 — La llave: el único momento interactivo del sitio. */}
       <Panel tono="noche" id="llave">
         <div className="wrap">
           <div className={s.llave}>

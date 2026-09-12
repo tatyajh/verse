@@ -4,6 +4,7 @@ import ProductCard from "@/components/product-card";
 import {
   porTonalidad,
   getTonalidad,
+  getProduct,
   TIPO_LABEL,
   TONALIDADES,
   type Tonalidad,
@@ -70,17 +71,61 @@ export default async function Aurora(props: PageProps<"/aurora">) {
           </div>
         </div>
 
-        {ORDEN_TIPO.map((tipo) => {
-          const delGrupo = piezas.filter((p) => p.tipo === tipo);
-          if (delGrupo.length === 0) return null;
+        {/* Conjuntos con componentes individuales */}
+        {(() => {
+          const conjuntos = piezas.filter((p) => p.tipo === "conjunto");
+          if (conjuntos.length > 0) {
+            return (
+              <div className={s.grupo}>
+                <div className={`${s.grupoCinta} label`}>
+                  <h2 className={s.grupoTitulo}>{TIPO_LABEL["conjunto"]}s</h2>
+                  <span>{conjuntos.length}</span>
+                </div>
+                <div className={s.rejilla}>
+                  {conjuntos.map((conjunto) => (
+                    <div key={conjunto.slug} className={s.conjuntoBloque}>
+                      <ProductCard
+                        producto={conjunto}
+                        sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
+                      />
+                      {conjunto.componentes && conjunto.componentes.length > 0 && (
+                        <div className={s.componentesSection}>
+                          <p className={`${s.componentesLabel} label`}>O compra por separado:</p>
+                          <div className={s.componentesGrid}>
+                            {conjunto.componentes
+                              .map((slug) => getProduct(slug))
+                              .filter(Boolean)
+                              .map((comp) => (
+                                <ProductCard
+                                  key={comp!.slug}
+                                  producto={comp!}
+                                  sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 25vw"
+                                />
+                              ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          }
+          return null;
+        })()}
+
+        {/* Bodies */}
+        {(() => {
+          const bodies = piezas.filter((p) => p.tipo === "body");
+          if (bodies.length === 0) return null;
           return (
-            <div key={tipo} className={s.grupo}>
+            <div className={s.grupo}>
               <div className={`${s.grupoCinta} label`}>
-                <h2 className={s.grupoTitulo}>{TIPO_LABEL[tipo]}s</h2>
-                <span>{delGrupo.length}</span>
+                <h2 className={s.grupoTitulo}>{TIPO_LABEL["body"]}s</h2>
+                <span>{bodies.length}</span>
               </div>
               <div className={s.rejilla}>
-                {delGrupo.map((p) => (
+                {bodies.map((p) => (
                   <ProductCard
                     key={p.slug}
                     producto={p}
@@ -90,7 +135,30 @@ export default async function Aurora(props: PageProps<"/aurora">) {
               </div>
             </div>
           );
-        })}
+        })()}
+
+        {/* Complementos */}
+        {(() => {
+          const complementos = piezas.filter((p) => p.tipo === "complemento");
+          if (complementos.length === 0) return null;
+          return (
+            <div className={s.grupo}>
+              <div className={`${s.grupoCinta} label`}>
+                <h2 className={s.grupoTitulo}>{TIPO_LABEL["complemento"]}s</h2>
+                <span>{complementos.length}</span>
+              </div>
+              <div className={s.rejilla}>
+                {complementos.map((p) => (
+                  <ProductCard
+                    key={p.slug}
+                    producto={p}
+                    sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
+                  />
+                ))}
+              </div>
+            </div>
+          );
+        })()}
       </div>
     </section>
   );

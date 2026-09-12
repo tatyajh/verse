@@ -131,7 +131,7 @@ export const PRODUCTS: Product[] = [
   // ---------- Nocturna Conjuntos ----------
   {
     slug: "aurora-eclipse",
-    nombre: "Eclipse",
+    nombre: "Sombra",
     tonalidad: "nocturna",
     tipo: "conjunto",
     piezas: 4,
@@ -149,7 +149,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "aurora-pulsar",
-    nombre: "Pulsar",
+    nombre: "Equinoccio",
     tonalidad: "nocturna",
     tipo: "conjunto",
     piezas: 3,

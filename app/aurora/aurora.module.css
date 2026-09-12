@@ -137,7 +137,33 @@
   gap: clamp(1.2rem, 3vw, 2.2rem);
 }
 
+.conjuntoBloque {
+  display: contents;
+}
+
+.componentesSection {
+  grid-column: 1 / -1;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--line);
+  margin-top: 0.5rem;
+}
+
+.componentesLabel {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.2rem;
+}
+
+.componentesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 2vw, 1.8rem);
+}
+
 @media (max-width: 860px) {
+  .componentesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .rejilla {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -150,6 +176,9 @@
   }
   .toggle {
     gap: 1.6rem;
+  }
+  .componentesGrid {
+    grid-template-columns: 1fr;
   }
 }
 
