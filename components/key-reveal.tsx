@@ -18,7 +18,7 @@ export default function KeyReveal() {
   const reducido = useMedia("(prefers-reduced-motion: reduce)");
   const fino = useMedia("(pointer: fine)");
 
-  const pista = reducido ? "" : fino ? "Pasa el cursor" : "Desliza";
+  const pista = "";
 
   useEffect(() => {
     const el = ref.current;
