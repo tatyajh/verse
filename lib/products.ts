@@ -198,8 +198,7 @@ export const PRODUCTS: Product[] = [
   { slug: "aurora-solsticio", nombre: "Solsticio", tonalidad: "nocturna", tipo: "complemento", tallas: ["Única"] },
 
   // ---------- Diurna Conjuntos ----------
-  // Nota: Los nombres de los conjuntos diurnos (Alba, Escarcha, Celestial, Rocío)
-  // están listos para confirmación final con la marca. Modificar según sea necesario.
+  // Nombres confirmados del moodboard de Aurora Diurna
   {
     slug: "aurora-alba",
     nombre: "Alba",
@@ -211,7 +210,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "aurora-escarcha",
-    nombre: "Escarcha",
+    nombre: "Nube",
     tonalidad: "diurna",
     tipo: "conjunto",
     piezas: 3,
@@ -220,7 +219,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "aurora-celestial",
-    nombre: "Celestial",
+    nombre: "Eclipse",
     tonalidad: "diurna",
     tipo: "conjunto",
     piezas: 4,
@@ -229,7 +228,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "aurora-rocio",
-    nombre: "Rocío",
+    nombre: "Neblina",
     tonalidad: "diurna",
     tipo: "conjunto",
     piezas: 3,
