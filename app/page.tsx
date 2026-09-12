@@ -13,33 +13,6 @@ const LADO_COLOR = {
   diurna: { bg: "#F4EEE5", fg: "#2B1C3D" },
 } as const;
 
-const DETALLE = [
-  {
-    clave: "Textiles",
-    titulo: "Encaje francés y tul bordado",
-    texto:
-      "Elásticos que sostienen sin marcar y encajes que conservan su caída después de varios lavados. Lo que decide si una pieza vuelve al cajón o al cuerpo.",
-  },
-  {
-    clave: "Herrajes",
-    titulo: "Acabados en rose gold",
-    texto:
-      "Argollas, reguladores y broches en rose gold, elegidos pieza por pieza. Es la firma de la casa y el detalle que se reconoce sin leer una etiqueta.",
-  },
-  {
-    clave: "Ajuste",
-    titulo: "Tallaje probado en cuerpos reales",
-    texto:
-      "Cada talla se prueba y se corrige antes de producirse, y se sigue corrigiendo con lo que cuentan quienes ya la usan.",
-  },
-  {
-    clave: "Empaque",
-    titulo: "Una caja que se abre despacio",
-    texto:
-      "Papel seda, sello con la llave y una bolsa interna para guardar la pieza. La experiencia empieza antes de ponérsela.",
-  },
-];
-
 export default function Home() {
 
   return (
@@ -157,25 +130,7 @@ export default function Home() {
         </div>
       </Panel>
 
-      {/* 6 — Detalle: lista tipográfica. Sin tarjetas, sin iconos. */}
-      <Panel tono="noche" seam={false}>
-        <div className="wrap">
-          <h2 className={s.detalleTitulo}>
-            Lo que no se ve en una foto decide si vuelves a usarla.
-          </h2>
-          <dl className={s.lista}>
-            {DETALLE.map((fila) => (
-              <div key={fila.clave} className={s.fila}>
-                <dt className={`${s.filaClave} label`}>{fila.clave}</dt>
-                <dd className={s.filaTitulo}>{fila.titulo}</dd>
-                <dd className={s.filaTexto}>{fila.texto}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </Panel>
-
-      {/* 7 — Tallas: banda ancha, letras separadas por filetes. */}
+      {/* 6 — Tallas: banda ancha, letras separadas por filetes. */}
       <Panel tono="seda" id="tallas">
         <div className="wrap">
           <div className={s.tallas}>
