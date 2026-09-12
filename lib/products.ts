@@ -31,6 +31,11 @@ export type Product = {
   precio: number;
   resumen: string;
   descripcion: string;
+  /**
+   * Ficha técnica de composición (uso interno: producción, no venta). A
+   * quien compra no le interesa el desglose en %; nunca se renderiza en el
+   * storefront. Vive aquí solo como referencia para quien produce la pieza.
+   */
   materiales: string[];
   cuidado: string;
   tallas: Talla[];

@@ -69,15 +69,9 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
 
             <div className={s.separador} />
 
+            {/* La composición del tejido (producto.materiales) es ficha técnica
+                de producción, no contenido de venta: no se muestra aquí. */}
             <div className={s.datos}>
-              <div className={s.dato}>
-                <h2 className="label">Materiales</h2>
-                <ul>
-                  {producto.materiales.map((m) => (
-                    <li key={m}>{m}</li>
-                  ))}
-                </ul>
-              </div>
               <div className={s.dato}>
                 <h2 className="label">Cuidado</h2>
                 <p>{producto.cuidado}</p>

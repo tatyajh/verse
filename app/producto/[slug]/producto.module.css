@@ -75,13 +75,6 @@
   color: var(--accent);
 }
 
-.dato ul {
-  display: grid;
-  gap: 0.4rem;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
 .dato p {
   color: var(--muted);
   font-size: 0.95rem;
