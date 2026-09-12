@@ -78,7 +78,10 @@ export default async function Aurora(props: PageProps<"/aurora">) {
             return (
               <div className={s.grupo}>
                 <div className={`${s.grupoCinta} label`}>
-                  <h2 className={s.grupoTitulo}>{TIPO_LABEL["conjunto"]}s</h2>
+                  <div>
+                    <h2 className={s.grupoTitulo}>{TIPO_LABEL["conjunto"]}s</h2>
+                    <p className={s.grupoDescripcion}>Sets de 3 o 4 piezas coordinadas: bra, panty, tanga y opcionales.</p>
+                  </div>
                   <span>{conjuntos.length}</span>
                 </div>
                 <div className={s.rejilla}>
@@ -121,7 +124,10 @@ export default async function Aurora(props: PageProps<"/aurora">) {
           return (
             <div className={s.grupo}>
               <div className={`${s.grupoCinta} label`}>
-                <h2 className={s.grupoTitulo}>{TIPO_LABEL["body"]}s</h2>
+                <div>
+                  <h2 className={s.grupoTitulo}>{TIPO_LABEL["body"]}s</h2>
+                  <p className={s.grupoDescripcion}>Prendas de una sola pieza que combinan confort y diseño.</p>
+                </div>
                 <span>{bodies.length}</span>
               </div>
               <div className={s.rejilla}>
@@ -144,7 +150,10 @@ export default async function Aurora(props: PageProps<"/aurora">) {
           return (
             <div className={s.grupo}>
               <div className={`${s.grupoCinta} label`}>
-                <h2 className={s.grupoTitulo}>{TIPO_LABEL["complemento"]}s</h2>
+                <div>
+                  <h2 className={s.grupoTitulo}>{TIPO_LABEL["complemento"]}s</h2>
+                  <p className={s.grupoDescripcion}>Accesorios y prendas de abrigo para completar tu look.</p>
+                </div>
                 <span>{complementos.length}</span>
               </div>
               <div className={s.rejilla}>

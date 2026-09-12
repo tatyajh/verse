@@ -129,6 +129,14 @@
   font-family: var(--font-display), "Didot", serif;
   font-size: 1.4rem;
   color: var(--fg);
+  margin-bottom: 0.3rem;
+}
+
+.grupoDescripcion {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0;
+  font-style: italic;
 }
 
 .rejilla {
