@@ -76,9 +76,21 @@ export default function Nav() {
       </Link>
 
       <div className={`${s.menu} label`}>
-        <Link href="/aurora" className="link">
-          Aurora
-        </Link>
+        <div className={s.dropdownContainer}>
+          <label htmlFor="colecciones-select">Colecciones</label>
+          <select
+            id="colecciones-select"
+            className={s.coleccionesSelect}
+            onChange={(e) => {
+              if (e.target.value) {
+                window.location.href = e.target.value;
+              }
+            }}
+            defaultValue="/aurora"
+          >
+            <option value="/aurora">Aurora</option>
+          </select>
+        </div>
         <Link href="/#llave" className={`link ${s.oculto}`}>
           La llave
         </Link>

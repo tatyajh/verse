@@ -66,7 +66,7 @@ export default function Home() {
             en las que decides sentirte tú misma.
           </p>
           <Link href="/aurora" className="btn btn-fg">
-            Ver Aurora
+            Ver última colección
           </Link>
         </div>
       </Panel>

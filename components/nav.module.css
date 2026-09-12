@@ -77,6 +77,41 @@
   font-variant-numeric: tabular-nums;
 }
 
+.dropdownContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dropdownContainer label {
+  color: var(--muted);
+  transition: color 0.4s var(--ease-umbral);
+  font-size: 0.9rem;
+}
+
+.coleccionesSelect {
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.4s var(--ease-umbral);
+  padding: 0;
+}
+
+.coleccionesSelect:hover,
+.coleccionesSelect:focus-visible {
+  color: var(--fg);
+  outline: none;
+}
+
+.coleccionesSelect option {
+  background: var(--bg);
+  color: var(--fg);
+}
+
 @media (max-width: 820px) {
   .menu {
     gap: 1.4rem;
