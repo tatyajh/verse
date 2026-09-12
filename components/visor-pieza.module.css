@@ -1,0 +1,75 @@
+.visor {
+  position: sticky;
+  top: 5.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.cuadro {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--noche);
+}
+
+.cuadro canvas,
+.cuadro img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* El giro real: arrastrable, con cursor de agarre. */
+.giro {
+  cursor: grab;
+  touch-action: pan-y; /* deja hacer scroll vertical; el arrastre horizontal gira */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.giro:active {
+  cursor: grabbing;
+}
+
+.giro img {
+  -webkit-user-drag: none;
+  pointer-events: none; /* el arrastre lo captura el contenedor, no la imagen */
+}
+
+.pista {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  color: rgb(233 227 219 / 0.7);
+  pointer-events: none;
+}
+
+.aros {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  gap: 0.3rem;
+  pointer-events: none;
+}
+
+.aro {
+  width: 4px;
+  height: 4px;
+  background: rgb(233 227 219 / 0.35);
+}
+
+.aroActivo {
+  background: var(--rose);
+}
+
+.proximamente {
+  color: var(--accent);
+}
+
+@media (max-width: 860px) {
+  .visor {
+    position: relative;
+    top: 0;
+  }
+}

@@ -45,6 +45,12 @@ type Comun = {
   tallas: Talla[];
   /** Ruta a fotografía real. Mientras no exista, se dibuja el grabado de encaje. */
   image?: string;
+  /**
+   * Secuencia de fotos para el giro 360° (mínimo 2, en orden de rotación).
+   * Mientras no exista, <VisorPieza> muestra la imagen fija de siempre —
+   * el visor ya está listo para cuando haya fotografía real de producto.
+   */
+  giro?: string[];
 };
 
 export type LineaProduct = Comun & {

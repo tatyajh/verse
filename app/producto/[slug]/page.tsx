@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Panel from "@/components/panel";
-import ProductImage from "@/components/product-image";
 import ProductCard from "@/components/product-card";
-import Comprar from "@/components/comprar";
+import VisorPieza from "@/components/visor-pieza";
 import {
   esAurora,
   getLinea,
@@ -84,13 +83,7 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
     <Panel tono="noche" seam={false}>
       <div className="wrap">
         <article className={s.pieza}>
-          <div className={s.marco}>
-            <ProductImage
-              producto={producto}
-              priority
-              sizes="(max-width: 860px) 100vw, 55vw"
-            />
-          </div>
+          <VisorPieza producto={producto} sizes="(max-width: 860px) 100vw, 55vw" />
 
           <div className={s.ficha}>
             <nav className={`${s.migas} label`} aria-label="Ruta">
@@ -122,16 +115,6 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
 
             {aurora && producto.tipo === "conjunto" && producto.piezas && (
               <p className={`${s.incluye} label`}>Conjunto de {producto.piezas} piezas</p>
-            )}
-
-            <div className={s.separador} />
-
-            {producto.precio !== undefined ? (
-              <Comprar producto={producto} />
-            ) : (
-              <p className={`${s.proximamente} label`}>
-                Próximamente — todavía no está a la venta
-              </p>
             )}
 
             {(producto.cuidado || !aurora) && (
