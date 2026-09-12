@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart";
-import { VerseBow } from "./verse-mark";
+import { VerseMark } from "./verse-mark";
 import s from "./nav.module.css";
 
 const COLECCIONES = [{ id: "aurora", nombre: "Aurora" }];
@@ -88,8 +88,7 @@ export default function Nav() {
       aria-label="Principal"
     >
       <Link href="/" className={s.marca}>
-        <VerseBow size={22} />
-        VERSÉ
+        <VerseMark size={28} />
       </Link>
 
       <div className={`${s.menu} label`}>
