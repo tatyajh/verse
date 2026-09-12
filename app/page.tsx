@@ -145,16 +145,11 @@ export default function Home() {
           <div className={s.llave}>
             <div className={s.llaveTexto}>
               <p className="label muted">El símbolo</p>
-              <h2 className={s.llaveTitulo}>Una V que también es una llave.</h2>
-              <p>
-                El símbolo de Versé nace de una V integrada con una llave ornamental. La
-                llave representa ese universo íntimo y personal que existe detrás de la
-                lencería: lo que eliges cuando nadie más lo va a ver.
-              </p>
+              <h2 className={s.llaveTitulo}>Detrás del encaje.</h2>
               <p>
                 Aparece en los herrajes, en el sello del empaque y en cada pieza de la
-                casa. Es el detalle que hace reconocible a Versé sin una etiqueta a la
-                vista.
+                casa: el detalle que hace reconocible a Versé sin necesidad de una
+                etiqueta a la vista.
               </p>
               <p className={s.cita}>
                 Sentirse bien con una misma no debería depender de una ocasión, de otra

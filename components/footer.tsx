@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Monogram from "./monogram";
+import { VerseMark } from "./verse-mark";
 import Panel from "./panel";
 import { LINEAS } from "@/lib/products";
 import s from "./footer.module.css";
@@ -11,7 +11,7 @@ export default function Footer() {
       <div className="wrap">
         <div className={s.rejilla}>
           <div className={s.marca}>
-            <Monogram size={30} stroke={2.2} />
+            <VerseMark size={52} />
             <p className={s.nombre}>VERSÉ</p>
             <p className={s.frase}>
               De lo cotidiano a lo especial, lencería para acompañar las distintas formas

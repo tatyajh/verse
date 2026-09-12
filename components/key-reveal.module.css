@@ -25,10 +25,11 @@
     linear-gradient(160deg, #241a1a, #140e0e 70%);
 }
 
-.fondo svg {
-  width: 42%;
-  height: auto;
-  color: var(--rose);
+/* el ancho lo fija el prop size="42%" del componente; aquí solo el filtro
+   de brillo para que el emblema —colores fijos de marca— lea bien sobre
+   el degradado oscuro del fondo */
+.fondo img {
+  filter: drop-shadow(0 0 18px rgb(201 143 111 / 0.25));
 }
 
 /* El encaje encima: retícula de tul + festón, recortado alrededor del cursor. */

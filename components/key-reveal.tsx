@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useMedia } from "@/lib/media";
-import Monogram from "./monogram";
+import { VerseMark } from "./verse-mark";
 import s from "./key-reveal.module.css";
 
 /**
@@ -79,7 +79,7 @@ export default function KeyReveal() {
   return (
     <div ref={ref} className={s.figura}>
       <div className={s.fondo}>
-        <Monogram size={220} stroke={1.1} />
+        <VerseMark size="42%" />
       </div>
       <div className={s.encaje} />
       <div className={s.filete} />

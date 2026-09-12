@@ -66,8 +66,8 @@ const TALLAS: Talla[] = ["XS", "S", "M", "L", "XL"];
 
 export const PRODUCTS: Product[] = [
   {
-    slug: "aurore",
-    nombre: "Aurore",
+    slug: "aurora",
+    nombre: "Aurora",
     linea: "diario",
     precio: 129000,
     resumen: "Bralette sin aro en algodón peinado con ribete de encaje francés.",

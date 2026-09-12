@@ -39,9 +39,6 @@
   line-height: 1;
 }
 
-.marca svg {
-  color: var(--accent);
-}
 
 .menu {
   display: flex;

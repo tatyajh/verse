@@ -17,8 +17,10 @@
   --tinta: #191413;
   --tul: #9c8a8c;
   --tul-hondo: #7a6a6c;
-  --rose: #c98f6f;
-  --rose-hondo: #a96a4c;
+  /* rose y umbra son los dos tonos exactos del logo (verse-mark.svg):
+     relleno #dba17f y trazo #6e5140. Antes eran una aproximación mía. */
+  --rose: #dba17f;
+  --rose-hondo: #6e5140;
   --vino: #5c2230;
 
   /* --- semánticos: por defecto, NOCHE --- */

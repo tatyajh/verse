@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useCart } from "@/lib/cart";
-import Monogram from "./monogram";
+import { VerseBow } from "./verse-mark";
 import s from "./nav.module.css";
 
 /**
@@ -71,7 +71,7 @@ export default function Nav() {
       aria-label="Principal"
     >
       <Link href="/" className={s.marca}>
-        <Monogram size={17} stroke={2.8} />
+        <VerseBow size={22} />
         VERSÉ
       </Link>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Monogram from "./monogram";
+import { VerseBow } from "./verse-mark";
 import s from "./umbral.module.css";
 
 /**
@@ -64,7 +64,7 @@ export default function Umbral() {
       <div className={`${s.hoja} ${s.der}`} />
       <div className={s.costura} />
       <div className={s.sello}>
-        <Monogram size={30} stroke={1.6} />
+        <VerseBow size={36} />
       </div>
     </div>
   );
