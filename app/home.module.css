@@ -114,9 +114,11 @@
   color: var(--fg);
 }
 
-.rasgos span + span::before {
+/* El punto va detrás de cada palabra, no delante de la siguiente: si la línea
+   se parte, queda cerrando la línea en vez de abriéndola huérfano. */
+.rasgos span:not(:last-child)::after {
   content: "·";
-  margin-right: 0.9rem;
+  margin-left: 0.9rem;
   color: var(--accent);
 }
 
