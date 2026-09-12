@@ -1,9 +1,17 @@
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import Panel from "@/components/panel";
 import ProductCard from "@/components/product-card";
 import KeyReveal from "@/components/key-reveal";
-import { LINEAS, productsByLinea } from "@/lib/products";
+import { getProduct, TONALIDADES } from "@/lib/products";
 import s from "./home.module.css";
+
+/** Rosa Oro: el acento cruzado del moodboard de Aurora, el mismo que usa /aurora. */
+const ACENTO_AURORA = "#B76E79";
+const LADO_COLOR = {
+  nocturna: { bg: "#080D18", fg: "#E9E3DB" },
+  diurna: { bg: "#F4EEE5", fg: "#2B1C3D" },
+} as const;
 
 const DETALLE = [
   {
@@ -32,8 +40,10 @@ const DETALLE = [
   },
 ];
 
+const SLUGS_DESTACADOS = ["aurora-eclipse", "aurora-alba", "aurora-onix"] as const;
+
 export default function Home() {
-  const destacados = LINEAS.map((linea) => productsByLinea(linea.id)[0]);
+  const destacados = SLUGS_DESTACADOS.map((slug) => getProduct(slug)!);
 
   return (
     <>
@@ -55,8 +65,8 @@ export default function Home() {
             De lo cotidiano a lo especial, lencería para acompañar las distintas formas
             en las que decides sentirte tú misma.
           </p>
-          <Link href="/coleccion" className="btn btn-fg">
-            Ver colección
+          <Link href="/aurora" className="btn btn-fg">
+            Ver Aurora
           </Link>
         </div>
       </Panel>
@@ -92,36 +102,49 @@ export default function Home() {
         </div>
       </Panel>
 
-      {/* 3 — Las líneas son un espectro, así que se dibujan como escalera. */}
-      <Panel tono="seda" id="lineas" seam={false}>
+      {/* 3 — Aurora es dos tonalidades, así que se muestra como dos paneles. */}
+      <Panel tono="seda" id="aurora" seam={false}>
         <div className="wrap">
-          <div className={`${s.espectroCinta} label`}>
-            <span>De lo cotidiano</span>
-            <span>A lo especial</span>
+          <div className={`${s.duoCinta} label`}>
+            <span>La colección</span>
+            <span>Aurora</span>
           </div>
-          <div className={s.espectroRiel} />
-          <div className={s.escalera}>
-            {LINEAS.map((linea) => (
-              <article key={linea.id} className={s.peldano}>
-                <p className="label muted">{linea.intencion}</p>
-                <h3 className={s.peldanoNombre}>{linea.nombre}</h3>
-                <p>{linea.descripcion}</p>
-                <Link href={`/coleccion?linea=${linea.id}`} className="label link">
-                  Ver {linea.nombre}
-                </Link>
-              </article>
+          <div className={s.duo}>
+            {TONALIDADES.map((t) => (
+              <Link
+                key={t.id}
+                href={`/aurora?tonalidad=${t.id}`}
+                className={s.lado}
+                style={
+                  {
+                    "--lado-bg": LADO_COLOR[t.id].bg,
+                    "--lado-fg": LADO_COLOR[t.id].fg,
+                    "--lado-accent": ACENTO_AURORA,
+                  } as CSSProperties
+                }
+              >
+                <p className={`${s.ladoIntencion} label`}>{t.nombre}</p>
+                <h3 className={s.ladoNombre}>Aurora {t.nombre}</h3>
+                <p className={s.ladoSensacion}>{t.sensacion}.</p>
+                <div className={s.ladoSwatches} aria-hidden="true">
+                  {t.paleta.map((c) => (
+                    <span key={c.hex} style={{ background: c.hex }} />
+                  ))}
+                </div>
+                <span className={`${s.ladoLink} label link`}>Explorar {t.nombre}</span>
+              </Link>
             ))}
           </div>
         </div>
       </Panel>
 
-      {/* 4 — Una pieza por línea, desfasadas para que no lean como catálogo. */}
+      {/* 4 — Tres piezas de Aurora, desfasadas para que no lean como catálogo. */}
       <Panel tono="seda" seam={false}>
         <div className="wrap">
           <div className={s.destacadoCinta}>
-            <h2 className={s.destacadoTitulo}>Primera colección</h2>
-            <Link href="/coleccion" className="label link">
-              Ver las seis piezas
+            <h2 className={s.destacadoTitulo}>De la colección Aurora</h2>
+            <Link href="/aurora" className="label link">
+              Ver las veinte piezas
             </Link>
           </div>
           <div className={s.vitrina}>

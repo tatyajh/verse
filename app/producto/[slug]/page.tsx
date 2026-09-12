@@ -4,14 +4,7 @@ import { notFound } from "next/navigation";
 import Panel from "@/components/panel";
 import ProductCard from "@/components/product-card";
 import VisorPieza from "@/components/visor-pieza";
-import {
-  esAurora,
-  getLinea,
-  getProduct,
-  getTonalidad,
-  PRODUCTS,
-  type Product,
-} from "@/lib/products";
+import { getProduct, getTonalidad, PRODUCTS } from "@/lib/products";
 import s from "./producto.module.css";
 
 export function generateStaticParams() {
@@ -34,49 +27,16 @@ export async function generateMetadata(
   };
 }
 
-/** Ruta y "también de la casa" dependen de si la pieza es de Aurora o de una línea. */
-function contexto(producto: Product) {
-  if (esAurora(producto)) {
-    const tonalidad = getTonalidad(producto.tonalidad);
-    const hermanas = PRODUCTS.filter(
-      (p): p is typeof producto =>
-        esAurora(p) && p.tonalidad === producto.tonalidad && p.slug !== producto.slug,
-    ).concat(
-      PRODUCTS.filter(
-        (p): p is typeof producto => esAurora(p) && p.tonalidad !== producto.tonalidad,
-      ),
-    );
-    return {
-      migas: [
-        { href: "/aurora", texto: "Aurora" },
-        { href: `/aurora?tonalidad=${tonalidad.id}`, texto: tonalidad.nombre },
-      ],
-      hermanas,
-      verTodo: "/aurora",
-    };
-  }
-
-  const linea = getLinea(producto.linea);
-  const hermanas = PRODUCTS.filter(
-    (p) => !esAurora(p) && p.linea === producto.linea && p.slug !== producto.slug,
-  ).concat(PRODUCTS.filter((p) => !esAurora(p) && p.linea !== producto.linea));
-  return {
-    migas: [
-      { href: "/coleccion", texto: "Colección" },
-      { href: `/coleccion?linea=${linea.id}`, texto: linea.nombre },
-    ],
-    hermanas,
-    verTodo: "/coleccion",
-  };
-}
-
 export default async function Pieza(props: PageProps<"/producto/[slug]">) {
   const { slug } = await props.params;
   const producto = getProduct(slug);
   if (!producto) notFound();
 
-  const { migas, hermanas, verTodo } = contexto(producto);
-  const aurora = esAurora(producto);
+  const tonalidad = getTonalidad(producto.tonalidad);
+  const hermanas = PRODUCTS.filter(
+    (p) => p.tonalidad === producto.tonalidad && p.slug !== producto.slug,
+  ).concat(PRODUCTS.filter((p) => p.tonalidad !== producto.tonalidad));
+
   const sinConfirmar = !producto.resumen && !producto.descripcion;
 
   return (
@@ -87,14 +47,17 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
 
           <div className={s.ficha}>
             <nav className={`${s.migas} label`} aria-label="Ruta">
-              {migas.map((m, i) => (
-                <span key={m.href} className={s.miga}>
-                  {i > 0 && <span aria-hidden="true">/</span>}
-                  <Link href={m.href} className="link">
-                    {m.texto}
-                  </Link>
-                </span>
-              ))}
+              <span className={s.miga}>
+                <Link href="/aurora" className="link">
+                  Aurora
+                </Link>
+              </span>
+              <span className={s.miga}>
+                <span aria-hidden="true">/</span>
+                <Link href={`/aurora?tonalidad=${tonalidad.id}`} className="link">
+                  {tonalidad.nombre}
+                </Link>
+              </span>
             </nav>
 
             <h1 className={s.nombre}>{producto.nombre}</h1>
@@ -113,40 +76,36 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
               </>
             )}
 
-            {aurora && producto.tipo === "conjunto" && producto.piezas && (
+            {producto.tipo === "conjunto" && producto.piezas && (
               <p className={`${s.incluye} label`}>Conjunto de {producto.piezas} piezas</p>
             )}
 
-            {(producto.cuidado || !aurora) && (
-              <>
-                <div className={s.separador} />
+            <div className={s.separador} />
 
-                {/* La composición del tejido (producto.materiales) es ficha técnica
-                    de producción, no contenido de venta: no se muestra aquí. */}
-                <div className={s.datos}>
-                  {producto.cuidado && (
-                    <div className={s.dato}>
-                      <h2 className="label">Cuidado</h2>
-                      <p>{producto.cuidado}</p>
-                    </div>
-                  )}
-                  <div className={s.dato}>
-                    <h2 className="label">Envíos</h2>
-                    <p>
-                      A toda Colombia, de 2 a 5 días hábiles. Cada pedido llega en el
-                      empaque Versé, con papel seda y sello de la llave.
-                    </p>
-                  </div>
+            {/* La composición del tejido (producto.materiales) es ficha técnica
+                de producción, no contenido de venta: no se muestra aquí. */}
+            <div className={s.datos}>
+              {producto.cuidado && (
+                <div className={s.dato}>
+                  <h2 className="label">Cuidado</h2>
+                  <p>{producto.cuidado}</p>
                 </div>
-              </>
-            )}
+              )}
+              <div className={s.dato}>
+                <h2 className="label">Envíos</h2>
+                <p>
+                  A toda Colombia, de 2 a 5 días hábiles. Cada pedido llega en el empaque
+                  Versé, con papel seda y sello de la llave.
+                </p>
+              </div>
+            </div>
           </div>
         </article>
 
         <section className={s.tambien}>
           <div className={`${s.tambienCinta} label`}>
             <span>También de la casa</span>
-            <Link href={verTodo} className="link">
+            <Link href="/aurora" className="link">
               Ver todo
             </Link>
           </div>

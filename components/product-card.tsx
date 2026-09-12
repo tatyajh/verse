@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ProductImage from "./product-image";
 import { formatCOP } from "@/lib/money";
-import { esAurora, getLinea, TIPO_LABEL, type Product } from "@/lib/products";
+import { TIPO_LABEL, type Product } from "@/lib/products";
 import s from "./product-card.module.css";
 
 export default function ProductCard({
@@ -15,9 +15,7 @@ export default function ProductCard({
   priority?: boolean;
   className?: string;
 }) {
-  const etiqueta = esAurora(producto)
-    ? TIPO_LABEL[producto.tipo]
-    : getLinea(producto.linea).nombre;
+  const etiqueta = TIPO_LABEL[producto.tipo];
 
   return (
     <Link

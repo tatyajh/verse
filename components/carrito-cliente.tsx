@@ -98,11 +98,10 @@ export default function CarritoCliente() {
     return (
       <div className={s.vacio}>
         <p>
-          Todavía no has guardado ninguna pieza. La colección son seis, en tres líneas,
-          de lo cotidiano a lo especial.
+          Todavía no has guardado ninguna pieza. Aurora son veinte, en dos tonalidades.
         </p>
-        <Link href="/coleccion" className="btn btn-fg">
-          Ver colección
+        <Link href="/aurora" className="btn btn-fg">
+          Ver Aurora
         </Link>
       </div>
     );

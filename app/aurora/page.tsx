@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ProductCard from "@/components/product-card";
 import {
-  auroraPorTonalidad,
+  porTonalidad,
   getTonalidad,
   TIPO_LABEL,
   TONALIDADES,
@@ -29,7 +29,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
   const activa: Tonalidad = esTonalidad(crudo) ? crudo : "nocturna";
 
   const tonalidad = getTonalidad(activa);
-  const piezas = auroraPorTonalidad(activa);
+  const piezas = porTonalidad(activa);
 
   return (
     // data-panel: solo para que <Nav/> sepa de qué color pintarse encima

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { VerseMark } from "./verse-mark";
 import Panel from "./panel";
-import { LINEAS } from "@/lib/products";
+import { TONALIDADES } from "@/lib/products";
 import s from "./footer.module.css";
 
 /** El sitio abre con la caja y cierra en noche: vuelve a cerrarse. */
@@ -20,25 +20,15 @@ export default function Footer() {
           </div>
 
           <div className={s.col}>
-            <h3 className="label">Colecciones</h3>
+            <h3 className="label">Aurora</h3>
             <ul>
-              <li>
-                <Link href="/aurora" className="link">
-                  Aurora
-                </Link>
-              </li>
-              {LINEAS.map((l) => (
-                <li key={l.id}>
-                  <Link href={`/coleccion?linea=${l.id}`} className="link">
-                    {l.nombre}
+              {TONALIDADES.map((t) => (
+                <li key={t.id}>
+                  <Link href={`/aurora?tonalidad=${t.id}`} className="link">
+                    {t.nombre}
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link href="/coleccion" className="link">
-                  Colección completa
-                </Link>
-              </li>
             </ul>
           </div>
 

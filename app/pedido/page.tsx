@@ -103,7 +103,7 @@ export default async function Pedido(props: PageProps<"/pedido">) {
           )}
 
           <div className={s.acciones}>
-            <Link href="/coleccion" className="btn btn-fg">
+            <Link href="/aurora" className="btn btn-fg">
               Volver a la colección
             </Link>
             <a href="mailto:hola@verseintimates.com" className="btn">

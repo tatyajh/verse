@@ -76,14 +76,8 @@ export default function Nav() {
       </Link>
 
       <div className={`${s.menu} label`}>
-        <Link href="/coleccion" className="link">
-          Colección
-        </Link>
         <Link href="/aurora" className="link">
           Aurora
-        </Link>
-        <Link href="/#lineas" className={`link ${s.oculto}`}>
-          Líneas
         </Link>
         <Link href="/#llave" className={`link ${s.oculto}`}>
           La llave
