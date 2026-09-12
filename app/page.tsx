@@ -49,7 +49,7 @@ export default function Home() {
         <div className={s.heroEje} />
 
         <div className={`${s.heroCinta} wrap label`}>
-          <span>Lencería de diseño</span>
+          <span>Moda íntima</span>
           <span>Medellín, Colombia</span>
         </div>
 
@@ -59,7 +59,7 @@ export default function Home() {
 
         <div className={`${s.heroPie} wrap`}>
           <p className={s.heroFrase}>
-            De lo cotidiano a lo especial, lencería para acompañar las distintas formas
+            De lo cotidiano a lo especial, prendas para acompañar las distintas formas
             en las que decides sentirte tú misma.
           </p>
           <Link href="/aurora" className="btn btn-fg">
