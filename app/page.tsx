@@ -162,45 +162,57 @@ export default function Home() {
               <tbody>
                 <tr>
                   <td>XS</td>
-                  <td>80-84 cm</td>
-                  <td>62-66 cm</td>
-                  <td>88-92 cm</td>
+                  <td>82-86 cm</td>
+                  <td>64-68 cm</td>
+                  <td>92-96 cm</td>
                 </tr>
                 <tr>
                   <td>S</td>
-                  <td>84-88 cm</td>
-                  <td>66-70 cm</td>
-                  <td>92-96 cm</td>
+                  <td>86-90 cm</td>
+                  <td>68-72 cm</td>
+                  <td>96-100 cm</td>
                 </tr>
                 <tr>
                   <td>M</td>
-                  <td>88-92 cm</td>
-                  <td>70-74 cm</td>
-                  <td>96-100 cm</td>
+                  <td>90-94 cm</td>
+                  <td>72-76 cm</td>
+                  <td>102-106 cm</td>
                 </tr>
                 <tr>
                   <td>L</td>
-                  <td>92-96 cm</td>
-                  <td>74-78 cm</td>
-                  <td>100-104 cm</td>
+                  <td>94-98 cm</td>
+                  <td>76-80 cm</td>
+                  <td>106-110 cm</td>
                 </tr>
                 <tr>
                   <td>XL</td>
-                  <td>96-100 cm</td>
-                  <td>78-82 cm</td>
-                  <td>104-108 cm</td>
+                  <td>98-102 cm</td>
+                  <td>80-84 cm</td>
+                  <td>110-114 cm</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <div className={s.disenoUnico}>
-            <p className={s.disenoUnicoTitulo}>¿Tienes un cuerpo único?</p>
-            <p>
-              Si consideras que necesitas un diseño completamente personalizado o ajustes
-              especiales a nuestras piezas, escríbenos. Trabajamos con tus medidas,
-              preferencias y estilo para crear algo hecho pensando en ti.
-            </p>
+          <div className={s.disenoUnicoContainer}>
+            <input
+              type="checkbox"
+              id="disenoUnicoFlip"
+              className={s.disenoUnicoCheckbox}
+              aria-label="Voltear tarjeta de diseño único"
+            />
+            <label htmlFor="disenoUnicoFlip" className={s.disenoUnico}>
+              <div className={s.disenoUnicoFrente}>
+                <p className={s.disenoUnicoTitulo}>¿Consideras que tienes un cuerpo y un alma única?</p>
+              </div>
+              <div className={s.disenoUnicoAtras}>
+                <p className={s.disenoUnicoTitulo}>Diseño personalizado</p>
+                <p>
+                  Si necesitas un diseño completamente personalizado o ajustes especiales a nuestras piezas, escríbenos.
+                  Trabajamos con tus medidas, preferencias y estilo para crear algo hecho pensando en ti.
+                </p>
+              </div>
+            </label>
           </div>
         </div>
       </Panel>
