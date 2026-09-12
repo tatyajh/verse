@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "verse",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": [
+        "-c",
+        "export PATH=\"/Users/claudiahelena/.nvm/versions/node/v22.23.2/bin:$PATH\"; cd /Users/claudiahelena/Desktop/verse && exec npm run dev"
+      ],
+      "port": 3000
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+
+/**
+ * Grabado de encaje generativo.
+ *
+ * Versé todavía no tiene fotografía de producto. Un rectángulo gris diría
+ * "falta algo"; esto dice "esto es la marca". Cada pieza recibe un grabado
+ * propio —sembrado con su slug, idéntico entre recargas— dibujado en
+ * hairlines rose gold sobre noche: festón, roseta y retícula de tul.
+ *
+ * Cuando existan fotos, <ProductImage> usa la foto y esto desaparece solo.
+ */
+
+function semilla(texto: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < texto.length; i++) {
+    h ^= texto.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+/** mulberry32: pequeño, determinista y suficiente para dibujo. */
+function prng(estado: number): () => number {
+  let a = estado;
+  return () => {
+    a |= 0;
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+const NOCHE = "#140e0e";
+const NOCHE_2 = "#241a1a";
+const ROSE = "201, 143, 111";
+
+function dibujar(ctx: CanvasRenderingContext2D, w: number, h: number, slug: string) {
+  const r = prng(semilla(slug));
+  const min = Math.min(w, h);
+
+  ctx.clearRect(0, 0, w, h);
+
+  // Fondo: noche con una veladura hacia el centro alto, como luz rasante.
+  const fondo = ctx.createLinearGradient(0, 0, w * 0.4, h);
+  fondo.addColorStop(0, NOCHE_2);
+  fondo.addColorStop(1, NOCHE);
+  ctx.fillStyle = fondo;
+  ctx.fillRect(0, 0, w, h);
+
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.lineWidth = Math.max(0.6, min * 0.0016);
+
+  // --- retícula de tul: dos familias de líneas cruzadas, casi invisibles ---
+  const paso = min * (0.028 + r() * 0.014);
+  const giro = (12 + r() * 22) * (Math.PI / 180);
+  ctx.save();
+  ctx.translate(w / 2, h / 2);
+  ctx.rotate(giro);
+  ctx.strokeStyle = `rgba(${ROSE}, 0.075)`;
+  const alcance = Math.hypot(w, h);
+  ctx.beginPath();
+  for (let x = -alcance; x <= alcance; x += paso) {
+    ctx.moveTo(x, -alcance);
+    ctx.lineTo(x, alcance);
+  }
+  ctx.stroke();
+  ctx.beginPath();
+  for (let y = -alcance; y <= alcance; y += paso * 1.9) {
+    ctx.moveTo(-alcance, y);
+    ctx.lineTo(alcance, y);
+  }
+  ctx.stroke();
+  ctx.restore();
+
+  // --- festón: arcos colgantes en tres alturas, como borde de encaje ---
+  const alturas = [0.6, 0.71, 0.83];
+  alturas.forEach((f, i) => {
+    const y = h * f;
+    const radio = w / (7 + Math.floor(r() * 5));
+    ctx.strokeStyle = `rgba(${ROSE}, ${0.34 - i * 0.07})`;
+    ctx.beginPath();
+    for (let x = -radio; x < w + radio; x += radio * 2) {
+      ctx.moveTo(x, y);
+      ctx.arc(x + radio, y, radio, Math.PI, 0, true);
+    }
+    ctx.stroke();
+
+    // Puntos de picot colgando de cada valle.
+    ctx.fillStyle = `rgba(${ROSE}, ${0.3 - i * 0.08})`;
+    for (let x = radio; x < w; x += radio * 2) {
+      ctx.beginPath();
+      ctx.arc(x, y + radio * 0.34, ctx.lineWidth * 1.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  });
+
+  // --- roseta: repetición polar de pétalos elípticos, tres coronas ---
+  const cx = w * (0.42 + r() * 0.16);
+  const cy = h * (0.34 + r() * 0.08);
+  const petalos = 6 + Math.floor(r() * 7);
+  const coronas = [0.1, 0.165, 0.235];
+
+  coronas.forEach((k, i) => {
+    const radio = min * k;
+    const desfase = i * (Math.PI / petalos);
+    ctx.strokeStyle = `rgba(${ROSE}, ${0.48 - i * 0.13})`;
+    for (let p = 0; p < petalos; p++) {
+      const a = desfase + (p * Math.PI * 2) / petalos;
+      ctx.beginPath();
+      ctx.ellipse(
+        cx + Math.cos(a) * radio * 0.62,
+        cy + Math.sin(a) * radio * 0.62,
+        radio * 0.62,
+        radio * (0.17 + r() * 0.06),
+        a,
+        0,
+        Math.PI * 2,
+      );
+      ctx.stroke();
+    }
+  });
+
+  // Corazón de la roseta.
+  ctx.strokeStyle = `rgba(${ROSE}, 0.6)`;
+  ctx.beginPath();
+  ctx.arc(cx, cy, min * 0.022, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // --- viñeta: cierra los bordes para que el grabado no se corte en seco ---
+  const vineta = ctx.createRadialGradient(
+    cx,
+    cy,
+    min * 0.1,
+    w / 2,
+    h / 2,
+    Math.hypot(w, h) * 0.62,
+  );
+  vineta.addColorStop(0, "rgba(20, 14, 14, 0)");
+  vineta.addColorStop(1, "rgba(20, 14, 14, 0.92)");
+  ctx.fillStyle = vineta;
+  ctx.fillRect(0, 0, w, h);
+
+  // Filete interior: el marco del grabado.
+  ctx.strokeStyle = `rgba(${ROSE}, 0.28)`;
+  ctx.lineWidth = Math.max(1, min * 0.0018);
+  const m = min * 0.045;
+  ctx.strokeRect(m, m, w - m * 2, h - m * 2);
+}
+
+export default function LaceCanvas({
+  slug,
+  className,
+}: {
+  slug: string;
+  className?: string;
+}) {
+  const ref = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const lienzo = ref.current;
+    if (!lienzo) return;
+    const ctx = lienzo.getContext("2d");
+    if (!ctx) return;
+
+    let frame = 0;
+
+    const pintar = () => {
+      frame = 0;
+      const { width, height } = lienzo.getBoundingClientRect();
+      if (width === 0 || height === 0) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      lienzo.width = Math.round(width * dpr);
+      lienzo.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      dibujar(ctx, width, height, slug);
+    };
+
+    const reprogramar = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(pintar);
+    };
+
+    pintar();
+    const ro = new ResizeObserver(reprogramar);
+    ro.observe(lienzo);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      ro.disconnect();
+    };
+  }, [slug]);
+
+  return <canvas ref={ref} className={className} aria-hidden="true" />;
+}

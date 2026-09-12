@@ -1,0 +1,75 @@
+/* Por defecto oculto: sin JS la página se lee completa y nunca queda tapada.
+   Solo se muestra cuando el script síncrono marca la visita como nueva. */
+.umbral {
+  display: none;
+}
+
+:global(html[data-umbral="nuevo"]) .umbral {
+  display: block;
+}
+
+.hoja {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 50.5vw; /* medio viewport + solape, para que no se vea una fisura */
+  z-index: 300;
+  background: var(--noche);
+  transition: transform 1.4s var(--ease-umbral);
+  will-change: transform;
+}
+
+.izq {
+  left: 0;
+}
+
+.der {
+  right: 0;
+}
+
+/* La costura de la caja cerrada. */
+.costura {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  z-index: 301;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--rose) 18%,
+    var(--rose) 82%,
+    transparent
+  );
+  transform: translateX(-50%);
+  transition: opacity 0.5s ease;
+}
+
+/* El sello interrumpe la costura, como el lacre que mantiene cerrada la caja. */
+.sello {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 302;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  padding: 1.6rem 1.9rem;
+  background: var(--noche);
+  color: var(--rose);
+  transition: opacity 0.45s ease;
+}
+
+.abierto .izq {
+  transform: translateX(-100%);
+}
+
+.abierto .der {
+  transform: translateX(100%);
+}
+
+.abierto .costura,
+.abierto .sello {
+  opacity: 0;
+}

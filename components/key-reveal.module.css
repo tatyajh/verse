@@ -1,0 +1,97 @@
+.figura {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--noche);
+  cursor: crosshair;
+
+  /* Posición del descubierto. La actualiza el puntero; por defecto, el centro. */
+  --x: 50%;
+  --y: 50%;
+}
+
+/* Lo que hay debajo del encaje: una luz tibia y la llave. */
+.fondo {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(
+      60% 45% at var(--x) var(--y),
+      rgb(201 143 111 / 0.22),
+      transparent 70%
+    ),
+    linear-gradient(160deg, #241a1a, #140e0e 70%);
+}
+
+.fondo svg {
+  width: 42%;
+  height: auto;
+  color: var(--rose);
+}
+
+/* El encaje encima: retícula de tul + festón, recortado alrededor del cursor. */
+.encaje {
+  position: absolute;
+  inset: 0;
+  background-color: #140e0e;
+  background-image:
+    radial-gradient(
+      circle at 9px 0,
+      transparent 8px,
+      rgb(233 227 219 / 0.14) 8.4px,
+      transparent 9.6px
+    ),
+    radial-gradient(circle at 9px 11px, rgb(233 227 219 / 0.1) 2px, transparent 2.4px),
+    repeating-linear-gradient(
+      62deg,
+      rgb(233 227 219 / 0.05) 0 1px,
+      transparent 1px 11px
+    ),
+    repeating-linear-gradient(
+      -62deg,
+      rgb(233 227 219 / 0.05) 0 1px,
+      transparent 1px 11px
+    );
+  background-size:
+    18px 18px,
+    18px 18px,
+    auto,
+    auto;
+
+  -webkit-mask-image: radial-gradient(
+    circle at var(--x) var(--y),
+    transparent 0,
+    transparent 11%,
+    #000 34%
+  );
+  mask-image: radial-gradient(
+    circle at var(--x) var(--y),
+    transparent 0,
+    transparent 11%,
+    #000 34%
+  );
+}
+
+/* Filete interior, igual que en los grabados: la misma mano en todo el sitio. */
+.filete {
+  position: absolute;
+  inset: 4.5%;
+  border: 1px solid rgb(201 143 111 / 0.28);
+  pointer-events: none;
+}
+
+.pista {
+  position: absolute;
+  left: 1.4rem;
+  bottom: 1.4rem;
+  color: rgb(233 227 219 / 0.55);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .figura {
+    cursor: default;
+  }
+}

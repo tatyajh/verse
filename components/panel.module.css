@@ -1,0 +1,32 @@
+.panel {
+  position: relative;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.padded {
+  padding-block: var(--paso);
+}
+
+/* La costura: única línea rose que separa un mundo del otro.
+   Se descose desde el centro cuando el panel entra en pantalla. */
+.seam {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: var(--rose);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 1.2s var(--ease-umbral);
+}
+
+.seamOpen {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seam {
+    transform: scaleX(1);
+  }
+}

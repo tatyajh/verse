@@ -1,0 +1,94 @@
+.nav {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.15rem var(--gutter);
+  color: var(--fg);
+  /* El color lo decide el panel que quede debajo; la transición evita el salto. */
+  transition:
+    color 0.5s var(--ease-umbral),
+    transform 0.55s var(--ease-umbral),
+    opacity 0.35s ease;
+  pointer-events: none;
+}
+
+/* Al bajar, el nav se retira para no quedarse sobre los titulares. */
+.oculta {
+  transform: translateY(-115%);
+  opacity: 0;
+}
+
+.nav > * {
+  pointer-events: auto;
+}
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display), "Didot", serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.34em;
+  /* El tracking abre por la derecha; se compensa para que quede ópticamente pegado. */
+  padding-inline-end: 0.34em;
+  line-height: 1;
+}
+
+.marca svg {
+  color: var(--accent);
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+}
+
+.menu a {
+  color: var(--muted);
+  transition: color 0.4s var(--ease-umbral);
+}
+
+.menu a:hover,
+.menu a:focus-visible {
+  color: var(--fg);
+}
+
+.carrito {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  color: var(--fg);
+}
+
+.cuenta {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding-inline: 0.35rem;
+  border-radius: 999px; /* única curva del sitio: es un contador, no una tarjeta */
+  background: var(--accent);
+  color: var(--noche);
+  font-size: 0.625rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 820px) {
+  .menu {
+    gap: 1.4rem;
+  }
+  .oculto {
+    display: none;
+  }
+  .marca {
+    font-size: 0.95rem;
+    letter-spacing: 0.26em;
+  }
+}

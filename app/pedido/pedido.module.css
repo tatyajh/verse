@@ -1,0 +1,44 @@
+.pedido {
+  display: grid;
+  gap: 1.6rem;
+  justify-items: start;
+  max-width: 52ch;
+  padding-block: clamp(2rem, 8vw, 5rem);
+}
+
+.titulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: var(--t-xl);
+  line-height: 0.98;
+}
+
+.pedido p {
+  color: var(--muted);
+}
+
+.ficha {
+  display: grid;
+  gap: 0.9rem;
+  width: 100%;
+  margin-top: 0.6rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line);
+}
+
+.dato {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--muted);
+}
+
+.dato span:last-child {
+  color: var(--fg);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.8rem;
+}

@@ -1,0 +1,396 @@
+/* =========================================================
+   HOME — cada sección tiene su propia composición.
+   Ninguna repite la estructura de la anterior; es la regla
+   que separa esto de una plantilla.
+   ========================================================= */
+
+/* ---------- 1. Hero: el wordmark es la imagen ---------- */
+
+.hero {
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 2rem;
+  padding-block: 6rem 2.5rem;
+  overflow: hidden;
+}
+
+.heroCinta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--muted);
+}
+
+/* El wordmark se sangra a propósito y no lleva los márgenes de .wrap:
+   el nav ya muestra la marca entera, así que aquí puede cortarse. */
+.heroPalabraFila {
+  display: grid;
+  align-content: center;
+}
+
+.heroPalabra {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(5rem, 31vw, 32rem);
+  /* holgada a propósito: con 0.8 el acento de la É se cortaba por arriba */
+  line-height: 1.06;
+  letter-spacing: 0.05em;
+  text-align: center;
+  white-space: nowrap;
+  /* compensa el tracking de la última letra para que el corte sea simétrico */
+  text-indent: 0.05em;
+}
+
+.heroPie {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 2rem;
+}
+
+.heroFrase {
+  font-family: var(--font-body), Georgia, serif;
+  font-style: italic;
+  font-size: var(--t-m);
+  line-height: 1.5;
+  max-width: 30ch;
+  color: var(--fg);
+}
+
+.heroEje {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 68%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgb(201 143 111 / 0.4), transparent);
+  pointer-events: none;
+}
+
+@media (max-width: 700px) {
+  .heroPie {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+    justify-items: start;
+  }
+  .heroEje {
+    display: none;
+  }
+}
+
+/* ---------- 2. Manifiesto: dos columnas desiguales y desfasadas ---------- */
+
+.manifiesto {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(2rem, 7vw, 6rem);
+}
+
+.manifiestoTitulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: var(--t-xl);
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+}
+
+.manifiestoCuerpo {
+  display: grid;
+  gap: 1.6rem;
+  /* el desfase vertical es lo que rompe la simetría de "dos columnas" */
+  padding-top: clamp(0.5rem, 6vw, 5.5rem);
+  max-width: 52ch;
+}
+
+.manifiestoCuerpo p {
+  color: var(--muted);
+}
+
+/* Los cinco adjetivos como una sola línea tipográfica, no como etiquetas. */
+.rasgos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 0.8rem;
+  color: var(--fg);
+}
+
+.rasgos span + span::before {
+  content: "·";
+  margin-right: 0.9rem;
+  color: var(--accent);
+}
+
+@media (max-width: 860px) {
+  .manifiesto {
+    grid-template-columns: 1fr;
+  }
+  .manifiestoCuerpo {
+    padding-top: 0;
+  }
+}
+
+/* ---------- 3. Líneas: escalera, porque es un espectro real ---------- */
+
+.espectroCinta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  color: var(--muted);
+  padding-bottom: 1rem;
+}
+
+.espectroRiel {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    var(--line-fuerte),
+    var(--accent) 55%,
+    var(--vino)
+  );
+}
+
+.escalera {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.peldano {
+  display: grid;
+  gap: 0.8rem;
+  align-content: start;
+  padding-top: 2.2rem;
+  position: relative;
+}
+
+/* La marca en el riel: cada línea cuelga de su punto del espectro. */
+.peldano::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1.4rem;
+  background: var(--accent);
+}
+
+.peldano:nth-child(2) {
+  margin-top: clamp(2rem, 6vw, 5rem);
+}
+
+.peldano:nth-child(3) {
+  margin-top: clamp(4rem, 12vw, 10rem);
+}
+
+.peldanoNombre {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: var(--t-l);
+  line-height: 1;
+}
+
+.peldano p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  max-width: 34ch;
+}
+
+@media (max-width: 800px) {
+  .escalera {
+    grid-template-columns: 1fr;
+  }
+  .peldano:nth-child(2),
+  .peldano:nth-child(3) {
+    margin-top: 2.5rem;
+  }
+}
+
+/* ---------- 4. Destacado: rejilla desfasada ---------- */
+
+.destacadoCinta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.destacadoTitulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: var(--t-l);
+  line-height: 1;
+}
+
+.vitrina {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 3vw, 2.6rem);
+  align-items: start;
+}
+
+.vitrina > :nth-child(2) {
+  margin-top: clamp(2rem, 7vw, 6rem);
+}
+
+.vitrina > :nth-child(3) {
+  margin-top: clamp(1rem, 3vw, 2.5rem);
+}
+
+@media (max-width: 900px) {
+  .vitrina {
+    grid-template-columns: 1fr 1fr;
+  }
+  .vitrina > :nth-child(3) {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .vitrina {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .vitrina > :nth-child(2) {
+    margin-top: 0;
+  }
+}
+
+/* ---------- 5. La llave ---------- */
+
+.llave {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: clamp(2rem, 7vw, 6rem);
+  align-items: center;
+}
+
+.llaveTexto {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 46ch;
+}
+
+.llaveTitulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: var(--t-xl);
+  line-height: 1.04;
+}
+
+.llaveTexto p {
+  color: var(--muted);
+}
+
+.cita {
+  font-family: var(--font-body), Georgia, serif;
+  font-style: italic;
+  font-size: var(--t-m);
+  line-height: 1.5;
+  color: var(--fg);
+  padding-left: 1.4rem;
+  border-left: 1px solid var(--accent);
+}
+
+@media (max-width: 860px) {
+  .llave {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- 6. Detalle: lista tipográfica, sin tarjetas ---------- */
+
+.detalleTitulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: var(--t-l);
+  line-height: 1.05;
+  max-width: 20ch;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.lista {
+  display: grid;
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: 8rem 16rem 1fr;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: baseline;
+  padding-block: 1.7rem;
+  border-top: 1px solid var(--line);
+}
+
+.fila:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.filaClave {
+  color: var(--accent);
+}
+
+.filaTitulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: 1.35rem;
+  line-height: 1.15;
+}
+
+.filaTexto {
+  color: var(--muted);
+  font-size: 0.95rem;
+  max-width: 52ch;
+}
+
+@media (max-width: 820px) {
+  .fila {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+
+/* ---------- 7. Tallas: banda ancha ---------- */
+
+.tallas {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.tallasTexto {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 46ch;
+}
+
+.tallasTitulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: var(--t-l);
+  line-height: 1;
+}
+
+.tallasTexto p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Letras separadas por filetes, no cajas. */
+.regla {
+  display: flex;
+  align-items: stretch;
+  border-block: 1px solid var(--line);
+}
+
+.regla span {
+  padding: 1.5rem clamp(1rem, 2.5vw, 2rem);
+  color: var(--fg);
+}
+
+.regla span + span {
+  border-left: 1px solid var(--line);
+}
+
+@media (max-width: 760px) {
+  .tallas {
+    grid-template-columns: 1fr;
+  }
+}
