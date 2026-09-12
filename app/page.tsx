@@ -194,6 +194,60 @@ export default function Home() {
               <span>XL</span>
             </div>
           </div>
+
+          <div className={s.tablaTallas}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Talla</th>
+                  <th>Busto</th>
+                  <th>Cintura</th>
+                  <th>Cadera</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>XS</td>
+                  <td>80-84 cm</td>
+                  <td>62-66 cm</td>
+                  <td>88-92 cm</td>
+                </tr>
+                <tr>
+                  <td>S</td>
+                  <td>84-88 cm</td>
+                  <td>66-70 cm</td>
+                  <td>92-96 cm</td>
+                </tr>
+                <tr>
+                  <td>M</td>
+                  <td>88-92 cm</td>
+                  <td>70-74 cm</td>
+                  <td>96-100 cm</td>
+                </tr>
+                <tr>
+                  <td>L</td>
+                  <td>92-96 cm</td>
+                  <td>74-78 cm</td>
+                  <td>100-104 cm</td>
+                </tr>
+                <tr>
+                  <td>XL</td>
+                  <td>96-100 cm</td>
+                  <td>78-82 cm</td>
+                  <td>104-108 cm</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className={s.disenoUnico}>
+            <p className={s.disenoUnicoTitulo}>¿Tienes un cuerpo único?</p>
+            <p>
+              Si consideras que necesitas un diseño completamente personalizado o ajustes
+              especiales a nuestras piezas, escríbenos. Trabajamos con tus medidas,
+              preferencias y estilo para crear algo hecho pensando en ti.
+            </p>
+          </div>
         </div>
       </Panel>
     </>

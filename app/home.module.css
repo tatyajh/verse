@@ -390,8 +390,76 @@ a.ladoLink::after {
   border-left: 1px solid var(--line);
 }
 
+/* Tabla de medidas */
+.tablaTallas {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  overflow-x: auto;
+}
+
+.tablaTallas table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.tablaTallas th {
+  padding: 1rem clamp(0.75rem, 2vw, 1.5rem);
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  color: var(--fg);
+  font-weight: 500;
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+}
+
+.tablaTallas td {
+  padding: 0.875rem clamp(0.75rem, 2vw, 1.5rem);
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.tablaTallas tr:last-child td {
+  border-bottom: none;
+}
+
+/* Sección de diseño único */
+.disenoUnico {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding: clamp(2rem, 4vw, 3rem);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  border-left: 2px solid var(--accent);
+  display: grid;
+  gap: 0.8rem;
+}
+
+.disenoUnicoTitulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: 1.2rem;
+  color: var(--fg);
+  margin: 0;
+  line-height: 1;
+}
+
+.disenoUnico p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
 @media (max-width: 760px) {
   .tallas {
     grid-template-columns: 1fr;
+  }
+
+  .tablaTallas {
+    font-size: 0.85rem;
+  }
+
+  .tablaTallas th,
+  .tablaTallas td {
+    padding: 0.7rem 0.5rem;
   }
 }
