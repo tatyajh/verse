@@ -1,71 +1,32 @@
 import { PALETA_AURORA_DIURNA, PALETA_AURORA_NOCTURNA, type PaletaGrabado } from "@/components/lace-canvas";
 
 /**
- * Catálogo — fuente única de verdad.
- *
- * Todo el catálogo es, por ahora, la colección Aurora: dos tonalidades
- * (nocturna/diurna) cruzadas con el tipo de pieza (conjunto/body/complemento).
- * Antes existió un catálogo de muestra en tres "líneas" inventadas
- * (Diario/Ritual/Velada) para tener algo que mostrar mientras se definía la
- * marca; se retiró porque no correspondía a ninguna decisión real de Versé.
+ * Catálogo Aurora — 4 momentos, 20 piezas.
+ * Distribución: Medianoche (5) + Penumbra (5) + Alba (5) + Amanecer (5)
  *
  * El servidor SIEMPRE recalcula totales desde aquí: nada de lo que llegue
  * del navegador decide cuánto se cobra.
  */
 
-export type Talla = "XS" | "S" | "M" | "L" | "XL" | "Única";
-export type Tonalidad = "nocturna" | "diurna";
-export type TipoPieza = "conjunto" | "body" | "complemento" | "bra" | "panty" | "tanga" | "liguero" | "brasiera" | "longline" | "manto";
+export type Talla = "S" | "M" | "L" | "XL" | "Única";
+export type Tonalidad = "medianoche" | "penumbra" | "alba" | "amanecer";
+export type TipoPieza = "conjunto" | "body" | "corset" | "complemento" | "bra" | "panty" | "tanga" | "liguero" | "brasiera" | "longline" | "manto";
 
 export type Product = {
   slug: string;
   nombre: string;
   tonalidad: Tonalidad;
   tipo: TipoPieza;
-  /**
-   * Solo en conjuntos: cuántas piezas trae (3 o 4, según si incluye liguero
-   * u otro complemento). Es la única certeza que hay todavía sobre el
-   * contenido del set — no se inventa cuáles son esas piezas.
-   */
   piezas?: number;
-  /**
-   * Pesos colombianos, sin decimales. Ausente = todavía no hay precio
-   * confirmado; el storefront lo muestra como "por confirmar" y no deja
-   * añadir la pieza al carrito.
-   */
   precio?: number;
-  /**
-   * resumen/descripcion ausentes = todavía no hay copy real para la pieza.
-   * No se rellenan con texto inventado: mejor no decir nada que describir
-   * mal una prenda que Versé todavía no ha definido.
-   */
   resumen?: string;
   descripcion?: string;
-  /**
-   * Ficha técnica de composición (uso interno: producción, no venta). A
-   * quien compra no le interesa el desglose en %; nunca se renderiza en el
-   * storefront. Vive aquí solo como referencia para quien produce la pieza.
-   */
   materiales?: string[];
   cuidado?: string;
   tallas: Talla[];
-  /** Ruta a fotografía real. Mientras no exista, se dibuja el grabado de encaje. */
   image?: string;
-  /**
-   * Secuencia de fotos para el giro 360° (mínimo 2, en orden de rotación).
-   * Mientras no exista, <VisorPieza> muestra la imagen fija de siempre —
-   * el visor ya está listo para cuando haya fotografía real de producto.
-   */
   giro?: string[];
-  /**
-   * Array de slugs de prendas individuales que componen este conjunto.
-   * Solo presente en productos tipo "conjunto".
-   */
   componentes?: string[];
-  /**
-   * Slug del conjunto padre si esta prenda es componente de un conjunto.
-   * Presente en prendas tipo "bra", "panty", "tanga", "liguero", etc.
-   */
   componenteDe?: string;
 };
 
@@ -77,31 +38,56 @@ export type TonalidadInfo = {
   grabado: PaletaGrabado;
 };
 
-/** Las dos tonalidades de Aurora — el moodboard que envió la marca. */
 export const TONALIDADES: TonalidadInfo[] = [
   {
-    id: "nocturna",
-    nombre: "Nocturna",
-    sensacion: "Profundidad, misterio, magnetismo",
+    id: "medianoche",
+    nombre: "Medianoche",
+    sensacion: "Profundidad, misterio, poder",
     paleta: [
-      { nombre: "Noche boreal", hex: "#080D18" },
-      { nombre: "Negro eclipse", hex: "#111111" },
-      { nombre: "Petróleo aurora", hex: "#12484B" },
-      { nombre: "Morado abismo", hex: "#2B1C3D" },
-      { nombre: "Violeta pulsar", hex: "#5D4772" },
+      { nombre: "Negro profundo", hex: "#0a0a0a" },
+      { nombre: "Negro + dorado", hex: "#1a1410" },
+      { nombre: "Grafito", hex: "#3a3a3a" },
+      { nombre: "Gris carbón", hex: "#4a4a4a" },
+      { nombre: "Oro", hex: "#d4af37" },
     ],
     grabado: PALETA_AURORA_NOCTURNA,
   },
   {
-    id: "diurna",
-    nombre: "Diurna",
-    sensacion: "Calma, feminidad, luz etérea",
+    id: "penumbra",
+    nombre: "Penumbra",
+    sensacion: "Transición, misterio azul",
     paleta: [
-      { nombre: "Azul escarcha", hex: "#9EADB9" },
-      { nombre: "Verde niebla", hex: "#AAB9AC" },
-      { nombre: "Lila celestial", hex: "#C7B8CD" },
-      { nombre: "Rosa boreal", hex: "#D2A2B2" },
-      { nombre: "Crema lunar", hex: "#F4EEE5" },
+      { nombre: "Azul oscuro", hex: "#001f3f" },
+      { nombre: "Azul tinta", hex: "#0a2540" },
+      { nombre: "Índigo", hex: "#4b0082" },
+      { nombre: "Violeta", hex: "#7851a9" },
+      { nombre: "Morado profundo", hex: "#2d1b69" },
+    ],
+    grabado: PALETA_AURORA_NOCTURNA,
+  },
+  {
+    id: "alba",
+    nombre: "Alba",
+    sensacion: "Primera luz, frescura, renacimiento",
+    paleta: [
+      { nombre: "Verde esmeralda", hex: "#50c878" },
+      { nombre: "Lila", hex: "#c77dff" },
+      { nombre: "Lavanda", hex: "#e0aaff" },
+      { nombre: "Malva frío", hex: "#c8b8db" },
+      { nombre: "Verde claro", hex: "#a8d8da" },
+    ],
+    grabado: PALETA_AURORA_DIURNA,
+  },
+  {
+    id: "amanecer",
+    nombre: "Amanecer",
+    sensacion: "Luz cálida, esperanza, dulzura",
+    paleta: [
+      { nombre: "Rosado", hex: "#ffc0cb" },
+      { nombre: "Rosa empolvado", hex: "#fadadd" },
+      { nombre: "Rosa pálido", hex: "#ffc6d9" },
+      { nombre: "Azul claro", hex: "#87ceeb" },
+      { nombre: "Perla", hex: "#fdeef4" },
     ],
     grabado: PALETA_AURORA_DIURNA,
   },
@@ -110,6 +96,7 @@ export const TONALIDADES: TonalidadInfo[] = [
 export const TIPO_LABEL: Record<TipoPieza, string> = {
   conjunto: "Conjunto",
   body: "Body",
+  corset: "Corset",
   complemento: "Complemento",
   bra: "Bra",
   panty: "Panty",
@@ -120,89 +107,86 @@ export const TIPO_LABEL: Record<TipoPieza, string> = {
   manto: "Manto",
 };
 
-const TALLAS: Talla[] = ["XS", "S", "M", "L", "XL"];
+const TALLAS: Talla[] = ["S", "M", "L", "XL"];
 
 /**
- * Catálogo completo: Veinte piezas (conjuntos, bodies, complementos) más sus
- * componentes individuales. Los conjuntos ahora traen un array de slugs de sus
- * componentes, permitiendo compras individual de bras, panties, tangas, etc.
+ * Catálogo Aurora: 20 piezas distribuidas en 4 momentos.
+ * - Medianoche: Sombra, Equinoccio + Solsticio, Marfil, Penumbra (2 + 0 + 3 = 5)
+ * - Penumbra: Abismo, Nébula + Medianoche, Niebla + Grafito (2 + 2 + 1 = 5)
+ * - Alba: Alba, Nube + Lunar, Cristal + Perla (2 + 2 + 1 = 5)
+ * - Amanecer: Eclipse, Neblina + Umbra, Onix + Vapor (2 + 2 + 1 = 5)
  */
 export const PRODUCTS: Product[] = [
-  // ---------- Nocturna Conjuntos ----------
+  // ---------- MEDIANOCHE: 2 conjuntos + 3 complementos ----------
   {
     slug: "aurora-eclipse",
     nombre: "Sombra",
-    tonalidad: "nocturna",
+    tonalidad: "medianoche",
     tipo: "conjunto",
     piezas: 4,
     tallas: TALLAS,
     componentes: ["aurora-eclipse-bra", "aurora-eclipse-panty", "aurora-eclipse-tanga", "aurora-eclipse-brasiera"],
   },
   {
+    slug: "aurora-pulsar",
+    nombre: "Equinoccio",
+    tonalidad: "medianoche",
+    tipo: "conjunto",
+    piezas: 3,
+    tallas: TALLAS,
+    componentes: ["aurora-pulsar-bra", "aurora-pulsar-panty", "aurora-pulsar-tanga"],
+  },
+  // Componentes de Medianoche
+  { slug: "aurora-eclipse-bra", nombre: "Bra Intensa", tonalidad: "medianoche", tipo: "bra", tallas: TALLAS, componenteDe: "aurora-eclipse" },
+  { slug: "aurora-eclipse-panty", nombre: "Panty Clásico", tonalidad: "medianoche", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-eclipse" },
+  { slug: "aurora-eclipse-tanga", nombre: "Tanga", tonalidad: "medianoche", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-eclipse" },
+  { slug: "aurora-eclipse-brasiera", nombre: "Brasiera", tonalidad: "medianoche", tipo: "brasiera", tallas: TALLAS, componenteDe: "aurora-eclipse" },
+  { slug: "aurora-pulsar-bra", nombre: "Bra Romántica", tonalidad: "medianoche", tipo: "bra", tallas: TALLAS, componenteDe: "aurora-pulsar" },
+  { slug: "aurora-pulsar-panty", nombre: "Panty Clásico", tonalidad: "medianoche", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-pulsar" },
+  { slug: "aurora-pulsar-tanga", nombre: "Tanga con Tirales", tonalidad: "medianoche", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-pulsar" },
+  // Complementos Medianoche
+  { slug: "aurora-solsticio", nombre: "Solsticio", tonalidad: "medianoche", tipo: "complemento", tallas: ["Única"] },
+  { slug: "aurora-marfil", nombre: "Marfil", tonalidad: "medianoche", tipo: "complemento", tallas: ["Única"] },
+  { slug: "aurora-penumbra", nombre: "Penumbra", tonalidad: "medianoche", tipo: "complemento", tallas: ["Única"] },
+
+  // ---------- PENUMBRA: 2 conjuntos + 2 bodies + 1 complemento ----------
+  {
     slug: "aurora-abismo",
     nombre: "Abismo",
-    tonalidad: "nocturna",
+    tonalidad: "penumbra",
     tipo: "conjunto",
     piezas: 4,
     tallas: TALLAS,
     componentes: ["aurora-abismo-longline", "aurora-abismo-panty", "aurora-abismo-tanga", "aurora-abismo-liguero"],
   },
   {
-    slug: "aurora-pulsar",
-    nombre: "Equinoccio",
-    tonalidad: "nocturna",
-    tipo: "conjunto",
-    piezas: 3,
-    tallas: TALLAS,
-    componentes: ["aurora-pulsar-bra", "aurora-pulsar-panty", "aurora-pulsar-tanga"],
-  },
-  {
     slug: "aurora-nebula",
     nombre: "Nébula",
-    tonalidad: "nocturna",
+    tonalidad: "penumbra",
     tipo: "conjunto",
     piezas: 3,
     tallas: TALLAS,
     componentes: ["aurora-nebula-bra", "aurora-nebula-panty", "aurora-nebula-tanga"],
   },
+  // Componentes de Penumbra
+  { slug: "aurora-abismo-longline", nombre: "Longline Magnética", tonalidad: "penumbra", tipo: "longline", tallas: TALLAS, componenteDe: "aurora-abismo" },
+  { slug: "aurora-abismo-panty", nombre: "Panty Tiro Medio", tonalidad: "penumbra", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-abismo" },
+  { slug: "aurora-abismo-tanga", nombre: "Tanga", tonalidad: "penumbra", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-abismo" },
+  { slug: "aurora-abismo-liguero", nombre: "Liguero Ajustable", tonalidad: "penumbra", tipo: "liguero", tallas: ["Única"], componenteDe: "aurora-abismo" },
+  { slug: "aurora-nebula-bra", nombre: "Bralette Halter", tonalidad: "penumbra", tipo: "bra", tallas: TALLAS, componenteDe: "aurora-nebula" },
+  { slug: "aurora-nebula-panty", nombre: "Panty Clásico", tonalidad: "penumbra", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-nebula" },
+  { slug: "aurora-nebula-tanga", nombre: "Tanga con Tirales", tonalidad: "penumbra", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-nebula" },
+  // Bodies Penumbra
+  { slug: "aurora-medianoche", nombre: "Medianoche", tonalidad: "penumbra", tipo: "body", tallas: TALLAS },
+  { slug: "aurora-niebla", nombre: "Niebla", tonalidad: "penumbra", tipo: "body", tallas: TALLAS },
+  // Complementos Penumbra
+  { slug: "aurora-grafito", nombre: "Grafito", tonalidad: "penumbra", tipo: "complemento", tallas: ["Única"] },
 
-  // ---------- Nocturna Conjuntos - Componentes Individuales ----------
-  // Eclipse
-  { slug: "aurora-eclipse-bra", nombre: "Bra Intensa", tonalidad: "nocturna", tipo: "bra", tallas: TALLAS, componenteDe: "aurora-eclipse" },
-  { slug: "aurora-eclipse-panty", nombre: "Panty Clásico", tonalidad: "nocturna", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-eclipse" },
-  { slug: "aurora-eclipse-tanga", nombre: "Tanga", tonalidad: "nocturna", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-eclipse" },
-  { slug: "aurora-eclipse-brasiera", nombre: "Brasiera", tonalidad: "nocturna", tipo: "brasiera", tallas: TALLAS, componenteDe: "aurora-eclipse" },
-
-  // Abismo
-  { slug: "aurora-abismo-longline", nombre: "Longline Magnética", tonalidad: "nocturna", tipo: "longline", tallas: TALLAS, componenteDe: "aurora-abismo" },
-  { slug: "aurora-abismo-panty", nombre: "Panty Tiro Medio", tonalidad: "nocturna", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-abismo" },
-  { slug: "aurora-abismo-tanga", nombre: "Tanga", tonalidad: "nocturna", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-abismo" },
-  { slug: "aurora-abismo-liguero", nombre: "Liguero Ajustable", tonalidad: "nocturna", tipo: "liguero", tallas: ["Única"], componenteDe: "aurora-abismo" },
-
-  // Pulsar
-  { slug: "aurora-pulsar-bra", nombre: "Bra Romántica", tonalidad: "nocturna", tipo: "bra", tallas: TALLAS, componenteDe: "aurora-pulsar" },
-  { slug: "aurora-pulsar-panty", nombre: "Panty Clásico", tonalidad: "nocturna", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-pulsar" },
-  { slug: "aurora-pulsar-tanga", nombre: "Tanga con Tirales", tonalidad: "nocturna", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-pulsar" },
-
-  // Nébula
-  { slug: "aurora-nebula-bra", nombre: "Bralette Halter", tonalidad: "nocturna", tipo: "bra", tallas: TALLAS, componenteDe: "aurora-nebula" },
-  { slug: "aurora-nebula-panty", nombre: "Panty Clásico", tonalidad: "nocturna", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-nebula" },
-  { slug: "aurora-nebula-tanga", nombre: "Tanga con Tirales", tonalidad: "nocturna", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-nebula" },
-
-  // ---------- Nocturna Bodies y Complementos ----------
-  { slug: "aurora-medianoche", nombre: "Medianoche", tonalidad: "nocturna", tipo: "body", tallas: TALLAS },
-  { slug: "aurora-umbra", nombre: "Umbra", tonalidad: "nocturna", tipo: "body", tallas: TALLAS },
-  { slug: "aurora-onix", nombre: "Ónix", tonalidad: "nocturna", tipo: "body", tallas: TALLAS },
-  { slug: "aurora-penumbra", nombre: "Penumbra", tonalidad: "nocturna", tipo: "complemento", tallas: ["Única"] },
-  { slug: "aurora-grafito", nombre: "Grafito", tonalidad: "nocturna", tipo: "complemento", tallas: ["Única"] },
-  { slug: "aurora-solsticio", nombre: "Solsticio", tonalidad: "nocturna", tipo: "complemento", tallas: ["Única"] },
-
-  // ---------- Diurna Conjuntos ----------
-  // Nombres confirmados del moodboard de Aurora Diurna
+  // ---------- ALBA: 2 conjuntos + 2 bodies + 1 complemento ----------
   {
     slug: "aurora-alba",
     nombre: "Alba",
-    tonalidad: "diurna",
+    tonalidad: "alba",
     tipo: "conjunto",
     piezas: 4,
     tallas: TALLAS,
@@ -211,16 +195,31 @@ export const PRODUCTS: Product[] = [
   {
     slug: "aurora-escarcha",
     nombre: "Nube",
-    tonalidad: "diurna",
+    tonalidad: "alba",
     tipo: "conjunto",
     piezas: 3,
     tallas: TALLAS,
     componentes: ["aurora-escarcha-bra", "aurora-escarcha-panty", "aurora-escarcha-tanga"],
   },
+  // Componentes de Alba
+  { slug: "aurora-alba-bra", nombre: "Bra", tonalidad: "alba", tipo: "bra", tallas: TALLAS, componenteDe: "aurora-alba" },
+  { slug: "aurora-alba-panty", nombre: "Panty Clásico", tonalidad: "alba", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-alba" },
+  { slug: "aurora-alba-tanga", nombre: "Tanga", tonalidad: "alba", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-alba" },
+  { slug: "aurora-alba-liguero", nombre: "Liguero", tonalidad: "alba", tipo: "liguero", tallas: ["Única"], componenteDe: "aurora-alba" },
+  { slug: "aurora-escarcha-bra", nombre: "Bra", tonalidad: "alba", tipo: "bra", tallas: TALLAS, componenteDe: "aurora-escarcha" },
+  { slug: "aurora-escarcha-panty", nombre: "Panty Clásico", tonalidad: "alba", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-escarcha" },
+  { slug: "aurora-escarcha-tanga", nombre: "Tanga", tonalidad: "alba", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-escarcha" },
+  // Bodies Alba
+  { slug: "aurora-lunar", nombre: "Lunar", tonalidad: "alba", tipo: "body", tallas: TALLAS },
+  { slug: "aurora-cristal", nombre: "Cristal", tonalidad: "alba", tipo: "body", tallas: TALLAS },
+  // Complementos Alba
+  { slug: "aurora-perla", nombre: "Perla", tonalidad: "alba", tipo: "complemento", tallas: ["Única"] },
+
+  // ---------- AMANECER: 2 conjuntos + 2 bodies + 1 complemento ----------
   {
     slug: "aurora-celestial",
     nombre: "Eclipse",
-    tonalidad: "diurna",
+    tonalidad: "amanecer",
     tipo: "conjunto",
     piezas: 4,
     tallas: TALLAS,
@@ -229,43 +228,25 @@ export const PRODUCTS: Product[] = [
   {
     slug: "aurora-rocio",
     nombre: "Neblina",
-    tonalidad: "diurna",
+    tonalidad: "amanecer",
     tipo: "conjunto",
     piezas: 3,
     tallas: TALLAS,
     componentes: ["aurora-rocio-bra", "aurora-rocio-panty", "aurora-rocio-tanga"],
   },
-
-  // ---------- Diurna Conjuntos - Componentes Individuales ----------
-  // Alba
-  { slug: "aurora-alba-bra", nombre: "Bra", tonalidad: "diurna", tipo: "bra", tallas: TALLAS, componenteDe: "aurora-alba" },
-  { slug: "aurora-alba-panty", nombre: "Panty Clásico", tonalidad: "diurna", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-alba" },
-  { slug: "aurora-alba-tanga", nombre: "Tanga", tonalidad: "diurna", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-alba" },
-  { slug: "aurora-alba-liguero", nombre: "Liguero", tonalidad: "diurna", tipo: "liguero", tallas: ["Única"], componenteDe: "aurora-alba" },
-
-  // Escarcha
-  { slug: "aurora-escarcha-bra", nombre: "Bra", tonalidad: "diurna", tipo: "bra", tallas: TALLAS, componenteDe: "aurora-escarcha" },
-  { slug: "aurora-escarcha-panty", nombre: "Panty Clásico", tonalidad: "diurna", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-escarcha" },
-  { slug: "aurora-escarcha-tanga", nombre: "Tanga", tonalidad: "diurna", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-escarcha" },
-
-  // Celestial
-  { slug: "aurora-celestial-bra", nombre: "Bra", tonalidad: "diurna", tipo: "bra", tallas: TALLAS, componenteDe: "aurora-celestial" },
-  { slug: "aurora-celestial-panty", nombre: "Panty Clásico", tonalidad: "diurna", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-celestial" },
-  { slug: "aurora-celestial-tanga", nombre: "Tanga", tonalidad: "diurna", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-celestial" },
-  { slug: "aurora-celestial-liguero", nombre: "Liguero", tonalidad: "diurna", tipo: "liguero", tallas: ["Única"], componenteDe: "aurora-celestial" },
-
-  // Rocío
-  { slug: "aurora-rocio-bra", nombre: "Bra", tonalidad: "diurna", tipo: "bra", tallas: TALLAS, componenteDe: "aurora-rocio" },
-  { slug: "aurora-rocio-panty", nombre: "Panty Clásico", tonalidad: "diurna", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-rocio" },
-  { slug: "aurora-rocio-tanga", nombre: "Tanga", tonalidad: "diurna", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-rocio" },
-
-  // ---------- Diurna Bodies y Complementos ----------
-  { slug: "aurora-niebla", nombre: "Niebla", tonalidad: "diurna", tipo: "body", tallas: TALLAS },
-  { slug: "aurora-lunar", nombre: "Lunar", tonalidad: "diurna", tipo: "body", tallas: TALLAS },
-  { slug: "aurora-cristal", nombre: "Cristal", tonalidad: "diurna", tipo: "body", tallas: TALLAS },
-  { slug: "aurora-perla", nombre: "Perla", tonalidad: "diurna", tipo: "complemento", tallas: ["Única"] },
-  { slug: "aurora-vapor", nombre: "Vapor", tonalidad: "diurna", tipo: "complemento", tallas: ["Única"] },
-  { slug: "aurora-marfil", nombre: "Marfil", tonalidad: "diurna", tipo: "complemento", tallas: ["Única"] },
+  // Componentes de Amanecer
+  { slug: "aurora-celestial-bra", nombre: "Bra", tonalidad: "amanecer", tipo: "bra", tallas: TALLAS, componenteDe: "aurora-celestial" },
+  { slug: "aurora-celestial-panty", nombre: "Panty Clásico", tonalidad: "amanecer", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-celestial" },
+  { slug: "aurora-celestial-tanga", nombre: "Tanga", tonalidad: "amanecer", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-celestial" },
+  { slug: "aurora-celestial-liguero", nombre: "Liguero", tonalidad: "amanecer", tipo: "liguero", tallas: ["Única"], componenteDe: "aurora-celestial" },
+  { slug: "aurora-rocio-bra", nombre: "Bra", tonalidad: "amanecer", tipo: "bra", tallas: TALLAS, componenteDe: "aurora-rocio" },
+  { slug: "aurora-rocio-panty", nombre: "Panty Clásico", tonalidad: "amanecer", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-rocio" },
+  { slug: "aurora-rocio-tanga", nombre: "Tanga", tonalidad: "amanecer", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-rocio" },
+  // Bodies Amanecer
+  { slug: "aurora-umbra", nombre: "Umbra", tonalidad: "amanecer", tipo: "body", tallas: TALLAS },
+  { slug: "aurora-onix", nombre: "Ónix", tonalidad: "amanecer", tipo: "body", tallas: TALLAS },
+  // Complementos Amanecer
+  { slug: "aurora-vapor", nombre: "Vapor", tonalidad: "amanecer", tipo: "complemento", tallas: ["Única"] },
 ];
 
 export function getProduct(slug: string): Product | undefined {
