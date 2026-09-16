@@ -15,19 +15,19 @@ import s from "./aurora.module.css";
 export const metadata: Metadata = {
   title: "Aurora",
   description:
-    "Veinte piezas, dos tonalidades. La colección Aurora, de Versé Intimates.",
+    "Veinte piezas, cuatro momentos. La colección Aurora, de Versé Intimates.",
 };
 
 function esTonalidad(valor: string | undefined): valor is Tonalidad {
   return TONALIDADES.some((t) => t.id === valor);
 }
 
-const ORDEN_TIPO: TipoPieza[] = ["conjunto", "body", "complemento"];
+const ORDEN_TIPO: TipoPieza[] = ["conjunto", "body", "corset", "complemento"];
 
 export default async function Aurora(props: PageProps<"/aurora">) {
   const query = await props.searchParams;
-  const crudo = Array.isArray(query.tonalidad) ? query.tonalidad[0] : query.tonalidad;
-  const activa: Tonalidad = esTonalidad(crudo) ? crudo : "nocturna";
+  const crudo = Array.isArray(query.momento) ? query.momento[0] : query.momento;
+  const activa: Tonalidad = esTonalidad(crudo) ? crudo : "medianoche";
 
   const tonalidad = getTonalidad(activa);
   const piezas = porTonalidad(activa);
@@ -37,7 +37,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
     // (el color real lo definen los tokens propios de .pagina, no este atributo).
     <section
       className={s.pagina}
-      data-panel={activa === "diurna" ? "seda" : "noche"}
+      data-panel={activa === "alba" || activa === "amanecer" ? "seda" : "noche"}
       data-tonalidad={activa}
     >
       <div className="wrap">
@@ -45,15 +45,15 @@ export default async function Aurora(props: PageProps<"/aurora">) {
           <p className={`${s.eyebrow} label`}>Colección</p>
           <h1 className={s.titulo}>Aurora</h1>
           <p className={s.intro}>
-            Veinte piezas, dos tonalidades. La misma casa, dos maneras de sentirla.
+            Veinte piezas, cuatro momentos. Aurora en su viaje completo del día.
           </p>
         </header>
 
-        <nav className={s.toggle} aria-label="Tonalidad">
+        <nav className={s.toggle} aria-label="Momento">
           {TONALIDADES.map((t) => (
             <Link
               key={t.id}
-              href={`/aurora?tonalidad=${t.id}`}
+              href={`/aurora?momento=${t.id}`}
               className={t.id === activa ? s.toggleActivo : ""}
               scroll={false}
             >
