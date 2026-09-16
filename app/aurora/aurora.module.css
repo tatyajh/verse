@@ -4,31 +4,57 @@
    más que la regla global del mismo atributo (que solo existe aquí para
    que <Nav/> detecte de qué color pintarse al pasar por encima). */
 
-.pagina[data-panel] {
-  --bg: #140e0e;
-  --bg-2: #1e1516;
+/* Medianoche: Negro profundo */
+.pagina[data-tonalidad="medianoche"] {
+  --bg: #060608;
+  --bg-2: #25252A;
   --fg: #e9e3db;
   --muted: #9c8a8c;
   --line: rgb(233 227 219 / 0.18);
-  --accent: #b76e79; /* Rosa Oro — el acento cruzado del moodboard de Aurora */
+  --accent: #B08D57;
   --line-fuerte: rgb(233 227 219 / 0.34);
+}
 
+/* Penumbra: Morado profundo */
+.pagina[data-tonalidad="penumbra"] {
+  --bg: #493B63;
+  --bg-2: #35345F;
+  --fg: #e9e3db;
+  --muted: #c9b8d4;
+  --line: rgb(233 227 219 / 0.18);
+  --accent: #8E82B7;
+  --line-fuerte: rgb(233 227 219 / 0.34);
+}
+
+/* Alba: Verde esmeralda */
+.pagina[data-tonalidad="alba"] {
+  --bg: #0F6E56;
+  --bg-2: #1a8a6f;
+  --fg: #e9e3db;
+  --muted: #b8d2db;
+  --line: rgb(233 227 219 / 0.18);
+  --accent: #8E82B7;
+  --line-fuerte: rgb(233 227 219 / 0.34);
+}
+
+/* Amanecer: Perla/Rosa */
+.pagina[data-tonalidad="amanecer"] {
+  --bg: #E5E1E2;
+  --bg-2: #D1E3E7;
+  --fg: #493B63;
+  --muted: #8E7A8E;
+  --line: rgb(73 59 99 / 0.16);
+  --accent: #C48F9F;
+  --line-fuerte: rgb(73 59 99 / 0.32);
+}
+
+.pagina[data-panel] {
   background: linear-gradient(180deg, var(--bg-2), var(--bg) 60%);
   color: var(--fg);
   transition:
     background-color 0.7s ease,
     color 0.7s ease;
   padding-block: clamp(3.5rem, 8vw, 6rem) clamp(4rem, 9vw, 7rem);
-}
-
-.pagina[data-panel][data-tonalidad="diurna"] {
-  --bg: #f4eee5;
-  --bg-2: #c7b8cd;
-  --fg: #2b1c3d;
-  --muted: #6f5f74;
-  --line: rgb(43 28 61 / 0.16);
-  --line-fuerte: rgb(43 28 61 / 0.32);
-  --accent: #b76e79;
 }
 
 .cabecera {
