@@ -109,8 +109,9 @@
 
 .toggleActivo {
   color: var(--fg) !important;
-  border-bottom-color: var(--accent) !important;
-  font-weight: 500;
+  border-bottom: 3px solid var(--accent) !important;
+  font-weight: 600;
+  padding-bottom: 0.35rem;
 }
 
 .mood {
