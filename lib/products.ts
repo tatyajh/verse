@@ -79,7 +79,6 @@ export const TONALIDADES: TonalidadInfo[] = [
     sensacion: "Luz cálida, esperanza, dulzura",
     paleta: [
       { nombre: "Rosado", hex: "#C48F9F" },
-      { nombre: "Rosa empolvado", hex: "#D1A7B2" },
       { nombre: "Rosa pálido", hex: "#E3C8CF" },
       { nombre: "Azul claro", hex: "#B8D2DB" },
       { nombre: "Azul hielo", hex: "#D1E3E7" },
