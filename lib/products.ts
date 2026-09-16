@@ -45,10 +45,7 @@ export const TONALIDADES: TonalidadInfo[] = [
     sensacion: "Profundidad, misterio, poder",
     paleta: [
       { nombre: "Negro profundo", hex: "#0a0a0a" },
-      { nombre: "Negro + dorado", hex: "#1a1410" },
-      { nombre: "Grafito", hex: "#3a3a3a" },
-      { nombre: "Gris carbón", hex: "#4a4a4a" },
-      { nombre: "Oro", hex: "#d4af37" },
+      { nombre: "Dorado", hex: "#d4af37" },
     ],
     grabado: PALETA_AURORA_NOCTURNA,
   },
