@@ -26,12 +26,12 @@
   --line-fuerte: rgb(233 227 219 / 0.34);
 }
 
-/* Alba: Verde esmeralda */
+/* Alba: Verde jade oscuro + Lila */
 .pagina[data-tonalidad="alba"] {
-  --bg: #0F6E56;
-  --bg-2: #1a8a6f;
+  --bg: #0d5c47;
+  --bg-2: #1a7a5e;
   --fg: #e9e3db;
-  --muted: #b8d2db;
+  --muted: #9D829E;
   --line: rgb(233 227 219 / 0.18);
   --accent: #8E82B7;
   --line-fuerte: rgb(233 227 219 / 0.34);
