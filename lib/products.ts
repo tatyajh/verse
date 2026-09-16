@@ -57,7 +57,7 @@ export const TONALIDADES: TonalidadInfo[] = [
       { nombre: "Azul oscuro", hex: "#111A35" },
       { nombre: "Azul tinta", hex: "#20284A" },
       { nombre: "Índigo", hex: "#35345F" },
-      { nombre: "Violeta", hex: "#534AB7" },
+      { nombre: "Magenta oscuro", hex: "#7B2D5F" },
     ],
     grabado: PALETA_AURORA_NOCTURNA,
   },
