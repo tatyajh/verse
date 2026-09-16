@@ -69,19 +69,22 @@
   font-size: clamp(1.6rem, 3.2vw, 2.4rem);
   color: var(--muted);
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid transparent;
+  border-bottom: 3px solid transparent;
   transition:
     color 0.4s var(--ease-umbral),
     border-color 0.4s var(--ease-umbral);
+  cursor: pointer;
 }
 
 .toggle button:hover {
   color: var(--fg);
+  border-bottom-color: color-mix(in srgb, var(--accent) 50%, transparent);
 }
 
 .toggleActivo {
   color: var(--fg) !important;
   border-bottom-color: var(--accent) !important;
+  font-weight: 500;
 }
 
 .mood {
