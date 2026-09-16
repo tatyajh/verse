@@ -55,9 +55,9 @@ export const TONALIDADES: TonalidadInfo[] = [
     sensacion: "Transición, misterio azul",
     paleta: [
       { nombre: "Azul oscuro", hex: "#111A35" },
+      { nombre: "Azul tinta", hex: "#20284A" },
       { nombre: "Índigo", hex: "#35345F" },
       { nombre: "Violeta", hex: "#534AB7" },
-      { nombre: "Morado profundo", hex: "#493B63" },
     ],
     grabado: PALETA_AURORA_NOCTURNA,
   },
@@ -78,7 +78,7 @@ export const TONALIDADES: TonalidadInfo[] = [
     nombre: "Amanecer",
     sensacion: "Luz cálida, esperanza, dulzura",
     paleta: [
-      { nombre: "Rosado", hex: "#D57A8A" },
+      { nombre: "Rosado algodón", hex: "#E8B5C5" },
       { nombre: "Azul claro", hex: "#B8D2DB" },
       { nombre: "Azul hielo", hex: "#D1E3E7" },
       { nombre: "Perla", hex: "#E5E1E2" },
