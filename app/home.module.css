@@ -186,6 +186,7 @@
 .ladoSwatches span {
   width: 1.1rem;
   height: 1.1rem;
+  border-radius: 3px;
   /* un tono del moodboard (Crema Lunar) coincide con el fondo diurno;
      el borde evita que ese swatch desaparezca contra su propio fondo */
   border: 1px solid color-mix(in srgb, var(--lado-fg) 35%, transparent);

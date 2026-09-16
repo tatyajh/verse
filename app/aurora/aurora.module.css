@@ -136,6 +136,7 @@
 .swatch {
   width: 1.6rem;
   height: 1.6rem;
+  border-radius: 4px;
   /* un tono del moodboard (Crema Lunar) coincide con el fondo diurno;
      un borde más marcado que --line evita que ese swatch desaparezca */
   border: 1px solid color-mix(in srgb, var(--fg) 35%, transparent);

@@ -9,6 +9,7 @@
   aspect-ratio: 4 / 5;
   overflow: hidden;
   background: var(--noche);
+  border-radius: 8px;
 }
 
 .marco canvas,

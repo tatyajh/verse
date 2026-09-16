@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Archivo, Italiana, Spectral } from "next/font/google";
+import { Archivo, Cormorant_Garamond, Spectral } from "next/font/google";
 import "./globals.css";
 import Umbral from "@/components/umbral";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 
-/* Display: capitales deco finísimas — sensación de grabado, no de "fuente de moda". */
-const display = Italiana({
+/* Display: elegante y redondeado — sensación de lujo sin rigidez. */
+const display = Cormorant_Garamond({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-display",
