@@ -69,7 +69,7 @@ export const TONALIDADES: TonalidadInfo[] = [
       { nombre: "Verde jade", hex: "#0F6E56" },
       { nombre: "Lila", hex: "#8E82B7" },
       { nombre: "Lavanda", hex: "#ADA4CC" },
-      { nombre: "Malva frío", hex: "#9D829E" },
+      { nombre: "Morado gris", hex: "#8E7DA8" },
     ],
     grabado: PALETA_AURORA_DIURNA,
   },
@@ -78,7 +78,7 @@ export const TONALIDADES: TonalidadInfo[] = [
     nombre: "Amanecer",
     sensacion: "Luz cálida, esperanza, dulzura",
     paleta: [
-      { nombre: "Rosado", hex: "#C48F9F" },
+      { nombre: "Rosado", hex: "#D57A8A" },
       { nombre: "Azul claro", hex: "#B8D2DB" },
       { nombre: "Azul hielo", hex: "#D1E3E7" },
       { nombre: "Perla", hex: "#E5E1E2" },
