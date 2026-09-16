@@ -9,10 +9,10 @@ import s from "./home.module.css";
 /** Rosa Oro: el acento cruzado del moodboard de Aurora, el mismo que usa /aurora. */
 const ACENTO_AURORA = "#B76E79";
 const LADO_COLOR = {
-  medianoche: { bg: "#0a0a0a", fg: "#e9e3db" }, // Negro profundo
-  penumbra: { bg: "#2d1b69", fg: "#e9e3db" }, // Morado profundo
-  alba: { bg: "#e8f5f0", fg: "#1a3a2e" }, // Verde esmeralda claro
-  amanecer: { bg: "#fdeef4", fg: "#5a3a42" }, // Perla/Rosa pálido
+  medianoche: { bg: "#060608", fg: "#e9e3db" }, // Negro
+  penumbra: { bg: "#493B63", fg: "#e9e3db" }, // Morado profundo
+  alba: { bg: "#0F6E56", fg: "#e9e3db" }, // Verde esmeralda
+  amanecer: { bg: "#E5E1E2", fg: "#493B63" }, // Perla
 } as const;
 
 export default function Home() {
