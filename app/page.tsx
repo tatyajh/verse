@@ -161,34 +161,28 @@ export default function Home() {
               </thead>
               <tbody>
                 <tr>
-                  <td>XS</td>
-                  <td>82-86 cm</td>
-                  <td>64-68 cm</td>
-                  <td>92-96 cm</td>
-                </tr>
-                <tr>
                   <td>S</td>
-                  <td>86-90 cm</td>
-                  <td>68-72 cm</td>
-                  <td>96-100 cm</td>
+                  <td>84-88 cm</td>
+                  <td>60-66 cm</td>
+                  <td>90-95 cm</td>
                 </tr>
                 <tr>
                   <td>M</td>
-                  <td>90-94 cm</td>
-                  <td>72-76 cm</td>
-                  <td>102-106 cm</td>
+                  <td>89-93 cm</td>
+                  <td>67-74 cm</td>
+                  <td>96-101 cm</td>
                 </tr>
                 <tr>
                   <td>L</td>
                   <td>94-98 cm</td>
-                  <td>76-80 cm</td>
-                  <td>106-110 cm</td>
+                  <td>75-82 cm</td>
+                  <td>102-108 cm</td>
                 </tr>
                 <tr>
                   <td>XL</td>
-                  <td>98-102 cm</td>
-                  <td>80-84 cm</td>
-                  <td>110-114 cm</td>
+                  <td>99-103 cm</td>
+                  <td>83-90 cm</td>
+                  <td>109-115 cm</td>
                 </tr>
               </tbody>
             </table>
