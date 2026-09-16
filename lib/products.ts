@@ -70,11 +70,10 @@ export const TONALIDADES: TonalidadInfo[] = [
     nombre: "Alba",
     sensacion: "Primera luz, frescura, renacimiento",
     paleta: [
-      { nombre: "Verde esmeralda", hex: "#50c878" },
+      { nombre: "Verde jade", hex: "#1a7a5e" },
       { nombre: "Lila", hex: "#c77dff" },
       { nombre: "Lavanda", hex: "#e0aaff" },
       { nombre: "Malva frío", hex: "#c8b8db" },
-      { nombre: "Verde claro", hex: "#a8d8da" },
     ],
     grabado: PALETA_AURORA_DIURNA,
   },
