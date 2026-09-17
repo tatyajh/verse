@@ -56,7 +56,7 @@
     color 0.7s ease;
   /* El nav es fixed y mide ~100px (el emblema es muy vertical): la cabecera
      tiene que empezar por debajo o queda tapada. */
-  padding-block: clamp(6.5rem, 11vh, 7.5rem) clamp(2rem, 6vh, 4rem);
+  padding-block: clamp(7.5rem, 11vh, 8.5rem) clamp(2rem, 6vh, 4rem);
   padding-inline: clamp(1.5rem, 5vw, 3rem);
 }
 

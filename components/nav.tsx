@@ -89,7 +89,10 @@ export default function Nav() {
     >
       <Link href="/" className={s.marca}>
         <VerseMark size={28} />
-        <span className={s.marcaTexto}>Versé</span>
+        <span className={s.marcaTexto}>
+          <span className={s.marcaNombre}>Versé</span>
+          <span className={s.marcaSufijo}>Intimates</span>
+        </span>
       </Link>
 
       <div className={`${s.menu} label`}>
