@@ -36,10 +36,34 @@
 
 /* Dos líneas, no una: el emblema es muy vertical y el lockup lo acompaña
    sin robarle ancho al menú en pantallas angostas. */
+.emblema {
+  position: relative;
+  display: inline-grid;
+}
+
+.emblema > * {
+  grid-area: 1 / 1;
+  transition: opacity 0.5s var(--ease-umbral);
+}
+
+.emblemaHondo {
+  opacity: 0;
+}
+
+.nav[data-panel="seda"] .emblemaClaro {
+  opacity: 0;
+}
+
+.nav[data-panel="seda"] .emblemaHondo {
+  opacity: 1;
+}
+
 .marcaTexto {
   display: grid;
   gap: 0.15rem;
-  color: var(--rose);
+  /* --accent, no --rose: el nav flota sobre seda también, y ahí el rosa
+     claro se pierde. El panel de abajo decide el tono. */
+  color: var(--accent);
 }
 
 .marcaNombre {

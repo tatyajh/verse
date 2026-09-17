@@ -90,7 +90,12 @@ export default function Nav() {
       aria-label="Principal"
     >
       <Link href="/" className={s.marca}>
-        <VerseMark size={28} />
+        {/* Los dos acabados apilados y fundidos por CSS según el panel: un
+            solo <img> no puede transicionar de color. */}
+        <span className={s.emblema}>
+          <VerseMark size={28} className={s.emblemaClaro} />
+          <VerseMark size={28} hondo className={s.emblemaHondo} />
+        </span>
         <span className={s.marcaTexto}>
           <span className={s.marcaNombre}>Versé</span>
           <span className={s.marcaSufijo}>Intimates</span>

@@ -15,7 +15,7 @@
   inset-inline: 0;
   top: 0;
   height: 1px;
-  background: var(--rose);
+  background: var(--accent);
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 1.2s var(--ease-umbral);

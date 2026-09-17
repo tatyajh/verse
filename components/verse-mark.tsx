@@ -4,10 +4,10 @@
  * ornamental —corazón y flor de lis— para espacios pequeños donde el
  * emblema completo, muy vertical, no cabe bien).
  *
- * Color fijo de marca (#DEA193, relleno y trazo): no se tiñe con los
- * tokens del panel, igual que un herraje no cambia de color según la
- * pared donde cuelga. Al servirse como <img>, el color vive dentro del
- * SVG y no puede cambiarse desde CSS.
+ * Dos acabados del mismo herraje: oro rosa (#DEA193) sobre noche y bronce
+ * (#C4734A, verse-mark-hondo.svg) sobre seda, donde el rosa claro se
+ * pierde. Al servirse como <img> el color vive dentro del SVG, así que el
+ * cambio es de archivo, no de CSS.
  */
 type Tamano = number | string;
 
@@ -41,11 +41,20 @@ function Marca({
 export function VerseMark({
   size = 48,
   className,
+  hondo = false,
 }: {
   size?: Tamano;
   className?: string;
+  /** Acabado bronce, para fondos claros. */
+  hondo?: boolean;
 }) {
-  return <Marca src="/verse-mark.svg" size={size} className={className} />;
+  return (
+    <Marca
+      src={hondo ? "/verse-mark-hondo.svg" : "/verse-mark.svg"}
+      size={size}
+      className={className}
+    />
+  );
 }
 
 /** Solo el cierre —corazón y flor de lis—. Para espacios pequeños o casi cuadrados. */
