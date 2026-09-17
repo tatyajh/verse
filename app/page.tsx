@@ -4,6 +4,7 @@ import Panel from "@/components/panel";
 import ProductCard from "@/components/product-card";
 import KeyReveal from "@/components/key-reveal";
 import { getProduct, TONALIDADES } from "@/lib/products";
+import { ENTRADAS, formatFecha } from "@/lib/blog";
 import s from "./home.module.css";
 
 /** Rosa Oro: el acento cruzado del moodboard de Aurora, el mismo que usa /aurora. */
@@ -194,6 +195,32 @@ export default function Home() {
               </tbody>
             </table>
           </div>
+        </div>
+      </Panel>
+
+      {/* 7 — El diario. Enlazarlo solo desde el pie lo dejaba enterrado. */}
+      <Panel tono="noche" id="diario">
+        <div className="wrap">
+          <div className={`${s.diarioCinta} label`}>
+            <span>Del diario</span>
+            <Link href="/blog" className="link">
+              Ver todo
+            </Link>
+          </div>
+          <ul className={s.diario}>
+            {ENTRADAS.slice(0, 2).map((e) => (
+              <li key={e.slug}>
+                <Link href={`/blog/${e.slug}`} className={s.entrada}>
+                  <time className={`${s.entradaFecha} label num`} dateTime={e.fecha}>
+                    {formatFecha(e.fecha)}
+                  </time>
+                  <h3 className={s.entradaTitulo}>{e.titulo}</h3>
+                  <p className={s.entradaResumen}>{e.resumen}</p>
+                  <span className={`${s.entradaLeer} label link`}>Leer</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </Panel>
     </>

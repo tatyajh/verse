@@ -124,6 +124,9 @@ export default function Nav() {
         <Link href="/#llave" className={`link ${s.oculto}`}>
           La llave
         </Link>
+        <Link href="/blog" className={`link ${s.oculto}`}>
+          Diario
+        </Link>
         <Link href="/favoritos" className={`${s.carrito} link`} aria-label="Favoritos">
           <span className={s.etiqueta}>Favoritos</span>
           <svg viewBox="0 0 24 24" aria-hidden="true" className={s.iconoMovil}>
