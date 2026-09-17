@@ -279,80 +279,121 @@ export default async function Aurora(props: PageProps<"/aurora">) {
                         Aurora {t.nombre}
                       </h2>
 
-                      {/* Conjuntos */}
-                      {(() => {
-                        const conjuntos = productosFiltrados.filter((p) => p.tipo === "conjunto");
-                        if (conjuntos.length === 0) return null;
-                        return (
-                          <div className={s.grupo}>
-                            <div className={`${s.grupoCinta} label`}>
-                              <div>
-                                <h3 className={s.grupoTitulo}>{TIPO_LABEL["conjunto"]}s</h3>
-                              </div>
-                              <span>{conjuntos.length}</span>
-                            </div>
-                            <div className={s.rejilla}>
-                              {conjuntos.map((conjunto) => (
-                                <ProductCard
-                                  key={conjunto.slug}
-                                  producto={conjunto}
-                                  sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
-                                />
-                              ))}
-                            </div>
-                          </div>
-                        );
-                      })()}
+                      {/* Cuando hay filtro, mostrar todos los productos filtrados agrupados por tipo */}
+                      {filtroTipo ? (
+                        <>
+                          {(() => {
+                            const productosPorTipo = productosFiltrados.reduce(
+                              (acc, p) => {
+                                if (!acc[p.tipo]) acc[p.tipo] = [];
+                                acc[p.tipo].push(p);
+                                return acc;
+                              },
+                              {} as Record<string, typeof productosFiltrados>
+                            );
 
-                      {/* Bodies */}
-                      {(() => {
-                        const bodies = productosFiltrados.filter((p) => p.tipo === "body");
-                        if (bodies.length === 0) return null;
-                        return (
-                          <div className={s.grupo}>
-                            <div className={`${s.grupoCinta} label`}>
-                              <div>
-                                <h3 className={s.grupoTitulo}>{TIPO_LABEL["body"]}s</h3>
+                            return Object.entries(productosPorTipo).map(([tipo, productos]) => (
+                              <div key={tipo} className={s.grupo}>
+                                <div className={`${s.grupoCinta} label`}>
+                                  <div>
+                                    <h3 className={s.grupoTitulo}>
+                                      {TIPO_LABEL[tipo as TipoPieza] || tipo}s
+                                    </h3>
+                                  </div>
+                                  <span>{productos.length}</span>
+                                </div>
+                                <div className={s.rejilla}>
+                                  {productos.map((p) => (
+                                    <ProductCard
+                                      key={p.slug}
+                                      producto={p}
+                                      sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
+                                    />
+                                  ))}
+                                </div>
                               </div>
-                              <span>{bodies.length}</span>
-                            </div>
-                            <div className={s.rejilla}>
-                              {bodies.map((p) => (
-                                <ProductCard
-                                  key={p.slug}
-                                  producto={p}
-                                  sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
-                                />
-                              ))}
-                            </div>
-                          </div>
-                        );
-                      })()}
+                            ));
+                          })()}
+                        </>
+                      ) : (
+                        <>
+                          {/* Sin filtro, mostrar estructura por tipo: Conjuntos, Bodies, Complementos */}
+                          {/* Conjuntos */}
+                          {(() => {
+                            const conjuntos = productosFiltrados.filter((p) => p.tipo === "conjunto");
+                            if (conjuntos.length === 0) return null;
+                            return (
+                              <div className={s.grupo}>
+                                <div className={`${s.grupoCinta} label`}>
+                                  <div>
+                                    <h3 className={s.grupoTitulo}>{TIPO_LABEL["conjunto"]}s</h3>
+                                  </div>
+                                  <span>{conjuntos.length}</span>
+                                </div>
+                                <div className={s.rejilla}>
+                                  {conjuntos.map((conjunto) => (
+                                    <ProductCard
+                                      key={conjunto.slug}
+                                      producto={conjunto}
+                                      sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
+                                    />
+                                  ))}
+                                </div>
+                              </div>
+                            );
+                          })()}
 
-                      {/* Complementos */}
-                      {(() => {
-                        const complementos = productosFiltrados.filter((p) => p.tipo === "complemento");
-                        if (complementos.length === 0) return null;
-                        return (
-                          <div className={s.grupo}>
-                            <div className={`${s.grupoCinta} label`}>
-                              <div>
-                                <h3 className={s.grupoTitulo}>{TIPO_LABEL["complemento"]}s</h3>
+                          {/* Bodies */}
+                          {(() => {
+                            const bodies = productosFiltrados.filter((p) => p.tipo === "body");
+                            if (bodies.length === 0) return null;
+                            return (
+                              <div className={s.grupo}>
+                                <div className={`${s.grupoCinta} label`}>
+                                  <div>
+                                    <h3 className={s.grupoTitulo}>{TIPO_LABEL["body"]}s</h3>
+                                  </div>
+                                  <span>{bodies.length}</span>
+                                </div>
+                                <div className={s.rejilla}>
+                                  {bodies.map((p) => (
+                                    <ProductCard
+                                      key={p.slug}
+                                      producto={p}
+                                      sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
+                                    />
+                                  ))}
+                                </div>
                               </div>
-                              <span>{complementos.length}</span>
-                            </div>
-                            <div className={s.rejilla}>
-                              {complementos.map((p) => (
-                                <ProductCard
-                                  key={p.slug}
-                                  producto={p}
-                                  sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
-                                />
-                              ))}
-                            </div>
-                          </div>
-                        );
-                      })()}
+                            );
+                          })()}
+
+                          {/* Complementos */}
+                          {(() => {
+                            const complementos = productosFiltrados.filter((p) => p.tipo === "complemento");
+                            if (complementos.length === 0) return null;
+                            return (
+                              <div className={s.grupo}>
+                                <div className={`${s.grupoCinta} label`}>
+                                  <div>
+                                    <h3 className={s.grupoTitulo}>{TIPO_LABEL["complemento"]}s</h3>
+                                  </div>
+                                  <span>{complementos.length}</span>
+                                </div>
+                                <div className={s.rejilla}>
+                                  {complementos.map((p) => (
+                                    <ProductCard
+                                      key={p.slug}
+                                      producto={p}
+                                      sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
+                                    />
+                                  ))}
+                                </div>
+                              </div>
+                            );
+                          })()}
+                        </>
+                      )}
                     </div>
                   );
                 })}
