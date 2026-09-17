@@ -1,3 +1,4 @@
+import { createNoise3D } from "simplex-noise";
 import { prng, semilla } from "./azar";
 
 /**
@@ -132,36 +133,121 @@ export function colorCintaEn(p: number): { nucleo: string; pie: string } {
 }
 
 /**
- * Una cinta es la suma de tres senos con frecuencias inconmensurables: la
- * línea nunca se repite, así que la aurora no delata su bucle.
+ * Una cinta ondula siguiendo un campo de ruido simplex, no una suma de
+ * senos. Los senos, por muchos que se apilen, acaban delatando su
+ * periodicidad: se «ve» el bucle. El ruido no tiene periodo, y eso es lo
+ * que hace que la aurora parezca viva en vez de animada.
+ *
+ * Cada cinta recorre su propio carril del campo, así que ninguna imita a
+ * otra pero todas comparten la misma física.
  */
 export type Cinta = {
+  /** Altura de reposo, en fracción del alto del lienzo. */
   base: number;
+  /** Grosor de la cinta. */
   alto: number;
-  f: [number, number, number];
-  v: [number, number, number];
-  a: [number, number, number];
-  d: [number, number, number];
+  /** Su calle dentro del campo de ruido: separa unas cintas de otras. */
+  carril: number;
+  /** Cuán largas son las ondas a lo ancho. */
+  escala: number;
+  /** Cuán rápido fluye el campo con el tiempo. */
+  deriva: number;
+  amplitud: number;
 };
+
+/* El campo se siembra con el mismo PRNG que los grabados: la aurora es la
+   misma en cada recarga, como cada pieza tiene siempre su mismo encaje. */
+let campo: ReturnType<typeof createNoise3D> | null = null;
+
+function ruido() {
+  if (!campo) campo = createNoise3D(prng(semilla("aurora-historia")));
+  return campo;
+}
 
 export function cintas(cuantas: number, llave = "aurora-historia"): Cinta[] {
   const r = prng(semilla(llave));
   return Array.from({ length: cuantas }, (_, i) => ({
     base: 0.16 + (i / cuantas) * 0.44 + r() * 0.08,
     alto: 0.055 + r() * 0.09,
-    f: [1.4 + r() * 1.4, 2.8 + r() * 1.8, 5 + r() * 2.6],
-    v: [0.06 + r() * 0.05, -0.04 - r() * 0.04, 0.02 + r() * 0.03],
-    a: [0.09 + r() * 0.07, 0.04 + r() * 0.03, 0.015 + r() * 0.015],
-    d: [r() * 6.28, r() * 6.28, r() * 6.28],
+    carril: r() * 100,
+    escala: 1.1 + r() * 0.9,
+    deriva: 0.05 + r() * 0.05,
+    amplitud: 0.1 + r() * 0.07,
   }));
 }
 
 /** La ondulación de la cinta en x (0..1) y el tiempo t (segundos). */
 export function alturaCinta(c: Cinta, x: number, t: number): number {
+  const n = ruido();
   return (
     c.base +
-    Math.sin(x * c.f[0] + t * c.v[0] + c.d[0]) * c.a[0] +
-    Math.sin(x * c.f[1] + t * c.v[1] + c.d[1]) * c.a[1] +
-    Math.sin(x * c.f[2] + t * c.v[2] + c.d[2]) * c.a[2]
+    // Onda larga: el cuerpo de la cinta.
+    n(x * c.escala, c.carril, t * c.deriva) * c.amplitud +
+    // Segunda octava: el temblor fino que tienen las auroras de verdad.
+    n(x * c.escala * 2.6, c.carril + 31.7, t * c.deriva * 1.9) * c.amplitud * 0.32
   );
+}
+
+/* ---------- la tinta ---------- */
+
+/**
+ * De qué color va el texto encima del cielo.
+ *
+ * No puede decidirlo el capítulo: el texto cambiaba de golpe en el borde
+ * de la sección mientras el cielo transicionaba poco a poco, así que al
+ * entrar en Prima Luce quedaba tinta oscura sobre cielo todavía oscuro
+ * —1.63:1, ilegible—. Aquí la tinta sigue la MISMA curva que el cielo.
+ *
+ * El halo es siempre el opuesto de la tinta: en el cruce, cuando el cielo
+ * pasa por su gris medio, ninguna de las dos tintas contrasta bien, y es
+ * el halo el que sostiene la lectura.
+ */
+const TINTA_CLARA = "233 227 219";
+const TINTA_OSCURA = "43 28 61";
+
+/** Luminancia relativa WCAG desde "r g b". */
+function wcag(rgb: string): number {
+  const [r, g, b] = rgb.split(" ").map((v) => {
+    const c = Number(v) / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+const contraste = (a: number, b: number) =>
+  (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+
+export function tintaEn(p: number): { tinta: string; halo: string; fuerza: number } {
+  const { i, j, t } = tramo(p, CIELOS_LAB.length);
+  // La L de las paradas centrales: es donde se apoya el texto.
+  const claridad =
+    [1, 2].reduce(
+      (suma, k) => suma + mezclaLab(CIELOS_LAB[i][k], CIELOS_LAB[j][k], t)[0],
+      0,
+    ) / 2;
+
+  void claridad;
+
+  // No se elige por un umbral fijo —cualquier umbral deja un tramo malo—,
+  // sino midiendo: gana la tinta que más contraste da contra TODAS las
+  // paradas del cielo en ESTE punto. El texto ocupa toda la altura, así
+  // que puede caer sobre cualquiera de ellas.
+  const contra = [0, 1, 2, 3].map((k) =>
+    wcag(labARgb(mezclaLab(CIELOS_LAB[i][k], CIELOS_LAB[j][k], t))),
+  );
+  const peor = (l: number) => Math.min(...contra.map((c) => contraste(l, c)));
+
+  const conClara = peor(wcag(TINTA_CLARA));
+  const conOscura = peor(wcag(TINTA_OSCURA));
+  const gana = conClara >= conOscura;
+  const logrado = Math.max(conClara, conOscura);
+
+  // El amanecer pasa por un gris medio donde ninguna tinta llega a 4.5:1
+  // —es el precio de que la noche se aclare de verdad—. Ahí el halo hace
+  // el trabajo. Fuera de ese tramo se apaga solo y no ensucia la letra.
+  const fuerza = Math.max(0, Math.min(1, (7 - logrado) / 4));
+
+  return gana
+    ? { tinta: TINTA_CLARA, halo: TINTA_OSCURA, fuerza }
+    : { tinta: TINTA_OSCURA, halo: TINTA_CLARA, fuerza };
 }

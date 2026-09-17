@@ -27,7 +27,7 @@
   align-content: center;
   gap: clamp(1.2rem, 3vw, 2rem);
   padding-block: clamp(5rem, 12vh, 9rem);
-  color: var(--hueso);
+  color: rgb(var(--tinta-cielo, 233 227 219));
 }
 
 .titular {
@@ -66,13 +66,19 @@
   display: grid;
   align-content: center;
   padding-block: clamp(6rem, 16vh, 12rem);
-  color: var(--hueso);
-}
 
-/* Cuando amanece, el cielo es perla: el texto se vuelve oscuro o no se lee. */
-.capitulo[data-tonalidad="amanecer"],
-.cierre {
-  color: #3c2f4f;
+  /* La tinta la manda el cielo, no la sección. Si la decidiera el capítulo
+     saltaría de golpe en el borde mientras el cielo aún transiciona, y en
+     ese tramo quedaba texto oscuro sobre fondo oscuro. */
+  color: rgb(var(--tinta-cielo, 233 227 219));
+
+  /* El halo es el opuesto de la tinta y solo aparece donde hace falta:
+     --halo-fuerza sube en el cruce, cuando el cielo pasa por su gris medio
+     y ninguna tinta llega a 4.5:1, y se apaga sola en el resto. */
+  text-shadow:
+    0 1px calc(6px + 16px * var(--halo-fuerza, 0))
+    rgb(var(--halo-cielo, 6 6 8) / calc(0.2 + 0.6 * var(--halo-fuerza, 0)));
+  transition: color 0.35s linear;
 }
 
 .marca {
@@ -93,13 +99,20 @@
 
 /* La aurora dentro de las letras. Si no hay background-clip, queda el
    color sólido de arriba y no se pierde nada. */
+/* El numeral NO puede tomar el degradado del cielo: en Prima Luce el cielo
+   es perla y el IV se volvía invisible. Cada capítulo trae su propio par,
+   elegido para contrastar con su fondo, no para igualarlo. */
+.capitulo[data-tonalidad="medianoche"] { --romano-a: #d4af37; --romano-b: #8a6d3a; }
+.capitulo[data-tonalidad="penumbra"]   { --romano-a: #7f76e0; --romano-b: #7B2D5F; }
+.capitulo[data-tonalidad="alba"]       { --romano-a: #1FB88A; --romano-b: #8E82B7; }
+.capitulo[data-tonalidad="amanecer"]   { --romano-a: #a8536d; --romano-b: #3c2f4f; }
+
 @supports (background-clip: text) or (-webkit-background-clip: text) {
   .romano {
     background-image: linear-gradient(
-      170deg,
-      rgb(var(--c1, 32 40 74)),
-      rgb(var(--c3, 123 45 95)) 55%,
-      rgb(var(--c2, 53 52 95))
+      165deg,
+      var(--romano-a, currentColor),
+      var(--romano-b, currentColor)
     );
     -webkit-background-clip: text;
     background-clip: text;
@@ -150,6 +163,10 @@
 /* ---------- cierre ---------- */
 
 .cierre {
+  color: rgb(var(--tinta-cielo, 43 28 61));
+  text-shadow:
+    0 1px calc(6px + 16px * var(--halo-fuerza, 0))
+    rgb(var(--halo-cielo, 233 227 219) / calc(0.2 + 0.6 * var(--halo-fuerza, 0)));
   min-height: 100svh;
   display: grid;
   align-content: center;

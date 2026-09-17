@@ -9,6 +9,7 @@ import {
   cintas as generarCintas,
   colorCintaEn,
   intensidadEn,
+  tintaEn,
   type Cinta,
 } from "@/lib/cielo";
 import s from "./cielo-aurora.module.css";
@@ -27,13 +28,10 @@ const PASADAS: [number, number][] = [
 ];
 
 export default function CieloAurora() {
-  const raiz = useRef<HTMLDivElement>(null);
   const lienzo = useRef<HTMLCanvasElement>(null);
   const reducido = useMedia("(prefers-reduced-motion: reduce)");
 
   useEffect(() => {
-    const caja = raiz.current;
-    if (!caja) return;
 
     // Con movimiento reducido el canvas ni se monta: no es una aurora
     // apagada, es otro camino. Queda el gradiente, que sigue al scroll —
@@ -72,10 +70,17 @@ export default function CieloAurora() {
       const paso = Math.round(avance * 512);
       if (paso !== ultimoColor) {
         ultimoColor = paso;
+        // Todo va a la raíz: el texto y el velo son hermanos del cielo,
+        // no descendientes suyos, y necesitan heredar los mismos colores.
+        const raizDoc = document.documentElement;
         const paradas = cieloEn(avance);
         for (let i = 0; i < paradas.length; i++) {
-          caja.style.setProperty(`--c${i}`, paradas[i]);
+          raizDoc.style.setProperty(`--c${i}`, paradas[i]);
         }
+        const { tinta, halo, fuerza } = tintaEn(avance);
+        raizDoc.style.setProperty("--tinta-cielo", tinta);
+        raizDoc.style.setProperty("--halo-cielo", halo);
+        raizDoc.style.setProperty("--halo-fuerza", fuerza.toFixed(3));
       }
 
       if (!ctx || !canvas) return;
@@ -134,7 +139,7 @@ export default function CieloAurora() {
   }, [reducido]);
 
   return (
-    <div ref={raiz} className={s.cielo} aria-hidden="true">
+    <div className={s.cielo} aria-hidden="true">
       <div className={s.fondo} />
       {!reducido && <canvas ref={lienzo} className={s.cintas} />}
       <div className={s.nieve} />

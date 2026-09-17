@@ -31,9 +31,12 @@
 
 .heroPalabra {
   font-family: var(--font-display), "Didot", serif;
-  font-size: clamp(5rem, 31vw, 32rem);
-  /* holgada a propósito: con 0.8 el acento de la É se cortaba por arriba */
-  line-height: 1.06;
+  /* Bodoni es bastante más ancha que la anterior: a 31vw la É se salía
+     del viewport. El wordmark puede sangrar, pero nunca por la É —es la
+     letra que hace la marca. A 25vw entra completa. */
+  font-size: clamp(3.4rem, 25vw, 26rem);
+  /* holgada a propósito: el acento de la É se corta por arriba si se aprieta */
+  line-height: 1.12;
   letter-spacing: 0.05em;
   text-align: center;
   white-space: nowrap;

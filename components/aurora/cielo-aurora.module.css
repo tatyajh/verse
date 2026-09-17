@@ -16,10 +16,10 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgb(var(--c0)) 0%,
-    rgb(var(--c1)) 34%,
-    rgb(var(--c2)) 68%,
-    rgb(var(--c3)) 100%
+    rgb(var(--c0, 6 6 8)) 0%,
+    rgb(var(--c1, 8 8 12)) 34%,
+    rgb(var(--c2, 11 10 16)) 68%,
+    rgb(var(--c3, 20 16 8)) 100%
   );
 }
 
@@ -37,5 +37,5 @@
   position: absolute;
   inset: auto 0 0 0;
   height: 38vh;
-  background: linear-gradient(180deg, transparent, rgb(var(--c3) / 0.55));
+  background: linear-gradient(180deg, transparent, rgb(var(--c3, 20 16 8) / 0.55));
 }
