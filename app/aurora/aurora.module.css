@@ -49,12 +49,13 @@
 }
 
 .pagina[data-panel] {
-  background: linear-gradient(180deg, var(--bg-2), var(--bg) 60%);
+  background: var(--bg);
   color: var(--fg);
   transition:
     background-color 0.7s ease,
     color 0.7s ease;
-  padding-block: clamp(3.5rem, 8vw, 6rem) clamp(4rem, 9vw, 7rem);
+  padding-block: clamp(2rem, 6vh, 4rem) clamp(2rem, 6vh, 4rem);
+  padding-inline: clamp(1.5rem, 5vw, 3rem);
 }
 
 .cabecera {
