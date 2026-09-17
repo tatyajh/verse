@@ -120,6 +120,14 @@ export default async function Aurora(props: PageProps<"/aurora">) {
                     </div>
                   </CapituloVelo>
 
+                  <Link
+                    href={`/aurora?view=productos&momento=${c.tonalidad}`}
+                    className={s.enlaceProductos}
+                  >
+                    <span className={s.enlaceProductosIcono}>◆</span>
+                    <span>Ver productos</span>
+                  </Link>
+
                   <UmbralVestidor momento={c.tonalidad} />
                 </section>
               );

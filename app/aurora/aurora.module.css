@@ -6,45 +6,45 @@
 
 /* Medianoche: Negro profundo */
 .pagina[data-tonalidad="noctis"] {
-  --bg: #060608;
+  --bg: linear-gradient(180deg, #060608 0%, #141008 100%);
   --bg-2: #25252A;
   --fg: #e9e3db;
   --muted: #9c8a8c;
   --line: rgb(233 227 219 / 0.18);
-  --accent: #B08D57;
+  --accent: #DEA193;
   --line-fuerte: rgb(233 227 219 / 0.34);
 }
 
 /* Penumbra: Morado profundo */
 .pagina[data-tonalidad="vigilia"] {
-  --bg: #493B63;
+  --bg: linear-gradient(180deg, #111A35 0%, #7B2D5F 100%);
   --bg-2: #35345F;
   --fg: #e9e3db;
   --muted: #c9b8d4;
   --line: rgb(233 227 219 / 0.18);
-  --accent: #8E82B7;
+  --accent: #DEA193;
   --line-fuerte: rgb(233 227 219 / 0.34);
 }
 
 /* Alba: Verde jade oscuro + Lila */
 .pagina[data-tonalidad="borealis"] {
-  --bg: #0F3B33;
+  --bg: linear-gradient(180deg, #04120e 0%, #2e2747 100%);
   --bg-2: #1a5c4f;
   --fg: #e9e3db;
   --muted: #9D829E;
   --line: rgb(233 227 219 / 0.18);
-  --accent: #8E82B7;
+  --accent: #DEA193;
   --line-fuerte: rgb(233 227 219 / 0.34);
 }
 
 /* Amanecer: Perla/Rosa */
 .pagina[data-tonalidad="prima-luce"] {
-  --bg: #E5E1E2;
+  --bg: linear-gradient(180deg, #B8D2DB 0%, #E5E1E2 100%);
   --bg-2: #D1E3E7;
   --fg: #493B63;
   --muted: #8E7A8E;
   --line: rgb(73 59 99 / 0.16);
-  --accent: #C48F9F;
+  --accent: #DEA193;
   --line-fuerte: rgb(73 59 99 / 0.32);
 }
 
@@ -265,7 +265,7 @@
   border-bottom: 1px solid var(--line);
   position: sticky;
   top: 0;
-  background: var(--bg);
+  background: transparent;
   z-index: 10;
 }
 
@@ -351,13 +351,46 @@
   min-height: 100svh;
   display: grid;
   align-content: center;
-  padding-block: clamp(6rem, 16vh, 12rem);
+  padding-block: clamp(8rem, 18vh, 14rem);
+  padding-inline: clamp(1.5rem, 4vw, 2.5rem);
   color: var(--fg);
 }
 
 /* Cuando amanece, el texto debe ser más oscuro para contraste contra fondo claro */
 .capitulo[data-tonalidad="prima-luce"] {
   color: #2a1a3f;
+}
+
+.enlaceProductos {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  padding: 0.8rem 1.2rem;
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 2px solid var(--accent);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  cursor: pointer;
+}
+
+.enlaceProductos:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.enlaceProductosIcono {
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  font-size: 1.2em;
+}
+
+.enlaceProductos:hover .enlaceProductosIcono {
+  transform: rotate(180deg) scale(1.2);
 }
 
 .cierre {

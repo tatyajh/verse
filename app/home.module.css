@@ -60,6 +60,16 @@
   color: var(--fg);
 }
 
+.heroBotones {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.heroBotones a {
+  white-space: nowrap;
+}
+
 .heroEje {
   position: absolute;
   top: 0;
@@ -78,6 +88,15 @@
   }
   .heroEje {
     display: none;
+  }
+  .heroBotones {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.8rem;
+  }
+  .heroBotones a {
+    width: 100%;
+    text-align: center;
   }
 }
 

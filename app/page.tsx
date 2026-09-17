@@ -37,9 +37,14 @@ export default function Home() {
             De lo cotidiano a lo especial, prendas para acompañar las distintas formas
             en las que decides sentirte tú misma.
           </p>
-          <Link href="/aurora" className="btn btn-fg">
+          <div className={s.heroBotones}>
+            <Link href="/aurora" className="btn btn-fg">
               Ver última colección
             </Link>
+            <Link href="/aurora?view=productos" className="btn btn-fg">
+              Ver todos los productos
+            </Link>
+          </div>
         </div>
       </Panel>
 
