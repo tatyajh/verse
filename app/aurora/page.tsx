@@ -135,6 +135,8 @@ export default async function Aurora(props: PageProps<"/aurora">) {
                     </div>
                   </CapituloVelo>
 
+                  <UmbralVestidor momento={c.tonalidad} />
+
                   <Link
                     href={`/aurora?view=productos&momento=${c.tonalidad}`}
                     className={s.enlaceProductos}
@@ -142,8 +144,6 @@ export default async function Aurora(props: PageProps<"/aurora">) {
                     <span className={s.enlaceProductosIcono}>◆</span>
                     <span>Ver todo lo que tiene {c.latin} para ti</span>
                   </Link>
-
-                  <UmbralVestidor momento={c.tonalidad} />
                 </section>
               );
             })}
@@ -152,7 +152,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
               <p className={s.cierreFrase}>{CIERRE.primera}</p>
               <p className={s.cierreFrase}>{CIERRE.segunda}</p>
               <div className={s.firma}>
-                <Link href="/aurora?view=productos" className="btn">
+                <Link href="/aurora?view=productos&momento=noctis" className="btn">
                   Ver Aurora Versé
                 </Link>
               </div>

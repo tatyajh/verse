@@ -1,0 +1,25 @@
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 0.9rem 1.6rem;
+  border: 1px solid var(--line-fuerte);
+  border-radius: 999px;
+  color: var(--fg);
+  transition:
+    border-color 0.45s var(--ease-umbral),
+    color 0.45s var(--ease-umbral);
+}
+
+.boton:hover,
+.boton:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.icono {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+}

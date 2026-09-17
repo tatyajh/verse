@@ -1,0 +1,92 @@
+.cabecera {
+  display: grid;
+  gap: 1.1rem;
+  max-width: 54ch;
+  padding-top: clamp(2rem, 6vw, 4rem);
+  margin-bottom: clamp(3rem, 7vw, 5rem);
+}
+
+.eyebrow {
+  color: var(--accent);
+}
+
+.titulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: var(--t-xl);
+  line-height: 0.98;
+}
+
+.intro {
+  color: var(--muted);
+  font-size: var(--t-m);
+}
+
+.lista {
+  display: grid;
+}
+
+.fila {
+  border-top: 1px solid var(--line);
+}
+
+.fila:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.enlace {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  grid-template-areas:
+    "fecha titulo"
+    "fecha resumen"
+    "fecha leer";
+  gap: 0.6rem clamp(1.5rem, 4vw, 3rem);
+  padding-block: clamp(1.8rem, 4vw, 2.6rem);
+  align-items: start;
+}
+
+.fecha {
+  grid-area: fecha;
+  color: var(--muted);
+  padding-top: 0.45rem;
+}
+
+.entradaTitulo {
+  grid-area: titulo;
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1.1;
+  transition: color 0.4s var(--ease-umbral);
+}
+
+.enlace:hover .entradaTitulo,
+.enlace:focus-visible .entradaTitulo {
+  color: var(--accent);
+}
+
+.resumen {
+  grid-area: resumen;
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+.leer {
+  grid-area: leer;
+  color: var(--accent);
+  justify-self: start;
+  margin-top: 0.4rem;
+}
+
+@media (max-width: 760px) {
+  .enlace {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "fecha"
+      "titulo"
+      "resumen"
+      "leer";
+  }
+  .fecha {
+    padding-top: 0;
+  }
+}

@@ -1,0 +1,55 @@
+.cabecera {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: clamp(2rem, 6vw, 4rem);
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.titulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: var(--t-xl);
+  line-height: 0.95;
+}
+
+.vacio {
+  display: grid;
+  gap: 1.6rem;
+  justify-items: start;
+  padding-block: clamp(3rem, 8vw, 6rem);
+  max-width: 44ch;
+}
+
+.vacio p {
+  color: var(--muted);
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 3vw, 2.6rem);
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+}
+
+.aviso {
+  color: var(--muted);
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line);
+  max-width: 52ch;
+}
+
+@media (max-width: 900px) {
+  .rejilla {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .rejilla {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}

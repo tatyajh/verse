@@ -2,10 +2,13 @@ import Link from "next/link";
 import { VerseMark } from "./verse-mark";
 import Panel from "./panel";
 import { TONALIDADES } from "@/lib/products";
+import { enlaceWhatsApp } from "@/lib/contacto";
 import s from "./footer.module.css";
 
 /** El sitio abre con la caja y cierra en noche: vuelve a cerrarse. */
 export default function Footer() {
+  const whatsapp = enlaceWhatsApp("Hola Versé, quiero preguntarles algo.");
+
   return (
     <Panel tono="noche" padded={false} className={s.pie}>
       <div className="wrap">
@@ -30,7 +33,7 @@ export default function Footer() {
                 </li>
               ))}
               <li>
-                <Link href="/aurora/historia" className="link">
+                <Link href="/aurora" className="link">
                   La historia
                 </Link>
               </li>
@@ -55,6 +58,11 @@ export default function Footer() {
                   Guía de tallas
                 </Link>
               </li>
+              <li>
+                <Link href="/blog" className="link">
+                  Diario
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -66,6 +74,18 @@ export default function Footer() {
                   hola@verseintimates.com
                 </a>
               </li>
+              {whatsapp && (
+                <li>
+                  <a
+                    href={whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link"
+                  >
+                    WhatsApp
+                  </a>
+                </li>
+              )}
               <li>
                 <a
                   href="https://instagram.com/verse_intimates"

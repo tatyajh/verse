@@ -1,7 +1,16 @@
 .card {
+  position: relative;
   display: grid;
   gap: 1.1rem;
   color: inherit;
+}
+
+/* El enlace cubre la tarjeta por debajo del corazón, que va en z-index 2. */
+.enlace {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
 }
 
 .marco {
@@ -29,8 +38,8 @@
 
 .card:hover .marco canvas,
 .card:hover .marco img,
-.card:focus-visible .marco canvas,
-.card:focus-visible .marco img {
+.card:focus-within .marco canvas,
+.card:focus-within .marco img {
   transform: scale(1.035);
 }
 
@@ -54,6 +63,24 @@
   gap: 0.45rem;
 }
 
+/* De dónde viene la pieza: colección y momento, antes que el nombre. */
+.procedencia {
+  color: var(--accent);
+}
+
+.pieFila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.favorito {
+  position: relative;
+  z-index: 2;
+  margin-right: -0.5rem;
+}
+
 .nombre {
   font-family: var(--font-display), "Didot", serif;
   font-size: 1.55rem;
@@ -63,7 +90,7 @@
 }
 
 .card:hover .nombre,
-.card:focus-visible .nombre {
+.card:focus-within .nombre {
   color: var(--accent);
 }
 

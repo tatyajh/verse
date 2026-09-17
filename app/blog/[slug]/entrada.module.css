@@ -1,0 +1,111 @@
+.entrada {
+  max-width: 68ch;
+  padding-top: clamp(2rem, 6vw, 4rem);
+}
+
+.migas {
+  color: var(--muted);
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.cabecera {
+  display: grid;
+  gap: 1.1rem;
+  padding-bottom: clamp(2rem, 5vw, 3rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.fecha {
+  color: var(--accent);
+}
+
+.titulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: var(--t-xl);
+  line-height: 1;
+}
+
+.resumen {
+  color: var(--muted);
+  font-size: var(--t-m);
+  max-width: 52ch;
+}
+
+.cuerpo {
+  display: grid;
+  gap: 1.5rem;
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+}
+
+.cuerpo p {
+  max-width: 62ch;
+}
+
+.subtitulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+  line-height: 1.15;
+  margin-top: clamp(1rem, 3vw, 2rem);
+}
+
+/* La única cursiva de la entrada: si hubiera dos, ninguna sería especial. */
+.cita {
+  font-family: var(--font-script), cursive;
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+  line-height: 1.25;
+  color: var(--accent);
+  padding-left: 1.4rem;
+  border-left: 1px solid var(--accent);
+  margin-block: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+.cierre {
+  padding-top: clamp(1.5rem, 4vw, 2.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.otras {
+  margin-top: clamp(3rem, 8vw, 6rem);
+  padding-top: clamp(1.5rem, 4vw, 2.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.otrasCinta {
+  color: var(--muted);
+  margin-bottom: 1.8rem;
+}
+
+.otrasLista {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.otraEnlace {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.otraTitulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  line-height: 1.15;
+  transition: color 0.4s var(--ease-umbral);
+}
+
+.otraEnlace:hover .otraTitulo,
+.otraEnlace:focus-visible .otraTitulo {
+  color: var(--accent);
+}
+
+.otraResumen {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+  .otrasLista {
+    grid-template-columns: 1fr;
+  }
+}

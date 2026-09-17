@@ -51,6 +51,13 @@
   color: var(--accent);
 }
 
+.tituloFila {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .nombre {
   font-family: var(--font-display), "Didot", serif;
   font-size: clamp(2.4rem, 5.5vw, 4.25rem);

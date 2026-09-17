@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart";
+import { useFavoritos } from "@/lib/favoritos";
 import { VerseMark } from "./verse-mark";
 import s from "./nav.module.css";
 
@@ -65,6 +66,7 @@ function useNav(): { tono: "noche" | "seda"; oculto: boolean } {
 export default function Nav() {
   const { tono, oculto } = useNav();
   const { piezas, listo } = useCart();
+  const { cuenta: favoritos, listo: favoritosListo } = useFavoritos();
   const [coleccionesAbierto, setColeccionesAbierto] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -122,8 +124,34 @@ export default function Nav() {
         <Link href="/#llave" className={`link ${s.oculto}`}>
           La llave
         </Link>
-        <Link href="/carrito" className={`${s.carrito} link`}>
-          Carrito
+        <Link href="/favoritos" className={`${s.carrito} link`} aria-label="Favoritos">
+          <span className={s.etiqueta}>Favoritos</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true" className={s.iconoMovil}>
+            <path
+              d="M12 20.5 4.2 12.9a5 5 0 0 1 7.1-7l.7.7.7-.7a5 5 0 1 1 7.1 7Z"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinejoin="round"
+            />
+          </svg>
+          {favoritosListo && favoritos > 0 && (
+            <span className={s.cuenta} aria-label={`${favoritos} piezas guardadas`}>
+              {favoritos}
+            </span>
+          )}
+        </Link>
+        <Link href="/carrito" className={`${s.carrito} link`} aria-label="Carrito">
+          <span className={s.etiqueta}>Carrito</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true" className={s.iconoMovil}>
+            <path
+              d="M6 8h12l-1 12H7Zm3 0V6a3 3 0 0 1 6 0v2"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinejoin="round"
+            />
+          </svg>
           {listo && piezas > 0 && (
             <span className={s.cuenta} aria-label={`${piezas} piezas`}>
               {piezas}

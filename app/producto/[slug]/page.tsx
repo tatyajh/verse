@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import Panel from "@/components/panel";
 import ProductCard from "@/components/product-card";
 import VisorPieza from "@/components/visor-pieza";
+import BotonFavorito from "@/components/boton-favorito";
+import BotonWhatsApp from "@/components/boton-whatsapp";
 import { getProduct, getTonalidad, PRODUCTS } from "@/lib/products";
 import s from "./producto.module.css";
 
@@ -60,7 +62,10 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
               </span>
             </nav>
 
-            <h1 className={s.nombre}>{producto.nombre}</h1>
+            <div className={s.tituloFila}>
+              <h1 className={s.nombre}>{producto.nombre}</h1>
+              <BotonFavorito slug={producto.slug} nombre={producto.nombre} />
+            </div>
 
             {sinConfirmar ? (
               <p className={s.resumen}>
@@ -79,6 +84,14 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
             {producto.tipo === "conjunto" && producto.piezas && (
               <p className={`${s.incluye} label`}>Conjunto de {producto.piezas} piezas</p>
             )}
+
+            <div className={s.separador} />
+
+            {/* Comprar y el aviso de "próximamente" los pinta <VisorPieza/>,
+                pegados a la imagen: aquí duplicarían el mismo llamado. */}
+            <BotonWhatsApp
+              mensaje={`Hola Versé, me interesa ${producto.nombre} de Aurora ${tonalidad.nombre}.`}
+            />
 
             <div className={s.separador} />
 
