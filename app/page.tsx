@@ -9,10 +9,10 @@ import s from "./home.module.css";
 /** Rosa Oro: el acento cruzado del moodboard de Aurora, el mismo que usa /aurora. */
 const ACENTO_AURORA = "#B76E79";
 const LADO_COLOR = {
-  medianoche: { bg: "#060608", fg: "#e9e3db" }, // Negro
-  penumbra: { bg: "#493B63", fg: "#e9e3db" }, // Morado profundo
-  alba: { bg: "#0F6E56", fg: "#e9e3db" }, // Verde esmeralda
-  amanecer: { bg: "#E5E1E2", fg: "#493B63" }, // Perla
+  noctis: { bg: "#060608", fg: "#e9e3db" }, // Negro
+  vigilia: { bg: "#493B63", fg: "#e9e3db" }, // Morado profundo
+  borealis: { bg: "#0F6E56", fg: "#e9e3db" }, // Verde esmeralda
+  prima-luce: { bg: "#E5E1E2", fg: "#493B63" }, // Perla
 } as const;
 
 export default function Home() {
@@ -37,14 +37,9 @@ export default function Home() {
             De lo cotidiano a lo especial, prendas para acompañar las distintas formas
             en las que decides sentirte tú misma.
           </p>
-          <span className={s.heroAcciones}>
-            <Link href="/aurora" className="btn btn-fg">
+          <Link href="/aurora" className="btn btn-fg">
               Ver última colección
             </Link>
-            <Link href="/aurora/historia" className={`${s.heroLeer} link`}>
-              Leer la noche
-            </Link>
-          </span>
         </div>
       </Panel>
 
@@ -195,28 +190,5 @@ export default function Home() {
             </table>
           </div>
 
-          <div className={s.disenoUnicoContainer}>
-            <input
-              type="checkbox"
-              id="disenoUnicoFlip"
-              className={s.disenoUnicoCheckbox}
-              aria-label="Voltear tarjeta de diseño único"
-            />
-            <label htmlFor="disenoUnicoFlip" className={s.disenoUnico}>
-              <div className={s.disenoUnicoFrente}>
-                <p className={s.disenoUnicoTitulo}>¿Consideras que tienes un cuerpo y un alma única?</p>
-              </div>
-              <div className={s.disenoUnicoAtras}>
-                <p className={s.disenoUnicoTitulo}>Diseño personalizado</p>
-                <p>
-                  Si necesitas un diseño completamente personalizado o ajustes especiales a nuestras piezas, escríbenos.
-                  Trabajamos con tus medidas, preferencias y estilo para crear algo hecho pensando en ti.
-                </p>
-              </div>
-            </label>
-          </div>
-        </div>
+      </div>
       </Panel>
-    </>
-  );
-}
