@@ -301,6 +301,7 @@ a.ladoLink::after {
   font-family: var(--font-display), "Didot", serif;
   font-size: var(--t-xl);
   line-height: 1.04;
+  color: var(--rose);
 }
 
 .llaveTexto p {

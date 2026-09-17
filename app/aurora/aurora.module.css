@@ -72,8 +72,28 @@
   font-family: var(--font-display), "Didot", serif;
   font-size: clamp(1.8rem, 4vw, 2.6rem);
   letter-spacing: 0.04em;
-  color: var(--fg);
 }
+
+.marcaVerse {
+  color: var(--rose);
+}
+
+/* La palabra lleva su propio significado: verde jade, lila y lavanda de la
+   paleta Borealis, cerrando en el oro rosa de la marca. */
+.marcaAurora {
+  background: linear-gradient(
+    95deg,
+    #27b98a 0%,
+    #4fd6b4 22%,
+    #8e82b7 52%,
+    #b98bc4 78%,
+    #dea193 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
 
 /* El toggle es la navegación principal de esta página: grande, no un filtro discreto. */
 .toggle {
@@ -226,7 +246,7 @@
 .togglePrincipal {
   display: flex;
   gap: 1.5rem;
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
   padding: 1.5rem 0;
   border-bottom: 1px solid var(--line);
   position: sticky;
@@ -276,11 +296,14 @@
 /* ---------- obertura ---------- */
 
 .obertura {
-  min-height: 100svh;
+  /* Descuenta la cabecera y el toggle que van encima: con 100svh el
+     contenido se centra en una pantalla entera y deja un hueco muerto. */
+  min-height: calc(100svh - 15rem);
   display: grid;
-  align-content: center;
+  /* Al inicio, no centrado: centrar dejaba un hueco muerto bajo el toggle. */
+  align-content: start;
   gap: clamp(1.2rem, 3vw, 2rem);
-  padding-block: clamp(5rem, 12vh, 9rem);
+  padding-block: clamp(1rem, 4vh, 2.5rem) clamp(4rem, 10vh, 7rem);
   color: var(--fg);
 }
 

@@ -63,7 +63,10 @@ export default async function Aurora(props: PageProps<"/aurora">) {
         <div className="wrap">
           {mostraHistoria && (
             <header className={s.cabecera}>
-              <h1 className={s.marcaColeccion}>Versé Aurora</h1>
+              <h1 className={s.marcaColeccion}>
+                <span className={s.marcaVerse}>Versé</span>{" "}
+                <span className={s.marcaAurora}>Aurora</span>
+              </h1>
             </header>
           )}
 
