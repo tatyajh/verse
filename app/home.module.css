@@ -15,9 +15,11 @@
   overflow: hidden;
 }
 
+/* Una sola línea desde que salió "Moda íntima": a la derecha, alineada con
+   el menú, en vez de amontonada bajo el lockup. */
 .heroCinta {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 1rem;
   color: var(--muted);
 }

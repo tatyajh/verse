@@ -25,7 +25,6 @@ export default function Home() {
         <div className={s.heroEje} />
 
         <div className={`${s.heroCinta} wrap label`}>
-          <span>Moda íntima</span>
           <span>Medellín, Colombia</span>
         </div>
 
