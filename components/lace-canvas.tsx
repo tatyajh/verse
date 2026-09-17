@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
+import s from "./lace-canvas.module.css";
 import { prng, semilla } from "@/lib/azar";
 
 /**
@@ -163,12 +164,6 @@ function dibujar(
   vineta.addColorStop(1, `rgba(${paleta.vineta}, 0.92)`);
   ctx.fillStyle = vineta;
   ctx.fillRect(0, 0, w, h);
-
-  // Filete interior: el marco del grabado.
-  ctx.strokeStyle = `rgba(${trazo}, 0.28)`;
-  ctx.lineWidth = Math.max(1, min * 0.0018);
-  const m = min * 0.045;
-  ctx.strokeRect(m, m, w - m * 2, h - m * 2);
 }
 
 export default function LaceCanvas({
@@ -216,12 +211,18 @@ export default function LaceCanvas({
   }, [slug, paleta]);
 
   return (
-    <canvas
-      ref={ref}
-      className={className}
-      aria-hidden="true"
-      // color de fondo inmediato: evita el parpadeo antes de que pinte el canvas
-      style={{ background: paleta.fondo }}
-    />
+    // El filete interior va en CSS (::after) y no en el canvas: así hereda
+    // el radio del contenedor y sigue su curva, sea arco o cápsula.
+    <div
+      className={`${s.grabado} ${className ?? ""}`}
+      style={{ "--trazo": paleta.trazo } as CSSProperties}
+    >
+      <canvas
+        ref={ref}
+        aria-hidden="true"
+        // color de fondo inmediato: evita el parpadeo antes de que pinte el canvas
+        style={{ background: paleta.fondo }}
+      />
+    </div>
   );
 }

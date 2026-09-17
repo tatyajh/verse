@@ -98,10 +98,11 @@ export default function CarritoCliente() {
     return (
       <div className={s.vacio}>
         <p>
-          Todavía no has guardado ninguna pieza. Aurora son veinte, en dos tonalidades.
+          Aún no has elegido nada. Aurora son veinte piezas en cuatro momentos de una
+          misma noche: empieza por el que sientas hoy.
         </p>
-        <Link href="/aurora" className="btn btn-fg">
-          Ver Aurora
+        <Link href="/aurora?view=productos&momento=noctis" className="btn btn-fg">
+          Ver Aurora Versé
         </Link>
       </div>
     );

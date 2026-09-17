@@ -1,0 +1,24 @@
+.grabado {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.grabado canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Filete interior: el marco del grabado. Hereda el radio del contenedor,
+   así que sigue el arco de las tarjetas y la cápsula del vestidor. Queda
+   fuera del canvas a propósito: no se escala con la imagen al pasar el
+   cursor, igual que un marco de verdad. */
+.grabado::after {
+  content: "";
+  position: absolute;
+  inset: 4.5%;
+  border: 1px solid rgba(var(--trazo), 0.28);
+  border-radius: inherit;
+  pointer-events: none;
+}

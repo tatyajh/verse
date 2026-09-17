@@ -98,7 +98,10 @@
 /* El toggle es la navegación principal de esta página: grande, no un filtro discreto. */
 .toggle {
   display: flex;
-  gap: clamp(1.5rem, 4vw, 3rem);
+  /* Cuatro momentos con subtítulo no caben en 375px: que salten de línea
+     antes que desbordar y volver la página desplazable de lado. */
+  flex-wrap: wrap;
+  gap: 1rem clamp(1.5rem, 4vw, 3rem);
   margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
   padding: 0 clamp(1rem, 2vw, 2rem) 1.5rem clamp(1rem, 2vw, 2rem);
   border-bottom: 1px solid var(--line);
@@ -336,6 +339,15 @@
   padding-block: clamp(8rem, 18vh, 14rem);
   padding-inline: clamp(1.5rem, 4vw, 2.5rem);
   color: var(--fg);
+}
+
+/* En celular cada capítulo ya es más alto que la pantalla: el padding de
+   escritorio sumaba casi 300px muertos entre el enlace y el capítulo siguiente. */
+@media (max-width: 700px) {
+  .capitulo {
+    min-height: 0;
+    padding-block: clamp(3rem, 8vh, 4.5rem);
+  }
 }
 
 /* Cuando amanece, el texto debe ser más oscuro para contraste contra fondo claro */
