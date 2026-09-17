@@ -368,14 +368,39 @@
   pointer-events: none;
   background-color: rgb(var(--velo) / 0.36);
 
-  -webkit-mask-image:
-    linear-gradient(90deg, #000 0%, #000 34%, rgb(0 0 0 / 0.35) 60%, transparent 80%),
-    linear-gradient(180deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
-  -webkit-mask-composite: source-in;
-  mask-image:
-    linear-gradient(90deg, #000 0%, #000 34%, rgb(0 0 0 / 0.35) 60%, transparent 80%),
-    linear-gradient(180deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
-  mask-composite: intersect;
+  /* La máscara dibuja la tela: un cuerpo hasta --borde, con un festón de
+     semicírculos en cada lado —el orillo de un encaje de verdad, no un
+     corte recto— y un desvanecido arriba y abajo. --r es el radio de cada
+     onda del festón. */
+  --r: 13px;
+  --borde: 62%;
+  --tela: linear-gradient(
+    90deg,
+    transparent var(--r),
+    #000 var(--r),
+    #000 calc(var(--borde) - var(--r)),
+    transparent calc(var(--borde) - var(--r))
+  );
+  --orillo-izq: radial-gradient(
+    circle at var(--r) 50%,
+    #000 var(--r),
+    transparent calc(var(--r) + 0.7px)
+  );
+  --orillo-der: radial-gradient(
+    circle at calc(var(--borde) - var(--r)) 50%,
+    #000 var(--r),
+    transparent calc(var(--r) + 0.7px)
+  );
+  --desvanecido: linear-gradient(180deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+
+  -webkit-mask-image: var(--desvanecido), var(--orillo-izq), var(--orillo-der), var(--tela);
+  -webkit-mask-size: 100% 100%, 100% calc(var(--r) * 2), 100% calc(var(--r) * 2), 100% 100%;
+  -webkit-mask-repeat: no-repeat, repeat-y, repeat-y, no-repeat;
+  -webkit-mask-composite: source-in, source-over, source-over;
+  mask-image: var(--desvanecido), var(--orillo-izq), var(--orillo-der), var(--tela);
+  mask-size: 100% 100%, 100% calc(var(--r) * 2), 100% calc(var(--r) * 2), 100% 100%;
+  mask-repeat: no-repeat, repeat-y, repeat-y, no-repeat;
+  mask-composite: intersect, add, add;
 }
 
 /* I. Noctis — tul fino: dos retículas diagonales apretadas y un punto en
@@ -453,10 +478,8 @@
 @media (max-width: 700px) {
   .capitulo::before {
     background-color: rgb(var(--velo) / 0.48);
-    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
-    -webkit-mask-composite: source-over;
-    mask-image: linear-gradient(180deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
-    mask-composite: add;
+    --borde: 100%;
+    --r: 11px;
   }
 }
 
