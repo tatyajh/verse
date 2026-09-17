@@ -83,6 +83,8 @@
   position: absolute;
   inset: 4.5%;
   border: 1px solid rgb(201 143 111 / 0.28);
+  /* Mismo arco que la figura: un marco recto se cortaba contra la curva. */
+  border-radius: 50% 50% 14% 14% / 32% 32% 7% 7%;
   pointer-events: none;
 }
 
