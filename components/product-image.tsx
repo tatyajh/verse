@@ -35,7 +35,7 @@ export default function ProductImage({
     );
   }
 
-  const paleta = (producto.tonalidad === "alba" || producto.tonalidad === "amanecer") ? PALETA_AURORA_DIURNA : PALETA_AURORA_NOCTURNA;
+  const paleta = (producto.tonalidad === "borealis" || producto.tonalidad === "prima-luce") ? PALETA_AURORA_DIURNA : PALETA_AURORA_NOCTURNA;
 
   return <LaceCanvas slug={producto.slug} paleta={paleta} className={className} />;
 }
