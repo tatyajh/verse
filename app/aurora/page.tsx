@@ -28,12 +28,31 @@ function esTonalidad(valor: string | undefined): valor is Tonalidad {
 
 const ORDEN_TIPO: TipoPieza[] = ["conjunto", "body", "corset", "complemento"];
 
+function esTipoPieza(valor: string | undefined): valor is TipoPieza {
+  const tiposValidos: TipoPieza[] = [
+    "conjunto",
+    "body",
+    "corset",
+    "complemento",
+    "bra",
+    "panty",
+    "tanga",
+    "liguero",
+    "brasiera",
+    "longline",
+    "manto",
+  ];
+  return tiposValidos.includes(valor as TipoPieza);
+}
+
 export default async function Aurora(props: PageProps<"/aurora">) {
   const query = await props.searchParams;
   const crudo = Array.isArray(query.momento) ? query.momento[0] : query.momento;
   const viewParam = Array.isArray(query.view) ? query.view[0] : query.view;
+  const tipoParam = Array.isArray(query.tipo) ? query.tipo[0] : query.tipo;
   const mostraHistoria = viewParam !== "productos";
   const mostrarTodosProductos = viewParam === "productos" && !crudo;
+  const filtroTipo = esTipoPieza(tipoParam) ? tipoParam : null;
   const activa: Tonalidad = esTonalidad(crudo) ? crudo : "noctis";
 
   const tonalidad = getTonalidad(activa);
@@ -187,8 +206,73 @@ export default async function Aurora(props: PageProps<"/aurora">) {
             {mostrarTodosProductos ? (
               /* Mostrar TODOS los productos de todas las tonalidades */
               <div className="wrap">
+                <div style={{ marginBottom: "3rem", marginTop: "2rem" }}>
+                  <div style={{ marginBottom: "1.5rem" }}>
+                    <p style={{ color: "var(--muted)", fontSize: "0.875rem", marginBottom: "0.75rem" }}>
+                      Filtrar por tipo:
+                    </p>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: "0.75rem",
+                      }}
+                    >
+                      <Link
+                        href="/aurora?view=productos"
+                        scroll={false}
+                        style={{
+                          padding: "0.5rem 1rem",
+                          border: `1px solid ${!filtroTipo ? "var(--accent)" : "var(--line)"}`,
+                          background: !filtroTipo ? "var(--accent)" : "transparent",
+                          color: !filtroTipo ? "var(--bg)" : "var(--fg)",
+                          cursor: "pointer",
+                          fontSize: "0.875rem",
+                          fontWeight: !filtroTipo ? "600" : "400",
+                          transition: "all 0.3s ease",
+                          fontFamily: "var(--font-ui), system-ui, sans-serif",
+                          textDecoration: "none",
+                          display: "inline-block",
+                        }}
+                      >
+                        Todos
+                      </Link>
+                      {["conjunto", "body", "bra", "panty", "tanga", "liguero", "brasiera", "longline", "complemento"].map(
+                        (tipo) => (
+                          <Link
+                            key={tipo}
+                            href={`/aurora?view=productos&tipo=${tipo}`}
+                            scroll={false}
+                            style={{
+                              padding: "0.5rem 1rem",
+                              border: `1px solid ${filtroTipo === tipo ? "var(--accent)" : "var(--line)"}`,
+                              background: filtroTipo === tipo ? "var(--accent)" : "transparent",
+                              color: filtroTipo === tipo ? "var(--bg)" : "var(--fg)",
+                              cursor: "pointer",
+                              fontSize: "0.875rem",
+                              fontWeight: filtroTipo === tipo ? "600" : "400",
+                              transition: "all 0.3s ease",
+                              fontFamily: "var(--font-ui), system-ui, sans-serif",
+                              textDecoration: "none",
+                              display: "inline-block",
+                            }}
+                          >
+                            {TIPO_LABEL[tipo as TipoPieza] || tipo}
+                          </Link>
+                        )
+                      )}
+                    </div>
+                  </div>
+                </div>
+
                 {TONALIDADES.map((t) => {
                   const productosPorMomento = porTonalidad(t.id);
+                  const productosFiltrados = filtroTipo
+                    ? productosPorMomento.filter((p) => p.tipo === filtroTipo)
+                    : productosPorMomento;
+
+                  if (productosFiltrados.length === 0) return null;
+
                   return (
                     <div key={t.id} style={{ marginTop: "4rem" }}>
                       <h2 className={s.grupoTitulo} style={{ marginBottom: "2rem" }}>
@@ -197,7 +281,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
 
                       {/* Conjuntos */}
                       {(() => {
-                        const conjuntos = productosPorMomento.filter((p) => p.tipo === "conjunto");
+                        const conjuntos = productosFiltrados.filter((p) => p.tipo === "conjunto");
                         if (conjuntos.length === 0) return null;
                         return (
                           <div className={s.grupo}>
@@ -222,7 +306,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
 
                       {/* Bodies */}
                       {(() => {
-                        const bodies = productosPorMomento.filter((p) => p.tipo === "body");
+                        const bodies = productosFiltrados.filter((p) => p.tipo === "body");
                         if (bodies.length === 0) return null;
                         return (
                           <div className={s.grupo}>
@@ -247,7 +331,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
 
                       {/* Complementos */}
                       {(() => {
-                        const complementos = productosPorMomento.filter((p) => p.tipo === "complemento");
+                        const complementos = productosFiltrados.filter((p) => p.tipo === "complemento");
                         if (complementos.length === 0) return null;
                         return (
                           <div className={s.grupo}>
