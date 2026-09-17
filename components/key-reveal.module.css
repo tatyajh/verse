@@ -4,6 +4,9 @@
   overflow: hidden;
   background: var(--noche);
   cursor: crosshair;
+  /* Arco de espejo: el mismo óvalo vertical del emblema. */
+  border-radius: 50% 50% 14% 14% / 32% 32% 7% 7%;
+
 
   /* Posición del descubierto. La actualiza el puntero; por defecto, el centro. */
   --x: 50%;

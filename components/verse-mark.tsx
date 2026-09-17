@@ -4,9 +4,10 @@
  * ornamental —corazón y flor de lis— para espacios pequeños donde el
  * emblema completo, muy vertical, no cabe bien).
  *
- * Colores fijos de marca (relleno #DBA17F, trazo #6E5140): no se tiñen
- * con los tokens del panel, igual que un herraje no cambia de color
- * según la pared donde cuelga.
+ * Color fijo de marca (#DEA193, relleno y trazo): no se tiñe con los
+ * tokens del panel, igual que un herraje no cambia de color según la
+ * pared donde cuelga. Al servirse como <img>, el color vive dentro del
+ * SVG y no puede cambiarse desde CSS.
  */
 type Tamano = number | string;
 

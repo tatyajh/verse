@@ -10,7 +10,7 @@ import { PALETA_AURORA_DIURNA, PALETA_AURORA_NOCTURNA, type PaletaGrabado } from
 
 export type Talla = "S" | "M" | "L" | "XL" | "Única";
 export type Tonalidad = "noctis" | "vigilia" | "borealis" | "prima-luce";
-export type TipoPieza = "conjunto" | "body" | "corset" | "complemento" | "bra" | "panty" | "tanga" | "liguero" | "brasiera" | "longline" | "manto";
+export type TipoPieza = "conjunto" | "body" | "corset" | "complemento" | "bra" | "panty" | "tanga" | "liguero";
 
 export type Product = {
   slug: string;
@@ -96,9 +96,6 @@ export const TIPO_LABEL: Record<TipoPieza, string> = {
   panty: "Panty",
   tanga: "Tanga",
   liguero: "Liguero",
-  brasiera: "Brasiera",
-  longline: "Longline",
-  manto: "Manto",
 };
 
 const TALLAS: Talla[] = ["S", "M", "L", "XL"];
@@ -119,7 +116,7 @@ export const PRODUCTS: Product[] = [
     tipo: "conjunto",
     piezas: 4,
     tallas: TALLAS,
-    componentes: ["aurora-eclipse-bra", "aurora-eclipse-panty", "aurora-eclipse-tanga", "aurora-eclipse-brasiera"],
+    componentes: ["aurora-eclipse-bra", "aurora-eclipse-panty", "aurora-eclipse-tanga", "aurora-eclipse-bralette"],
   },
   {
     slug: "aurora-pulsar",
@@ -134,7 +131,7 @@ export const PRODUCTS: Product[] = [
   { slug: "aurora-eclipse-bra", nombre: "Bra Intensa", tonalidad: "noctis", tipo: "bra", tallas: TALLAS, componenteDe: "aurora-eclipse" },
   { slug: "aurora-eclipse-panty", nombre: "Panty Clásico", tonalidad: "noctis", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-eclipse" },
   { slug: "aurora-eclipse-tanga", nombre: "Tanga", tonalidad: "noctis", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-eclipse" },
-  { slug: "aurora-eclipse-brasiera", nombre: "Brasiera", tonalidad: "noctis", tipo: "brasiera", tallas: TALLAS, componenteDe: "aurora-eclipse" },
+  { slug: "aurora-eclipse-bralette", nombre: "Bralette", tonalidad: "noctis", tipo: "bra", tallas: TALLAS, componenteDe: "aurora-eclipse" },
   { slug: "aurora-pulsar-bra", nombre: "Bra Romántica", tonalidad: "noctis", tipo: "bra", tallas: TALLAS, componenteDe: "aurora-pulsar" },
   { slug: "aurora-pulsar-panty", nombre: "Panty Clásico", tonalidad: "noctis", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-pulsar" },
   { slug: "aurora-pulsar-tanga", nombre: "Tanga con Tirales", tonalidad: "noctis", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-pulsar" },
@@ -151,7 +148,7 @@ export const PRODUCTS: Product[] = [
     tipo: "conjunto",
     piezas: 4,
     tallas: TALLAS,
-    componentes: ["aurora-abismo-longline", "aurora-abismo-panty", "aurora-abismo-tanga", "aurora-abismo-liguero"],
+    componentes: ["aurora-abismo-corset", "aurora-abismo-panty", "aurora-abismo-tanga", "aurora-abismo-liguero"],
   },
   {
     slug: "aurora-nebula",
@@ -163,7 +160,7 @@ export const PRODUCTS: Product[] = [
     componentes: ["aurora-nebula-bra", "aurora-nebula-panty", "aurora-nebula-tanga"],
   },
   // Componentes de Vigilia
-  { slug: "aurora-abismo-longline", nombre: "Longline Magnética", tonalidad: "vigilia", tipo: "longline", tallas: TALLAS, componenteDe: "aurora-abismo" },
+  { slug: "aurora-abismo-corset", nombre: "Corset Magnético", tonalidad: "vigilia", tipo: "corset", tallas: TALLAS, componenteDe: "aurora-abismo" },
   { slug: "aurora-abismo-panty", nombre: "Panty Tiro Medio", tonalidad: "vigilia", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-abismo" },
   { slug: "aurora-abismo-tanga", nombre: "Tanga", tonalidad: "vigilia", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-abismo" },
   { slug: "aurora-abismo-liguero", nombre: "Liguero Ajustable", tonalidad: "vigilia", tipo: "liguero", tallas: ["Única"], componenteDe: "aurora-abismo" },

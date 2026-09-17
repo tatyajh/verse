@@ -4,7 +4,7 @@
   margin-top: clamp(3rem, 7vw, 6rem);
   aspect-ratio: 16 / 7;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 1.75rem;
   border: 1px solid rgb(233 227 219 / 0.18);
   color: inherit;
 }

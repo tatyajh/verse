@@ -237,6 +237,7 @@ textarea {
   gap: 0.8rem;
   padding: 1.1rem 2.4rem;
   border: 1px solid var(--line-fuerte);
+  border-radius: 999px;
   font-family: var(--font-ui), system-ui, sans-serif;
   font-size: var(--t-label);
   font-weight: 500;
@@ -291,6 +292,7 @@ textarea {
   background: var(--noche);
   color: var(--hueso);
   border: 1px solid var(--rose);
+  border-radius: 999px;
   transform: translateY(-120%);
   transition: transform 0.3s var(--ease-umbral);
 }

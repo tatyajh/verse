@@ -9,7 +9,8 @@
   aspect-ratio: 4 / 5;
   overflow: hidden;
   background: var(--noche);
-  border-radius: 8px;
+  /* Arco de espejo: el mismo óvalo vertical del emblema. */
+  border-radius: 50% 50% 14% 14% / 32% 32% 7% 7%;
 }
 
 .marco canvas,
@@ -37,9 +38,13 @@
    tonos claros, y el texto necesita un fondo propio para leerse ahí también. */
 .linea {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
-  padding: 0.35rem 0.6rem;
+  /* Centrado: la curva del arco se come la esquina superior izquierda. */
+  top: 1.1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
   background: rgb(20 14 14 / 0.55);
   color: var(--rose);
 }

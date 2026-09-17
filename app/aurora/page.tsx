@@ -6,7 +6,6 @@ import CapituloVelo from "@/components/aurora/capitulo-velo";
 import UmbralVestidor from "@/components/aurora/umbral-vestidor";
 import {
   porTonalidad,
-  getTonalidad,
   getProduct,
   TIPO_LABEL,
   TONALIDADES,
@@ -26,8 +25,6 @@ function esTonalidad(valor: string | undefined): valor is Tonalidad {
   return TONALIDADES.some((t) => t.id === valor);
 }
 
-const ORDEN_TIPO: TipoPieza[] = ["conjunto", "body", "corset", "complemento"];
-
 function esTipoPieza(valor: string | undefined): valor is TipoPieza {
   const tiposValidos: TipoPieza[] = [
     "conjunto",
@@ -38,9 +35,6 @@ function esTipoPieza(valor: string | undefined): valor is TipoPieza {
     "panty",
     "tanga",
     "liguero",
-    "brasiera",
-    "longline",
-    "manto",
   ];
   return tiposValidos.includes(valor as TipoPieza);
 }
@@ -55,7 +49,6 @@ export default async function Aurora(props: PageProps<"/aurora">) {
   const filtroTipo = esTipoPieza(tipoParam) ? tipoParam : null;
   const activa: Tonalidad = esTonalidad(crudo) ? crudo : "noctis";
 
-  const tonalidad = getTonalidad(activa);
   const piezas = porTonalidad(activa);
 
   return (
@@ -68,13 +61,11 @@ export default async function Aurora(props: PageProps<"/aurora">) {
     >
       {!mostrarTodosProductos && (
         <div className="wrap">
-          <header className={s.cabecera}>
-            <p className={`${s.eyebrow} label`}>Colección</p>
-            <h1 className={s.titulo}>Aurora</h1>
-            <p className={s.intro}>
-              Veinte piezas, cuatro momentos. Aurora en su viaje completo del día.
-            </p>
-          </header>
+          {mostraHistoria && (
+            <header className={s.cabecera}>
+              <h1 className={s.marcaColeccion}>Versé Aurora</h1>
+            </header>
+          )}
 
           {/* Toggle principal: Historia / Productos */}
           <nav className={s.togglePrincipal} aria-label="Vistas">
@@ -103,7 +94,6 @@ export default async function Aurora(props: PageProps<"/aurora">) {
 
             <header className={`${s.obertura} wrap`}>
               <p className="label">La colección</p>
-              <h1 className={s.titular}>{OBERTURA.titulo}</h1>
               <p className={s.lema}>{OBERTURA.lema}</p>
               <p className={s.cita}>{OBERTURA.cita}</p>
             </header>
@@ -147,7 +137,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
                     className={s.enlaceProductos}
                   >
                     <span className={s.enlaceProductosIcono}>◆</span>
-                    <span>Ver productos</span>
+                    <span>Ver todo lo que tiene {c.latin} para ti</span>
                   </Link>
 
                   <UmbralVestidor momento={c.tonalidad} />
@@ -160,9 +150,8 @@ export default async function Aurora(props: PageProps<"/aurora">) {
               <p className={s.cierreFrase}>{CIERRE.segunda}</p>
               <div className={s.firma}>
                 <Link href="/aurora?view=productos" className="btn">
-                  Ver la colección
+                  Ver Aurora Versé
                 </Link>
-                <span className="label">Aurora · Versé</span>
               </div>
             </footer>
           </article>
@@ -192,17 +181,6 @@ export default async function Aurora(props: PageProps<"/aurora">) {
               </nav>
             )}
 
-            {!mostrarTodosProductos && (
-              <div className={s.mood}>
-                <p className={s.sensacion}>{tonalidad.sensacion}.</p>
-                <div className={s.swatches} aria-hidden="true">
-                  {tonalidad.paleta.map((c) => (
-                    <span key={c.hex} className={s.swatch} style={{ background: c.hex }} />
-                  ))}
-                </div>
-              </div>
-            )}
-
             {mostrarTodosProductos ? (
               /* Mostrar TODOS los productos de todas las tonalidades */
               <div className="wrap">
@@ -227,6 +205,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
                           background: !filtroTipo ? "var(--accent)" : "transparent",
                           color: !filtroTipo ? "var(--bg)" : "var(--fg)",
                           cursor: "pointer",
+                          borderRadius: "999px",
                           fontSize: "0.875rem",
                           fontWeight: !filtroTipo ? "600" : "400",
                           transition: "all 0.3s ease",
@@ -237,7 +216,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
                       >
                         Todos
                       </Link>
-                      {["conjunto", "body", "bra", "panty", "tanga", "liguero", "brasiera", "longline", "complemento"].map(
+                      {["conjunto", "body", "corset", "bra", "panty", "tanga", "liguero", "complemento"].map(
                         (tipo) => (
                           <Link
                             key={tipo}
@@ -249,6 +228,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
                               background: filtroTipo === tipo ? "var(--accent)" : "transparent",
                               color: filtroTipo === tipo ? "var(--bg)" : "var(--fg)",
                               cursor: "pointer",
+                              borderRadius: "999px",
                               fontSize: "0.875rem",
                               fontWeight: filtroTipo === tipo ? "600" : "400",
                               transition: "all 0.3s ease",

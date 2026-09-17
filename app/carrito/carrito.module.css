@@ -52,6 +52,8 @@
   aspect-ratio: 4 / 5;
   overflow: hidden;
   background: var(--noche);
+  /* Arco de espejo: el mismo óvalo vertical del emblema. */
+  border-radius: 50% 50% 14% 14% / 32% 32% 7% 7%;
 }
 
 .miniatura canvas,
@@ -85,11 +87,13 @@
   color: var(--accent);
 }
 
-/* Cantidad: filetes, sin cajas ni esquinas redondeadas. */
+/* Cantidad: una cápsula con filetes adentro, sin botones sueltos. */
 .cantidad {
   display: flex;
   align-items: center;
   border: 1px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
 }
 
 .cantidad button {

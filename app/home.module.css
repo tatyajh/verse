@@ -42,6 +42,7 @@
   white-space: nowrap;
   /* compensa el tracking de la última letra para que el corte sea simétrico */
   text-indent: 0.05em;
+  color: var(--rose);
 }
 
 .heroPie {
@@ -208,7 +209,7 @@
 .ladoSwatches span {
   width: 1.1rem;
   height: 1.1rem;
-  border-radius: 3px;
+  border-radius: 50%;
   /* un tono del moodboard (Crema Lunar) coincide con el fondo diurno;
      el borde evita que ese swatch desaparezca contra su propio fondo */
   border: 1px solid color-mix(in srgb, var(--lado-fg) 35%, transparent);

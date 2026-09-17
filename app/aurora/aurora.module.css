@@ -54,39 +54,32 @@
   transition:
     background-color 0.7s ease,
     color 0.7s ease;
-  padding-block: clamp(2rem, 6vh, 4rem) clamp(2rem, 6vh, 4rem);
+  /* El nav es fixed y mide ~100px (el emblema es muy vertical): la cabecera
+     tiene que empezar por debajo o queda tapada. */
+  padding-block: clamp(6.5rem, 11vh, 7.5rem) clamp(2rem, 6vh, 4rem);
   padding-inline: clamp(1.5rem, 5vw, 3rem);
 }
 
 .cabecera {
-  display: grid;
-  gap: 1.3rem;
-  max-width: 60ch;
-  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+  /* El cielo es fixed con z-index 0 y tapa todo lo que no se eleve:
+     sin esto la cabecera queda detrás del gradiente y no se ve. */
+  position: relative;
+  z-index: 1;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.eyebrow {
-  color: var(--accent);
-}
-
-.titulo {
+.marcaColeccion {
   font-family: var(--font-display), "Didot", serif;
-  font-size: clamp(3.5rem, 11vw, 8rem);
-  line-height: 0.92;
-  letter-spacing: 0.02em;
-}
-
-.intro {
-  color: var(--muted);
-  font-size: var(--t-m);
-  max-width: 46ch;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  letter-spacing: 0.04em;
+  color: var(--fg);
 }
 
 /* El toggle es la navegación principal de esta página: grande, no un filtro discreto. */
 .toggle {
   display: flex;
   gap: clamp(1.5rem, 4vw, 3rem);
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
   padding: 0 clamp(1rem, 2vw, 2rem) 1.5rem clamp(1rem, 2vw, 2rem);
   border-bottom: 1px solid var(--line);
 }
@@ -113,34 +106,6 @@
   border-bottom: 3px solid var(--accent) !important;
   font-weight: 600;
   padding-bottom: 0.35rem;
-}
-
-.mood {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 1.5rem;
-  margin-bottom: clamp(3rem, 6vw, 5rem);
-}
-
-.sensacion {
-  font-family: var(--font-body), Georgia, serif;
-  font-style: italic;
-  font-size: var(--t-m);
-}
-
-.swatches {
-  display: flex;
-  gap: 0.6rem;
-}
-
-.swatch {
-  width: 1.6rem;
-  height: 1.6rem;
-  border-radius: 4px;
-  /* Borde visible en todos los colores, incluso en negro */
-  border: 1.5px solid color-mix(in srgb, var(--fg) 50%, transparent);
-  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.1);
 }
 
 .grupo {
@@ -319,17 +284,10 @@
   color: var(--fg);
 }
 
-.titular {
-  font-family: var(--font-display), "Didot", serif;
-  font-size: clamp(4rem, 17vw, 15rem);
-  line-height: 0.92;
-  letter-spacing: 0.04em;
-}
-
 /* La cursiva solo aquí: el lema es la frase que la marca firma. */
 .lema {
   font-family: var(--font-script), cursive;
-  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-size: clamp(2.6rem, 7.5vw, 5.5rem);
   line-height: 1.15;
   color: #c9a9b8;
 }

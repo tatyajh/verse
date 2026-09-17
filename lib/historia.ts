@@ -32,7 +32,6 @@ export type Capitulo = {
 };
 
 export const OBERTURA = {
-  titulo: "Aurora",
   lema: "Una noche. Mil versiones.",
   cita: "Hay noches que terminan al amanecer. Otras permanecen para siempre.",
 } as const;

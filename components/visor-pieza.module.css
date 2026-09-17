@@ -10,6 +10,8 @@
   aspect-ratio: 4 / 5;
   overflow: hidden;
   background: var(--noche);
+  /* Arco de espejo: el mismo óvalo vertical del emblema. */
+  border-radius: 50% 50% 14% 14% / 32% 32% 7% 7%;
 }
 
 .cuadro canvas,
