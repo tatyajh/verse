@@ -461,6 +461,9 @@
 .capitulo[data-tonalidad="prima-luce"] {
   --velo: 229 225 226;
   --hilo: 42 26 63;
+  /* La sección hereda el acento de Noctis (rosa claro) en toda la historia;
+     sobre la perla del amanecer ese rosa se pierde. Aquí manda el hondo. */
+  --accent: var(--rose-hondo);
   color: #2a1a3f;
   text-shadow: 0 1px 2px rgb(229 225 226 / 0.4);
 }

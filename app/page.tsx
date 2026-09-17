@@ -7,13 +7,14 @@ import { getProduct, TONALIDADES } from "@/lib/products";
 import { ENTRADAS, formatFecha } from "@/lib/blog";
 import s from "./home.module.css";
 
-/** Rosa Oro: el acento cruzado del moodboard de Aurora, el mismo que usa /aurora. */
+/** Rosa Oro: el acento cruzado del moodboard de Aurora, el mismo que usa /aurora.
+    Sobre la perla del amanecer se pierde: ahí manda el bronce hondo. */
 const ACENTO_AURORA = "#B76E79";
 const LADO_COLOR = {
-  noctis: { bg: "#060608", fg: "#e9e3db" }, // Negro
-  vigilia: { bg: "#493B63", fg: "#e9e3db" }, // Morado profundo
-  borealis: { bg: "#0F6E56", fg: "#e9e3db" }, // Verde esmeralda
-  "prima-luce": { bg: "#E5E1E2", fg: "#493B63" }, // Perla
+  noctis: { bg: "#060608", fg: "#e9e3db", accent: ACENTO_AURORA }, // Negro
+  vigilia: { bg: "#493B63", fg: "#e9e3db", accent: ACENTO_AURORA }, // Morado profundo
+  borealis: { bg: "#0F6E56", fg: "#e9e3db", accent: ACENTO_AURORA }, // Verde esmeralda
+  "prima-luce": { bg: "#E5E1E2", fg: "#493B63", accent: "#C4734A" }, // Perla
 } as const;
 
 export default function Home() {
@@ -96,7 +97,7 @@ export default function Home() {
                   {
                     "--lado-bg": LADO_COLOR[t.id].bg,
                     "--lado-fg": LADO_COLOR[t.id].fg,
-                    "--lado-accent": ACENTO_AURORA,
+                    "--lado-accent": LADO_COLOR[t.id].accent,
                   } as CSSProperties
                 }
               >
