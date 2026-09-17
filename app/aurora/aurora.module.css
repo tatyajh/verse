@@ -41,11 +41,13 @@
 .pagina[data-tonalidad="prima-luce"] {
   --bg: linear-gradient(180deg, #B8D2DB 0%, #E5E1E2 100%);
   --bg-2: #D1E3E7;
-  --fg: #493B63;
-  --muted: #8E7A8E;
-  --line: rgb(73 59 99 / 0.16);
+  /* Sobre celeste el morado medio se perdía: el texto va en el morado
+     hondo del capítulo, y el atenuado sube a ~5:1 de contraste. */
+  --fg: #2a1a3f;
+  --muted: #5f4d6e;
+  --line: rgb(42 26 63 / 0.2);
   --accent: var(--rose-hondo);
-  --line-fuerte: rgb(73 59 99 / 0.32);
+  --line-fuerte: rgb(42 26 63 / 0.38);
 }
 
 .pagina[data-panel] {
@@ -353,6 +355,12 @@
 /* Cuando amanece, el texto debe ser más oscuro para contraste contra fondo claro */
 .capitulo[data-tonalidad="prima-luce"] {
   color: #2a1a3f;
+  /* El cielo bajo este capítulo pasa por verdes a medio tono donde ni el
+     texto claro ni el oscuro leen bien. El halo claro levanta la letra
+     sin meter una caja detrás. */
+  text-shadow:
+    0 0 14px rgb(229 225 226 / 0.55),
+    0 1px 2px rgb(229 225 226 / 0.4);
 }
 
 .enlaceProductos {

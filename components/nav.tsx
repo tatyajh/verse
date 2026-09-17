@@ -129,7 +129,7 @@ export default function Nav() {
         <Link href="/#llave" className={`link ${s.oculto}`}>
           La llave
         </Link>
-        <Link href="/blog" className={`link ${s.oculto}`}>
+        <Link href="/blog" className="link">
           Diario
         </Link>
         <Link href="/favoritos" className={`${s.carrito} link`} aria-label="Favoritos">

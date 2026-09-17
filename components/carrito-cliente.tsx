@@ -97,12 +97,9 @@ export default function CarritoCliente() {
   if (lineas.length === 0) {
     return (
       <div className={s.vacio}>
-        <p>
-          Aún no has elegido nada. Aurora son veinte piezas en cuatro momentos de una
-          misma noche: empieza por el que sientas hoy.
-        </p>
-        <Link href="/aurora?view=productos&momento=noctis" className="btn btn-fg">
-          Ver Aurora Versé
+        <p>Aún no has elegido nada.</p>
+        <Link href="/aurora?view=productos" className="btn btn-fg">
+          Ver todos los productos
         </Link>
       </div>
     );
