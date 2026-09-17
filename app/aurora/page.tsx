@@ -55,30 +55,29 @@ export default async function Aurora(props: PageProps<"/aurora">) {
           </p>
         </header>
 
-        {mostraHistoria ? (
+        {/* Toggle principal: Historia / Productos */}
+        <nav className={s.togglePrincipal} aria-label="Vistas">
+          <Link
+            href="/aurora?view=productos"
+            className={!mostraHistoria ? s.togglePrincipalActivo : ""}
+            scroll={false}
+          >
+            Productos
+          </Link>
+          <Link
+            href="/aurora"
+            className={mostraHistoria ? s.togglePrincipalActivo : ""}
+            scroll={false}
+          >
+            Historia
+          </Link>
+        </nav>
+      </div>
+
+      {mostraHistoria ? (
           /* VISTA HISTORIA */
           <article className={s.noche}>
             <CieloAurora />
-
-            {/* Toggle principal: Historia / Productos */}
-            <div className="wrap">
-              <nav className={s.togglePrincipal} aria-label="Vistas">
-                <Link
-                  href="/aurora?view=productos"
-                  className={!mostraHistoria ? s.togglePrincipalActivo : ""}
-                  scroll={false}
-                >
-                  Productos
-                </Link>
-                <Link
-                  href="/aurora"
-                  className={mostraHistoria ? s.togglePrincipalActivo : ""}
-                  scroll={false}
-                >
-                  Historia
-                </Link>
-              </nav>
-            </div>
 
             <header className={`${s.obertura} wrap`}>
               <p className="label">La colección</p>
@@ -140,24 +139,6 @@ export default async function Aurora(props: PageProps<"/aurora">) {
         ) : (
           /* VISTA PRODUCTOS */
           <>
-            {/* Toggle principal: Historia / Productos */}
-            <nav className={s.togglePrincipal} aria-label="Vistas">
-              <Link
-                href="/aurora?view=productos"
-                className={!mostraHistoria ? s.togglePrincipalActivo : ""}
-                scroll={false}
-              >
-                Productos
-              </Link>
-              <Link
-                href="/aurora"
-                className={mostraHistoria ? s.togglePrincipalActivo : ""}
-                scroll={false}
-              >
-                Historia
-              </Link>
-            </nav>
-
             <nav className={s.toggle} aria-label="Momento">
               {TONALIDADES.map((t) => {
                 const cap = CAPITULOS.find(c => c.tonalidad === t.id);
@@ -287,7 +268,6 @@ export default async function Aurora(props: PageProps<"/aurora">) {
             })()}
           </>
         )}
-      </div>
     </section>
   );
 }
