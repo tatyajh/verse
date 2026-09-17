@@ -74,8 +74,8 @@ export default function Footer() {
                   hola@verseintimates.com
                 </a>
               </li>
-              {whatsapp && (
-                <li>
+              <li>
+                {whatsapp ? (
                   <a
                     href={whatsapp}
                     target="_blank"
@@ -84,8 +84,12 @@ export default function Footer() {
                   >
                     WhatsApp
                   </a>
-                </li>
-              )}
+                ) : (
+                  <span className={s.pendiente} aria-disabled="true">
+                    WhatsApp <em>pronto</em>
+                  </span>
+                )}
+              </li>
               <li>
                 <a
                   href="https://instagram.com/verse_intimates"

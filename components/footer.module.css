@@ -23,6 +23,7 @@
   letter-spacing: 0.28em;
   padding-inline-end: 0.28em;
   line-height: 1;
+  color: var(--rose);
 }
 
 .frase {
@@ -65,4 +66,18 @@
   .marca {
     grid-column: 1 / -1;
   }
+}
+
+/* Maqueta: el lugar existe, el enlace todavía no. */
+.pendiente {
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+.pendiente em {
+  font-style: normal;
+  font-size: 0.6875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.8;
 }
