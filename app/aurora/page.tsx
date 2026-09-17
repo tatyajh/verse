@@ -58,7 +58,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
         {/* Toggle principal: Historia / Productos */}
         <nav className={s.togglePrincipal} aria-label="Vistas">
           <Link
-            href="/aurora?view=productos"
+            href={`/aurora?view=productos&momento=${activa}`}
             className={!mostraHistoria ? s.togglePrincipalActivo : ""}
             scroll={false}
           >

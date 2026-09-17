@@ -86,7 +86,7 @@
   display: flex;
   gap: clamp(1.5rem, 4vw, 3rem);
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
-  padding-bottom: 1.5rem;
+  padding: 0 clamp(1rem, 2vw, 2rem) 1.5rem clamp(1rem, 2vw, 2rem);
   border-bottom: 1px solid var(--line);
 }
 
@@ -137,9 +137,9 @@
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 4px;
-  /* un tono del moodboard (Crema Lunar) coincide con el fondo diurno;
-     un borde más marcado que --line evita que ese swatch desaparezca */
-  border: 1px solid color-mix(in srgb, var(--fg) 35%, transparent);
+  /* Borde visible en todos los colores, incluso en negro */
+  border: 1.5px solid color-mix(in srgb, var(--fg) 50%, transparent);
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.1);
 }
 
 .grupo {
@@ -355,9 +355,9 @@
   color: var(--fg);
 }
 
-/* Cuando amanece, el texto debe ser más claro para contraste */
+/* Cuando amanece, el texto debe ser más oscuro para contraste contra fondo claro */
 .capitulo[data-tonalidad="prima-luce"] {
-  color: #1a1a2e;
+  color: #2a1a3f;
 }
 
 .cierre {
