@@ -355,12 +355,32 @@
 /* Cuando amanece, el texto debe ser más oscuro para contraste contra fondo claro */
 .capitulo[data-tonalidad="prima-luce"] {
   color: #2a1a3f;
-  /* El cielo bajo este capítulo pasa por verdes a medio tono donde ni el
-     texto claro ni el oscuro leen bien. El halo claro levanta la letra
-     sin meter una caja detrás. */
-  text-shadow:
-    0 0 14px rgb(229 225 226 / 0.55),
-    0 1px 2px rgb(229 225 226 / 0.4);
+  text-shadow: 0 1px 2px rgb(229 225 226 / 0.4);
+}
+
+/* El cielo interpola entre centros de capítulo: al empezar el IV va a mitad
+   de camino entre el jade y la perla, un verde a medio tono donde el texto
+   oscuro no lee. Un velo de perla detrás de la columna de texto, que se
+   difumina hacia el cielo para no taparlo. */
+.capitulo[data-tonalidad="prima-luce"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgb(229 225 226 / 0.82) 0%,
+    rgb(229 225 226 / 0.7) 38%,
+    rgb(229 225 226 / 0.25) 62%,
+    transparent 80%
+  );
+}
+
+@media (max-width: 700px) {
+  .capitulo[data-tonalidad="prima-luce"]::before {
+    background: rgb(229 225 226 / 0.72);
+  }
 }
 
 .enlaceProductos {
