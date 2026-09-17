@@ -12,7 +12,7 @@ const LADO_COLOR = {
   noctis: { bg: "#060608", fg: "#e9e3db" }, // Negro
   vigilia: { bg: "#493B63", fg: "#e9e3db" }, // Morado profundo
   borealis: { bg: "#0F6E56", fg: "#e9e3db" }, // Verde esmeralda
-  prima-luce: { bg: "#E5E1E2", fg: "#493B63" }, // Perla
+  "prima-luce": { bg: "#E5E1E2", fg: "#493B63" }, // Perla
 } as const;
 
 export default function Home() {
@@ -189,6 +189,8 @@ export default function Home() {
               </tbody>
             </table>
           </div>
-
-      </div>
+        </div>
       </Panel>
+    </>
+  );
+}

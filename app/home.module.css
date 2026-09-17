@@ -438,7 +438,7 @@ a.ladoLink::after {
   border-bottom: none;
 }
 
-@media (max-width: 760px)
+@media (max-width: 760px) {
   .tallas {
     grid-template-columns: 1fr;
   }

@@ -10,7 +10,7 @@ import {
   type Tonalidad,
   type TipoPieza,
 } from "@/lib/products";
-import { getCapitulo } from "@/lib/historia";
+import { CAPITULOS } from "@/lib/historia";
 import s from "./aurora.module.css";
 
 export const metadata: Metadata = {
@@ -28,11 +28,12 @@ const ORDEN_TIPO: TipoPieza[] = ["conjunto", "body", "corset", "complemento"];
 export default async function Aurora(props: PageProps<"/aurora">) {
   const query = await props.searchParams;
   const crudo = Array.isArray(query.momento) ? query.momento[0] : query.momento;
+  const viewParam = Array.isArray(query.view) ? query.view[0] : query.view;
+  const mostraHistoria = viewParam !== "productos";
   const activa: Tonalidad = esTonalidad(crudo) ? crudo : "noctis";
 
   const tonalidad = getTonalidad(activa);
   const piezas = porTonalidad(activa);
-  const capitulo = getCapitulo(activa);
 
   return (
     // data-panel: solo para que <Nav/> sepa de qué color pintarse encima
@@ -49,143 +50,185 @@ export default async function Aurora(props: PageProps<"/aurora">) {
           <p className={s.intro}>
             Veinte piezas, cuatro momentos. Aurora en su viaje completo del día.
           </p>
-          <Link href="/aurora/historia" className={`${s.entrada} link`}>
-            Una noche. Mil versiones — leer la historia
-          </Link>
         </header>
 
-        <nav className={s.toggle} aria-label="Momento">
-          {TONALIDADES.map((t) => {
-            const cap = getCapitulo(t.id);
-            return (
-              <Link
-                key={t.id}
-                href={`/aurora?momento=${t.id}`}
-                className={t.id === activa ? s.toggleActivo : ""}
-                scroll={false}
-              >
-                {t.nombre}
-                {cap && (
-                  <span className={s.toggleLatin}>
-                    {cap.romano.toLowerCase()}. {cap.latin.toLowerCase()}
-                  </span>
-                )}
-              </Link>
-            );
-          })}
+        {/* Toggle principal: Historia / Productos */}
+        <nav className={s.togglePrincipal} aria-label="Vistas">
+          <Link
+            href="/aurora?view=productos"
+            className={!mostraHistoria ? s.togglePrincipalActivo : ""}
+            scroll={false}
+          >
+            Productos
+          </Link>
+          <Link
+            href="/aurora"
+            className={mostraHistoria ? s.togglePrincipalActivo : ""}
+            scroll={false}
+          >
+            Historia
+          </Link>
         </nav>
 
-        <div className={s.mood}>
-          <p className={s.sensacion}>{tonalidad.sensacion}.</p>
-          {capitulo && (
-            <Link href="/aurora/historia" className={`${s.leer} label link`}>
-              Leer {capitulo.latin}
-            </Link>
-          )}
-          <div className={s.swatches} aria-hidden="true">
-            {tonalidad.paleta.map((c) => (
-              <span key={c.hex} className={s.swatch} style={{ background: c.hex }} />
-            ))}
-          </div>
-        </div>
-
-        {/* Conjuntos con componentes individuales */}
-        {(() => {
-          const conjuntos = piezas.filter((p) => p.tipo === "conjunto");
-          if (conjuntos.length > 0) {
-            return (
-              <div className={s.grupo}>
-                <div className={`${s.grupoCinta} label`}>
-                  <div>
-                    <h2 className={s.grupoTitulo}>{TIPO_LABEL["conjunto"]}s</h2>
-                    <p className={s.grupoDescripcion}>Sets de 3 o 4 piezas coordinadas: bra, panty, tanga y opcionales.</p>
+        {mostraHistoria ? (
+          /* VISTA HISTORIA */
+          <>
+            <div className={s.historiaSeccion}>
+              {CAPITULOS.map((cap, idx) => (
+                <article key={cap.tonalidad} className={s.capituloBloque} data-capitulo={idx}>
+                  <div className={s.capituloEncabezado}>
+                    <span className={`${s.capituloRomano} label`}>{cap.romano}</span>
+                    <h2 className={s.capituloTitulo}>{cap.titulo}</h2>
                   </div>
-                  <span>{conjuntos.length}</span>
-                </div>
-                <div className={s.rejilla}>
-                  {conjuntos.map((conjunto) => (
-                    <div key={conjunto.slug} className={s.conjuntoBloque}>
+                  <div className={s.capituloVersos}>
+                    {cap.versos.map((verso, i) => (
+                      <p key={i} className={s.verso}>
+                        {verso}
+                      </p>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className={s.explorarContenedor}>
+              <Link href="/aurora?view=productos" className="btn btn-fg">
+                Explorar los productos
+              </Link>
+            </div>
+          </>
+        ) : (
+          /* VISTA PRODUCTOS */
+          <>
+            <nav className={s.toggle} aria-label="Momento">
+              {TONALIDADES.map((t) => {
+                const cap = CAPITULOS.find(c => c.tonalidad === t.id);
+                return (
+                  <Link
+                    key={t.id}
+                    href={`/aurora?view=productos&momento=${t.id}`}
+                    className={t.id === activa ? s.toggleActivo : ""}
+                    scroll={false}
+                  >
+                    {t.nombre}
+                    {cap && (
+                      <span className={s.toggleLatin}>
+                        {cap.romano.toLowerCase()}. {cap.latin.toLowerCase()}
+                      </span>
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <div className={s.mood}>
+              <p className={s.sensacion}>{tonalidad.sensacion}.</p>
+              <div className={s.swatches} aria-hidden="true">
+                {tonalidad.paleta.map((c) => (
+                  <span key={c.hex} className={s.swatch} style={{ background: c.hex }} />
+                ))}
+              </div>
+            </div>
+
+            {/* Conjuntos con componentes individuales */}
+            {(() => {
+              const conjuntos = piezas.filter((p) => p.tipo === "conjunto");
+              if (conjuntos.length > 0) {
+                return (
+                  <div className={s.grupo}>
+                    <div className={`${s.grupoCinta} label`}>
+                      <div>
+                        <h2 className={s.grupoTitulo}>{TIPO_LABEL["conjunto"]}s</h2>
+                        <p className={s.grupoDescripcion}>Sets de 3 o 4 piezas coordinadas: bra, panty, tanga y opcionales.</p>
+                      </div>
+                      <span>{conjuntos.length}</span>
+                    </div>
+                    <div className={s.rejilla}>
+                      {conjuntos.map((conjunto) => (
+                        <div key={conjunto.slug} className={s.conjuntoBloque}>
+                          <ProductCard
+                            producto={conjunto}
+                            sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
+                          />
+                          {conjunto.componentes && conjunto.componentes.length > 0 && (
+                            <div className={s.componentesSection}>
+                              <p className={`${s.componentesLabel} label`}>O compra por separado:</p>
+                              <div className={s.componentesGrid}>
+                                {conjunto.componentes
+                                  .map((slug) => getProduct(slug))
+                                  .filter(Boolean)
+                                  .map((comp) => (
+                                    <ProductCard
+                                      key={comp!.slug}
+                                      producto={comp!}
+                                      sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 25vw"
+                                    />
+                                  ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+              return null;
+            })()}
+
+            {/* Bodies */}
+            {(() => {
+              const bodies = piezas.filter((p) => p.tipo === "body");
+              if (bodies.length === 0) return null;
+              return (
+                <div className={s.grupo}>
+                  <div className={`${s.grupoCinta} label`}>
+                    <div>
+                      <h2 className={s.grupoTitulo}>{TIPO_LABEL["body"]}s</h2>
+                      <p className={s.grupoDescripcion}>Prendas de una sola pieza que combinan confort y diseño.</p>
+                    </div>
+                    <span>{bodies.length}</span>
+                  </div>
+                  <div className={s.rejilla}>
+                    {bodies.map((p) => (
                       <ProductCard
-                        producto={conjunto}
+                        key={p.slug}
+                        producto={p}
                         sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
                       />
-                      {conjunto.componentes && conjunto.componentes.length > 0 && (
-                        <div className={s.componentesSection}>
-                          <p className={`${s.componentesLabel} label`}>O compra por separado:</p>
-                          <div className={s.componentesGrid}>
-                            {conjunto.componentes
-                              .map((slug) => getProduct(slug))
-                              .filter(Boolean)
-                              .map((comp) => (
-                                <ProductCard
-                                  key={comp!.slug}
-                                  producto={comp!}
-                                  sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 25vw"
-                                />
-                              ))}
-                          </div>
-                        </div>
-                      )}
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
+
+            {/* Complementos */}
+            {(() => {
+              const complementos = piezas.filter((p) => p.tipo === "complemento");
+              if (complementos.length === 0) return null;
+              return (
+                <div className={s.grupo}>
+                  <div className={`${s.grupoCinta} label`}>
+                    <div>
+                      <h2 className={s.grupoTitulo}>{TIPO_LABEL["complemento"]}s</h2>
+                      <p className={s.grupoDescripcion}>Accesorios y prendas de abrigo para completar tu look.</p>
                     </div>
-                  ))}
+                    <span>{complementos.length}</span>
+                  </div>
+                  <div className={s.rejilla}>
+                    {complementos.map((p) => (
+                      <ProductCard
+                        key={p.slug}
+                        producto={p}
+                        sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
-            );
-          }
-          return null;
-        })()}
-
-        {/* Bodies */}
-        {(() => {
-          const bodies = piezas.filter((p) => p.tipo === "body");
-          if (bodies.length === 0) return null;
-          return (
-            <div className={s.grupo}>
-              <div className={`${s.grupoCinta} label`}>
-                <div>
-                  <h2 className={s.grupoTitulo}>{TIPO_LABEL["body"]}s</h2>
-                  <p className={s.grupoDescripcion}>Prendas de una sola pieza que combinan confort y diseño.</p>
-                </div>
-                <span>{bodies.length}</span>
-              </div>
-              <div className={s.rejilla}>
-                {bodies.map((p) => (
-                  <ProductCard
-                    key={p.slug}
-                    producto={p}
-                    sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
-                  />
-                ))}
-              </div>
-            </div>
-          );
-        })()}
-
-        {/* Complementos */}
-        {(() => {
-          const complementos = piezas.filter((p) => p.tipo === "complemento");
-          if (complementos.length === 0) return null;
-          return (
-            <div className={s.grupo}>
-              <div className={`${s.grupoCinta} label`}>
-                <div>
-                  <h2 className={s.grupoTitulo}>{TIPO_LABEL["complemento"]}s</h2>
-                  <p className={s.grupoDescripcion}>Accesorios y prendas de abrigo para completar tu look.</p>
-                </div>
-                <span>{complementos.length}</span>
-              </div>
-              <div className={s.rejilla}>
-                {complementos.map((p) => (
-                  <ProductCard
-                    key={p.slug}
-                    producto={p}
-                    sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
-                  />
-                ))}
-              </div>
-            </div>
-          );
-        })()}
+              );
+            })()}
+          </>
+        )}
       </div>
     </section>
   );
