@@ -353,16 +353,30 @@
 }
 
 /* Cuando amanece, el texto debe ser más oscuro para contraste contra fondo claro */
+/* Cada capítulo lleva un velo de su propio tono detrás de la columna de
+   texto, difuminado hacia la derecha donde el cielo sigue vivo. El cielo
+   interpola entre centros de capítulo, así que al empezar cada uno va a
+   medio camino desde el anterior: el velo garantiza que la letra lea igual
+   en los cuatro, esté el cielo como esté. */
+.capitulo[data-tonalidad="noctis"] {
+  --velo: 6 6 8;
+}
+
+.capitulo[data-tonalidad="vigilia"] {
+  --velo: 17 26 53;
+}
+
+.capitulo[data-tonalidad="borealis"] {
+  --velo: 4 18 14;
+}
+
 .capitulo[data-tonalidad="prima-luce"] {
+  --velo: 229 225 226;
   color: #2a1a3f;
   text-shadow: 0 1px 2px rgb(229 225 226 / 0.4);
 }
 
-/* El cielo interpola entre centros de capítulo: al empezar el IV va a mitad
-   de camino entre el jade y la perla, un verde a medio tono donde el texto
-   oscuro no lee. Un velo de perla detrás de la columna de texto, que se
-   difumina hacia el cielo para no taparlo. */
-.capitulo[data-tonalidad="prima-luce"]::before {
+.capitulo::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -370,16 +384,16 @@
   pointer-events: none;
   background: linear-gradient(
     90deg,
-    rgb(229 225 226 / 0.82) 0%,
-    rgb(229 225 226 / 0.7) 38%,
-    rgb(229 225 226 / 0.25) 62%,
+    rgb(var(--velo) / 0.82) 0%,
+    rgb(var(--velo) / 0.7) 38%,
+    rgb(var(--velo) / 0.25) 62%,
     transparent 80%
   );
 }
 
 @media (max-width: 700px) {
-  .capitulo[data-tonalidad="prima-luce"]::before {
-    background: rgb(229 225 226 / 0.72);
+  .capitulo::before {
+    background: rgb(var(--velo) / 0.72);
   }
 }
 
