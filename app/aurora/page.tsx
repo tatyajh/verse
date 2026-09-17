@@ -4,6 +4,7 @@ import ProductCard from "@/components/product-card";
 import CieloAurora from "@/components/aurora/cielo-aurora";
 import CapituloVelo from "@/components/aurora/capitulo-velo";
 import UmbralVestidor from "@/components/aurora/umbral-vestidor";
+import FilterProductos from "@/components/aurora/filter-productos";
 import {
   porTonalidad,
   getTonalidad,
@@ -186,18 +187,26 @@ export default async function Aurora(props: PageProps<"/aurora">) {
 
             {mostrarTodosProductos ? (
               /* Mostrar TODOS los productos de todas las tonalidades */
-              <div className="wrap">
-                {TONALIDADES.map((t) => {
-                  const productosPorMomento = porTonalidad(t.id);
-                  return (
-                    <div key={t.id} style={{ marginTop: "4rem" }}>
-                      <h2 className={s.grupoTitulo} style={{ marginBottom: "2rem" }}>
-                        Aurora {t.nombre}
-                      </h2>
+              <FilterProductos>
+                {(filtro) => (
+                  <div className="wrap">
+                    {TONALIDADES.map((t) => {
+                      const productosPorMomento = porTonalidad(t.id);
+                      const productosFiltrados = filtro
+                        ? productosPorMomento.filter((p) => p.tipo === filtro)
+                        : productosPorMomento;
+
+                      if (productosFiltrados.length === 0) return null;
+
+                      return (
+                        <div key={t.id} style={{ marginTop: "4rem" }}>
+                          <h2 className={s.grupoTitulo} style={{ marginBottom: "2rem" }}>
+                            Aurora {t.nombre}
+                          </h2>
 
                       {/* Conjuntos */}
                       {(() => {
-                        const conjuntos = productosPorMomento.filter((p) => p.tipo === "conjunto");
+                        const conjuntos = productosFiltrados.filter((p) => p.tipo === "conjunto");
                         if (conjuntos.length === 0) return null;
                         return (
                           <div className={s.grupo}>
@@ -222,7 +231,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
 
                       {/* Bodies */}
                       {(() => {
-                        const bodies = productosPorMomento.filter((p) => p.tipo === "body");
+                        const bodies = productosFiltrados.filter((p) => p.tipo === "body");
                         if (bodies.length === 0) return null;
                         return (
                           <div className={s.grupo}>
@@ -247,7 +256,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
 
                       {/* Complementos */}
                       {(() => {
-                        const complementos = productosPorMomento.filter((p) => p.tipo === "complemento");
+                        const complementos = productosFiltrados.filter((p) => p.tipo === "complemento");
                         if (complementos.length === 0) return null;
                         return (
                           <div className={s.grupo}>
@@ -272,7 +281,9 @@ export default async function Aurora(props: PageProps<"/aurora">) {
                     </div>
                   );
                 })}
-              </div>
+                  </div>
+                )}
+              </FilterProductos>
             ) : (
               /* Mostrar productos del MOMENTO específico */
               <div className="wrap">
