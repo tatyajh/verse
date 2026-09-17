@@ -294,6 +294,15 @@ a.ladoLink::after {
   border-left: 1px solid var(--accent);
 }
 
+/* La frase que firma la marca. Es la única de la home en cursiva: si
+   hubiera dos, ninguna sería especial. */
+.citaFirma {
+  font-family: var(--font-script), cursive;
+  font-style: normal;
+  font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+  line-height: 1.3;
+}
+
 @media (max-width: 860px) {
   .llave {
     grid-template-columns: 1fr;
@@ -513,4 +522,18 @@ a.ladoLink::after {
   .tablaTallas td {
     padding: 0.7rem 0.5rem;
   }
+}
+
+.heroAcciones {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.2rem, 3vw, 2rem);
+  flex-wrap: wrap;
+}
+
+.heroLeer {
+  font-family: var(--font-body), Georgia, serif;
+  font-style: italic;
+  color: var(--accent);
+  white-space: nowrap;
 }

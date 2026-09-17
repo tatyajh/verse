@@ -1,0 +1,69 @@
+.umbral {
+  position: relative;
+  display: block;
+  margin-top: clamp(3rem, 7vw, 6rem);
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid rgb(233 227 219 / 0.18);
+  color: inherit;
+}
+
+.umbral canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transform: scale(1);
+  transition: transform 1.1s var(--ease-umbral);
+}
+
+.umbral:hover canvas,
+.umbral:focus-visible canvas {
+  transform: scale(1.04);
+}
+
+/* La rendija: una línea de luz del momento que se abre al entrar en
+   pantalla. Es la puerta que la noche abrió y que nadie más podía ver. */
+.rendija {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, transparent, var(--luz), transparent);
+  clip-path: inset(50% 0 50% 0);
+  transition: clip-path 1.2s var(--ease-umbral), width 0.5s var(--ease-umbral);
+}
+
+.umbral[data-abierto="si"] .rendija {
+  clip-path: inset(0 0 0 0);
+}
+
+.umbral:hover .rendija,
+.umbral:focus-visible .rendija {
+  width: 3px;
+}
+
+.pie {
+  position: absolute;
+  left: 1.4rem;
+  bottom: 1.2rem;
+  right: 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  color: rgb(233 227 219 / 0.95);
+  text-shadow: 0 1px 12px rgb(6 6 8 / 0.8);
+}
+
+/* Sobre el grabado crema de Alba y Amanecer, el texto se invierte. */
+.umbral[data-claro="si"] .pie {
+  color: #2b1c3d;
+  text-shadow: 0 1px 10px rgb(244 238 229 / 0.9);
+}
+
+.umbral[data-claro="si"] {
+  border-color: rgb(43 28 61 / 0.22);
+}

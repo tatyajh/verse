@@ -138,3 +138,20 @@
     letter-spacing: 0.26em;
   }
 }
+
+/* La historia cuelga de su colección: un escalón por debajo, en cursiva,
+   con el lema debajo para que se entienda que no es otra colección. */
+.coleccionHistoria {
+  padding-left: 1.1rem;
+  font-style: italic;
+  opacity: 0.82;
+}
+
+.coleccionHistoria span {
+  display: block;
+  font-style: normal;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+  margin-top: 0.15rem;
+}

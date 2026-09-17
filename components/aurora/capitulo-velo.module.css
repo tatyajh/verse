@@ -1,0 +1,55 @@
+/* --avance registrado: así el navegador lo interpola como número y una
+   transición basta para suavizar los escalones del observador. */
+@property --avance {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 130%;
+}
+
+.velo {
+  position: relative;
+  --avance: 130%;
+  --deriva: 0px;
+}
+
+/* El texto NUNCA se enmascara. Lo enmascarado es la capa de encima. Si el
+   JS no llega, si mask-image no existe o si hay movimiento reducido, el
+   encaje sencillamente no se renderiza y aquí no queda nada tapado. */
+.cuerpo {
+  position: relative;
+  z-index: 1;
+}
+
+.encaje {
+  position: absolute;
+  /* desborda un poco: el encaje no debe terminar justo en el texto */
+  inset: -1.5rem -1rem;
+  z-index: 2;
+  pointer-events: none;
+  transition: --avance 0.45s linear;
+
+  /* Mismo encaje que «La llave»: festón, picot y dos retículas de tul. */
+  background-color: rgb(var(--c0, 6 6 8) / 0.92);
+  background-image:
+    radial-gradient(circle at 9px 0, transparent 8px, rgb(233 227 219 / 0.14) 8.4px, transparent 9.6px),
+    radial-gradient(circle at 9px 11px, rgb(233 227 219 / 0.1) 2px, transparent 2.4px),
+    repeating-linear-gradient(62deg, rgb(233 227 219 / 0.05) 0 1px, transparent 1px 11px),
+    repeating-linear-gradient(-62deg, rgb(233 227 219 / 0.05) 0 1px, transparent 1px 11px);
+  background-size: 18px 18px, 18px 18px, auto, auto;
+  background-position: var(--deriva) var(--deriva), var(--deriva) var(--deriva), 0 0, 0 0;
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--avance) - 18%),
+    #000 var(--avance),
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--avance) - 18%),
+    #000 var(--avance),
+    #000 100%
+  );
+}

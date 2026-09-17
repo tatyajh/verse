@@ -37,9 +37,14 @@ export default function Home() {
             De lo cotidiano a lo especial, prendas para acompañar las distintas formas
             en las que decides sentirte tú misma.
           </p>
-          <Link href="/aurora" className="btn btn-fg">
-            Ver última colección
-          </Link>
+          <span className={s.heroAcciones}>
+            <Link href="/aurora" className="btn btn-fg">
+              Ver última colección
+            </Link>
+            <Link href="/aurora/historia" className={`${s.heroLeer} link`}>
+              Leer la noche
+            </Link>
+          </span>
         </div>
       </Panel>
 
@@ -85,7 +90,7 @@ export default function Home() {
             {TONALIDADES.map((t) => (
               <Link
                 key={t.id}
-                href={`/aurora?tonalidad=${t.id}`}
+                href={`/aurora?momento=${t.id}`}
                 className={s.lado}
                 style={
                   {
@@ -122,7 +127,7 @@ export default function Home() {
               <p className={s.cita}>
                 No somos una sola verdad. Somos el diálogo entre lo que contradice y lo que completa.
               </p>
-              <p className={s.cita}>
+              <p className={`${s.cita} ${s.citaFirma}`}>
                 Aquí tu dualidad es sagrada.
               </p>
             </div>

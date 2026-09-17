@@ -1,0 +1,191 @@
+/* =========================================================
+   AURORA — la historia. Una noche. Mil versiones.
+   El cielo lo pinta <CieloAurora/> detrás; aquí solo vive
+   la tipografía. Cada capítulo hereda el color de su
+   momento y el texto se voltea cuando amanece.
+   ========================================================= */
+
+.noche {
+  position: relative;
+  /* El cielo es fixed por detrás; esto solo debe dejarlo ver. */
+  background: transparent;
+}
+
+/* Todo el contenido va por encima del cielo. */
+.obertura,
+.capitulo,
+.cierre {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- obertura ---------- */
+
+.obertura {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  gap: clamp(1.2rem, 3vw, 2rem);
+  padding-block: clamp(5rem, 12vh, 9rem);
+  color: var(--hueso);
+}
+
+.titular {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(4rem, 17vw, 15rem);
+  line-height: 0.92;
+  letter-spacing: 0.04em;
+}
+
+/* La cursiva solo aquí: el lema es la frase que la marca firma. A este
+   tamaño Pinyon respira; más pequeña se deshilacha. */
+.lema {
+  font-family: var(--font-script), cursive;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.15;
+  color: #c9a9b8;
+}
+
+/* Spectral, no cursiva: dos bloques de Pinyon seguidos compiten y la
+   cursiva deja de ser un acento. El lema se queda con ese privilegio. */
+.cita {
+  font-family: var(--font-body), Georgia, serif;
+  font-style: italic;
+  font-size: var(--t-m);
+  line-height: 1.5;
+  max-width: 34ch;
+  padding-left: 1.4rem;
+  border-left: 1px solid rgb(219 161 127 / 0.5);
+  margin-top: clamp(1rem, 3vw, 2rem);
+}
+
+/* ---------- capítulo ---------- */
+
+.capitulo {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  padding-block: clamp(6rem, 16vh, 12rem);
+  color: var(--hueso);
+}
+
+/* Cuando amanece, el cielo es perla: el texto se vuelve oscuro o no se lee. */
+.capitulo[data-tonalidad="amanecer"],
+.cierre {
+  color: #3c2f4f;
+}
+
+.marca {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(1rem, 3vw, 2.2rem);
+  flex-wrap: wrap;
+  margin-bottom: clamp(1.5rem, 4vw, 3rem);
+}
+
+.romano {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(3.5rem, 11vw, 9rem);
+  line-height: 0.8;
+  letter-spacing: 0.02em;
+  color: currentColor;
+}
+
+/* La aurora dentro de las letras. Si no hay background-clip, queda el
+   color sólido de arriba y no se pierde nada. */
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .romano {
+    background-image: linear-gradient(
+      170deg,
+      rgb(var(--c1, 32 40 74)),
+      rgb(var(--c3, 123 45 95)) 55%,
+      rgb(var(--c2, 53 52 95))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+.nombre {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.latin {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.promesa {
+  font-family: var(--font-body), Georgia, serif;
+  font-style: italic;
+  font-size: var(--t-m);
+  opacity: 0.82;
+}
+
+/* ---------- los versos ---------- */
+
+.versos {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 38ch;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  line-height: 1.55;
+}
+
+/* Último verso de cada capítulo: cierra, así que pesa más. */
+.remate {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  margin-top: 0.8rem;
+  max-width: 24ch;
+}
+
+/* ---------- cierre ---------- */
+
+.cierre {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: clamp(1rem, 3vw, 2rem);
+  padding-block: clamp(6rem, 16vh, 12rem);
+}
+
+.cierreFrase {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(2.2rem, 6.5vw, 5.5rem);
+  line-height: 1.02;
+  max-width: 18ch;
+}
+
+.cierreFrase + .cierreFrase {
+  font-family: var(--font-script), cursive;
+  font-size: clamp(2rem, 5.5vw, 4.4rem);
+  line-height: 1.2;
+  max-width: 22ch;
+  opacity: 0.9;
+}
+
+.firma {
+  margin-top: clamp(2rem, 6vw, 4rem);
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+@media (max-width: 700px) {
+  .marca {
+    gap: 0.8rem;
+  }
+  .versos {
+    max-width: none;
+  }
+}

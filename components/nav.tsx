@@ -6,7 +6,9 @@ import { useCart } from "@/lib/cart";
 import { VerseMark } from "./verse-mark";
 import s from "./nav.module.css";
 
-const COLECCIONES = [{ id: "aurora", nombre: "Aurora" }];
+const COLECCIONES = [
+  { id: "aurora", nombre: "Aurora", historia: "Una noche. Mil versiones." },
+];
 
 /**
  * El nav flota sobre paneles que alternan noche y seda, así que no puede tener
@@ -103,14 +105,23 @@ export default function Nav() {
           {coleccionesAbierto && (
             <div className={s.coleccionesDropdown}>
               {COLECCIONES.map((col) => (
-                <Link
-                  key={col.id}
-                  href={`/${col.id}`}
-                  className={s.coleccionLink}
-                  onClick={() => setColeccionesAbierto(false)}
-                >
-                  {col.nombre}
-                </Link>
+                <div key={col.id}>
+                  <Link
+                    href={`/${col.id}`}
+                    className={s.coleccionLink}
+                    onClick={() => setColeccionesAbierto(false)}
+                  >
+                    {col.nombre}
+                  </Link>
+                  <Link
+                    href={`/${col.id}/historia`}
+                    className={`${s.coleccionLink} ${s.coleccionHistoria}`}
+                    onClick={() => setColeccionesAbierto(false)}
+                  >
+                    La historia
+                    <span>{col.historia}</span>
+                  </Link>
+                </div>
               ))}
             </div>
           )}

@@ -1,0 +1,41 @@
+/* El cielo vive en el layout de /aurora: no se desmonta al pasar de la
+   historia a las piezas, así que la noche no se corta a mitad. */
+.cielo {
+  position: fixed;
+  inset: 0;
+  /* z-index 0, no -1: con negativo el cielo queda DETRÁS del fondo del
+     body y no se ve nada. El contenido se eleva a 1 en historia.module.css. */
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* El fondo es un gradiente, no canvas: lo compone la GPU y cuesta cero.
+   El JS solo reescribe las cuatro paradas. */
+.fondo {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(var(--c0)) 0%,
+    rgb(var(--c1)) 34%,
+    rgb(var(--c2)) 68%,
+    rgb(var(--c3)) 100%
+  );
+}
+
+/* Las cintas. Transparente: solo luz sumada sobre el fondo. */
+.cintas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.92;
+}
+
+/* La nieve del relato: una neblina baja que asienta el horizonte. */
+.nieve {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 38vh;
+  background: linear-gradient(180deg, transparent, rgb(var(--c3) / 0.55));
+}

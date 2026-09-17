@@ -10,6 +10,7 @@ import {
   type Tonalidad,
   type TipoPieza,
 } from "@/lib/products";
+import { getCapitulo } from "@/lib/historia";
 import s from "./aurora.module.css";
 
 export const metadata: Metadata = {
@@ -31,6 +32,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
 
   const tonalidad = getTonalidad(activa);
   const piezas = porTonalidad(activa);
+  const capitulo = getCapitulo(activa);
 
   return (
     // data-panel: solo para que <Nav/> sepa de qué color pintarse encima
@@ -47,23 +49,39 @@ export default async function Aurora(props: PageProps<"/aurora">) {
           <p className={s.intro}>
             Veinte piezas, cuatro momentos. Aurora en su viaje completo del día.
           </p>
+          <Link href="/aurora/historia" className={`${s.entrada} link`}>
+            Una noche. Mil versiones — leer la historia
+          </Link>
         </header>
 
         <nav className={s.toggle} aria-label="Momento">
-          {TONALIDADES.map((t) => (
-            <Link
-              key={t.id}
-              href={`/aurora?momento=${t.id}`}
-              className={t.id === activa ? s.toggleActivo : ""}
-              scroll={false}
-            >
-              {t.nombre}
-            </Link>
-          ))}
+          {TONALIDADES.map((t) => {
+            const cap = getCapitulo(t.id);
+            return (
+              <Link
+                key={t.id}
+                href={`/aurora?momento=${t.id}`}
+                className={t.id === activa ? s.toggleActivo : ""}
+                scroll={false}
+              >
+                {t.nombre}
+                {cap && (
+                  <span className={s.toggleLatin}>
+                    {cap.romano.toLowerCase()}. {cap.latin.toLowerCase()}
+                  </span>
+                )}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className={s.mood}>
           <p className={s.sensacion}>{tonalidad.sensacion}.</p>
+          {capitulo && (
+            <Link href="/aurora/historia" className={`${s.leer} label link`}>
+              Leer {capitulo.latin}
+            </Link>
+          )}
           <div className={s.swatches} aria-hidden="true">
             {tonalidad.paleta.map((c) => (
               <span key={c.hex} className={s.swatch} style={{ background: c.hex }} />

@@ -24,11 +24,16 @@ export default function Footer() {
             <ul>
               {TONALIDADES.map((t) => (
                 <li key={t.id}>
-                  <Link href={`/aurora?tonalidad=${t.id}`} className="link">
+                  <Link href={`/aurora?momento=${t.id}`} className="link">
                     {t.nombre}
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/aurora/historia" className="link">
+                  La historia
+                </Link>
+              </li>
             </ul>
           </div>
 

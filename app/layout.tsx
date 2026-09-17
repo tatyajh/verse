@@ -1,15 +1,26 @@
 import type { Metadata } from "next";
-import { Archivo, Cormorant_Garamond, Spectral } from "next/font/google";
+import { Archivo, Bodoni_Moda, Pinyon_Script, Spectral } from "next/font/google";
 import "./globals.css";
 import Umbral from "@/components/umbral";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 
-/* Display: elegante y redondeado — sensación de lujo sin rigidez. */
-const display = Cormorant_Garamond({
-  weight: "400",
+/* Display: didone de alto contraste. Ese grueso/fino es el idioma de la
+   moda —y el de la lencería: encaje y piel, luz y sombra. */
+const display = Bodoni_Moda({
+  weight: ["400", "500"],
   subsets: ["latin"],
   variable: "--font-display",
+  display: "swap",
+});
+
+/* Cursiva: solo para las frases que cargan emoción —el lema, las citas—.
+   Nunca para texto corrido ni por debajo de 1.5rem: a ese tamaño se
+   deshace. Es el acento escrito a mano sobre la tipografía grabada. */
+const script = Pinyon_Script({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-script",
   display: "swap",
 });
 
@@ -67,7 +78,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-scroll-behavior="smooth"
       // el script de arriba escribe data-umbral antes de hidratar
       suppressHydrationWarning
-      className={`${display.variable} ${body.variable} ${ui.variable}`}
+      className={`${display.variable} ${script.variable} ${body.variable} ${ui.variable}`}
     >
       <body>
         <script dangerouslySetInnerHTML={{ __html: DECIDIR_UMBRAL }} />
