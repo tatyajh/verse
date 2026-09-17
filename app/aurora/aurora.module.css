@@ -353,25 +353,30 @@
 }
 
 /* Cuando amanece, el texto debe ser más oscuro para contraste contra fondo claro */
-/* Cada capítulo lleva un velo de su propio tono detrás de la columna de
-   texto, difuminado hacia la derecha donde el cielo sigue vivo. El cielo
-   interpola entre centros de capítulo, así que al empezar cada uno va a
-   medio camino desde el anterior: el velo garantiza que la letra lea igual
-   en los cuatro, esté el cielo como esté. */
+/* Detrás de la columna de texto hay un encaje fijo —el mismo tul de «La
+   llave» y del velo que se descubre al leer, pero que aquí se queda—, en el
+   tono de cada capítulo y difuminado hacia la derecha donde el cielo sigue
+   vivo. El cielo interpola entre centros de capítulo, así que al empezar
+   cada uno va a medio camino desde el anterior: el encaje garantiza que la
+   letra lea igual en los cuatro, esté el cielo como esté. */
 .capitulo[data-tonalidad="noctis"] {
   --velo: 6 6 8;
+  --hilo: 233 227 219;
 }
 
 .capitulo[data-tonalidad="vigilia"] {
   --velo: 17 26 53;
+  --hilo: 233 227 219;
 }
 
 .capitulo[data-tonalidad="borealis"] {
   --velo: 4 18 14;
+  --hilo: 233 227 219;
 }
 
 .capitulo[data-tonalidad="prima-luce"] {
   --velo: 229 225 226;
+  --hilo: 42 26 63;
   color: #2a1a3f;
   text-shadow: 0 1px 2px rgb(229 225 226 / 0.4);
 }
@@ -382,18 +387,25 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    rgb(var(--velo) / 0.82) 0%,
-    rgb(var(--velo) / 0.7) 38%,
-    rgb(var(--velo) / 0.25) 62%,
-    transparent 80%
-  );
+
+  background-color: rgb(var(--velo) / 0.62);
+  background-image:
+    radial-gradient(circle at 9px 0, transparent 8px, rgb(var(--hilo) / 0.16) 8.4px, transparent 9.6px),
+    radial-gradient(circle at 9px 11px, rgb(var(--hilo) / 0.12) 2px, transparent 2.4px),
+    repeating-linear-gradient(62deg, rgb(var(--hilo) / 0.06) 0 1px, transparent 1px 11px),
+    repeating-linear-gradient(-62deg, rgb(var(--hilo) / 0.06) 0 1px, transparent 1px 11px);
+  background-size: 18px 18px, 18px 18px, auto, auto;
+
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 36%, rgb(0 0 0 / 0.35) 62%, transparent 82%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 36%, rgb(0 0 0 / 0.35) 62%, transparent 82%);
 }
 
+/* En celular el texto ocupa todo el ancho: el encaje no se difumina de lado. */
 @media (max-width: 700px) {
   .capitulo::before {
-    background: rgb(var(--velo) / 0.72);
+    -webkit-mask-image: none;
+    mask-image: none;
+    background-color: rgb(var(--velo) / 0.7);
   }
 }
 
