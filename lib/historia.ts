@@ -48,7 +48,7 @@ export const CAPITULOS: Capitulo[] = [
     romano: "I",
     latin: "Noctis",
     titulo: "La noche guarda un secreto",
-    tonalidad: "medianoche",
+    tonalidad: "noctis",
     intensidad: 0,
     versos: [
       "La nieve dormía bajo un cielo inmenso cuando ella apareció.",
@@ -63,7 +63,7 @@ export const CAPITULOS: Capitulo[] = [
     romano: "II",
     latin: "Vigilia",
     titulo: "Donde nacen las promesas",
-    tonalidad: "penumbra",
+    tonalidad: "vigilia",
     intensidad: 0.18,
     versos: [
       "Algo se movió en el horizonte.",
@@ -81,7 +81,7 @@ export const CAPITULOS: Capitulo[] = [
     romano: "III",
     latin: "Borealis",
     titulo: "La danza de lo imposible",
-    tonalidad: "alba",
+    tonalidad: "borealis",
     intensidad: 1,
     versos: [
       "Entonces el cielo comenzó a arder.",
@@ -101,7 +101,7 @@ export const CAPITULOS: Capitulo[] = [
     romano: "IV",
     latin: "Prima Luce",
     titulo: "El arte de permanecer",
-    tonalidad: "amanecer",
+    tonalidad: "prima-luce",
     intensidad: 0.35,
     versos: [
       "Cuando apareció la primera luz del día, la aurora comenzó a desvanecerse.",

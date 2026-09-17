@@ -28,7 +28,7 @@ const ORDEN_TIPO: TipoPieza[] = ["conjunto", "body", "corset", "complemento"];
 export default async function Aurora(props: PageProps<"/aurora">) {
   const query = await props.searchParams;
   const crudo = Array.isArray(query.momento) ? query.momento[0] : query.momento;
-  const activa: Tonalidad = esTonalidad(crudo) ? crudo : "medianoche";
+  const activa: Tonalidad = esTonalidad(crudo) ? crudo : "noctis";
 
   const tonalidad = getTonalidad(activa);
   const piezas = porTonalidad(activa);
@@ -39,7 +39,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
     // (el color real lo definen los tokens propios de .pagina, no este atributo).
     <section
       className={s.pagina}
-      data-panel={activa === "alba" || activa === "amanecer" ? "seda" : "noche"}
+      data-panel={activa === "borealis" || activa === "prima-luce" ? "seda" : "noche"}
       data-tonalidad={activa}
     >
       <div className="wrap">
