@@ -218,22 +218,6 @@
   }
 }
 
-/* El nombre del capítulo cuelga del momento: el catálogo y el relato son
-   la misma columna vertebral. */
-.toggleLatin {
-  display: block;
-  font-family: var(--font-ui), system-ui, sans-serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0.55;
-  margin-top: 0.4rem;
-}
-
-.toggleActivo .toggleLatin {
-  opacity: 0.85;
-}
-
 .entrada {
   font-family: var(--font-body), Georgia, serif;
   font-style: italic;
@@ -456,8 +440,9 @@
   background-size: 28px 28px, 28px 28px, auto, auto;
 }
 
-/* IV. Prima Luce — guipur: rombos abiertos con una cuenta en cada cruce.
-   La tela más aireada, para la primera luz. */
+/* IV. Prima Luce — punto de espíritu: motas suaves en tresbolillo sobre un
+   tul finísimo. La tela más aireada, para la primera luz. (Nunca rombos:
+   el moño y la curva son de la marca, el rombo no.) */
 .capitulo[data-tonalidad="prima-luce"] {
   --velo: 229 225 226;
   --hilo: 42 26 63;
@@ -470,10 +455,13 @@
 
 .capitulo[data-tonalidad="prima-luce"]::before {
   background-image:
-    linear-gradient(45deg, transparent 47.5%, rgb(var(--hilo) / 0.11) 47.5%, rgb(var(--hilo) / 0.11) 52.5%, transparent 52.5%),
-    linear-gradient(-45deg, transparent 47.5%, rgb(var(--hilo) / 0.11) 47.5%, rgb(var(--hilo) / 0.11) 52.5%, transparent 52.5%),
-    radial-gradient(circle at 16px 16px, rgb(var(--hilo) / 0.16) 2px, transparent 2.9px);
-  background-size: 32px 32px;
+    radial-gradient(circle at 8px 8px, rgb(var(--hilo) / 0.2) 2.2px, transparent 3.2px),
+    radial-gradient(circle at 24px 24px, rgb(var(--hilo) / 0.2) 2.2px, transparent 3.2px),
+    radial-gradient(circle at 8px 8px, rgb(var(--hilo) / 0.06) 5px, transparent 5.6px),
+    radial-gradient(circle at 24px 24px, rgb(var(--hilo) / 0.06) 5px, transparent 5.6px),
+    repeating-linear-gradient(60deg, rgb(var(--hilo) / 0.035) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(-60deg, rgb(var(--hilo) / 0.035) 0 1px, transparent 1px 7px);
+  background-size: 32px 32px, 32px 32px, 32px 32px, 32px 32px, auto, auto;
 }
 
 /* En celular el texto ocupa todo el ancho: el encaje solo se difumina
@@ -510,12 +498,15 @@
 
 .enlaceProductosIcono {
   display: inline-block;
+  width: 1.35em;
+  height: 1.35em;
+  flex: none;
   transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  font-size: 1.2em;
 }
 
+/* Al pasar el cursor el moño se ladea un poco, como si lo tocaran. */
 .enlaceProductos:hover .enlaceProductosIcono {
-  transform: rotate(180deg) scale(1.2);
+  transform: rotate(-12deg) scale(1.15);
 }
 
 .cierre {

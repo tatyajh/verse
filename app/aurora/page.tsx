@@ -141,7 +141,22 @@ export default async function Aurora(props: PageProps<"/aurora">) {
                     href={`/aurora?view=productos&momento=${c.tonalidad}`}
                     className={s.enlaceProductos}
                   >
-                    <span className={s.enlaceProductosIcono}>◆</span>
+                    <svg
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      className={s.enlaceProductosIcono}
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      {/* Un moñito de cinta: dos lazos, el nudo y dos colas. */}
+                      <path d="M12 11.5C9.6 6.2 3.4 6.8 4.2 10.6c.6 2.9 5.1 2.3 7.8.9Z" />
+                      <path d="M12 11.5c2.4-5.3 8.6-4.7 7.8-.9-.6 2.9-5.1 2.3-7.8.9Z" />
+                      <circle cx="12" cy="11.5" r="1.3" fill="currentColor" stroke="none" />
+                      <path d="M11.4 12.6 9.2 18.6M12.6 12.6l2.2 6" />
+                    </svg>
                     <span>Ver todo lo que tiene {c.latin} para ti</span>
                   </Link>
                 </section>
@@ -163,24 +178,16 @@ export default async function Aurora(props: PageProps<"/aurora">) {
           <>
             {!mostrarTodosProductos && (
               <nav className={s.toggle} aria-label="Momento">
-                {TONALIDADES.map((t) => {
-                  const cap = CAPITULOS.find(c => c.tonalidad === t.id);
-                  return (
-                    <Link
-                      key={t.id}
-                      href={`/aurora?view=productos&momento=${t.id}`}
-                      className={t.id === activa ? s.toggleActivo : ""}
-                      scroll={false}
-                    >
-                      {t.nombre}
-                      {cap && (
-                        <span className={s.toggleLatin}>
-                          {cap.romano.toLowerCase()}. {cap.latin.toLowerCase()}
-                        </span>
-                      )}
-                    </Link>
-                  );
-                })}
+                {TONALIDADES.map((t) => (
+                  <Link
+                    key={t.id}
+                    href={`/aurora?view=productos&momento=${t.id}`}
+                    className={t.id === activa ? s.toggleActivo : ""}
+                    scroll={false}
+                  >
+                    {t.nombre}
+                  </Link>
+                ))}
               </nav>
             )}
 
