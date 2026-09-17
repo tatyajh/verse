@@ -289,51 +289,184 @@
   padding-bottom: 0.35rem;
 }
 
-/* Historia: cuatro capítulos */
-.historiaSeccion {
-  display: grid;
-  gap: clamp(3rem, 7vw, 5rem);
-  margin-bottom: clamp(3rem, 6vw, 5rem);
+/* ========== HISTORIA: Una noche. Mil versiones. ========== */
+
+.noche {
+  position: relative;
+  background: transparent;
 }
 
-.capituloBloque {
-  display: grid;
-  gap: 1.8rem;
-  max-width: 56ch;
+.obertura,
+.capitulo,
+.cierre {
+  position: relative;
+  z-index: 1;
 }
 
-.capituloEncabezado {
+/* ---------- obertura ---------- */
+
+.obertura {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  gap: clamp(1.2rem, 3vw, 2rem);
+  padding-block: clamp(5rem, 12vh, 9rem);
+  color: var(--fg);
+}
+
+.titular {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(4rem, 17vw, 15rem);
+  line-height: 0.92;
+  letter-spacing: 0.04em;
+}
+
+/* La cursiva solo aquí: el lema es la frase que la marca firma. */
+.lema {
+  font-family: var(--font-script), cursive;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.15;
+  color: #c9a9b8;
+}
+
+/* El lema es el único que lleva cursiva. */
+.cita {
+  font-family: var(--font-body), Georgia, serif;
+  font-style: italic;
+  font-size: var(--t-m);
+  line-height: 1.5;
+  max-width: 34ch;
+  padding-left: 1.4rem;
+  border-left: 1px solid rgb(219 161 127 / 0.5);
+  margin-top: clamp(1rem, 3vw, 2rem);
+}
+
+/* ---------- capítulo ---------- */
+
+.capitulo {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  padding-block: clamp(6rem, 16vh, 12rem);
+  color: var(--fg);
+}
+
+/* Cuando amanece, el texto se vuelve oscuro. */
+.capitulo[data-tonalidad="prima-luce"],
+.cierre {
+  color: #3c2f4f;
+}
+
+.marca {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(1rem, 3vw, 2.2rem);
+  flex-wrap: wrap;
+  margin-bottom: clamp(1.5rem, 4vw, 3rem);
+}
+
+.romano {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(3.5rem, 11vw, 9rem);
+  line-height: 0.8;
+  letter-spacing: 0.02em;
+  color: currentColor;
+}
+
+/* La aurora dentro de las letras: degradado de la tinta. */
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .romano {
+    background-image: linear-gradient(
+      170deg,
+      rgb(var(--tinta-cielo, 233 227 219)),
+      rgb(var(--halo-cielo, 43 28 61)) 60%,
+      rgb(var(--tinta-cielo, 233 227 219))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+.nombre {
   display: grid;
   gap: 0.4rem;
 }
 
-.capituloRomano {
-  color: var(--accent);
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
-}
-
-.capituloTitulo {
+.latin {
   font-family: var(--font-display), "Didot", serif;
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  line-height: 1.1;
-  color: var(--fg);
+  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-.capituloVersos {
-  display: grid;
-  gap: 0.85rem;
-}
-
-.verso {
+.promesa {
   font-family: var(--font-body), Georgia, serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--fg);
+  font-style: italic;
+  font-size: var(--t-m);
+  opacity: 0.82;
 }
 
-.explorarContenedor {
+/* ---------- versos ---------- */
+
+.versos {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 38ch;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  line-height: 1.55;
+}
+
+/* Último verso de cada capítulo: cierra, así que pesa más. */
+.remate {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  margin-top: 0.8rem;
+  max-width: 24ch;
+}
+
+/* ---------- cierre ---------- */
+
+.cierre {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: clamp(1rem, 3vw, 2rem);
+  padding-block: clamp(6rem, 16vh, 12rem);
+}
+
+.cierreFrase {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(2.2rem, 6.5vw, 5.5rem);
+  line-height: 1.02;
+  max-width: 18ch;
+}
+
+.cierreFrase + .cierreFrase {
+  font-family: var(--font-script), cursive;
+  font-size: clamp(2rem, 5.5vw, 4.4rem);
+  line-height: 1.2;
+  max-width: 22ch;
+  opacity: 0.9;
+}
+
+.firma {
+  margin-top: clamp(2rem, 6vw, 4rem);
   display: flex;
-  justify-content: center;
-  margin-top: clamp(2rem, 5vw, 4rem);
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+@media (max-width: 700px) {
+  .marca {
+    gap: 0.8rem;
+  }
+  .versos {
+    max-width: none;
+  }
 }

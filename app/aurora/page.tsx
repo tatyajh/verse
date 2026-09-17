@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ProductCard from "@/components/product-card";
+import CieloAurora from "@/components/aurora/cielo-aurora";
+import CapituloVelo from "@/components/aurora/capitulo-velo";
+import UmbralVestidor from "@/components/aurora/umbral-vestidor";
 import {
   porTonalidad,
   getTonalidad,
@@ -10,7 +13,7 @@ import {
   type Tonalidad,
   type TipoPieza,
 } from "@/lib/products";
-import { CAPITULOS } from "@/lib/historia";
+import { CAPITULOS, OBERTURA, CIERRE } from "@/lib/historia";
 import s from "./aurora.module.css";
 
 export const metadata: Metadata = {
@@ -72,31 +75,66 @@ export default async function Aurora(props: PageProps<"/aurora">) {
 
         {mostraHistoria ? (
           /* VISTA HISTORIA */
-          <>
-            <div className={s.historiaSeccion}>
-              {CAPITULOS.map((cap, idx) => (
-                <article key={cap.tonalidad} className={s.capituloBloque} data-capitulo={idx}>
-                  <div className={s.capituloEncabezado}>
-                    <span className={`${s.capituloRomano} label`}>{cap.romano}</span>
-                    <h2 className={s.capituloTitulo}>{cap.titulo}</h2>
-                  </div>
-                  <div className={s.capituloVersos}>
-                    {cap.versos.map((verso, i) => (
-                      <p key={i} className={s.verso}>
-                        {verso}
-                      </p>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
+          <article className={s.noche}>
+            <CieloAurora />
 
-            <div className={s.explorarContenedor}>
-              <Link href="/aurora?view=productos" className="btn btn-fg">
-                Explorar los productos
-              </Link>
-            </div>
-          </>
+            <header className={`${s.obertura} wrap`}>
+              <p className="label">La colección</p>
+              <h1 className={s.titular}>{OBERTURA.titulo}</h1>
+              <p className={s.lema}>{OBERTURA.lema}</p>
+              <p className={s.cita}>{OBERTURA.cita}</p>
+            </header>
+
+            {CAPITULOS.map((c, i) => {
+              const ultimo = i === CAPITULOS.length - 1;
+              const versos = ultimo ? c.versos.slice(0, -1) : c.versos;
+              const cuerpo = versos.slice(0, -1);
+              const remate = versos[versos.length - 1];
+
+              return (
+                <section
+                  key={c.latin}
+                  className={`${s.capitulo} wrap`}
+                  data-tonalidad={c.tonalidad}
+                  aria-labelledby={`cap-${c.romano}`}
+                >
+                  <div className={s.marca}>
+                    <p className={s.romano} aria-hidden="true">
+                      {c.romano}
+                    </p>
+                    <div className={s.nombre}>
+                      <h2 className={s.latin} id={`cap-${c.romano}`}>
+                        {c.latin}
+                      </h2>
+                      <p className={s.promesa}>{c.titulo}</p>
+                    </div>
+                  </div>
+
+                  <CapituloVelo>
+                    <div className={s.versos}>
+                      {cuerpo.map((v) => (
+                        <p key={v}>{v}</p>
+                      ))}
+                      <p className={s.remate}>{remate}</p>
+                    </div>
+                  </CapituloVelo>
+
+                  <UmbralVestidor momento={c.tonalidad} />
+                </section>
+              );
+            })}
+
+            <footer className={`${s.cierre} wrap`} data-panel="seda">
+              <p className={s.cierreFrase}>{CIERRE.primera}</p>
+              <p className={s.cierreFrase}>{CIERRE.segunda}</p>
+              <div className={s.firma}>
+                <Link href="/aurora?view=productos" className="btn">
+                  Ver la colección
+                </Link>
+                <span className="label">Aurora · Versé</span>
+              </div>
+            </footer>
+          </article>
         ) : (
           /* VISTA PRODUCTOS */
           <>
