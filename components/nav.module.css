@@ -121,6 +121,61 @@
   font-variant-numeric: tabular-nums;
 }
 
+.coleccionesMenu {
+  position: relative;
+}
+
+.coleccionesToggle {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--muted);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: color 0.4s var(--ease-umbral);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.coleccionesToggle:hover,
+.coleccionesToggle:focus-visible {
+  color: var(--fg);
+  outline: none;
+}
+
+.coleccionesDropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  background: var(--bg);
+  border: 1px solid var(--muted);
+  border-radius: 1rem;
+  min-width: 140px;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.coleccionLink {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: var(--fg);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: background 0.2s ease;
+  border-bottom: 1px solid var(--muted);
+}
+
+.coleccionLink:last-child {
+  border-bottom: none;
+}
+
+.coleccionLink:hover,
+.coleccionLink:focus-visible {
+  background: var(--accent);
+  outline: none;
+}
+
 /* En ancho normal manda el texto; el ícono solo existe para pantallas
    angostas, donde cuatro etiquetas no caben en una línea. */
 .iconoMovil {
@@ -146,9 +201,9 @@
     font-size: 0.6rem;
     letter-spacing: 0.16em;
   }
-  /* La historia sigue a un clic desde la portada; aquí manda la tienda. */
-  .secundario {
-    display: none;
+  .coleccionesToggle {
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
   }
   .etiqueta {
     position: absolute;
