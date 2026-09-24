@@ -94,7 +94,7 @@ export default function VisorPieza({
       {producto.precio !== undefined ? (
         <Comprar producto={producto} />
       ) : (
-        <p className={`${s.proximamente} label`}>Todavía no está a la venta.</p>
+        <p className={`${s.proximamente} label`}>Próximamente</p>
       )}
     </div>
   );

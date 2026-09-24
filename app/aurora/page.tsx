@@ -37,9 +37,9 @@ const TIPOS_FILTRO: TipoPieza[] = [
 ];
 
 const DESCRIPCION_GRUPO: Partial<Record<TipoPieza, string>> = {
-  conjunto: "Tres o cuatro prendas que combinan entre sí. Cada una se vende también suelta.",
+  conjunto: "Tres o cuatro prendas pensadas juntas. Cada una se vende también por separado.",
   body: "Una sola pieza, del escote a la cadera.",
-  complemento: "Lo que se suma al conjunto: accesorios y prendas para ponerse encima.",
+  complemento: "Para completar el conjunto: accesorios y capas para llevar encima.",
 };
 
 const TAMANOS = "(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw";
@@ -85,7 +85,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
             </h1>
           </header>
         ) : (
-          <h1 className="sr-only">Tienda Aurora</h1>
+          <h1 className="sr-only">Piezas de Aurora</h1>
         )}
 
         {/* Historia / Productos */}
@@ -118,11 +118,9 @@ export default async function Aurora(props: PageProps<"/aurora">) {
               <p className={s.cita}>{OBERTURA.cita}</p>
             </header>
 
-            {CAPITULOS.map((c, i) => {
-              const ultimo = i === CAPITULOS.length - 1;
-              const versos = ultimo ? c.versos.slice(0, -1) : c.versos;
-              const cuerpo = versos.slice(0, -1);
-              const remate = versos[versos.length - 1];
+            {CAPITULOS.map((c) => {
+              const cuerpo = c.versos.slice(0, -1);
+              const remate = c.versos[c.versos.length - 1];
 
               return (
                 <section

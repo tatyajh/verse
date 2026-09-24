@@ -25,18 +25,18 @@ export const ENTRADAS: Entrada[] = [
     slug: "por-que-aurora",
     titulo: "Por qué Aurora",
     resumen:
-      "Por qué organizamos la colección por las horas de una noche y no por tipo de prenda.",
+      "Por qué la colección se ordena por las horas de una noche y no por tipo de prenda.",
     fecha: "2026-09-17",
     cuerpo: [
       {
         tipo: "parrafo",
         texto:
-          "En casi todas las tiendas la lencería se ordena por categoría: bras por un lado, panties por otro, conjuntos al final. Sirve para encontrar una talla, pero no dice nada de cómo te quieres sentir. Aurora la ordenamos por la hora de la noche en que pensamos cada pieza.",
+          "La lencería suele ordenarse por categoría: bras, panties, conjuntos. Es práctico, pero no dice nada de la mujer que la lleva. Aurora se ordena por las horas de una noche.",
       },
       {
         tipo: "parrafo",
         texto:
-          "Noctis es la medianoche: negro profundo y dorado. Vigilia es ese rato en que algo empieza a moverse en el horizonte, en azules de tinta. Borealis es cuando el cielo se enciende, en verde jade y lila. Prima Luce es la primera luz del día, en perla y rosado. Son cuatro momentos y veinte piezas.",
+          "Noctis es la medianoche, en negro y oro. Vigilia, la hora azul en que el cielo empieza a cambiar. Borealis, el momento en que se enciende, en jade y lila. Prima Luce, la primera luz, en perla y rosa. Cuatro momentos, veinte piezas.",
       },
       {
         tipo: "cita",
@@ -45,7 +45,7 @@ export const ENTRADAS: Entrada[] = [
       {
         tipo: "parrafo",
         texto:
-          "No tienes que quedarte con una. Hoy puedes andar en Noctis y el sábado en Prima Luce, y las dos te quedan.",
+          "No hace falta quedarse con una. La misma mujer puede ser Noctis un martes y Prima Luce el domingo.",
       },
     ],
   },

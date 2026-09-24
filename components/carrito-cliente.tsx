@@ -97,9 +97,9 @@ export default function CarritoCliente() {
   if (lineas.length === 0) {
     return (
       <div className={s.vacio}>
-        <p>Aún no has elegido nada.</p>
-        <Link href="/aurora?view=productos" className="btn btn-fg">
-          Ir a la tienda
+        <p>Tu carrito está vacío.</p>
+        <Link href="/#colecciones" className="btn btn-fg">
+          Ver colecciones
         </Link>
       </div>
     );

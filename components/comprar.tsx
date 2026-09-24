@@ -19,7 +19,7 @@ export default function Comprar({ producto }: { producto: Product }) {
       return;
     }
     agregar(producto.slug, talla);
-    setAviso("Listo, está en tu carrito.");
+    setAviso("Añadida a tu carrito.");
   };
 
   return (
@@ -65,7 +65,7 @@ export default function Comprar({ producto }: { producto: Product }) {
 
       <p className={`${s.guia} label`}>
         <Link href="/blog/como-elegir-tu-talla" className="link">
-          ¿Qué talla pido?
+          Guía de tallas
         </Link>{" "}
         Cambio de talla sin costo en el primer pedido
       </p>

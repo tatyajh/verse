@@ -42,7 +42,7 @@ export const TONALIDADES: TonalidadInfo[] = [
   {
     id: "noctis",
     nombre: "Noctis",
-    sensacion: "Negro y dorado, para la medianoche",
+    sensacion: "Negro y oro. La medianoche.",
     paleta: [
       { nombre: "Negro profundo", hex: "#0a0a0a" },
       { nombre: "Dorado", hex: "#d4af37" },
@@ -52,7 +52,7 @@ export const TONALIDADES: TonalidadInfo[] = [
   {
     id: "vigilia",
     nombre: "Vigilia",
-    sensacion: "Azules de tinta, para cuando la noche empieza a cambiar",
+    sensacion: "Tinta, índigo y un rastro de magenta. La hora azul.",
     paleta: [
       { nombre: "Azul oscuro", hex: "#111A35" },
       { nombre: "Azul tinta", hex: "#20284A" },
@@ -64,7 +64,7 @@ export const TONALIDADES: TonalidadInfo[] = [
   {
     id: "borealis",
     nombre: "Borealis",
-    sensacion: "Jade y lila, la hora en que el cielo se enciende",
+    sensacion: "Jade y lila. El cielo encendido.",
     paleta: [
       { nombre: "Verde jade", hex: "#0F6E56" },
       { nombre: "Lila", hex: "#8E82B7" },
@@ -76,7 +76,7 @@ export const TONALIDADES: TonalidadInfo[] = [
   {
     id: "prima-luce",
     nombre: "Prima Luce",
-    sensacion: "Perla y rosado, la primera luz del día",
+    sensacion: "Perla, rosa y hielo. La primera luz.",
     paleta: [
       { nombre: "Rosado algodón", hex: "#E8B5C5" },
       { nombre: "Azul claro", hex: "#B8D2DB" },

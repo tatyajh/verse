@@ -15,11 +15,11 @@ export default function FavoritosCliente() {
     return (
       <div className={s.vacio}>
         <p>
-          Todavía no has guardado ninguna pieza. Toca el corazón en cualquiera que
-          te llame y la encuentras aquí cuando vuelvas.
+          Aún no has guardado ninguna pieza. Marca el corazón en las que quieras
+          volver a ver.
         </p>
-        <Link href="/aurora?view=productos&momento=noctis" className="btn">
-          Ver Aurora Versé
+        <Link href="/#colecciones" className="btn">
+          Ver colecciones
         </Link>
       </div>
     );

@@ -4,8 +4,8 @@ import type { Tonalidad } from "./products";
  * La historia de Aurora: un capítulo por momento del catálogo, y cada uno
  * termina en un enlace a sus piezas.
  *
- * Los versos son de Moni y van tal como los escribió, frase por frase.
- * No editarlos sin preguntarle.
+ * Un verso por línea: la página los compone uno a uno y el último de cada
+ * capítulo va destacado.
  */
 
 export type Capitulo = {
@@ -28,95 +28,83 @@ export type Capitulo = {
 
 export const OBERTURA = {
   lema: "Una noche. Mil versiones.",
-  cita: "Hay noches que terminan al amanecer. Otras permanecen para siempre.",
+  cita: "Una noche en la nieve, contada en cuatro horas.",
 } as const;
 
-/** El cierre, y el lema de la colección. */
+/** El cierre de la historia, después del último capítulo. */
 export const CIERRE = {
-  primera: "Algunas historias nunca terminan.",
-  segunda: "Solo encuentran una nueva forma de comenzar.",
+  primera: "Algunas noches terminan al amanecer.",
+  segunda: "Otras se quedan puestas.",
 } as const;
 
 export const CAPITULOS: Capitulo[] = [
   {
     romano: "I",
     latin: "Noctis",
-    titulo: "La noche guarda un secreto",
+    titulo: "Lo que la nieve no cuenta",
     tonalidad: "noctis",
     intensidad: 0,
     versos: [
-      "La nieve dormía bajo un cielo inmenso cuando ella apareció.",
-      "No dejó huellas.",
-      "Solo una sensación imposible de nombrar.",
-      "La oscuridad parecía reconocerla.",
-      "Como si ambas compartieran un secreto antiguo.",
-      "Y mientras el mundo permanecía en silencio, la noche abrió una puerta que nadie más podía ver.",
+      "Había nevado toda la tarde y el pueblo ya dormía.",
+      "Ella salió sin abrigo.",
+      "El frío no la tocó: se le quedó en el pelo, en las pestañas.",
+      "Caminó hasta donde terminan las casas.",
+      "Allí la oscuridad no era vacío. Era terciopelo.",
+      "Se quedó quieta, con las manos frías y los ojos abiertos.",
+      "Y esperó.",
     ],
   },
   {
     romano: "II",
     latin: "Vigilia",
-    titulo: "Donde nacen las promesas",
+    titulo: "La hora azul",
     tonalidad: "vigilia",
     intensidad: 0.18,
     versos: [
-      "Algo se movió en el horizonte.",
-      "No era luz.",
-      "No todavía.",
-      "Era la promesa de algo extraordinario.",
-      "El aire se volvió más ligero.",
-      "Las estrellas más cercanas.",
-      "Y por primera vez, la noche pareció contener la respiración.",
-      "Ella sonrió.",
-      "Como quien sabe que la magia siempre llega a quienes saben esperar.",
+      "Pasó una hora. Tal vez dos.",
+      "El cielo cambió primero en el borde.",
+      "Un azul de tinta, y debajo otro más claro.",
+      "En el valle nada se movía.",
+      "Solo su aliento, blanco, subiendo despacio.",
+      "Hacía tiempo había dejado de apurar lo que vale la pena.",
+      "La noche también estaba esperando.",
     ],
   },
   {
     romano: "III",
     latin: "Borealis",
-    titulo: "La danza de lo imposible",
+    titulo: "Cuando el cielo se enciende",
     tonalidad: "borealis",
     intensidad: 1,
     versos: [
-      "Entonces el cielo comenzó a arder.",
-      "Ríos de luz recorrieron la oscuridad.",
-      "Verdes.",
-      "Violetas.",
-      "Destellos imposibles de atrapar.",
-      "La aurora bailaba sobre la nieve como un sueño despierto.",
-      "Y ella bailó con ella.",
-      "Sin miedo.",
-      "Sin límites.",
-      "Sin elegir una sola versión de sí misma.",
-      "Porque algunas mujeres nacieron para ser muchas.",
+      "Entonces empezó.",
+      "Una franja verde se abrió sobre las montañas, lenta, como seda que alguien desdobla.",
+      "Detrás vino el violeta.",
+      "La luz se plegaba y se volvía a plegar.",
+      "Sobre la nieve, todo tomó color.",
+      "También ella.",
+      "Se soltó el pelo.",
+      "Bailó sin testigos, que es la única forma honesta de bailar.",
+      "Esa noche fue muchas mujeres.",
+      "Y ninguna le sobró.",
     ],
   },
   {
     romano: "IV",
     latin: "Prima Luce",
-    titulo: "El arte de permanecer",
+    titulo: "La primera luz",
     tonalidad: "prima-luce",
     intensidad: 0.35,
     versos: [
-      "Cuando apareció la primera luz del día, la aurora comenzó a desvanecerse.",
-      "Pero no desapareció.",
-      "Se quedó suspendida en el aire, como un recuerdo que se niega a partir.",
-      "Ella observó el horizonte una última vez.",
-      "La noche había terminado.",
-      "El encanto no.",
-      "Y mientras el nuevo día despertaba, comprendió que algunas historias nunca terminan.",
-      "Solo encuentran una nueva forma de comenzar.",
+      "Con la madrugada, el verde se fue apagando.",
+      "El cielo pasó a perla, y de perla a rosa.",
+      "Ella volvió por el mismo camino.",
+      "Sus huellas seguían ahí, ahora con luz.",
+      "Nadie la vio llegar.",
+      "Pero algo de esa noche se le quedó en la piel.",
     ],
   },
 ];
-
-/**
- * El último verso de Borealis y los dos primeros de cada capítulo cargan
- * el peso: se componen a mayor escala. Aquí se marca cuál destaca.
- */
-export const VERSO_DESTACADO: Record<string, number> = {
-  Borealis: 10,
-};
 
 export function getCapitulo(tonalidad: Tonalidad): Capitulo | undefined {
   return CAPITULOS.find((c) => c.tonalidad === tonalidad);

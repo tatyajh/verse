@@ -9,12 +9,12 @@ export default function NotFound() {
         <div className={s.contenedor}>
           <h1 className={s.titulo}>Esta página no existe</h1>
           <p className={s.descripcion}>
-            Puede que el enlace esté mal escrito o que la pieza ya no esté en la
-            tienda. Desde aquí puedes seguir mirando.
+            Puede que el enlace esté incompleto o que la pieza ya no esté
+            disponible.
           </p>
           <div className={s.acciones}>
-            <Link href="/aurora?view=productos" className="btn btn-fg">
-              Ir a la tienda
+            <Link href="/#colecciones" className="btn btn-fg">
+              Ver colecciones
             </Link>
             <Link href="/" className="label link">
               Volver al inicio

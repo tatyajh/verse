@@ -51,7 +51,7 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
             <nav className={`${s.migas} label`} aria-label="Ruta">
               <span className={s.miga}>
                 <Link href="/aurora?view=productos" className="link">
-                  Tienda
+                  Aurora
                 </Link>
               </span>
               <span className={s.miga}>
@@ -69,8 +69,8 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
 
             {sinConfirmar ? (
               <p className={s.resumen}>
-                Pieza de la colección Aurora. El diseño final, el precio y la fecha de
-                lanzamiento todavía se están definiendo.
+                Pieza de la colección Aurora. Precio y fecha de lanzamiento por
+                anunciar.
               </p>
             ) : (
               <>

@@ -47,13 +47,13 @@ export const metadata: Metadata = {
     template: "%s — Versé Intimates",
   },
   description:
-    "Lencería diseñada en Medellín: conjuntos, bodies, bras y panties de la colección Aurora. Envíos a toda Colombia.",
+    "Lencería diseñada en Medellín. Conjuntos, bodies y piezas sueltas. Envíos a toda Colombia.",
   openGraph: {
     type: "website",
     locale: "es_CO",
     siteName: "Versé Intimates",
     title: "Versé Intimates",
-    description: "Conjuntos, bodies, bras y panties de la colección Aurora.",
+    description: "Lencería diseñada en Medellín.",
   },
   robots: { index: true, follow: true },
 };

@@ -71,7 +71,7 @@ components/
   aurora/                  cielo, velos y enlaces de la historia
 lib/
   products.ts              catálogo: fuente de verdad
-  historia.ts              versos de Aurora (no editar sin la autora)
+  historia.ts              versos de la historia de Aurora
   blog.ts                  entradas del diario
   cart.tsx  favoritos.tsx  estado en localStorage
   orden.ts                 totales y envío

@@ -34,15 +34,15 @@ export default function Home() {
 
         <div className={`${s.heroPie} wrap`}>
           <p className={s.heroFrase}>
-            De lo cotidiano a lo especial, prendas para acompañar las distintas formas
-            en las que decides sentirte tú misma.
+            Lencería diseñada en Medellín. Para el día entero, o para una sola
+            noche.
           </p>
           <div className={s.heroBotones}>
             <Link href="/aurora?view=productos" className="btn btn-fg">
-              Comprar Aurora
+              Descubrir Aurora
             </Link>
             <Link href="/aurora" className="label link">
-              Leer la historia
+              La historia
             </Link>
           </div>
         </div>
@@ -53,25 +53,25 @@ export default function Home() {
         <div className="wrap">
           <div className={s.manifiesto}>
             <h2 className={s.manifiestoTitulo}>
-              No debería haber que elegir entre una pieza bonita y una que funcione.
+              Hecha para llevarse puesta, no para guardarse.
             </h2>
             <div className={s.manifiestoCuerpo}>
               <p>
-                Hacemos ropa interior para ponértela un martes cualquiera, no solo en
-                una fecha especial. Si te hace sentir bien, esa ya es la ocasión.
+                Versé diseña lencería para mujeres que no reservan lo bello para una
+                ocasión. Encaje, transparencias y herrajes pensados para acompañar el
+                día entero, y la noche que no estaba en los planes.
               </p>
               <p>
-                Diseñamos cada pieza pensando en cómo se siente al final del día: que el
-                encaje no raspe, que el panty no se enrolle, que el bra sostenga sin
-                marcar. Lo bonito viene después, y viene con todo.
+                En cada pieza cuidamos lo que casi nadie ve: dónde apoya un tirante,
+                cómo termina un borde, qué se muestra y qué apenas se insinúa.
               </p>
             </div>
           </div>
         </div>
       </Panel>
 
-      {/* 3 — Los cuatro momentos de Aurora, cada uno con su color. */}
-      <Panel tono="seda" id="aurora" seam={false}>
+      {/* 3 — Colección vigente: los cuatro momentos de Aurora. */}
+      <Panel tono="seda" id="colecciones" seam={false}>
         <div className="wrap">
           <div className={`${s.duoCinta} label`}>
             <span>La colección</span>
@@ -93,7 +93,7 @@ export default function Home() {
               >
                 <p className={`${s.ladoIntencion} label`}>{t.nombre}</p>
                 <h3 className={s.ladoNombre}>Aurora {t.nombre}</h3>
-                <p className={s.ladoSensacion}>{t.sensacion}.</p>
+                <p className={s.ladoSensacion}>{t.sensacion}</p>
                 <div className={s.ladoSwatches} aria-hidden="true">
                   {t.paleta.map((c) => (
                     <span key={c.hex} style={{ background: c.hex }} />
@@ -113,15 +113,11 @@ export default function Home() {
             <div className={s.llaveTexto}>
               <h2 className={s.llaveTitulo}>Versé</h2>
               <p>
-                Hay días de encaje negro y días de algodón claro. Ninguno es más tuyo
-                que el otro.
+                La llave es el emblema de la casa. Habla de lo que se guarda y de la
+                libertad de decidir a quién se le muestra.
               </p>
-              <p className={s.cita}>
-                Por eso Aurora tiene cuatro momentos: te pones el que vaya contigo hoy.
-              </p>
-              <p className={`${s.cita} ${s.citaFirma}`}>
-                Mañana puede ser otro.
-              </p>
+              <p className={s.cita}>Lo íntimo no se esconde.</p>
+              <p className={`${s.cita} ${s.citaFirma}`}>Se elige.</p>
             </div>
             <KeyReveal />
           </div>
@@ -135,8 +131,8 @@ export default function Home() {
             <div className={s.tallasTexto}>
               <h2 className={s.tallasTitulo}>Guía de tallas</h2>
               <p>
-                Si estás entre dos tallas, escríbenos con tus medidas y te decimos cuál
-                pedir. Cambio de talla sin costo en el primer pedido.
+                Si estás entre dos tallas, escríbenos con tus medidas y te recomendamos
+                la indicada. El primer cambio de talla corre por nuestra cuenta.
               </p>
             </div>
             <div className={`${s.regla} label`}>

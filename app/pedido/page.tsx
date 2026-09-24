@@ -103,8 +103,8 @@ export default async function Pedido(props: PageProps<"/pedido">) {
           )}
 
           <div className={s.acciones}>
-            <Link href="/aurora?view=productos" className="btn btn-fg">
-              Volver a la tienda
+            <Link href="/#colecciones" className="btn btn-fg">
+              Ver colecciones
             </Link>
             <a href="mailto:hola@verseintimates.com" className="btn">
               Escribirnos
