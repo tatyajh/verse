@@ -4,7 +4,7 @@
    más que la regla global del mismo atributo (que solo existe aquí para
    que <Nav/> detecte de qué color pintarse al pasar por encima). */
 
-/* Medianoche: Negro profundo */
+/* Noctis */
 .pagina[data-tonalidad="noctis"] {
   --bg: linear-gradient(180deg, #060608 0%, #141008 100%);
   --bg-2: #25252A;
@@ -15,7 +15,7 @@
   --line-fuerte: rgb(233 227 219 / 0.34);
 }
 
-/* Penumbra: Morado profundo */
+/* Vigilia */
 .pagina[data-tonalidad="vigilia"] {
   --bg: linear-gradient(180deg, #111A35 0%, #7B2D5F 100%);
   --bg-2: #35345F;
@@ -26,7 +26,7 @@
   --line-fuerte: rgb(233 227 219 / 0.34);
 }
 
-/* Alba: Verde jade oscuro + Lila */
+/* Borealis */
 .pagina[data-tonalidad="borealis"] {
   --bg: linear-gradient(180deg, #04120e 0%, #2e2747 100%);
   --bg-2: #1a5c4f;
@@ -37,7 +37,7 @@
   --line-fuerte: rgb(233 227 219 / 0.34);
 }
 
-/* Amanecer: Perla/Rosa */
+/* Prima Luce */
 .pagina[data-tonalidad="prima-luce"] {
   --bg: linear-gradient(180deg, #B8D2DB 0%, #E5E1E2 100%);
   --bg-2: #D1E3E7;
@@ -131,6 +131,35 @@
   border-bottom: 3px solid var(--accent) !important;
   font-weight: 600;
   padding-bottom: 0.35rem;
+}
+
+/* Filtro por tipo de prenda, solo en «Todos». */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.filtros a {
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--line-fuerte);
+  border-radius: 999px;
+  color: var(--muted);
+  transition:
+    color 0.3s var(--ease-umbral),
+    border-color 0.3s var(--ease-umbral);
+}
+
+.filtros a:hover,
+.filtros a:focus-visible {
+  color: var(--fg);
+  border-color: var(--fg);
+}
+
+.filtros a.filtroActivo {
+  color: var(--fg);
+  border-color: var(--accent);
 }
 
 .grupo {

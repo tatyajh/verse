@@ -50,13 +50,13 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
           <div className={s.ficha}>
             <nav className={`${s.migas} label`} aria-label="Ruta">
               <span className={s.miga}>
-                <Link href="/aurora" className="link">
-                  Aurora
+                <Link href="/aurora?view=productos" className="link">
+                  Tienda
                 </Link>
               </span>
               <span className={s.miga}>
                 <span aria-hidden="true">/</span>
-                <Link href={`/aurora?tonalidad=${tonalidad.id}`} className="link">
+                <Link href={`/aurora?view=productos&momento=${tonalidad.id}`} className="link">
                   {tonalidad.nombre}
                 </Link>
               </span>
@@ -117,8 +117,8 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
 
         <section className={s.tambien}>
           <div className={`${s.tambienCinta} label`}>
-            <span>También de la casa</span>
-            <Link href="/aurora" className="link">
+            <span>También de Aurora</span>
+            <Link href="/aurora?view=productos" className="link">
               Ver todo
             </Link>
           </div>

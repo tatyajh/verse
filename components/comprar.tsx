@@ -15,18 +15,20 @@ export default function Comprar({ producto }: { producto: Product }) {
 
   const alAgregar = () => {
     if (!talla) {
-      setAviso("Elige una talla para continuar.");
+      setAviso("Primero elige tu talla.");
       return;
     }
     agregar(producto.slug, talla);
-    setAviso("Añadida al carrito.");
+    setAviso("Listo, está en tu carrito.");
   };
 
   return (
     <div className={s.bloque}>
       <div className={`${s.cabecera} label num`}>
         <span>{formatCOP(producto.precio)}</span>
-        <span>{unica ? "Talla única" : "XS – XL"}</span>
+        <span>{unica
+            ? "Talla única"
+            : `${producto.tallas[0]} – ${producto.tallas[producto.tallas.length - 1]}`}</span>
       </div>
 
       {!unica && (
@@ -62,6 +64,9 @@ export default function Comprar({ producto }: { producto: Product }) {
       </p>
 
       <p className={`${s.guia} label`}>
+        <Link href="/blog/como-elegir-tu-talla" className="link">
+          ¿Qué talla pido?
+        </Link>{" "}
         Cambio de talla sin costo en el primer pedido
       </p>
     </div>

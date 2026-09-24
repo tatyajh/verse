@@ -8,27 +8,21 @@ import { hexALab } from "@/lib/cielo";
 import s from "./umbral-vestidor.module.css";
 
 /**
- * El final de cada capítulo es una puerta, no un botón.
+ * Enlace al final de cada capítulo que lleva a las piezas de ese momento.
  *
- * Aquí la historia deja de ser una página «sobre nosotras» y se convierte
- * en el vestidor: se sale del relato directo a las piezas de ese momento.
- *
- * La rendija de luz se abre al entrar en pantalla —misma mano que <Seam/>:
- * la clase se pone sobre el DOM, no con estado—. Es decoración pura y va
- * aria-hidden; el enlace funciona igual sin ella.
+ * La rendija de luz se abre al entrar en pantalla (igual que <Seam/>, con un
+ * atributo en el DOM y no con estado). Es decorativa y va aria-hidden.
  */
 export default function UmbralVestidor({ momento }: { momento: Tonalidad }) {
   const ref = useRef<HTMLAnchorElement>(null);
   const tonalidad = getTonalidad(momento);
 
-  // El grabado de Alba y Amanecer es crema: encima, un texto claro y una
-  // rendija pálida desaparecen. Se decide por la luminosidad real del
-  // fondo, no por una lista de momentos que habría que mantener a mano.
+  // Sobre grabados claros (Borealis, Prima Luce) el texto va oscuro. Se
+  // decide por la luminosidad del fondo, no por una lista de momentos.
   const fondoL = hexALab(tonalidad.grabado.fondo)[0];
   const claro = fondoL > 0.6;
 
-  // La rendija toma el tono de la paleta que más se separa del fondo:
-  // es una línea de luz, y tiene que verse.
+  // La rendija usa el color de la paleta con más contraste contra el fondo.
   const luz =
     tonalidad.paleta
       .map((c) => ({ hex: c.hex, d: Math.abs(hexALab(c.hex)[0] - fondoL) }))
@@ -58,7 +52,7 @@ export default function UmbralVestidor({ momento }: { momento: Tonalidad }) {
   return (
     <Link
       ref={ref}
-      href={`/aurora?momento=${momento}`}
+      href={`/aurora?view=productos&momento=${momento}`}
       prefetch
       className={s.umbral}
       data-claro={claro ? "si" : undefined}

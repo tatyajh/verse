@@ -1,13 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "@/lib/cart";
 import { useFavoritos } from "@/lib/favoritos";
 import { VerseMark } from "./verse-mark";
 import s from "./nav.module.css";
-
-const COLECCIONES = [{ id: "aurora", nombre: "Aurora" }];
 
 /**
  * El nav flota sobre paneles que alternan noche y seda, así que no puede tener
@@ -67,21 +65,6 @@ export default function Nav() {
   const { tono, oculto } = useNav();
   const { piezas, listo } = useCart();
   const { cuenta: favoritos, listo: favoritosListo } = useFavoritos();
-  const [coleccionesAbierto, setColeccionesAbierto] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const cerrarAlClicAfuera = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setColeccionesAbierto(false);
-      }
-    };
-
-    if (coleccionesAbierto) {
-      document.addEventListener("mousedown", cerrarAlClicAfuera);
-      return () => document.removeEventListener("mousedown", cerrarAlClicAfuera);
-    }
-  }, [coleccionesAbierto]);
 
   return (
     <nav
@@ -103,31 +86,11 @@ export default function Nav() {
       </Link>
 
       <div className={`${s.menu} label`}>
-        <div className={s.coleccionesMenu} ref={menuRef}>
-          <button
-            className={`${s.coleccionesToggle} link`}
-            onClick={() => setColeccionesAbierto(!coleccionesAbierto)}
-            aria-expanded={coleccionesAbierto}
-          >
-            Colecciones
-          </button>
-          {coleccionesAbierto && (
-            <div className={s.coleccionesDropdown}>
-              {COLECCIONES.map((col) => (
-                <Link
-                  key={col.id}
-                  href={`/${col.id}`}
-                  className={s.coleccionLink}
-                  onClick={() => setColeccionesAbierto(false)}
-                >
-                  {col.nombre}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-        <Link href="/#llave" className={`link ${s.oculto}`}>
-          La llave
+        <Link href="/aurora?view=productos" className="link">
+          Tienda
+        </Link>
+        <Link href="/aurora" className={`link ${s.secundario}`}>
+          Aurora
         </Link>
         <Link href="/blog" className="link">
           Diario

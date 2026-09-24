@@ -99,7 +99,7 @@ export default function CarritoCliente() {
       <div className={s.vacio}>
         <p>Aún no has elegido nada.</p>
         <Link href="/aurora?view=productos" className="btn btn-fg">
-          Ver todos los productos
+          Ir a la tienda
         </Link>
       </div>
     );

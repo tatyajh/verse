@@ -7,7 +7,7 @@ import UmbralVestidor from "@/components/aurora/umbral-vestidor";
 import {
   porTonalidad,
   getProduct,
-  TIPO_LABEL,
+  TIPO_PLURAL,
   TONALIDADES,
   type Tonalidad,
   type TipoPieza,
@@ -25,18 +25,27 @@ function esTonalidad(valor: string | undefined): valor is Tonalidad {
   return TONALIDADES.some((t) => t.id === valor);
 }
 
+const TIPOS_FILTRO: TipoPieza[] = [
+  "conjunto",
+  "body",
+  "corset",
+  "bra",
+  "panty",
+  "tanga",
+  "liguero",
+  "complemento",
+];
+
+const DESCRIPCION_GRUPO: Partial<Record<TipoPieza, string>> = {
+  conjunto: "Tres o cuatro prendas que combinan entre sí. Cada una se vende también suelta.",
+  body: "Una sola pieza, del escote a la cadera.",
+  complemento: "Lo que se suma al conjunto: accesorios y prendas para ponerse encima.",
+};
+
+const TAMANOS = "(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw";
+
 function esTipoPieza(valor: string | undefined): valor is TipoPieza {
-  const tiposValidos: TipoPieza[] = [
-    "conjunto",
-    "body",
-    "corset",
-    "complemento",
-    "bra",
-    "panty",
-    "tanga",
-    "liguero",
-  ];
-  return tiposValidos.includes(valor as TipoPieza);
+  return TIPOS_FILTRO.includes(valor as TipoPieza);
 }
 
 export default async function Aurora(props: PageProps<"/aurora">) {
@@ -49,7 +58,15 @@ export default async function Aurora(props: PageProps<"/aurora">) {
   const filtroTipo = esTipoPieza(tipoParam) ? tipoParam : null;
   const activa: Tonalidad = esTonalidad(crudo) ? crudo : "noctis";
 
-  const piezas = porTonalidad(activa);
+  // En la vista por momento y en «Todos» sin filtro se muestran las piezas
+  // principales; las prendas sueltas aparecen bajo su conjunto o al filtrar.
+  const fuente = mostrarTodosProductos
+    ? TONALIDADES.flatMap((t) => porTonalidad(t.id))
+    : porTonalidad(activa);
+  const tipos: TipoPieza[] = filtroTipo ? [filtroTipo] : ["conjunto", "body", "complemento"];
+  const grupos = tipos
+    .map((tipo) => ({ tipo, productos: fuente.filter((p) => p.tipo === tipo) }))
+    .filter((g) => g.productos.length > 0);
 
   return (
     // data-panel: solo para que <Nav/> sepa de qué color pintarse encima
@@ -59,36 +76,36 @@ export default async function Aurora(props: PageProps<"/aurora">) {
       data-panel={activa === "borealis" || activa === "prima-luce" ? "seda" : "noche"}
       data-tonalidad={activa}
     >
-      {!mostrarTodosProductos && (
-        <div className="wrap">
-          {mostraHistoria && (
-            <header className={s.cabecera}>
-              <h1 className={s.marcaColeccion}>
-                <span className={s.marcaVerse}>Versé</span>{" "}
-                <span className={s.marcaAurora}>Aurora</span>
-              </h1>
-            </header>
-          )}
+      <div className="wrap">
+        {mostraHistoria ? (
+          <header className={s.cabecera}>
+            <h1 className={s.marcaColeccion}>
+              <span className={s.marcaVerse}>Versé</span>{" "}
+              <span className={s.marcaAurora}>Aurora</span>
+            </h1>
+          </header>
+        ) : (
+          <h1 className="sr-only">Tienda Aurora</h1>
+        )}
 
-          {/* Toggle principal: Historia / Productos */}
-          <nav className={s.togglePrincipal} aria-label="Vistas">
-            <Link
-              href={`/aurora?view=productos&momento=${activa}`}
-              className={!mostraHistoria ? s.togglePrincipalActivo : ""}
-              scroll={false}
-            >
-              Productos
-            </Link>
-            <Link
-              href="/aurora"
-              className={mostraHistoria ? s.togglePrincipalActivo : ""}
-              scroll={false}
-            >
-              Historia
-            </Link>
-          </nav>
-        </div>
-      )}
+        {/* Historia / Productos */}
+        <nav className={s.togglePrincipal} aria-label="Vistas">
+          <Link
+            href="/aurora?view=productos"
+            className={!mostraHistoria ? s.togglePrincipalActivo : ""}
+            scroll={false}
+          >
+            Productos
+          </Link>
+          <Link
+            href="/aurora"
+            className={mostraHistoria ? s.togglePrincipalActivo : ""}
+            scroll={false}
+          >
+            Historia
+          </Link>
+        </nav>
+      </div>
 
       {mostraHistoria ? (
           /* VISTA HISTORIA */
@@ -157,7 +174,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
                       <circle cx="12" cy="11.5" r="1.3" fill="currentColor" stroke="none" />
                       <path d="M11.4 12.6 9.2 18.6M12.6 12.6l2.2 6" />
                     </svg>
-                    <span>Ver todo lo que tiene {c.latin} para ti</span>
+                    <span>Ver las piezas de {c.latin}</span>
                   </Link>
                 </section>
               );
@@ -167,319 +184,99 @@ export default async function Aurora(props: PageProps<"/aurora">) {
               <p className={s.cierreFrase}>{CIERRE.primera}</p>
               <p className={s.cierreFrase}>{CIERRE.segunda}</p>
               <div className={s.firma}>
-                <Link href="/aurora?view=productos&momento=noctis" className="btn">
-                  Ver Aurora Versé
+                <Link href="/aurora?view=productos" className="btn">
+                  Ver toda la colección
                 </Link>
               </div>
             </footer>
           </article>
         ) : (
           /* VISTA PRODUCTOS */
-          <>
-            {!mostrarTodosProductos && (
-              <nav className={s.toggle} aria-label="Momento">
-                {TONALIDADES.map((t) => (
+          <div className="wrap">
+            <nav className={s.toggle} aria-label="Momento">
+              <Link
+                href="/aurora?view=productos"
+                className={mostrarTodosProductos ? s.toggleActivo : ""}
+                scroll={false}
+              >
+                Todos
+              </Link>
+              {TONALIDADES.map((t) => (
+                <Link
+                  key={t.id}
+                  href={`/aurora?view=productos&momento=${t.id}`}
+                  className={!mostrarTodosProductos && t.id === activa ? s.toggleActivo : ""}
+                  scroll={false}
+                >
+                  {t.nombre}
+                </Link>
+              ))}
+            </nav>
+
+            {mostrarTodosProductos && (
+              <nav className={`${s.filtros} label`} aria-label="Tipo de prenda">
+                <Link
+                  href="/aurora?view=productos"
+                  className={!filtroTipo ? s.filtroActivo : ""}
+                  scroll={false}
+                >
+                  Todo
+                </Link>
+                {TIPOS_FILTRO.map((tipo) => (
                   <Link
-                    key={t.id}
-                    href={`/aurora?view=productos&momento=${t.id}`}
-                    className={t.id === activa ? s.toggleActivo : ""}
+                    key={tipo}
+                    href={`/aurora?view=productos&tipo=${tipo}`}
+                    className={filtroTipo === tipo ? s.filtroActivo : ""}
                     scroll={false}
                   >
-                    {t.nombre}
+                    {TIPO_PLURAL[tipo]}
                   </Link>
                 ))}
               </nav>
             )}
 
-            {mostrarTodosProductos ? (
-              /* Mostrar TODOS los productos de todas las tonalidades */
-              <div className="wrap">
-                <div style={{ marginBottom: "3rem", marginTop: "2rem" }}>
-                  <div style={{ marginBottom: "1.5rem" }}>
-                    <p style={{ color: "var(--muted)", fontSize: "0.875rem", marginBottom: "0.75rem" }}>
-                      Filtrar por tipo:
-                    </p>
-                    <div
-                      style={{
-                        display: "flex",
-                        flexWrap: "wrap",
-                        gap: "0.75rem",
-                      }}
-                    >
-                      <Link
-                        href="/aurora?view=productos"
-                        scroll={false}
-                        style={{
-                          padding: "0.5rem 1rem",
-                          border: `1px solid ${!filtroTipo ? "var(--accent)" : "var(--line)"}`,
-                          background: !filtroTipo ? "var(--accent)" : "transparent",
-                          color: !filtroTipo ? "var(--bg)" : "var(--fg)",
-                          cursor: "pointer",
-                          borderRadius: "999px",
-                          fontSize: "0.875rem",
-                          fontWeight: !filtroTipo ? "600" : "400",
-                          transition: "all 0.3s ease",
-                          fontFamily: "var(--font-ui), system-ui, sans-serif",
-                          textDecoration: "none",
-                          display: "inline-block",
-                        }}
-                      >
-                        Todos
-                      </Link>
-                      {["conjunto", "body", "corset", "bra", "panty", "tanga", "liguero", "complemento"].map(
-                        (tipo) => (
-                          <Link
-                            key={tipo}
-                            href={`/aurora?view=productos&tipo=${tipo}`}
-                            scroll={false}
-                            style={{
-                              padding: "0.5rem 1rem",
-                              border: `1px solid ${filtroTipo === tipo ? "var(--accent)" : "var(--line)"}`,
-                              background: filtroTipo === tipo ? "var(--accent)" : "transparent",
-                              color: filtroTipo === tipo ? "var(--bg)" : "var(--fg)",
-                              cursor: "pointer",
-                              borderRadius: "999px",
-                              fontSize: "0.875rem",
-                              fontWeight: filtroTipo === tipo ? "600" : "400",
-                              transition: "all 0.3s ease",
-                              fontFamily: "var(--font-ui), system-ui, sans-serif",
-                              textDecoration: "none",
-                              display: "inline-block",
-                            }}
-                          >
-                            {TIPO_LABEL[tipo as TipoPieza] || tipo}
-                          </Link>
-                        )
-                      )}
-                    </div>
+            {grupos.map(({ tipo, productos }) => (
+              <div key={tipo} className={s.grupo}>
+                <div className={`${s.grupoCinta} label`}>
+                  <div>
+                    <h2 className={s.grupoTitulo}>{TIPO_PLURAL[tipo]}</h2>
+                    {!mostrarTodosProductos && DESCRIPCION_GRUPO[tipo] && (
+                      <p className={s.grupoDescripcion}>{DESCRIPCION_GRUPO[tipo]}</p>
+                    )}
                   </div>
+                  <span>{productos.length}</span>
                 </div>
-
-                {/* Obtener TODOS los productos de TODAS las tonalidades */}
-                {(() => {
-                  const todosPorMomento = TONALIDADES.flatMap((t) => porTonalidad(t.id));
-                  const todosFiltrados = filtroTipo
-                    ? todosPorMomento.filter((p) => p.tipo === filtroTipo)
-                    : todosPorMomento;
-
-                  if (filtroTipo) {
-                    // Si hay filtro, agrupar por tipo y mostrar
-                    const productosPorTipo = todosFiltrados.reduce(
-                      (acc, p) => {
-                        if (!acc[p.tipo]) acc[p.tipo] = [];
-                        acc[p.tipo].push(p);
-                        return acc;
-                      },
-                      {} as Record<string, typeof todosFiltrados>
-                    );
-
-                    return Object.entries(productosPorTipo).map(([tipo, productos]) => (
-                      <div key={tipo} className={s.grupo}>
-                        <div className={`${s.grupoCinta} label`}>
-                          <div>
-                            <h3 className={s.grupoTitulo}>
-                              {TIPO_LABEL[tipo as TipoPieza] || tipo}s
-                            </h3>
+                <div className={s.rejilla}>
+                  {productos.map((p) =>
+                    !mostrarTodosProductos && p.componentes?.length ? (
+                      <div key={p.slug} className={s.conjuntoBloque}>
+                        <ProductCard producto={p} sizes={TAMANOS} />
+                        <div className={s.componentesSection}>
+                          <p className={`${s.componentesLabel} label`}>
+                            O por separado
+                          </p>
+                          <div className={s.componentesGrid}>
+                            {p.componentes
+                              .map((slug) => getProduct(slug))
+                              .filter((c) => c !== undefined)
+                              .map((c) => (
+                                <ProductCard
+                                  key={c.slug}
+                                  producto={c}
+                                  sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 25vw"
+                                />
+                              ))}
                           </div>
-                          <span>{productos.length}</span>
-                        </div>
-                        <div className={s.rejilla}>
-                          {productos.map((p) => (
-                            <ProductCard
-                              key={p.slug}
-                              producto={p}
-                              sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
-                            />
-                          ))}
                         </div>
                       </div>
-                    ));
-                  } else {
-                    // Sin filtro, agrupar por tipo: Conjuntos, Bodies, Complementos
-                    return (
-                      <>
-                        {/* Conjuntos */}
-                        {(() => {
-                          const conjuntos = todosFiltrados.filter((p) => p.tipo === "conjunto");
-                          if (conjuntos.length === 0) return null;
-                          return (
-                            <div className={s.grupo}>
-                              <div className={`${s.grupoCinta} label`}>
-                                <div>
-                                  <h3 className={s.grupoTitulo}>{TIPO_LABEL["conjunto"]}s</h3>
-                                </div>
-                                <span>{conjuntos.length}</span>
-                              </div>
-                              <div className={s.rejilla}>
-                                {conjuntos.map((conjunto) => (
-                                  <ProductCard
-                                    key={conjunto.slug}
-                                    producto={conjunto}
-                                    sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
-                                  />
-                                ))}
-                              </div>
-                            </div>
-                          );
-                        })()}
-
-                        {/* Bodies */}
-                        {(() => {
-                          const bodies = todosFiltrados.filter((p) => p.tipo === "body");
-                          if (bodies.length === 0) return null;
-                          return (
-                            <div className={s.grupo}>
-                              <div className={`${s.grupoCinta} label`}>
-                                <div>
-                                  <h3 className={s.grupoTitulo}>{TIPO_LABEL["body"]}s</h3>
-                                </div>
-                                <span>{bodies.length}</span>
-                              </div>
-                              <div className={s.rejilla}>
-                                {bodies.map((p) => (
-                                  <ProductCard
-                                    key={p.slug}
-                                    producto={p}
-                                    sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
-                                  />
-                                ))}
-                              </div>
-                            </div>
-                          );
-                        })()}
-
-                        {/* Complementos */}
-                        {(() => {
-                          const complementos = todosFiltrados.filter((p) => p.tipo === "complemento");
-                          if (complementos.length === 0) return null;
-                          return (
-                            <div className={s.grupo}>
-                              <div className={`${s.grupoCinta} label`}>
-                                <div>
-                                  <h3 className={s.grupoTitulo}>{TIPO_LABEL["complemento"]}s</h3>
-                                </div>
-                                <span>{complementos.length}</span>
-                              </div>
-                              <div className={s.rejilla}>
-                                {complementos.map((p) => (
-                                  <ProductCard
-                                    key={p.slug}
-                                    producto={p}
-                                    sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
-                                  />
-                                ))}
-                              </div>
-                            </div>
-                          );
-                        })()}
-                      </>
-                    );
-                  }
-                })()}
+                    ) : (
+                      <ProductCard key={p.slug} producto={p} sizes={TAMANOS} />
+                    ),
+                  )}
+                </div>
               </div>
-            ) : (
-              /* Mostrar productos del MOMENTO específico */
-              <div className="wrap">
-                {/* Conjuntos con componentes individuales */}
-                {(() => {
-                  const conjuntos = piezas.filter((p) => p.tipo === "conjunto");
-                  if (conjuntos.length > 0) {
-                    return (
-                      <div className={s.grupo}>
-                        <div className={`${s.grupoCinta} label`}>
-                          <div>
-                            <h2 className={s.grupoTitulo}>{TIPO_LABEL["conjunto"]}s</h2>
-                            <p className={s.grupoDescripcion}>Sets de 3 o 4 piezas coordinadas: bra, panty, tanga y opcionales.</p>
-                          </div>
-                          <span>{conjuntos.length}</span>
-                        </div>
-                        <div className={s.rejilla}>
-                          {conjuntos.map((conjunto) => (
-                            <div key={conjunto.slug} className={s.conjuntoBloque}>
-                              <ProductCard
-                                producto={conjunto}
-                                sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
-                              />
-                              {conjunto.componentes && conjunto.componentes.length > 0 && (
-                                <div className={s.componentesSection}>
-                                  <p className={`${s.componentesLabel} label`}>O compra por separado:</p>
-                                  <div className={s.componentesGrid}>
-                                    {conjunto.componentes
-                                      .map((slug) => getProduct(slug))
-                                      .filter(Boolean)
-                                      .map((comp) => (
-                                        <ProductCard
-                                          key={comp!.slug}
-                                          producto={comp!}
-                                          sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 25vw"
-                                        />
-                                      ))}
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    );
-                  }
-                  return null;
-                })()}
-
-                {/* Bodies */}
-                {(() => {
-                  const bodies = piezas.filter((p) => p.tipo === "body");
-                  if (bodies.length === 0) return null;
-                  return (
-                    <div className={s.grupo}>
-                      <div className={`${s.grupoCinta} label`}>
-                        <div>
-                          <h2 className={s.grupoTitulo}>{TIPO_LABEL["body"]}s</h2>
-                          <p className={s.grupoDescripcion}>Prendas de una sola pieza que combinan confort y diseño.</p>
-                        </div>
-                        <span>{bodies.length}</span>
-                      </div>
-                      <div className={s.rejilla}>
-                        {bodies.map((p) => (
-                          <ProductCard
-                            key={p.slug}
-                            producto={p}
-                            sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  );
-                })()}
-
-                {/* Complementos */}
-                {(() => {
-                  const complementos = piezas.filter((p) => p.tipo === "complemento");
-                  if (complementos.length === 0) return null;
-                  return (
-                    <div className={s.grupo}>
-                      <div className={`${s.grupoCinta} label`}>
-                        <div>
-                          <h2 className={s.grupoTitulo}>{TIPO_LABEL["complemento"]}s</h2>
-                          <p className={s.grupoDescripcion}>Accesorios y prendas de abrigo para completar tu look.</p>
-                        </div>
-                        <span>{complementos.length}</span>
-                      </div>
-                      <div className={s.rejilla}>
-                        {complementos.map((p) => (
-                          <ProductCard
-                            key={p.slug}
-                            producto={p}
-                            sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  );
-                })()}
-              </div>
-            )}
-          </>
+            ))}
+          </div>
         )}
     </section>
   );
