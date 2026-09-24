@@ -5,7 +5,7 @@ import { TONALIDADES } from "@/lib/products";
 import { enlaceWhatsApp } from "@/lib/contacto";
 import s from "./footer.module.css";
 
-/** El sitio abre con la caja y cierra en noche: vuelve a cerrarse. */
+/** Pie en panel noche, igual que la apertura. */
 export default function Footer() {
   const whatsapp = enlaceWhatsApp("Hola Versé, quiero preguntarles algo.");
 
@@ -17,17 +17,21 @@ export default function Footer() {
             <VerseMark size={52} />
             <p className={s.nombre}>VERSÉ</p>
             <p className={s.frase}>
-              De lo cotidiano a lo especial, lencería para acompañar las distintas formas
-              en las que decides sentirte tú misma.
+              Lencería diseñada en Medellín. Enviamos a toda Colombia.
             </p>
           </div>
 
           <div className={s.col}>
             <h3 className="label">Aurora</h3>
             <ul>
+              <li>
+                <Link href="/aurora?view=productos" className="link">
+                  Toda la colección
+                </Link>
+              </li>
               {TONALIDADES.map((t) => (
                 <li key={t.id}>
-                  <Link href={`/aurora?momento=${t.id}`} className="link">
+                  <Link href={`/aurora?view=productos&momento=${t.id}`} className="link">
                     {t.nombre}
                   </Link>
                 </li>
@@ -41,7 +45,7 @@ export default function Footer() {
           </div>
 
           <div className={s.col}>
-            <h3 className="label">La casa</h3>
+            <h3 className="label">Versé</h3>
             <ul>
               <li>
                 <Link href="/#manifiesto" className="link">

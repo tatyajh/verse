@@ -7,7 +7,7 @@ import s from "./blog.module.css";
 export const metadata: Metadata = {
   title: "Diario",
   description:
-    "Notas de la casa: cómo pensamos las colecciones, cómo elegir tu talla y qué pasa detrás de cada pieza.",
+    "Notas de Versé: cómo pensamos las colecciones y cómo elegir tu talla.",
 };
 
 export default function Blog() {
@@ -18,8 +18,8 @@ export default function Blog() {
           <p className={`${s.eyebrow} label`}>Versé Intimates</p>
           <h1 className={s.titulo}>Diario</h1>
           <p className={s.intro}>
-            Cómo pensamos las colecciones, cómo elegir tu talla, y lo que pasa
-            detrás de cada pieza.
+            Lo que escribimos sobre las colecciones, las tallas y cómo
+            trabajamos.
           </p>
         </header>
 

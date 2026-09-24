@@ -1,9 +1,7 @@
 /**
- * El diario de la casa.
- *
- * Las entradas viven aquí, como la historia de Aurora: sin CMS ni base de
- * datos. Para publicar una nueva, se agrega al principio del arreglo —el
- * orden del archivo es el orden en que se leen— y se despliega.
+ * Entradas del diario. No hay CMS: para publicar una nueva se agrega al
+ * principio del arreglo (el orden del archivo es el orden en pantalla) y
+ * se despliega.
  *
  * `fecha` en formato ISO (AAAA-MM-DD) para que ordene y se lea igual en
  * cualquier navegador.
@@ -27,18 +25,18 @@ export const ENTRADAS: Entrada[] = [
     slug: "por-que-aurora",
     titulo: "Por qué Aurora",
     resumen:
-      "Una colección que no se organiza por tallas ni por tipos de prenda, sino por las horas de una noche.",
+      "Por qué organizamos la colección por las horas de una noche y no por tipo de prenda.",
     fecha: "2026-09-17",
     cuerpo: [
       {
         tipo: "parrafo",
         texto:
-          "Casi toda la lencería se ordena por categoría: bras por un lado, panties por otro, conjuntos al final. Es cómodo para quien vende y frío para quien compra. Aurora se ordena distinto: por el momento de la noche en que fue pensada.",
+          "En casi todas las tiendas la lencería se ordena por categoría: bras por un lado, panties por otro, conjuntos al final. Sirve para encontrar una talla, pero no dice nada de cómo te quieres sentir. Aurora la ordenamos por la hora de la noche en que pensamos cada pieza.",
       },
       {
         tipo: "parrafo",
         texto:
-          "Noctis es la medianoche, el negro profundo y el dorado. Vigilia es la penumbra, cuando el azul empieza a moverse. Borealis es la primera luz, el verde jade y el lila. Prima Luce es el amanecer, la perla y el rosado. Cuatro momentos, veinte piezas.",
+          "Noctis es la medianoche: negro profundo y dorado. Vigilia es ese rato en que algo empieza a moverse en el horizonte, en azules de tinta. Borealis es cuando el cielo se enciende, en verde jade y lila. Prima Luce es la primera luz del día, en perla y rosado. Son cuatro momentos y veinte piezas.",
       },
       {
         tipo: "cita",
@@ -47,7 +45,7 @@ export const ENTRADAS: Entrada[] = [
       {
         tipo: "parrafo",
         texto:
-          "La idea no es que elijas una y descartes las otras tres. Es que reconozcas en cuál estás hoy, y que mañana puedas estar en otra sin sentir que te contradices.",
+          "No tienes que quedarte con una. Hoy puedes andar en Noctis y el sábado en Prima Luce, y las dos te quedan.",
       },
     ],
   },

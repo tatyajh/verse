@@ -1,9 +1,8 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import Panel from "@/components/panel";
-import ProductCard from "@/components/product-card";
 import KeyReveal from "@/components/key-reveal";
-import { getProduct, TONALIDADES } from "@/lib/products";
+import { TONALIDADES } from "@/lib/products";
 import { ENTRADAS, formatFecha } from "@/lib/blog";
 import s from "./home.module.css";
 
@@ -21,7 +20,7 @@ export default function Home() {
 
   return (
     <>
-      {/* 1 — El wordmark es la imagen. No hay foto todavía; no hace falta. */}
+      {/* 1 — Hero: el wordmark hace de imagen mientras no haya fotos. */}
       <Panel tono="noche" seam={false} padded={false} className={s.hero}>
         <div className={s.heroEje} />
 
@@ -39,11 +38,11 @@ export default function Home() {
             en las que decides sentirte tú misma.
           </p>
           <div className={s.heroBotones}>
-            <Link href="/aurora" className="btn btn-fg">
-              Ver última colección
-            </Link>
             <Link href="/aurora?view=productos" className="btn btn-fg">
-              Ver todos los productos
+              Comprar Aurora
+            </Link>
+            <Link href="/aurora" className="label link">
+              Leer la historia
             </Link>
           </div>
         </div>
@@ -58,29 +57,20 @@ export default function Home() {
             </h2>
             <div className={s.manifiestoCuerpo}>
               <p>
-                Versé nace de una idea sencilla: la ropa interior puede acompañar tu día
-                y, al mismo tiempo, ser una forma de expresión, seguridad y sensualidad.
-                Sin ocasión que esperar y sin nadie a quien pedirle permiso.
+                Hacemos ropa interior para ponértela un martes cualquiera, no solo en
+                una fecha especial. Si te hace sentir bien, esa ya es la ocasión.
               </p>
               <p>
-                Cada pieza busca el equilibrio entre comodidad, feminidad, diseño y
-                exclusividad. Siluetas, encajes, transparencias, textiles y herrajes se
-                eligen con intención y conservan una identidad reconocible como parte del
-                universo Versé.
-              </p>
-              <p className={`${s.rasgos} label`}>
-                <span>Femenina</span>
-                <span>Romántica</span>
-                <span>Sofisticada</span>
-                <span>Sensual</span>
-                <span>Detallista</span>
+                Diseñamos cada pieza pensando en cómo se siente al final del día: que el
+                encaje no raspe, que el panty no se enrolle, que el bra sostenga sin
+                marcar. Lo bonito viene después, y viene con todo.
               </p>
             </div>
           </div>
         </div>
       </Panel>
 
-      {/* 3 — Aurora es dos tonalidades, así que se muestra como dos paneles. */}
+      {/* 3 — Los cuatro momentos de Aurora, cada uno con su color. */}
       <Panel tono="seda" id="aurora" seam={false}>
         <div className="wrap">
           <div className={`${s.duoCinta} label`}>
@@ -91,7 +81,7 @@ export default function Home() {
             {TONALIDADES.map((t) => (
               <Link
                 key={t.id}
-                href={`/aurora?momento=${t.id}`}
+                href={`/aurora?view=productos&momento=${t.id}`}
                 className={s.lado}
                 style={
                   {
@@ -109,27 +99,28 @@ export default function Home() {
                     <span key={c.hex} style={{ background: c.hex }} />
                   ))}
                 </div>
-                <span className={`${s.ladoLink} label link`}>Explorar {t.nombre}</span>
+                <span className={`${s.ladoLink} label link`}>Ver {t.nombre}</span>
               </Link>
             ))}
           </div>
         </div>
       </Panel>
 
-      {/* 4 — La llave: el único momento interactivo del sitio. */}
+      {/* 4 — La llave: el encaje que se descubre con el cursor. */}
       <Panel tono="noche" id="llave">
         <div className="wrap">
           <div className={s.llave}>
             <div className={s.llaveTexto}>
               <h2 className={s.llaveTitulo}>Versé</h2>
               <p>
-                Donde tú y tu sombra se reconocen. Donde lo que ves y lo que eres danzan en el mismo espacio, finalmente en paz.
+                Hay días de encaje negro y días de algodón claro. Ninguno es más tuyo
+                que el otro.
               </p>
               <p className={s.cita}>
-                No somos una sola verdad. Somos el diálogo entre lo que contradice y lo que completa.
+                Por eso Aurora tiene cuatro momentos: te pones el que vaya contigo hoy.
               </p>
               <p className={`${s.cita} ${s.citaFirma}`}>
-                Aquí tu dualidad es sagrada.
+                Mañana puede ser otro.
               </p>
             </div>
             <KeyReveal />
@@ -137,7 +128,7 @@ export default function Home() {
         </div>
       </Panel>
 
-      {/* 6 — Tallas: banda ancha, letras separadas por filetes. */}
+      {/* 5 — Tallas: banda ancha, letras separadas por filetes. */}
       <Panel tono="seda" id="tallas">
         <div className="wrap">
           <div className={s.tallas}>
@@ -149,7 +140,6 @@ export default function Home() {
               </p>
             </div>
             <div className={`${s.regla} label`}>
-              <span>XS</span>
               <span>S</span>
               <span>M</span>
               <span>L</span>
@@ -198,7 +188,7 @@ export default function Home() {
         </div>
       </Panel>
 
-      {/* 7 — El diario. Enlazarlo solo desde el pie lo dejaba enterrado. */}
+      {/* 6 — El diario. */}
       <Panel tono="noche" id="diario">
         <div className="wrap">
           <div className={`${s.diarioCinta} label`}>

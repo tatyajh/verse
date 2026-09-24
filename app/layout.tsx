@@ -5,8 +5,7 @@ import Umbral from "@/components/umbral";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 
-/* Display: didone de alto contraste. Ese grueso/fino es el idioma de la
-   moda —y el de la lencería: encaje y piel, luz y sombra. */
+/* Display: Bodoni Moda para títulos y el wordmark. */
 const display = Bodoni_Moda({
   weight: ["400", "500"],
   subsets: ["latin"],
@@ -14,9 +13,8 @@ const display = Bodoni_Moda({
   display: "swap",
 });
 
-/* Cursiva: solo para las frases que cargan emoción —el lema, las citas—.
-   Nunca para texto corrido ni por debajo de 1.5rem: a ese tamaño se
-   deshace. Es el acento escrito a mano sobre la tipografía grabada. */
+/* Caligráfica: solo lema y citas, nunca en texto corrido ni por debajo
+   de 1.5rem (a ese tamaño deja de leerse). */
 const script = Pinyon_Script({
   weight: "400",
   subsets: ["latin"],
@@ -24,7 +22,7 @@ const script = Pinyon_Script({
   display: "swap",
 });
 
-/* Cuerpo: serif dibujada para pantalla. Silenciosa a propósito. */
+/* Cuerpo. */
 const body = Spectral({
   weight: ["300", "400"],
   style: ["normal", "italic"],
@@ -33,7 +31,7 @@ const body = Spectral({
   display: "swap",
 });
 
-/* Utilidad: solo en 11px mayúsculas — nav, tallas, precios. */
+/* Interfaz: nav, tallas y precios en mayúsculas pequeñas. */
 const ui = Archivo({
   subsets: ["latin"],
   variable: "--font-ui",
@@ -49,13 +47,13 @@ export const metadata: Metadata = {
     template: "%s — Versé Intimates",
   },
   description:
-    "Lencería de diseño. De lo cotidiano a lo especial, Versé crea piezas para acompañar las distintas formas en las que una mujer decide sentirse ella misma.",
+    "Lencería diseñada en Medellín: conjuntos, bodies, bras y panties de la colección Aurora. Envíos a toda Colombia.",
   openGraph: {
     type: "website",
     locale: "es_CO",
     siteName: "Versé Intimates",
     title: "Versé Intimates",
-    description: "Lencería de diseño. De lo cotidiano a lo especial.",
+    description: "Conjuntos, bodies, bras y panties de la colección Aurora.",
   },
   robots: { index: true, follow: true },
 };

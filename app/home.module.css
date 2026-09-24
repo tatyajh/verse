@@ -65,7 +65,7 @@
 
 .heroBotones {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   align-items: center;
 }
 
@@ -95,9 +95,9 @@
   .heroBotones {
     flex-direction: column;
     width: 100%;
-    gap: 0.8rem;
+    gap: 1.4rem;
   }
-  .heroBotones a {
+  .heroBotones :global(.btn) {
     width: 100%;
     text-align: center;
   }
@@ -128,23 +128,6 @@
 
 .manifiestoCuerpo p {
   color: var(--muted);
-}
-
-/* Los cinco adjetivos como una sola línea tipográfica, no como etiquetas. */
-.rasgos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem;
-  margin-top: 0.8rem;
-  color: var(--fg);
-}
-
-/* El punto va detrás de cada palabra, no delante de la siguiente: si la línea
-   se parte, queda cerrando la línea en vez de abriéndola huérfano. */
-.rasgos span:not(:last-child)::after {
-  content: "·";
-  margin-left: 0.9rem;
-  color: var(--accent);
 }
 
 @media (max-width: 860px) {

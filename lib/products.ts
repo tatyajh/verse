@@ -1,11 +1,11 @@
 import { PALETA_AURORA_DIURNA, PALETA_AURORA_NOCTURNA, type PaletaGrabado } from "@/components/lace-canvas";
 
 /**
- * Catálogo Aurora — 4 momentos, 20 piezas.
- * Distribución: Noctis (5) + Vigilia (5) + Borealis (5) + Prima Luce (5)
+ * Catálogo de Aurora: cuatro momentos, cinco piezas principales en cada uno
+ * (conjuntos, bodies y complementos), más las prendas sueltas de cada conjunto.
  *
- * El servidor SIEMPRE recalcula totales desde aquí: nada de lo que llegue
- * del navegador decide cuánto se cobra.
+ * El servidor recalcula los totales desde aquí; el navegador no decide
+ * cuánto se cobra.
  */
 
 export type Talla = "S" | "M" | "L" | "XL" | "Única";
@@ -42,7 +42,7 @@ export const TONALIDADES: TonalidadInfo[] = [
   {
     id: "noctis",
     nombre: "Noctis",
-    sensacion: "Profundidad, misterio, poder",
+    sensacion: "Negro y dorado, para la medianoche",
     paleta: [
       { nombre: "Negro profundo", hex: "#0a0a0a" },
       { nombre: "Dorado", hex: "#d4af37" },
@@ -52,7 +52,7 @@ export const TONALIDADES: TonalidadInfo[] = [
   {
     id: "vigilia",
     nombre: "Vigilia",
-    sensacion: "Transición, misterio azul",
+    sensacion: "Azules de tinta, para cuando la noche empieza a cambiar",
     paleta: [
       { nombre: "Azul oscuro", hex: "#111A35" },
       { nombre: "Azul tinta", hex: "#20284A" },
@@ -64,7 +64,7 @@ export const TONALIDADES: TonalidadInfo[] = [
   {
     id: "borealis",
     nombre: "Borealis",
-    sensacion: "Primera luz, frescura, renacimiento",
+    sensacion: "Jade y lila, la hora en que el cielo se enciende",
     paleta: [
       { nombre: "Verde jade", hex: "#0F6E56" },
       { nombre: "Lila", hex: "#8E82B7" },
@@ -76,7 +76,7 @@ export const TONALIDADES: TonalidadInfo[] = [
   {
     id: "prima-luce",
     nombre: "Prima Luce",
-    sensacion: "Luz cálida, esperanza, dulzura",
+    sensacion: "Perla y rosado, la primera luz del día",
     paleta: [
       { nombre: "Rosado algodón", hex: "#E8B5C5" },
       { nombre: "Azul claro", hex: "#B8D2DB" },
@@ -98,17 +98,29 @@ export const TIPO_LABEL: Record<TipoPieza, string> = {
   liguero: "Liguero",
 };
 
+export const TIPO_PLURAL: Record<TipoPieza, string> = {
+  conjunto: "Conjuntos",
+  body: "Bodies",
+  corset: "Corsets",
+  complemento: "Complementos",
+  bra: "Bras",
+  panty: "Panties",
+  tanga: "Tangas",
+  liguero: "Ligueros",
+};
+
 const TALLAS: Talla[] = ["S", "M", "L", "XL"];
 
 /**
- * Catálogo Aurora: 20 piezas distribuidas en 4 momentos.
- * - Noctis: Sombra, Equinoccio + Solsticio, Marfil, Vigilia (2 + 0 + 3 = 5)
- * - Vigilia: Abismo, Nébula + Noctis, Niebla + Grafito (2 + 2 + 1 = 5)
- * - Borealis: Borealis, Nube + Lunar, Cristal + Perla (2 + 2 + 1 = 5)
- * - Prima Luce: Eclipse, Neblina + Umbra, Onix + Vapor (2 + 2 + 1 = 5)
+ * - Noctis: Sombra, Equinoccio · complementos Solsticio, Marfil, Penumbra
+ * - Vigilia: Abismo, Nébula · bodies Medianoche, Niebla · complemento Grafito
+ * - Borealis: Alba, Nube · bodies Lunar, Cristal · complemento Perla
+ * - Prima Luce: Eclipse, Neblina · bodies Umbra, Ónix · complemento Vapor
+ *
+ * Los slugs vienen de nombres anteriores; no se cambian para no romper enlaces.
  */
 export const PRODUCTS: Product[] = [
-  // ---------- MEDIANOCHE: 2 conjuntos + 3 complementos ----------
+  // ---------- NOCTIS: 2 conjuntos + 3 complementos ----------
   {
     slug: "aurora-eclipse",
     nombre: "Sombra",
@@ -138,9 +150,9 @@ export const PRODUCTS: Product[] = [
   // Complementos Noctis
   { slug: "aurora-solsticio", nombre: "Solsticio", tonalidad: "noctis", tipo: "complemento", tallas: ["Única"] },
   { slug: "aurora-marfil", nombre: "Marfil", tonalidad: "noctis", tipo: "complemento", tallas: ["Única"] },
-  { slug: "aurora-penumbra", nombre: "Vigilia", tonalidad: "noctis", tipo: "complemento", tallas: ["Única"] },
+  { slug: "aurora-penumbra", nombre: "Penumbra", tonalidad: "noctis", tipo: "complemento", tallas: ["Única"] },
 
-  // ---------- PENUMBRA: 2 conjuntos + 2 bodies + 1 complemento ----------
+  // ---------- VIGILIA: 2 conjuntos + 2 bodies + 1 complemento ----------
   {
     slug: "aurora-abismo",
     nombre: "Abismo",
@@ -168,15 +180,15 @@ export const PRODUCTS: Product[] = [
   { slug: "aurora-nebula-panty", nombre: "Panty Clásico", tonalidad: "vigilia", tipo: "panty", tallas: TALLAS, componenteDe: "aurora-nebula" },
   { slug: "aurora-nebula-tanga", nombre: "Tanga con Tirales", tonalidad: "vigilia", tipo: "tanga", tallas: TALLAS, componenteDe: "aurora-nebula" },
   // Bodies Vigilia
-  { slug: "aurora-medianoche", nombre: "Noctis", tonalidad: "vigilia", tipo: "body", tallas: TALLAS },
+  { slug: "aurora-medianoche", nombre: "Medianoche", tonalidad: "vigilia", tipo: "body", tallas: TALLAS },
   { slug: "aurora-niebla", nombre: "Niebla", tonalidad: "vigilia", tipo: "body", tallas: TALLAS },
   // Complementos Vigilia
   { slug: "aurora-grafito", nombre: "Grafito", tonalidad: "vigilia", tipo: "complemento", tallas: ["Única"] },
 
-  // ---------- ALBA: 2 conjuntos + 2 bodies + 1 complemento ----------
+  // ---------- BOREALIS: 2 conjuntos + 2 bodies + 1 complemento ----------
   {
     slug: "aurora-alba",
-    nombre: "Borealis",
+    nombre: "Alba",
     tonalidad: "borealis",
     tipo: "conjunto",
     piezas: 4,
@@ -206,7 +218,7 @@ export const PRODUCTS: Product[] = [
   // Complementos Borealis
   { slug: "aurora-perla", nombre: "Perla", tonalidad: "borealis", tipo: "complemento", tallas: ["Única"] },
 
-  // ---------- AMANECER: 2 conjuntos + 2 bodies + 1 complemento ----------
+  // ---------- PRIMA LUCE: 2 conjuntos + 2 bodies + 1 complemento ----------
   {
     slug: "aurora-celestial",
     nombre: "Eclipse",

@@ -7,14 +7,19 @@ export default function NotFound() {
     <Panel tono="noche" seam={false}>
       <div className="wrap">
         <div className={s.contenedor}>
-          <div className={s.codigo}>404</div>
-          <h1 className={s.titulo}>Página no encontrada</h1>
+          <h1 className={s.titulo}>Esta página no existe</h1>
           <p className={s.descripcion}>
-            La página que buscas no existe o ha sido movida a otro lugar.
+            Puede que el enlace esté mal escrito o que la pieza ya no esté en la
+            tienda. Desde aquí puedes seguir mirando.
           </p>
-          <Link href="/" className="btn btn-fg">
-            Volver al inicio
-          </Link>
+          <div className={s.acciones}>
+            <Link href="/aurora?view=productos" className="btn btn-fg">
+              Ir a la tienda
+            </Link>
+            <Link href="/" className="label link">
+              Volver al inicio
+            </Link>
+          </div>
         </div>
       </div>
     </Panel>
