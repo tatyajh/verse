@@ -3,10 +3,7 @@
 import { useFavoritos } from "@/lib/favoritos";
 import s from "./boton-favorito.module.css";
 
-/**
- * El corazón se dibuja con trazo y se rellena al guardarse: el mismo gesto
- * del emblema, que también es línea antes que mancha.
- */
+/** Corazón en trazo que se rellena cuando la pieza queda guardada. */
 export default function BotonFavorito({
   slug,
   nombre,

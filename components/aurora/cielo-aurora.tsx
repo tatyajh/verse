@@ -14,7 +14,7 @@ import {
 } from "@/lib/cielo";
 import s from "./cielo-aurora.module.css";
 
-/** Por debajo de esto la aurora no se ve: Noctis no cuesta un solo píxel. */
+/** Por debajo de esta intensidad no se dibuja nada (Noctis no pinta el canvas). */
 const UMBRAL = 0.04;
 
 /** Muestras por cinta. 48 basta: son curvas suaves, no hairlines. */

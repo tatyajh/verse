@@ -8,8 +8,7 @@ import s from "./key-reveal.module.css";
 /**
  * «La llave»: el encaje cubre la pieza y el cursor la descubre.
  *
- * Es el único momento interactivo del sitio y existe porque la marca dice que
- * la llave representa lo que hay detrás de la lencería. Con puntero fino se
+ * La llave es el símbolo de la marca. Con puntero fino se
  * sigue el cursor; con pantalla táctil el descubierto baja con el scroll; con
  * movimiento reducido se queda quieto en el centro.
  */

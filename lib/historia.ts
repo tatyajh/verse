@@ -1,16 +1,11 @@
 import type { Tonalidad } from "./products";
 
 /**
- * Aurora: una noche. Mil versiones.
+ * La historia de Aurora: un capítulo por momento del catálogo, y cada uno
+ * termina en un enlace a sus piezas.
  *
- * El relato de la colección, en cuatro capítulos que son los cuatro
- * momentos. No es una página «sobre nosotras»: es la misma columna
- * vertebral del catálogo contada en prosa. Cada capítulo termina en un
- * umbral hacia sus piezas.
- *
- * El verso corto es deliberado —así lo escribió Moni—. Cada frase
- * respira sola; el texto deja espacio a la imaginación en vez de
- * explicarlo todo.
+ * Los versos son de Moni y van tal como los escribió, frase por frase.
+ * No editarlos sin preguntarle.
  */
 
 export type Capitulo = {

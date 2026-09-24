@@ -3,12 +3,8 @@ import LaceCanvas, { PALETA_AURORA_DIURNA, PALETA_AURORA_NOCTURNA } from "./lace
 import type { Product } from "@/lib/products";
 
 /**
- * Una sola puerta para la imagen de producto: si la pieza ya tiene fotografía
- * se usa; si no, se dibuja su grabado. Añadir fotos después es agregar `image`
- * en products.ts — ningún componente cambia.
- *
- * El grabado se dibuja con la paleta de la tonalidad de la pieza, para que
- * Nocturna y Diurna se noten incluso antes de tener fotografía real.
+ * Imagen de producto: la foto si la pieza tiene `image` en products.ts; si no,
+ * el grabado de encaje con la paleta de su momento.
  */
 export default function ProductImage({
   producto,

@@ -7,14 +7,13 @@ import { prng, semilla } from "@/lib/azar";
 /**
  * Grabado de encaje generativo.
  *
- * Versé todavía no tiene fotografía de producto. Un rectángulo gris diría
- * "falta algo"; esto dice "esto es la marca". Cada pieza recibe un grabado
- * propio —sembrado con su slug, idéntico entre recargas— dibujado en
- * hairlines sobre un fondo de dos tonos: festón, roseta y retícula de tul.
+ * Reemplaza la foto de producto mientras no exista. Cada pieza recibe un
+ * grabado propio, sembrado con su slug (idéntico entre recargas), con
+ * festón, roseta y retícula de tul sobre un fondo de dos tonos.
  *
  * La paleta por defecto es la noche del sitio. Aurora trae las suyas
- * propias (ver lib/products.ts) para que sus dos tonalidades se noten
- * incluso sin foto todavía.
+ * propias (ver lib/products.ts) para que cada momento se distinga
+ * aun sin foto.
  *
  * Cuando existan fotos, <ProductImage> usa la foto y esto desaparece solo.
  */

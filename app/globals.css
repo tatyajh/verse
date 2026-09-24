@@ -229,7 +229,7 @@ textarea {
   transform: scaleX(1);
 }
 
-/* botón: hairline, jamás relleno sólido en rose gold */
+/* Botón de contorno; nunca con relleno de color de acento. */
 .btn {
   display: inline-flex;
   align-items: center;
