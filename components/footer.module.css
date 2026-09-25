@@ -58,6 +58,12 @@
   color: var(--muted);
 }
 
+.legales {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.8rem;
+}
+
 @media (max-width: 880px) {
   .rejilla {
     grid-template-columns: 1fr 1fr;

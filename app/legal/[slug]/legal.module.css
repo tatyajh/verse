@@ -1,0 +1,52 @@
+.documento {
+  max-width: 68ch;
+  padding-top: clamp(2rem, 6vw, 4rem);
+}
+
+.cabecera {
+  display: grid;
+  gap: 1.1rem;
+  padding-bottom: clamp(2rem, 5vw, 3rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.titulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: var(--t-xl);
+  line-height: 1;
+}
+
+.resumen {
+  color: var(--muted);
+  font-size: var(--t-m);
+  max-width: 52ch;
+}
+
+.fecha {
+  color: var(--muted);
+}
+
+.cuerpo {
+  display: grid;
+  gap: 1.2rem;
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+}
+
+.cuerpo p {
+  max-width: 62ch;
+}
+
+.subtitulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(1.3rem, 2.4vw, 1.65rem);
+  line-height: 1.15;
+  margin-top: clamp(0.8rem, 2.5vw, 1.6rem);
+}
+
+.otros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2.2rem;
+  padding-top: clamp(1.5rem, 4vw, 2.5rem);
+  border-top: 1px solid var(--line);
+}

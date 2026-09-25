@@ -98,7 +98,7 @@ export default function CarritoCliente() {
     return (
       <div className={s.vacio}>
         <p>Tu carrito está vacío.</p>
-        <Link href="/#colecciones" className="btn btn-fg">
+        <Link href="/colecciones" className="btn btn-fg">
           Ver colecciones
         </Link>
       </div>
@@ -182,6 +182,18 @@ export default function CarritoCliente() {
             {error}
           </p>
         )}
+
+        <p className={`${s.medios} label`}>
+          Al pagar aceptas los{" "}
+          <Link href="/legal/terminos" className="link">
+            términos
+          </Link>{" "}
+          y la{" "}
+          <Link href="/legal/privacidad" className="link">
+            política de privacidad
+          </Link>
+          .
+        </p>
 
         <p className={`${s.medios} label`}>
           Tarjeta, PSE, Nequi y Bancolombia · Envío sin costo desde{" "}

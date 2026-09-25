@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { VerseMark } from "./verse-mark";
 import Panel from "./panel";
-import { TONALIDADES } from "@/lib/products";
+import { COLECCIONES } from "@/lib/colecciones";
+import { DOCUMENTOS } from "@/lib/legal";
 import { enlaceWhatsApp } from "@/lib/contacto";
 import s from "./footer.module.css";
 
@@ -22,23 +23,18 @@ export default function Footer() {
           </div>
 
           <div className={s.col}>
-            <h3 className="label">Aurora</h3>
+            <h3 className="label">Colecciones</h3>
             <ul>
-              <li>
-                <Link href="/aurora?view=productos" className="link">
-                  Toda la colección
-                </Link>
-              </li>
-              {TONALIDADES.map((t) => (
-                <li key={t.id}>
-                  <Link href={`/aurora?view=productos&momento=${t.id}`} className="link">
-                    {t.nombre}
+              {COLECCIONES.map((c) => (
+                <li key={c.id}>
+                  <Link href={c.piezas} className="link">
+                    {c.nombre}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link href="/aurora" className="link">
-                  La historia
+                <Link href="/colecciones" className="link">
+                  Ver todas
                 </Link>
               </li>
             </ul>
@@ -109,8 +105,14 @@ export default function Footer() {
         </div>
 
         <div className={`${s.legal} label`}>
-          <span>© {new Date().getFullYear()} Versé Intimates</span>
-          <span>Medellín, Colombia</span>
+          <span>© {new Date().getFullYear()} Versé Intimates · Medellín, Colombia</span>
+          <nav className={s.legales} aria-label="Legal">
+            {DOCUMENTOS.map((d) => (
+              <Link key={d.slug} href={`/legal/${d.slug}`} className="link">
+                {d.titulo}
+              </Link>
+            ))}
+          </nav>
         </div>
       </div>
     </Panel>
