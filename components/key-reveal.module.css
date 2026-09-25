@@ -36,30 +36,12 @@
 .encaje {
   position: absolute;
   inset: 0;
-  background-color: var(--noche);
-  background-image:
-    radial-gradient(
-      circle at 9px 0,
-      transparent 8px,
-      rgb(233 227 219 / 0.14) 8.4px,
-      transparent 9.6px
-    ),
-    radial-gradient(circle at 9px 11px, rgb(233 227 219 / 0.1) 2px, transparent 2.4px),
-    repeating-linear-gradient(
-      62deg,
-      rgb(233 227 219 / 0.05) 0 1px,
-      transparent 1px 11px
-    ),
-    repeating-linear-gradient(
-      -62deg,
-      rgb(233 227 219 / 0.05) 0 1px,
-      transparent 1px 11px
-    );
-  background-size:
-    18px 18px,
-    18px 18px,
-    auto,
-    auto;
+  /* El encaje de la marca, algo atenuado para que el hilo no compita con la
+     foto que asoma. */
+  background:
+    linear-gradient(rgb(6 6 8 / 0.4), rgb(6 6 8 / 0.4)),
+    url("/texturas/encaje.jpg") 0 0 / 230px repeat,
+    var(--noche);
 
   -webkit-mask-image: radial-gradient(
     circle at var(--x) var(--y),

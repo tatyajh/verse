@@ -14,17 +14,22 @@
   bottom: 0;
   width: 50.5vw; /* medio viewport + solape, para que no se vea una fisura */
   z-index: 300;
-  background: var(--noche);
+  /* Las dos hojas son una sola tela de seda partida por la costura: cada una
+     muestra su mitad de la misma imagen. */
+  background: var(--noche) url("/texturas/seda-noche.jpg") no-repeat;
+  background-size: 101vw 100vh;
   transition: transform 1.4s var(--ease-umbral);
   will-change: transform;
 }
 
 .izq {
   left: 0;
+  background-position: left center;
 }
 
 .der {
   right: 0;
+  background-position: right center;
 }
 
 /* La costura de la caja cerrada. */
@@ -55,8 +60,10 @@
   transform: translate(-50%, -50%);
   display: grid;
   place-items: center;
-  padding: 1.6rem 1.9rem;
-  background: var(--noche);
+  padding: 2.6rem 2.2rem;
+  /* Halo oscuro y ovalado como el emblema: corta la costura sin dejar un
+     recuadro sobre la seda. */
+  background: radial-gradient(ellipse 50% 50%, var(--noche) 55%, rgb(6 6 8 / 0) 100%);
   color: var(--rose);
   transition: opacity 0.45s ease;
 }

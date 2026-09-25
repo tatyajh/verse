@@ -3,6 +3,8 @@ import Link from "next/link";
 import Panel from "@/components/panel";
 import { COLECCIONES } from "@/lib/colecciones";
 import { porColeccion } from "@/lib/products";
+import { IMAGEN_COLECCION } from "@/lib/provisional";
+import Image from "next/image";
 import s from "./colecciones.module.css";
 
 export const metadata: Metadata = {
@@ -26,7 +28,7 @@ export default function Colecciones() {
             // Las prendas sueltas de un conjunto no cuentan como pieza aparte.
             const piezas = porColeccion(c.id).filter((p) => !p.componenteDe).length;
             return (
-              <li key={c.id} className={s.fila}>
+              <li key={c.id} className={`${s.fila} ${IMAGEN_COLECCION[c.id] ? s.conImagen : ""}`}>
                 <div className={s.cuerpo}>
                   <h2 className={s.nombre}>{c.nombre}</h2>
                   <p className={s.descripcion}>{c.descripcion}</p>
@@ -42,6 +44,16 @@ export default function Colecciones() {
                     )}
                   </div>
                 </div>
+                {IMAGEN_COLECCION[c.id] && (
+                  <div className={s.imagen}>
+                    <Image
+                      src={IMAGEN_COLECCION[c.id]!}
+                      alt={`Piezas de la colección ${c.nombre}`}
+                      fill
+                      sizes="(max-width: 760px) 100vw, 50vw"
+                    />
+                  </div>
+                )}
               </li>
             );
           })}

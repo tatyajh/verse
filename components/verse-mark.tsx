@@ -1,8 +1,7 @@
 /**
- * El emblema real de la marca, recortado del arte que envió Versé
- * (verse-mark.svg: cápsula + V + llave; verse-bow.svg: solo el cierre
- * ornamental —corazón y flor de lis— para espacios pequeños donde el
- * emblema completo, muy vertical, no cabe bien).
+ * El emblema real de la marca, del arte que envió Versé (verse-mark.svg:
+ * cápsula + V + llave). La llave es única: siempre se muestra completa,
+ * nunca recortada ni redibujada.
  *
  * Dos acabados del mismo herraje: oro rosa (#DEA193) sobre noche y bronce
  * (#C4734A, verse-mark-hondo.svg) sobre seda, donde el rosa claro se
@@ -55,15 +54,4 @@ export function VerseMark({
       className={className}
     />
   );
-}
-
-/** Solo el cierre —corazón y flor de lis—. Para espacios pequeños o casi cuadrados. */
-export function VerseBow({
-  size = 24,
-  className,
-}: {
-  size?: Tamano;
-  className?: string;
-}) {
-  return <Marca src="/verse-bow.svg" size={size} className={className} />;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { VerseBow } from "./verse-mark";
+import { VerseMark } from "./verse-mark";
 import s from "./umbral.module.css";
 
 /**
@@ -64,7 +64,8 @@ export default function Umbral() {
       <div className={`${s.hoja} ${s.der}`} />
       <div className={s.costura} />
       <div className={s.sello}>
-        <VerseBow size={36} />
+        {/* La llave completa del logo, nunca recortada. */}
+        <VerseMark size={62} />
       </div>
     </div>
   );

@@ -52,13 +52,11 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background-color: rgb(6 6 8 / 0.28);
-    background-image:
-      radial-gradient(circle at 9px 0, transparent 8px, rgb(236 232 234 / 0.2) 8.4px, transparent 9.6px),
-      radial-gradient(circle at 9px 11px, rgb(236 232 234 / 0.16) 2px, transparent 2.4px),
-      repeating-linear-gradient(62deg, rgb(236 232 234 / 0.08) 0 1px, transparent 1px 11px),
-      repeating-linear-gradient(-62deg, rgb(236 232 234 / 0.08) 0 1px, transparent 1px 11px);
-    background-size: 18px 18px, 18px 18px, auto, auto;
+    /* El encaje de la marca (fondo negro, hilo marfil): con «screen» el negro
+       desaparece y solo queda el hilo sobre la foto. */
+    background: url("/texturas/encaje.jpg") 0 0 / 190px repeat;
+    mix-blend-mode: screen;
+    opacity: 0.55;
     clip-path: inset(0 0 0 0);
     transition: clip-path 0.9s var(--ease-umbral);
   }
