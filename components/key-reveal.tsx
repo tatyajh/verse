@@ -1,23 +1,23 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { useMedia } from "@/lib/media";
 import { VerseMark } from "./verse-mark";
 import s from "./key-reveal.module.css";
 
 /**
- * «La llave»: el encaje cubre la pieza y el cursor la descubre.
+ * «La llave»: el encaje cubre la foto y el cursor la descubre. Es el único
+ * gesto animado de la portada.
  *
- * La llave es el símbolo de la marca. Con puntero fino se
- * sigue el cursor; con pantalla táctil el descubierto baja con el scroll; con
- * movimiento reducido se queda quieto en el centro.
+ * Con puntero fino sigue el cursor; en pantalla táctil el descubierto baja
+ * con el scroll; con movimiento reducido queda quieto en el centro. Sin foto,
+ * debajo del encaje está el emblema.
  */
-export default function KeyReveal() {
+export default function KeyReveal({ foto }: { foto?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const reducido = useMedia("(prefers-reduced-motion: reduce)");
   const fino = useMedia("(pointer: fine)");
-
-  const pista = "";
 
   useEffect(() => {
     const el = ref.current;
@@ -78,11 +78,21 @@ export default function KeyReveal() {
   return (
     <div ref={ref} className={s.figura}>
       <div className={s.fondo}>
-        <VerseMark size="42%" />
+        {foto ? (
+          <Image
+            src={foto}
+            alt=""
+            fill
+            priority
+            sizes="(max-width: 860px) 90vw, 40vw"
+            className={s.foto}
+          />
+        ) : (
+          <VerseMark size="42%" />
+        )}
       </div>
       <div className={s.encaje} />
       <div className={s.filete} />
-      {pista && <span className={`${s.pista} label`}>{pista}</span>}
     </div>
   );
 }

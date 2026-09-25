@@ -4,93 +4,79 @@
    que separa esto de una plantilla.
    ========================================================= */
 
-/* ---------- 1. Hero: el wordmark es la imagen ---------- */
+/* ---------- 1. Hero: texto y lista a la izquierda, la llave a la derecha ---------- */
 
 .hero {
   min-height: 100svh;
   display: grid;
-  grid-template-rows: 1fr auto;
-  gap: 2rem;
-  padding-block: 6rem 2.5rem;
-  overflow: hidden;
+  align-items: center;
+  padding-block: 7rem 4rem;
 }
 
-/* El wordmark se sangra a propósito y no lleva los márgenes de .wrap:
-   el nav ya muestra la marca entera, así que aquí puede cortarse. */
-.heroPalabraFila {
+.heroRejilla {
   display: grid;
-  align-content: center;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(2.5rem, 7vw, 7rem);
+  align-items: center;
+}
+
+.heroTexto {
+  display: grid;
+  gap: 1.4rem;
+  justify-items: start;
 }
 
 .heroPalabra {
   font-family: var(--font-display), "Didot", serif;
-  /* Bodoni es bastante más ancha que la anterior: a 31vw la É se salía
-     del viewport. El wordmark puede sangrar, pero nunca por la É —es la
-     letra que hace la marca. A 25vw entra completa. */
-  font-size: clamp(3.4rem, 25vw, 26rem);
-  /* holgada a propósito: el acento de la É se corta por arriba si se aprieta */
-  line-height: 1.12;
-  letter-spacing: 0.05em;
-  text-align: center;
-  white-space: nowrap;
-  /* compensa el tracking de la última letra para que el corte sea simétrico */
-  text-indent: 0.05em;
+  font-size: clamp(4.5rem, 13vw, 11rem);
+  line-height: 0.85;
+  letter-spacing: -0.01em;
   color: var(--rose);
-}
-
-.heroPie {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-  gap: 2rem;
+  margin-bottom: 0.6rem;
 }
 
 .heroFrase {
-  font-family: var(--font-body), Georgia, serif;
-  font-style: italic;
   font-size: var(--t-m);
-  line-height: 1.5;
-  max-width: 30ch;
-  color: var(--fg);
+  line-height: 1.45;
+  max-width: 28ch;
 }
 
-.heroBotones {
+.heroInvitacion {
+  color: var(--muted);
+  max-width: 40ch;
+}
+
+.heroEnlaces {
   display: flex;
-  gap: 2rem;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 2rem;
+  margin-top: 0.4rem;
+  color: var(--muted);
 }
 
-.heroBotones a {
-  white-space: nowrap;
+.heroFigura {
+  margin: 0;
+  display: grid;
+  gap: 1rem;
 }
 
-.heroEje {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 68%;
-  width: 1px;
-  background: linear-gradient(to bottom, transparent, rgb(201 143 111 / 0.4), transparent);
-  pointer-events: none;
+.heroPie {
+  font-family: var(--font-display), "Didot", serif;
+  font-style: italic;
+  color: var(--muted);
+  text-align: center;
+  max-width: 34ch;
+  justify-self: center;
 }
 
-@media (max-width: 700px) {
-  .heroPie {
+@media (max-width: 860px) {
+  .heroRejilla {
     grid-template-columns: 1fr;
-    gap: 1.8rem;
-    justify-items: start;
   }
-  .heroEje {
-    display: none;
-  }
-  .heroBotones {
-    flex-direction: column;
-    width: 100%;
-    gap: 1.4rem;
-  }
-  .heroBotones :global(.btn) {
-    width: 100%;
-    text-align: center;
+  .heroFigura {
+    order: -1;
+    width: min(100%, 26rem);
+    justify-self: center;
   }
 }
 
@@ -209,49 +195,7 @@
   }
 }
 
-/* ---------- 4. La llave ---------- */
-
-.llave {
-  display: grid;
-  grid-template-columns: 1fr 0.9fr;
-  gap: clamp(2rem, 7vw, 6rem);
-  align-items: center;
-}
-
-.llaveTexto {
-  display: grid;
-  gap: 1.5rem;
-  max-width: 46ch;
-}
-
-.llaveTitulo {
-  font-family: var(--font-display), "Didot", serif;
-  font-size: var(--t-xl);
-  line-height: 1.04;
-  color: var(--rose);
-}
-
-.llaveTexto p {
-  color: var(--muted);
-}
-
-.cita {
-  font-family: var(--font-body), Georgia, serif;
-  font-style: italic;
-  font-size: var(--t-m);
-  line-height: 1.5;
-  color: var(--fg);
-  padding-left: 1.4rem;
-  border-left: 1px solid var(--accent);
-}
-
-@media (max-width: 860px) {
-  .llave {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ---------- 5. Tallas: banda ancha ---------- */
+/* ---------- 4. Tallas: banda ancha ---------- */
 
 .tallas {
   display: grid;
@@ -311,10 +255,8 @@
   border-bottom: 1px solid var(--line);
   color: var(--fg);
   font-weight: 500;
-  font-family: var(--font-ui);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: 0.8rem;
+  font-family: var(--font-body), serif;
+  font-size: 0.875rem;
 }
 
 .tablaTallas td {
@@ -342,7 +284,7 @@
   }
 }
 
-/* ---------- 6. Diario: dos entradas, sin tarjetas ---------- */
+/* ---------- 5. Diario: dos entradas, sin tarjetas ---------- */
 
 .diarioCinta {
   display: flex;

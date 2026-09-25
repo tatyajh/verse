@@ -1,4 +1,5 @@
 import type { ColeccionId } from "@/lib/colecciones";
+import { conProvisional } from "@/lib/provisional";
 import { PALETA_AURORA_DIURNA, PALETA_AURORA_NOCTURNA, type PaletaGrabado } from "@/components/lace-canvas";
 
 /**
@@ -256,7 +257,7 @@ const AURORA: Omit<Product, "coleccion">[] = [
 
 export const PRODUCTS: Product[] = [
   ...AURORA.map((p) => ({ ...p, coleccion: "aurora" as const })),
-];
+].map(conProvisional);
 
 export function porColeccion(coleccion: ColeccionId): Product[] {
   return PRODUCTS.filter((p) => p.coleccion === coleccion);

@@ -1,0 +1,53 @@
+.form {
+  display: grid;
+  gap: 0.8rem;
+  max-width: 34rem;
+}
+
+.fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.campo {
+  flex: 1 1 14rem;
+  min-width: 0;
+  padding: 1rem 1.3rem;
+  border: 1px solid var(--line-fuerte);
+  border-radius: 999px;
+  background: transparent;
+  transition: border-color 0.3s var(--ease-umbral);
+}
+
+.campo::placeholder {
+  color: var(--muted);
+}
+
+.campo:focus-visible {
+  outline: none;
+  border-color: var(--fg);
+}
+
+.nota {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.nota[role="alert"] {
+  color: var(--fg);
+}
+
+.listo {
+  font-family: var(--font-display), "Didot", serif;
+  font-style: italic;
+  font-size: var(--t-m);
+}
+
+.trampa {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}

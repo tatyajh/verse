@@ -1,37 +1,39 @@
 /* =========================================================
    VERSÉ INTIMATES — tokens y base
-   Dirección de arte «Umbral»: el sitio alterna dos mundos,
-   NOCHE y SEDA. Los componentes se escriben una sola vez
-   contra tokens semánticos; el panel decide el mundo.
+   El sitio alterna dos fondos, NOCHE y SEDA. Los componentes
+   se escriben contra tokens semánticos; el panel decide cuál.
+   La paleta sale del moodboard de Aurora: negro de Noctis,
+   perla de Prima Luce, morado de Vigilia. El oro rosa es el
+   metal del logo y se reserva para la marca.
    ========================================================= */
 
 :root {
   color-scheme: dark;
 
   /* --- materiales (constantes, nunca se usan directo en componentes) --- */
-  --noche: #140e0e;
-  --noche-2: #1e1516;
-  --seda: #e9e3db;
-  --seda-2: #ded6cc;
-  --hueso: #e9e3db;
-  --tinta: #191413;
-  --tul: #9c8a8c;
-  --tul-hondo: #6b5c5e;
-  /* rose y umbra son los dos tonos exactos del logo (verse-mark.svg):
-     relleno #DEA193 y trazo #C4734A. Oro rosa con toques brillantes. */
+  --noche: #060608;
+  --noche-2: #111116;
+  --seda: #e5e1e2;
+  --seda-2: #d9d4d7;
+  --hueso: #ece8ea;
+  --tinta: #231d2e;
+  --tul: #9d95a4;
+  --tul-hondo: #5e5468;
+  /* Los dos tonos del logo (verse-mark.svg): oro rosa y su versión honda. */
   --rose: #DEA193;
   --rose-hondo: #C4734A;
-  --vino: #5c2230;
+  /* Morado de Vigilia: el acento sobre fondos claros. */
+  --morado: #493b63;
 
   /* --- semánticos: por defecto, NOCHE --- */
   --bg: var(--noche);
   --bg-2: var(--noche-2);
   --fg: var(--hueso);
   --muted: var(--tul);
-  --line: rgb(233 227 219 / 0.18);
-  --line-fuerte: rgb(233 227 219 / 0.34);
+  --line: rgb(236 232 234 / 0.16);
+  --line-fuerte: rgb(236 232 234 / 0.32);
   --accent: var(--rose);
-  --vel: rgb(20 14 14 / 0.72);
+  --vel: rgb(6 6 8 / 0.72);
 
   /* --- medida --- */
   --gutter: clamp(1.25rem, 4.5vw, 4rem);
@@ -44,7 +46,7 @@
   --t-l: clamp(1.6rem, 3.4vw, 2.6rem);
   --t-m: clamp(1.15rem, 1.8vw, 1.5rem);
   --t-body: clamp(0.95rem, 0.9rem + 0.2vw, 1.0625rem);
-  --t-label: 0.6875rem;
+  --t-label: 0.875rem;
 
   /* --- movimiento --- */
   --ease-umbral: cubic-bezier(0.76, 0, 0.24, 1);
@@ -56,10 +58,10 @@
   --bg-2: var(--noche-2);
   --fg: var(--hueso);
   --muted: var(--tul);
-  --line: rgb(233 227 219 / 0.18);
-  --line-fuerte: rgb(233 227 219 / 0.34);
+  --line: rgb(236 232 234 / 0.16);
+  --line-fuerte: rgb(236 232 234 / 0.32);
   --accent: var(--rose);
-  --vel: rgb(20 14 14 / 0.72);
+  --vel: rgb(6 6 8 / 0.72);
 }
 
 [data-panel="seda"] {
@@ -68,10 +70,10 @@
   --bg-2: var(--seda-2);
   --fg: var(--tinta);
   --muted: var(--tul-hondo);
-  --line: rgb(25 20 19 / 0.16);
-  --line-fuerte: rgb(25 20 19 / 0.32);
-  --accent: var(--rose-hondo);
-  --vel: rgb(233 227 219 / 0.72);
+  --line: rgb(35 29 46 / 0.16);
+  --line-fuerte: rgb(35 29 46 / 0.32);
+  --accent: var(--morado);
+  --vel: rgb(229 225 226 / 0.72);
 }
 
 /* =========================================================
@@ -86,13 +88,6 @@
 
 html {
   -webkit-text-size-adjust: 100%;
-}
-
-/* Mientras la caja está cerrada no se puede desplazar. El atributo lo pone y
-   lo quita <Umbral/>; sin JS nunca se pone, así que nunca bloquea. */
-html[data-umbral="nuevo"],
-html[data-umbral="nuevo"] body {
-  overflow: hidden;
 }
 
 body {
@@ -179,19 +174,18 @@ textarea {
   letter-spacing: 0.02em;
 }
 
+/* Etiquetas (nav, tallas, precios, fechas): la misma serif del cuerpo, en
+   tamaño pequeño y en minúscula normal. Nada de mayúsculas espaciadas. */
 .label {
-  font-family: var(--font-ui), system-ui, sans-serif;
+  font-family: var(--font-body), Georgia, serif;
   font-size: var(--t-label);
-  font-weight: 500;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 0.01em;
   line-height: 1.4;
 }
 
 .num {
-  font-family: var(--font-ui), system-ui, sans-serif;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.06em;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 .wrap {
@@ -238,11 +232,10 @@ textarea {
   padding: 1.1rem 2.4rem;
   border: 1px solid var(--line-fuerte);
   border-radius: 999px;
-  font-family: var(--font-ui), system-ui, sans-serif;
-  font-size: var(--t-label);
-  font-weight: 500;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
+  font-family: var(--font-body), Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
   background: transparent;
   transition:
     border-color 0.45s var(--ease-umbral),

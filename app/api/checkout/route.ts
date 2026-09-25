@@ -42,6 +42,16 @@ export async function POST(request: Request) {
     );
   }
 
+  // Una pieza sin precio real (o en 0, como los provisionales) nunca se cobra:
+  // si pasara, el total sería solo el envío.
+  const sinPrecio = items.find((i) => !getProduct(i.slug)?.precio);
+  if (sinPrecio) {
+    return Response.json(
+      { error: "Esta pieza todavía no está a la venta. Te avisamos cuando salga." },
+      { status: 400 },
+    );
+  }
+
   // El monto se recalcula aquí desde el catálogo. Lo que mande el navegador
   // sobre precios se ignora por completo.
   const totales = calcularTotales(items);

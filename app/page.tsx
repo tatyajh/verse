@@ -2,6 +2,8 @@ import type { CSSProperties } from "react";
 import Link from "next/link";
 import Panel from "@/components/panel";
 import KeyReveal from "@/components/key-reveal";
+import ListaPrivada from "@/components/lista-privada";
+import { FOTO_PORTADA } from "@/lib/provisional";
 import { TONALIDADES } from "@/lib/products";
 import { ENTRADAS, formatFecha } from "@/lib/blog";
 import { getCapitulo } from "@/lib/historia";
@@ -21,27 +23,35 @@ export default function Home() {
 
   return (
     <>
-      {/* 1 — Hero: el wordmark hace de imagen mientras no haya fotos. */}
+      {/* 1 — Hero: la llave (el encaje que el cursor descubre) y la lista privada. */}
       <Panel tono="noche" seam={false} padded={false} className={s.hero}>
-        <div className={s.heroEje} />
-
-        <div className={s.heroPalabraFila}>
-          <h1 className={s.heroPalabra}>VERSÉ</h1>
-        </div>
-
-        <div className={`${s.heroPie} wrap`}>
-          <p className={s.heroFrase}>
-            Lencería diseñada en Medellín para el día entero o para una sola
-            noche.
-          </p>
-          <div className={s.heroBotones}>
-            <Link href="/aurora?view=productos" className="btn btn-fg">
-              Descubrir Aurora
-            </Link>
-            <Link href="/aurora" className="label link">
-              La historia
-            </Link>
+        <div className={`${s.heroRejilla} wrap`}>
+          <div className={s.heroTexto}>
+            <h1 className={s.heroPalabra}>Versé</h1>
+            <p className={s.heroFrase}>
+              Lencería diseñada en Medellín para el día entero o para una sola
+              noche.
+            </p>
+            <p className={s.heroInvitacion}>
+              La primera edición de Aurora se ofrece primero a quienes estén en la
+              lista.
+            </p>
+            <ListaPrivada />
+            <p className={s.heroEnlaces}>
+              <Link href="/aurora?view=productos" className="link">
+                Ver las piezas
+              </Link>
+              <Link href="/aurora" className="link">
+                Leer la historia
+              </Link>
+            </p>
           </div>
+          <figure className={s.heroFigura}>
+            <KeyReveal foto={FOTO_PORTADA} />
+            <figcaption className={s.heroPie}>
+              La llave es el emblema de la casa: cada una decide qué abre y para quién.
+            </figcaption>
+          </figure>
         </div>
       </Panel>
 
@@ -108,24 +118,7 @@ export default function Home() {
         </ul>
       </Panel>
 
-      {/* 4 — La llave: el encaje que se descubre con el cursor. */}
-      <Panel tono="noche" id="llave">
-        <div className="wrap">
-          <div className={s.llave}>
-            <div className={s.llaveTexto}>
-              <h2 className={s.llaveTitulo}>Versé</h2>
-              <p>
-                La llave es el emblema de la casa: el herraje que abre lo que se
-                guarda.
-              </p>
-              <p className={s.cita}>Cada una decide qué abre y para quién.</p>
-            </div>
-            <KeyReveal />
-          </div>
-        </div>
-      </Panel>
-
-      {/* 5 — Tallas: banda ancha, letras separadas por filetes. */}
+      {/* 4 — Tallas: banda ancha, letras separadas por filetes. */}
       <Panel tono="seda" id="tallas">
         <div className="wrap">
           <div className={s.tallas}>
@@ -185,7 +178,7 @@ export default function Home() {
         </div>
       </Panel>
 
-      {/* 6 — El diario. */}
+      {/* 5 — El diario. */}
       <Panel tono="noche" id="diario">
         <div className="wrap">
           <div className={s.diarioCinta}>

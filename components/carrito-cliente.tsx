@@ -119,7 +119,7 @@ export default function CarritoCliente() {
                 {l.producto.nombre}
               </Link>
               <p className={`${s.meta} label`}>
-                Talla {l.talla} · {formatCOP(l.producto.precio)}
+                Talla {l.talla}, {formatCOP(l.producto.precio)}
               </p>
               <button
                 type="button"
@@ -196,7 +196,7 @@ export default function CarritoCliente() {
         </p>
 
         <p className={`${s.medios} label`}>
-          Tarjeta, PSE, Nequi y Bancolombia · Envío sin costo desde{" "}
+          Pagas con tarjeta, PSE, Nequi o Bancolombia. Envío sin costo desde{" "}
           {formatCOP(ENVIO.gratisDesde)}
         </p>
       </aside>

@@ -28,8 +28,8 @@ export type PaletaGrabado = {
 };
 
 export const PALETA_NOCHE: PaletaGrabado = {
-  fondo: "#140e0e",
-  fondo2: "#241a1a",
+  fondo: "#060608",
+  fondo2: "#15141b",
   trazo: "201, 143, 111",
   vineta: "20, 14, 14",
 };

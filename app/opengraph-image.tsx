@@ -30,7 +30,7 @@ export default async function Image() {
           alignItems: "center",
           justifyContent: "center",
           gap: 64,
-          background: "#140E0E",
+          background: "#060608",
         }}
       >
         <img src={emblema} width={176} height={398} alt="" />

@@ -85,8 +85,8 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
 
             {sinConfirmar ? (
               <p className={s.resumen}>
-                Pieza de la colección {coleccion.nombre}. Precio y fecha de lanzamiento por
-                anunciar.
+                Pieza de la colección {coleccion.nombre}. La descripción completa se
+                publica con el lanzamiento.
               </p>
             ) : (
               <>

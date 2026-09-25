@@ -18,7 +18,7 @@ export default function ProductCard({
   className?: string;
 }) {
   const etiqueta = TIPO_LABEL[producto.tipo];
-  const procedencia = `${getColeccion(producto.coleccion).nombre} · ${getTonalidad(producto.tonalidad).nombre}`;
+  const procedencia = `${getColeccion(producto.coleccion).nombre} ${getTonalidad(producto.tonalidad).nombre}`;
   const precio = producto.precio !== undefined ? formatCOP(producto.precio) : null;
 
   return (
@@ -30,7 +30,7 @@ export default function ProductCard({
       </div>
       <div className={s.pie}>
         <p className={`${s.procedencia} label`}>
-          {procedencia} · {etiqueta}
+          {etiqueta} de {procedencia}
         </p>
         <h3 className={s.nombre}>{producto.nombre}</h3>
         {producto.resumen && <p className={s.resumen}>{producto.resumen}</p>}

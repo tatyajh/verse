@@ -96,7 +96,7 @@ export default function Footer() {
         </div>
 
         <div className={`${s.legal} label`}>
-          <span>© {new Date().getFullYear()} Versé Intimates · Medellín, Colombia</span>
+          <span>© {new Date().getFullYear()} Versé Intimates, Medellín</span>
           <nav className={s.legales} aria-label="Legal">
             {DOCUMENTOS.map((d) => (
               <Link key={d.slug} href={`/legal/${d.slug}`} className="link">

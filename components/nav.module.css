@@ -73,10 +73,11 @@
   line-height: 1;
 }
 
+/* «INTIMATES» en mayúsculas espaciadas es parte del logo, no una etiqueta. */
 .marcaSufijo {
-  font-family: var(--font-ui), system-ui, sans-serif;
+  font-family: var(--font-body), Georgia, serif;
   font-size: 0.5rem;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   line-height: 1;
@@ -130,12 +131,9 @@
   border: none;
   padding: 0;
   color: var(--muted);
-  font-family: var(--font-ui);
-  font-size: 0.85rem;
+  font: inherit;
   cursor: pointer;
   transition: color 0.4s var(--ease-umbral);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .coleccionesToggle:hover,
@@ -194,16 +192,10 @@
 }
 
 @media (max-width: 620px) {
-  /* Cinco cosas en 335px: el tracking de .label (0.28em) es lo que las
-     hace anchas. Se aprieta aquí, no en el resto del sitio. */
+  /* Cuatro enlaces y dos íconos en 335px: se aprieta solo aquí. */
   .menu {
-    gap: 0.85rem;
-    font-size: 0.6rem;
-    letter-spacing: 0.16em;
-  }
-  .coleccionesToggle {
-    font-size: 0.6rem;
-    letter-spacing: 0.16em;
+    gap: 0.9rem;
+    font-size: 0.8125rem;
   }
   .etiqueta {
     position: absolute;

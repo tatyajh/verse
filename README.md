@@ -25,28 +25,29 @@ Otros comandos: `npm run build` (producción), `npm run lint`, `npx tsc --noEmit
 
 ## Diseño
 
-Al entrar, la página muestra una caja que se abre una vez por sesión (`components/umbral.tsx`).
-Después, la portada alterna paneles oscuros (noche) y claros (seda).
+La portada tiene un solo gesto animado: en el hero, un encaje cubre una foto dentro del arco
+de la llave y el cursor la descubre (en celular, el scroll). Todo lo demás está quieto. Mientras
+no haya venta, la acción principal es la **lista privada** de la primera edición.
 
-**Paleta.** Los tokens semánticos (`--bg`, `--fg`, `--muted`, `--line`, `--accent`) se
-reasignan según `data-panel`, así que cada componente se escribe una vez y sirve en los
-dos fondos. `/aurora` define además sus propios tokens por momento (Noctis, Vigilia,
-Borealis, Prima Luce) en `app/aurora/aurora.module.css`.
+**Paleta.** Sale del moodboard de Aurora. Los tokens semánticos (`--bg`, `--fg`, `--muted`,
+`--line`, `--accent`) se reasignan según `data-panel`, así que cada componente se escribe
+una vez y sirve en los dos fondos. `/aurora` define además sus propios tokens por momento.
 
 | | Noche | Seda |
 |---|---|---|
-| Fondo | `#140E0E` | `#E9E3DB` |
-| Texto | `#E9E3DB` | `#191413` |
-| Neutro | `#9C8A8C` | `#6B5C5E` |
-| Acento | oro rosa `#DEA193` | bronce `#C4734A` |
+| Fondo | `#060608` (negro de Noctis) | `#E5E1E2` (perla de Prima Luce) |
+| Texto | `#ECE8EA` | `#231D2E` |
+| Neutro | `#9D95A4` | `#5E5468` |
+| Acento | oro rosa `#DEA193` | morado de Vigilia `#493B63` |
 
-**Tipografía.** Bodoni Moda (títulos), Pinyon Script (solo lema y citas), Spectral
-(cuerpo) y Archivo (nav, tallas y precios en mayúsculas pequeñas). Se cargan con
-`next/font`.
+El oro rosa y su versión honda `#C4734A` son el metal del logo y se reservan para la marca.
 
-**Movimiento.** La caja de entrada, las costuras entre paneles, el encaje de «La llave»
-que se descubre con el cursor y, en `/aurora`, el cielo que cambia con el scroll y el
-encaje sobre cada capítulo. Todo se apaga con `prefers-reduced-motion`.
+**Tipografía.** Dos familias: Bodoni Moda (títulos y, en cursiva, lema y citas) y Spectral
+(todo lo demás, incluidas etiquetas y precios, en minúscula normal). Se cargan con `next/font`.
+
+**Qué evitar** (se ve genérico, hecho con AI): cuadrículas de tarjetas idénticas, etiquetas en
+mayúsculas espaciadas sobre los títulos, datos unidos con «·», botones que no llevan a ningún
+lado, resplandores y animaciones sin propósito.
 
 ---
 
@@ -66,18 +67,20 @@ app/
   sitemap.ts  robots.ts    SEO
   opengraph-image.tsx      imagen al compartir un enlace
   api/checkout/            firma el pago (solo servidor)
+  api/lista/               inscripciones a la lista privada (llegan por correo)
   api/wompi/webhook/       recibe y valida los eventos de Wompi
 components/
-  umbral.tsx               la caja de entrada
-  panel.tsx  seam.tsx      paneles a sangre y sus costuras
+  panel.tsx  seam.tsx      paneles a sangre y el filete entre ellos
   lace-canvas.tsx          grabado de encaje generativo (hace de foto)
-  key-reveal.tsx           «La llave»
+  key-reveal.tsx           el encaje que el cursor descubre (hero)
+  lista-privada.tsx        inscripción a la primera edición
   aurora/                  cielo, velos y enlaces de la historia
   grupo-piezas.tsx         un tipo de prenda del catálogo (reutilizable)
 lib/
   colecciones.ts           registro de colecciones
   products.ts              catálogo: fuente de verdad
   legal.ts                 textos legales (borrador) y datos de la empresa
+  provisional.ts           fotos (Unsplash) y precios en 0 para ver el sitio; ACTIVO = false los quita
   historia.ts              versos de la historia de Aurora
   blog.ts                  entradas del diario
   cart.tsx  favoritos.tsx  estado en localStorage
@@ -114,7 +117,9 @@ Cuando una pieza tenga `precio`, aparece el selector de talla y el botón de com
 
 ### Cuando tengas fotos
 
-Pon los archivos en `public/piezas/` y añade `image` a la pieza:
+Hoy se ven fotos provisionales de Unsplash (`lib/provisional.ts`). Cuando lleguen las
+propias, pon los archivos en `public/piezas/`, añade `image` a cada pieza y cambia
+`ACTIVO` a `false` en `lib/provisional.ts`:
 
 ```ts
 {
@@ -168,10 +173,8 @@ al confirmarse el pago, unidos por la referencia. Configura `RESEND_API_KEY` y
 
 ## Accesibilidad
 
-Enlace de salto al contenido, anillo de foco visible en cada parada, la apertura y
-el descubierto se desactivan con `prefers-reduced-motion`, y sin JavaScript la página se
-lee completa: las hojas de la caja están ocultas por defecto y solo aparecen cuando el
-script las habilita.
+Enlace de salto al contenido, anillo de foco visible en cada parada, contraste mínimo de
+4,5:1 en texto, y el descubierto del encaje queda quieto con `prefers-reduced-motion`.
 
 ---
 

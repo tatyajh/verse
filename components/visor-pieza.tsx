@@ -4,6 +4,7 @@ import { useCallback, useRef, useState } from "react";
 import ProductImage from "./product-image";
 import Comprar from "./comprar";
 import type { Product } from "@/lib/products";
+import ListaPrivada from "./lista-privada";
 import s from "./visor-pieza.module.css";
 
 const PIXELES_POR_CUADRO = 10;
@@ -94,7 +95,10 @@ export default function VisorPieza({
       {producto.precio !== undefined ? (
         <Comprar producto={producto} />
       ) : (
-        <p className={`${s.proximamente} label`}>Próximamente</p>
+        <div className={s.proximamente}>
+          <p>Todavía no está a la venta. Deja tu correo y te avisamos cuando salga.</p>
+          <ListaPrivada pieza={producto.slug} boton="Avísame" />
+        </div>
       )}
     </div>
   );
