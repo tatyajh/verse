@@ -31,8 +31,8 @@ Versé tiene cinco firmas visuales, en `components/firmas/`:
   deja llevar por el cursor.
 - **La tela** (`tela.tsx`, PixiJS): seda que ondula bajo el cursor, en momentos puntuales.
 - **La moldería** (`molderia.tsx`): patronaje con medidas reales, detrás de la guía de tallas.
-- **La seda** (`menu-seda.tsx` y la caja de entrada): el menú y la apertura son dos hojas de
-  seda que se cierran o se abren; al entrar, la seda ondea.
+- **La seda** (`umbral.tsx`): una cortina de dos hojas de seda que se abre al entrar al
+  sitio y en cada cambio de página; al entrar, la seda ondea.
 - **Aurora como luz** (`transicion-aurora.tsx`): en la portada, el fondo recorre los cuatro
   momentos al bajar.
 
