@@ -4,6 +4,7 @@ import "./globals.css";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import { SITE } from "@/lib/sitio";
+import { ACTIVO as PROVISIONAL } from "@/lib/provisional";
 
 /* Dos familias: Bodoni Moda para títulos y citas (su cursiva reemplaza a la
    caligráfica), Spectral para todo lo demás, incluidas etiquetas y precios. */
@@ -41,7 +42,8 @@ export const metadata: Metadata = {
     title: "Versé Intimates",
     description: "Lencería diseñada en Medellín.",
   },
-  robots: { index: true, follow: true },
+  // Con fotos provisionales el sitio es de pruebas: no se indexa.
+  robots: { index: !PROVISIONAL, follow: !PROVISIONAL },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
