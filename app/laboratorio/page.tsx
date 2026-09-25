@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import {
-  Abril_Fatface,
-  Gloock,
-  IM_Fell_English,
-  Old_Standard_TT,
-  Sorts_Mill_Goudy,
-  Yeseva_One,
+  Bona_Nova,
+  Fanwood_Text,
+  Gilda_Display,
+  IM_Fell_French_Canon,
+  IM_Fell_Great_Primer,
+  Linden_Hill,
+  Oranienbaum,
+  Rozha_One,
+  Sedan,
 } from "next/font/google";
 import Image from "next/image";
 import Hilo from "@/components/laboratorio/hilo";
@@ -13,50 +16,65 @@ import HiloEnlace from "@/components/laboratorio/hilo-enlace";
 import { FOTO_PORTADA } from "@/lib/provisional";
 import s from "./laboratorio.module.css";
 
-// Candidatas de tipografía: se cargan solo en esta página.
-const fell = IM_Fell_English({ weight: "400", style: ["normal", "italic"], subsets: ["latin"] });
-const oldStandard = Old_Standard_TT({ weight: ["400", "700"], style: ["normal", "italic"], subsets: ["latin"] });
-const goudy = Sorts_Mill_Goudy({ weight: "400", style: ["normal", "italic"], subsets: ["latin"] });
-const abril = Abril_Fatface({ weight: "400", subsets: ["latin"] });
-const yeseva = Yeseva_One({ weight: "400", subsets: ["latin"] });
-const gloock = Gloock({ weight: "400", subsets: ["latin"] });
+// Candidatas de tipografía, elegidas por ser poco usadas: se cargan solo aquí.
+const fellCanon = IM_Fell_French_Canon({ weight: "400", style: ["normal", "italic"], subsets: ["latin"] });
+const fellPrimer = IM_Fell_Great_Primer({ weight: "400", style: ["normal", "italic"], subsets: ["latin"] });
+const linden = Linden_Hill({ weight: "400", style: ["normal", "italic"], subsets: ["latin"] });
+const fanwood = Fanwood_Text({ weight: "400", style: ["normal", "italic"], subsets: ["latin"] });
+const gilda = Gilda_Display({ weight: "400", subsets: ["latin"] });
+const rozha = Rozha_One({ weight: "400", subsets: ["latin"] });
+const oranienbaum = Oranienbaum({ weight: "400", subsets: ["latin"] });
+const bona = Bona_Nova({ weight: ["400", "700"], style: ["normal", "italic"], subsets: ["latin"] });
+const sedan = Sedan({ weight: "400", style: ["normal", "italic"], subsets: ["latin"] });
 
 const TIPOGRAFIAS = [
   {
-    nombre: "IM Fell English",
-    nota: "Libro antiguo: la tinta imperfecta de la imprenta. La más humana.",
-    titulo: fell.className,
-    cuerpo: fell.className,
+    nombre: "IM Fell French Canon + IM Fell Great Primer",
+    nota: "Tipos de una imprenta inglesa de 1680, con la tinta imperfecta. Casi nadie las usa en web.",
+    titulo: fellCanon.className,
+    cuerpo: fellPrimer.className,
   },
   {
-    nombre: "Old Standard TT",
-    nota: "Periódico y libro del siglo XIX. La más victoriana editorial.",
-    titulo: oldStandard.className,
-    cuerpo: oldStandard.className,
+    nombre: "Linden Hill",
+    nota: "Recuperación de una letra de libro de Frederic Goudy: elegante y rara.",
+    titulo: linden.className,
+    cuerpo: linden.className,
   },
   {
-    nombre: "Sorts Mill Goudy",
-    nota: "Libro clásico de principios del siglo XX, cálido y legible.",
-    titulo: goudy.className,
-    cuerpo: goudy.className,
+    nombre: "Fanwood Text",
+    nota: "Letra de libro clásico americano, muy fina.",
+    titulo: fanwood.className,
+    cuerpo: fanwood.className,
   },
   {
-    nombre: "Abril Fatface + Old Standard TT",
-    nota: "Cartel victoriano de contraste fuerte para títulos; Old Standard para leer.",
-    titulo: abril.className,
-    cuerpo: oldStandard.className,
+    nombre: "Gilda Display + Fanwood Text",
+    nota: "Contraste alto con curvas suaves para títulos; Fanwood para leer.",
+    titulo: gilda.className,
+    cuerpo: fanwood.className,
   },
   {
-    nombre: "Yeseva One + Sorts Mill Goudy",
-    nota: "Didona femenina para títulos; Goudy para leer.",
-    titulo: yeseva.className,
-    cuerpo: goudy.className,
+    nombre: "Rozha One + Linden Hill",
+    nota: "Didona gruesa de cartel, poco vista; Linden Hill para leer.",
+    titulo: rozha.className,
+    cuerpo: linden.className,
   },
   {
-    nombre: "Gloock + IM Fell English",
-    nota: "Contraste alto con carácter para títulos; Fell para leer.",
-    titulo: gloock.className,
-    cuerpo: fell.className,
+    nombre: "Oranienbaum + Bona Nova",
+    nota: "Didona rusa de alto contraste con un cuerpo polaco de los setenta.",
+    titulo: oranienbaum.className,
+    cuerpo: bona.className,
+  },
+  {
+    nombre: "Sedan",
+    nota: "Estilo antiguo con cursiva propia.",
+    titulo: sedan.className,
+    cuerpo: sedan.className,
+  },
+  {
+    nombre: "Bona Nova",
+    nota: "Letra de libro polaca con mucha personalidad en la cursiva.",
+    titulo: bona.className,
+    cuerpo: bona.className,
   },
 ];
 
@@ -111,9 +129,9 @@ export default function Laboratorio() {
 
         {/* Prueba 2 — Tipografía */}
         <p className={`${s.nota} wrap`}>
-          2. Tipografía: seis candidatas victorianas y editoriales con el mismo texto.
-          Elijan la que suene a Versé (o combinen el título de una con el cuerpo de
-          otra).
+          2. Tipografía: ocho candidatas poco usadas, con el mismo texto. Elijan la
+          que suene a Versé (o combinen el título de una con el cuerpo de otra).
+          La elegida escribe «Versé» en grande en el hero.
         </p>
         <section className={`${s.tipos} wrap`}>
           {TIPOGRAFIAS.map((t, i) => (
