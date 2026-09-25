@@ -131,6 +131,11 @@ export default function SedaPixi({
       });
       io.observe(el);
 
+      // El lienzo no recibe toques: el movimiento se lee en el contenedor, y
+      // así en celular el dedo sigue haciendo scroll en lugar de quedarse
+      // atrapado en la tela.
+      app.canvas.style.pointerEvents = "none";
+      app.canvas.style.touchAction = "auto";
       el.appendChild(app.canvas);
       onListo();
 

@@ -92,3 +92,8 @@
 .abierto .sello {
   opacity: 0;
 }
+
+/* Entre páginas: la misma apertura, más corta. */
+.rapida .hoja {
+  transition-duration: 1s;
+}
