@@ -115,7 +115,7 @@ export default function Laboratorio() {
                 Diseñada en Medellín.
               </p>
               <div className={s.heroEnlaces}>
-                <HiloEnlace href="/aurora">Ver Aurora</HiloEnlace>
+                <HiloEnlace href="/aurora">Ver la última colección</HiloEnlace>
                 <HiloEnlace href="/productos">Ver todos los productos</HiloEnlace>
               </div>
             </div>

@@ -39,7 +39,7 @@
 }
 
 .listo {
-  font-family: var(--font-display), "Didot", serif;
+  font-family: var(--font-display), Georgia, serif;
   font-style: italic;
   font-size: var(--t-m);
 }

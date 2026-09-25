@@ -1,9 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 import ProductImage from "./product-image";
 import Comprar from "./comprar";
 import type { Product } from "@/lib/products";
+import { formatCOP } from "@/lib/money";
 import ListaPrivada from "./lista-privada";
 import s from "./visor-pieza.module.css";
 
@@ -21,10 +23,16 @@ const PIXELES_POR_CUADRO = 10;
 export default function VisorPieza({
   producto,
   sizes,
+  galeria,
 }: {
   producto: Product;
   sizes?: string;
+  /** Conjunto y sus prendas: miniaturas bajo la foto principal. */
+  galeria?: Product[];
 }) {
+  const conGaleria = galeria && galeria.length > 1 ? galeria : null;
+  const [activa, setActiva] = useState(0);
+  const enFoto = conGaleria ? conGaleria[activa] : producto;
   const giro = producto.giro && producto.giro.length > 1 ? producto.giro : null;
   const [cuadro, setCuadro] = useState(0);
   const arrastre = useRef<{ x: number; cuadro: number } | null>(null);
@@ -77,7 +85,7 @@ export default function VisorPieza({
           // eslint-disable-next-line @next/next/no-img-element -- secuencia local, no next/image
           <img src={giro[cuadro]} alt="" draggable={false} />
         ) : (
-          <ProductImage producto={producto} priority sizes={sizes} />
+          <ProductImage key={enFoto.slug} producto={enFoto} priority sizes={sizes} />
         )}
 
         {giro && (
@@ -91,6 +99,41 @@ export default function VisorPieza({
           </>
         )}
       </div>
+
+      {conGaleria && (
+        <div className={s.galeria}>
+          <div className={s.miniaturas} role="group" aria-label="Prendas del conjunto">
+            {conGaleria.map((p, i) => (
+              <button
+                key={p.slug}
+                type="button"
+                className={`${s.miniatura} ${i === activa ? s.miniaturaActiva : ""}`}
+                onClick={() => setActiva(i)}
+                aria-pressed={i === activa}
+                aria-label={i === 0 ? "Ver el conjunto" : `Ver ${p.nombre}`}
+              >
+                <ProductImage producto={p} sizes="80px" />
+              </button>
+            ))}
+          </div>
+          {/* Al elegir una prenda: qué es y cómo comprarla sola. */}
+          {activa > 0 ? (
+            <p className={s.prenda}>
+              <span>
+                {enFoto.nombre}
+                {enFoto.precio !== undefined && `, ${formatCOP(enFoto.precio)}`}
+              </span>
+              <Link href={`/producto/${enFoto.slug}`} className="link">
+                Comprar por separado
+              </Link>
+            </p>
+          ) : (
+            <p className={s.prenda}>
+              <span>El conjunto completo. Cada prenda se vende también por separado.</span>
+            </p>
+          )}
+        </div>
+      )}
 
       {producto.precio !== undefined ? (
         <Comprar producto={producto} />

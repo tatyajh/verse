@@ -28,8 +28,8 @@
 
 /* Borealis */
 .pagina[data-tonalidad="borealis"] {
-  --bg: linear-gradient(180deg, #0f6e56 0%, #4b4478 100%);
-  --bg-2: #1a7a62;
+  --bg: linear-gradient(180deg, #34615a 0%, #5b5680 100%);
+  --bg-2: #3f6d65;
   --fg: #f1eef0;
   --muted: #d6cfe0;
   --line: rgb(233 227 219 / 0.18);
@@ -355,7 +355,7 @@
 
 /* III. Borealis */
 .capitulo[data-tonalidad="borealis"] {
-  --velo: 15 90 72;
+  --velo: 45 88 80;
   --hilo: 233 227 219;
 }
 

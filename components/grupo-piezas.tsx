@@ -1,12 +1,14 @@
 import ProductCard from "./product-card";
-import { getProduct, TIPO_PLURAL, type Product, type TipoPieza } from "@/lib/products";
+import { TIPO_PLURAL, type Product, type TipoPieza } from "@/lib/products";
+import { galeriaDe } from "@/lib/catalogo";
 import s from "./grupo-piezas.module.css";
 
 const TAMANOS = "(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw";
 
 /**
  * Un tipo de prenda dentro del catálogo de una colección. Con
- * `conComponentes`, cada conjunto muestra debajo sus prendas sueltas.
+ * `conComponentes`, cada conjunto lleva sus prendas como galería en la
+ * propia tarjeta.
  */
 export default function GrupoPiezas({
   tipo,
@@ -31,30 +33,14 @@ export default function GrupoPiezas({
         <span>{productos.length}</span>
       </div>
       <div className={s.rejilla}>
-        {productos.map((p) =>
-          conComponentes && p.componentes?.length ? (
-            <div key={p.slug} className={s.conjuntoBloque}>
-              <ProductCard producto={p} sizes={TAMANOS} />
-              <div className={s.componentesSection}>
-                <p className={`${s.componentesLabel} label`}>O por separado</p>
-                <div className={s.componentesGrid}>
-                  {p.componentes
-                    .map((slug) => getProduct(slug))
-                    .filter((c) => c !== undefined)
-                    .map((c) => (
-                      <ProductCard
-                        key={c.slug}
-                        producto={c}
-                        sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 25vw"
-                      />
-                    ))}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <ProductCard key={p.slug} producto={p} sizes={TAMANOS} />
-          ),
-        )}
+        {productos.map((p) => (
+          <ProductCard
+            key={p.slug}
+            producto={p}
+            sizes={TAMANOS}
+            galeria={conComponentes ? galeriaDe(p) : undefined}
+          />
+        ))}
       </div>
     </section>
   );

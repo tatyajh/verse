@@ -8,6 +8,7 @@ import BotonFavorito from "@/components/boton-favorito";
 import BotonWhatsApp from "@/components/boton-whatsapp";
 import { getProduct, getTonalidad, PRODUCTS } from "@/lib/products";
 import { getColeccion } from "@/lib/colecciones";
+import { galeriaDe } from "@/lib/catalogo";
 import { WHATSAPP } from "@/lib/contacto";
 import s from "./producto.module.css";
 
@@ -61,7 +62,11 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
     <Panel tono="noche" seam={false}>
       <div className="wrap">
         <article className={s.pieza}>
-          <VisorPieza producto={producto} sizes="(max-width: 860px) 100vw, 55vw" />
+          <VisorPieza
+            producto={producto}
+            galeria={galeriaDe(producto)}
+            sizes="(max-width: 860px) 100vw, 55vw"
+          />
 
           <div className={s.ficha}>
             <nav className={`${s.migas} label`} aria-label="Ruta">

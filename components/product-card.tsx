@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ProductImage from "./product-image";
+import GaleriaTarjeta from "./galeria-tarjeta";
 import BotonFavorito from "./boton-favorito";
 import { formatCOP } from "@/lib/money";
 import { TIPO_LABEL, getTonalidad, type Product } from "@/lib/products";
@@ -11,8 +12,11 @@ export default function ProductCard({
   sizes,
   priority,
   className,
+  galeria,
 }: {
   producto: Product;
+  /** Conjunto y sus prendas: se muestran como miniaturas bajo la foto. */
+  galeria?: Product[];
   sizes?: string;
   priority?: boolean;
   className?: string;
@@ -25,9 +29,13 @@ export default function ProductCard({
     // El enlace se estira sobre la tarjeta en vez de envolverla: así el
     // corazón puede vivir encima sin quedar anidado dentro de un <a>.
     <div className={`${s.card} ${className ?? ""}`}>
-      <div className={s.marco}>
-        <ProductImage producto={producto} sizes={sizes} priority={priority} />
-      </div>
+      {galeria && galeria.length > 1 ? (
+        <GaleriaTarjeta items={galeria} sizes={sizes} claseMarco={s.marco} />
+      ) : (
+        <div className={s.marco}>
+          <ProductImage producto={producto} sizes={sizes} priority={priority} />
+        </div>
+      )}
       <div className={s.pie}>
         <p className={`${s.procedencia} label`}>
           {etiqueta} de {procedencia}

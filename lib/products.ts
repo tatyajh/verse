@@ -69,7 +69,7 @@ export const TONALIDADES: TonalidadInfo[] = [
     nombre: "Borealis",
     sensacion: "Jade y lila, el cielo encendido.",
     paleta: [
-      { nombre: "Verde jade", hex: "#0F6E56" },
+      { nombre: "Verde jade", hex: "#34615A" },
       { nombre: "Lila", hex: "#8E82B7" },
       { nombre: "Lavanda", hex: "#ADA4CC" },
       { nombre: "Morado gris", hex: "#8E7DA8" },

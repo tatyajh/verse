@@ -16,7 +16,7 @@ const ACENTO_AURORA = "#B76E79";
 const LADO_COLOR = {
   noctis: { bg: "#060608", fg: "#e9e3db", accent: ACENTO_AURORA }, // Negro
   vigilia: { bg: "#493B63", fg: "#e9e3db", accent: ACENTO_AURORA }, // Morado profundo
-  borealis: { bg: "#0F6E56", fg: "#e9e3db", accent: ACENTO_AURORA }, // Verde esmeralda
+  borealis: { bg: "#34615A", fg: "#f1eef0", accent: ACENTO_AURORA }, // Jade apagado
   "prima-luce": { bg: "#E5E1E2", fg: "#493B63", accent: "#C4734A" }, // Perla
 } as const;
 
@@ -35,7 +35,7 @@ export default function Home() {
             </p>
             <div className={s.heroBotones}>
               <Link href="/aurora" className="btn btn-fg">
-                Ver Aurora
+                Ver la última colección
               </Link>
               <Link href="/productos" className="btn">
                 Ver todos los productos

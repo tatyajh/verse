@@ -6,7 +6,7 @@
 }
 
 .texto {
-  font-family: var(--font-display), "Didot", serif;
+  font-family: var(--font-display), Georgia, serif;
   font-size: clamp(1.3rem, 2.2vw, 1.7rem);
   transition: color 0.4s var(--ease-umbral);
 }
