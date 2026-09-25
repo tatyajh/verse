@@ -58,7 +58,7 @@ const TEXTURAS: Record<Tonalidad, string[]> = {
   "prima-luce": [U("photo-1617055407123-3d7130c1f940"), U("photo-1631737860377-2d332ca3e3f5")],
 };
 
-/** Imagen de cada colección en /colecciones. */
+/** Imagen de cada colección, en su sección de la portada. */
 export const IMAGEN_COLECCION: Partial<Record<ColeccionId, string>> = ACTIVO
   ? { aurora: "/provisional/aurora-trio.jpg" }
   : {};

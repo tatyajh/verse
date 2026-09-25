@@ -170,7 +170,7 @@ export default function CarritoCliente() {
 
         <button
           type="button"
-          className="btn btn-fg"
+          className="btn btn-solido"
           onClick={pagar}
           disabled={enviando}
         >

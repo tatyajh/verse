@@ -17,6 +17,11 @@
   pointer-events: none;
 }
 
+.nav[data-fondo="si"] {
+  background: linear-gradient(to bottom, var(--bg) 62%, transparent);
+  padding-bottom: 2rem;
+}
+
 /* Al bajar, el nav se retira para no quedarse sobre los titulares. */
 .oculta {
   transform: translateY(-115%);

@@ -14,11 +14,14 @@ import s from "./nav.module.css";
  * un color fijo: mide qué panel queda bajo su línea base y adopta ese mundo.
  * Es lo que permite que no haya barra opaca ni blur tapando la composición.
  */
-function useNav(): { tono: "noche" | "seda"; oculto: boolean } {
+function useNav(): { tono: "noche" | "seda"; oculto: boolean; conFondo: boolean } {
   const [tono, setTono] = useState<"noche" | "seda">("noche");
   // El nav flota sin barra opaca, así que se retira al bajar en vez de
   // quedarse encima de los titulares. Al subir vuelve de inmediato.
   const [oculto, setOculto] = useState(false);
+  // Arriba del todo el nav va limpio sobre el hero; al bajar gana un fondo
+  // que se desvanece, para no montarse sobre el texto.
+  const [conFondo, setConFondo] = useState(false);
 
   useEffect(() => {
     let frame = 0;
@@ -39,6 +42,7 @@ function useNav(): { tono: "noche" | "seda"; oculto: boolean } {
       setTono(encontrado ?? "noche");
 
       const y = window.scrollY;
+      setConFondo(y > 40);
       if (Math.abs(y - anterior) > 6) {
         setOculto(y > anterior && y > 160);
         anterior = y;
@@ -60,11 +64,11 @@ function useNav(): { tono: "noche" | "seda"; oculto: boolean } {
     };
   }, []);
 
-  return { tono, oculto };
+  return { tono, oculto, conFondo };
 }
 
 export default function Nav() {
-  const { tono, oculto } = useNav();
+  const { tono, oculto, conFondo } = useNav();
   const { piezas, listo } = useCart();
   const { cuenta: favoritos, listo: favoritosListo } = useFavoritos();
   const [coleccionesAbierto, setColeccionesAbierto] = useState(false);
@@ -95,6 +99,7 @@ export default function Nav() {
     <nav
       className={`${s.nav} ${oculto ? s.oculta : ""}`}
       data-panel={tono}
+      data-fondo={conFondo ? "si" : undefined}
       aria-label="Principal"
     >
       <Link href="/" className={s.marca}>
@@ -132,18 +137,15 @@ export default function Nav() {
                 </Link>
               ))}
               <Link
-                href="/colecciones"
+                href="/piezas"
                 className={s.coleccionLink}
                 onClick={() => setColeccionesAbierto(false)}
               >
-                Todas las colecciones
+                Todas las piezas
               </Link>
             </div>
           )}
         </div>
-        <Link href="/piezas" className="link">
-          Piezas
-        </Link>
         <Link href="/blog" className="link">
           Diario
         </Link>

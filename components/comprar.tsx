@@ -51,7 +51,7 @@ export default function Comprar({ producto }: { producto: Product }) {
       )}
 
       <div className={s.accion}>
-        <button type="button" className="btn btn-fg" onClick={alAgregar}>
+        <button type="button" className="btn btn-solido" onClick={alAgregar}>
           Añadir al carrito
         </button>
         <Link href="/carrito" className="label link">

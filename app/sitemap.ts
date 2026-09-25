@@ -10,7 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: url("/"), changeFrequency: "weekly", priority: 1 },
-    { url: url("/colecciones"), changeFrequency: "monthly", priority: 0.8 },
     { url: url("/piezas"), changeFrequency: "weekly", priority: 0.9 },
     ...COLECCIONES.map((c) => ({
       url: url(c.ruta),

@@ -230,14 +230,26 @@ textarea {
   transform: scaleX(1);
 }
 
+/* En pantallas táctiles no hay hover que revele el subrayado: queda visible
+   siempre, para que un enlace se lea como enlace. El nav no lo necesita. */
+@media (hover: none) {
+  .link::after {
+    transform: scaleX(1);
+    opacity: 0.55;
+  }
+  nav .link::after {
+    transform: scaleX(0);
+  }
+}
+
 /* Botón de contorno; nunca con relleno de color de acento. */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
-  padding: 1.1rem 2.4rem;
-  border: 1px solid var(--line-fuerte);
+  padding: 1rem 2.1rem;
+  border: 1px solid color-mix(in srgb, var(--fg) 55%, transparent);
   border-radius: 999px;
   font-family: var(--font-body), Georgia, serif;
   font-size: 1.025rem;
@@ -262,6 +274,19 @@ textarea {
 
 .btn-fg {
   border-color: var(--fg);
+}
+
+/* Relleno: solo para la acción principal de una pantalla. */
+.btn-solido {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+
+.btn-solido:hover:not(:disabled) {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: var(--noche);
 }
 
 .btn-fg:hover:not(:disabled) {

@@ -46,12 +46,11 @@
   max-width: 40ch;
 }
 
-.heroEnlaces {
+.heroBotones {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem 2rem;
+  gap: 0.8rem;
   margin-top: 0.4rem;
-  color: var(--muted);
 }
 
 .heroFigura {
@@ -119,12 +118,51 @@
 /* ---------- 3. Colección vigente: franjas de color a lo ancho ---------- */
 
 .coleccionCabecera {
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.conImagen {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.coleccionTexto {
+  display: grid;
+  gap: 1.2rem;
+  justify-items: start;
+}
+
+.coleccionDescripcion {
+  color: var(--muted);
+  font-size: var(--t-m);
+  max-width: 34ch;
+}
+
+.coleccionBotones {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
   flex-wrap: wrap;
-  gap: 1rem 2rem;
-  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  gap: 0.8rem;
+  margin-top: 0.4rem;
+}
+
+.coleccionImagen {
+  position: relative;
+  aspect-ratio: 8 / 7;
+  overflow: hidden;
+  /* Mismo arco que las tarjetas y la llave. */
+  border-radius: 50% 50% 6% 6% / 22% 22% 4% 4%;
+}
+
+.coleccionImagen img {
+  object-fit: cover;
+}
+
+@media (max-width: 760px) {
+  .conImagen {
+    grid-template-columns: 1fr;
+  }
 }
 
 .coleccionTitulo {

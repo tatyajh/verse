@@ -74,7 +74,7 @@ export default function ListaPrivada({
           aria-invalid={estado === "error"}
           aria-describedby={`${id}-nota`}
         />
-        <button type="submit" className="btn btn-fg" disabled={estado === "enviando"}>
+        <button type="submit" className="btn btn-solido" disabled={estado === "enviando"}>
           {estado === "enviando" ? "Enviando…" : boton}
         </button>
       </div>

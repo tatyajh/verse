@@ -3,7 +3,9 @@ import Link from "next/link";
 import Panel from "@/components/panel";
 import KeyReveal from "@/components/key-reveal";
 import ListaPrivada from "@/components/lista-privada";
-import { FOTO_PORTADA } from "@/lib/provisional";
+import { FOTO_PORTADA, IMAGEN_COLECCION } from "@/lib/provisional";
+import { getColeccion } from "@/lib/colecciones";
+import Image from "next/image";
 import { TONALIDADES } from "@/lib/products";
 import { ENTRADAS, formatFecha } from "@/lib/blog";
 import { getCapitulo } from "@/lib/historia";
@@ -37,14 +39,14 @@ export default function Home() {
               lista.
             </p>
             <ListaPrivada />
-            <p className={s.heroEnlaces}>
-              <Link href="/aurora" className="link">
-                Ver la última colección: Aurora
+            <div className={s.heroBotones}>
+              <Link href="/aurora" className="btn btn-fg">
+                Ver Aurora
               </Link>
-              <Link href="/piezas" className="link">
+              <Link href="/piezas" className="btn">
                 Ver todas las piezas
               </Link>
-            </p>
+            </div>
           </div>
           <figure className={s.heroFigura}>
             <KeyReveal foto={FOTO_PORTADA} />
@@ -80,11 +82,31 @@ export default function Home() {
       {/* 3 — Colección vigente: los cuatro momentos de Aurora. */}
       <Panel tono="seda" id="colecciones" seam={false}>
         <div className="wrap">
-          <div className={s.coleccionCabecera}>
-            <h2 className={s.coleccionTitulo}>Aurora</h2>
-            <Link href="/aurora?view=productos" className="label link">
-              Ver toda la colección
-            </Link>
+          <div className={`${s.coleccionCabecera} ${IMAGEN_COLECCION.aurora ? s.conImagen : ""}`}>
+            <div className={s.coleccionTexto}>
+              <h2 className={s.coleccionTitulo}>Aurora</h2>
+              <p className={s.coleccionDescripcion}>
+                La colección más reciente. {getColeccion("aurora").descripcion}
+              </p>
+              <div className={s.coleccionBotones}>
+                <Link href="/aurora?view=productos" className="btn btn-fg">
+                  Ver la colección
+                </Link>
+                <Link href="/aurora" className="btn">
+                  Leer la historia
+                </Link>
+              </div>
+            </div>
+            {IMAGEN_COLECCION.aurora && (
+              <div className={s.coleccionImagen}>
+                <Image
+                  src={IMAGEN_COLECCION.aurora}
+                  alt="Piezas de la colección Aurora"
+                  fill
+                  sizes="(max-width: 760px) 100vw, 50vw"
+                />
+              </div>
+            )}
           </div>
         </div>
         {/* Cuatro franjas a lo ancho, una por hora de la noche. La altura sigue

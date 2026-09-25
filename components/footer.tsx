@@ -33,11 +33,6 @@ export default function Footer() {
                 </li>
               ))}
               <li>
-                <Link href="/colecciones" className="link">
-                  Todas las colecciones
-                </Link>
-              </li>
-              <li>
                 <Link href="/piezas" className="link">
                   Todas las piezas
                 </Link>

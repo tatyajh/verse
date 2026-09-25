@@ -1,5 +1,5 @@
 /**
- * Registro de colecciones. El nav, el pie, /colecciones, el sitemap y las
+ * Registro de colecciones. El nav, el pie, /piezas, el sitemap y las
  * fichas leen de aquí.
  *
  * Para agregar una colección:
@@ -15,7 +15,7 @@ export type ColeccionId = "aurora";
 export type Coleccion = {
   id: ColeccionId;
   nombre: string;
-  /** Una línea para la tarjeta de /colecciones. */
+  /** Una línea para presentarla. */
   descripcion: string;
   /** Página principal de la colección. */
   ruta: string;
