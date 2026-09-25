@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Panel from "@/components/panel";
-import LlaveViva from "@/components/llave-viva";
+import KeyReveal from "@/components/key-reveal";
 import Molderia from "@/components/firmas/molderia";
 import TransicionAurora from "@/components/firmas/transicion-aurora";
-import { IMAGEN_COLECCION } from "@/lib/provisional";
+import { FOTO_PORTADA, IMAGEN_COLECCION } from "@/lib/provisional";
 import { getColeccion } from "@/lib/colecciones";
 import Image from "next/image";
 import { ENTRADAS, formatFecha } from "@/lib/blog";
@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <>
-      {/* 1 — Hero: la llave del logo, que se mueve y ondula con el cursor o el dedo. */}
+      {/* 1 — Hero: la llave del logo abre el velo de encaje sobre la foto. */}
       <Panel tono="noche" seam={false} padded={false} className={s.hero}>
         <div className={s.luz} aria-hidden="true" />
         <div className={`${s.heroRejilla} wrap`}>
@@ -33,7 +33,7 @@ export default function Home() {
             </div>
           </div>
           <div className={s.heroFigura}>
-            <LlaveViva />
+            <KeyReveal foto={FOTO_PORTADA} />
           </div>
         </div>
       </Panel>

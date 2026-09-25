@@ -29,8 +29,9 @@ Versé tiene cinco firmas visuales (la mayoría en `components/firmas/`):
 
 - **El hilo** (`hilo.tsx`): reemplaza las líneas rectas. Cuelga entre secciones, respira y se
   deja llevar por el cursor.
-- **La llave viva** (`llave-viva.tsx`, PixiJS): la llave del logo (`public/verse-llave.svg`, el
-  emblema sin la cápsula) en el hero; sigue al cursor o al dedo y ondula como seda.
+- **La llave** (`key-reveal.tsx`): en el hero, la foto en espejo cubierta por el velo de
+  encaje, y encima la llave del logo sin la cápsula (`public/verse-llave-hero.svg`). Se mueve
+  con el cursor o el dedo y va abriendo el velo; los huecos se cierran solos.
 - **La moldería** (`molderia.tsx`): patronaje con medidas reales, detrás de la guía de tallas.
 - **La seda** (`umbral.tsx`): una cortina de dos hojas de seda que se abre al entrar al
   sitio y en cada cambio de página; al entrar, la seda ondea.
