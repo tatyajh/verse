@@ -1,0 +1,12 @@
+.hilo {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+.hilo path {
+  stroke: var(--rose);
+  stroke-width: 1;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}

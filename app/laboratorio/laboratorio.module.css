@@ -1,0 +1,158 @@
+.pagina {
+  background: var(--noche);
+  color: var(--fg);
+  padding-bottom: 8rem;
+}
+
+.intro {
+  display: grid;
+  gap: 1rem;
+  max-width: 60ch;
+  padding-top: 8rem;
+  padding-bottom: 4rem;
+  color: var(--muted);
+}
+
+.introTitulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: var(--t-xl);
+  color: var(--fg);
+}
+
+/* Explicación de cada prueba: texto de trabajo, no del sitio. */
+.nota {
+  color: var(--muted);
+  font-style: italic;
+  max-width: 70ch;
+  padding-top: 5rem;
+  padding-bottom: 1.5rem;
+  border-top: 1px dashed var(--line);
+}
+
+/* ---------- 1. Hero ---------- */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  padding: 12vh var(--gutter) 5rem;
+}
+
+/* Luz de aurora casi imperceptible que se mueve muy despacio. */
+.luz {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(35% 30% at 70% 35%, rgb(15 110 86 / 0.22), transparent 70%),
+    radial-gradient(30% 28% at 40% 60%, rgb(73 59 99 / 0.28), transparent 70%);
+  animation: deriva 36s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes deriva {
+  to {
+    transform: translate3d(-6%, 4%, 0) scale(1.08);
+  }
+}
+
+/* El logo real, enorme y cortado por el borde derecho. */
+.wordmark {
+  position: relative;
+  display: block;
+  margin-left: 20vw;
+  width: 118vw;
+  max-width: none;
+  height: auto;
+  pointer-events: none;
+}
+
+/* Foto pequeña, rectangular, que interrumpe el wordmark. */
+.foto {
+  position: absolute;
+  right: 12vw;
+  /* Cae sobre la línea de INTIMATES del wordmark. */
+  top: calc(12vh + 22vw);
+  width: clamp(9rem, 17vw, 15rem);
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+.foto img {
+  object-fit: cover;
+}
+
+.heroTexto {
+  position: relative;
+  display: grid;
+  gap: 2rem;
+  max-width: 24rem;
+  margin-top: clamp(2rem, 5vw, 4rem);
+}
+
+.heroFrase {
+  font-size: var(--t-m);
+  line-height: 1.45;
+}
+
+.heroEnlaces {
+  display: grid;
+  gap: 1.4rem;
+}
+
+@media (max-width: 760px) {
+  .wordmark {
+    margin-left: 4vw;
+    width: 170vw;
+  }
+  .foto {
+    position: relative;
+    right: auto;
+    top: auto;
+    margin: 2rem 0 0 auto;
+  }
+}
+
+/* ---------- 2. El hilo ---------- */
+
+.hiloDemo {
+  display: grid;
+  gap: 2rem;
+}
+
+.hiloTitulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: var(--t-xl);
+  max-width: 18ch;
+}
+
+.hiloTexto {
+  max-width: 44ch;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .luz {
+    animation: none;
+  }
+}
+
+/* ---------- 3. La llave ---------- */
+
+.llaveDemo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 5rem;
+  padding-block: 4rem;
+}
+
+.puerta {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(2.4rem, 7vw, 5.5rem);
+  line-height: 1;
+  color: var(--fg);
+  transition: color 0.4s var(--ease-umbral);
+}
+
+.puerta:hover {
+  color: var(--rose);
+}
