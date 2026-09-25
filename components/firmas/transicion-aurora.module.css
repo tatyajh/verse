@@ -14,6 +14,13 @@
   background: #060608;
 }
 
+/* La luz de color de cada momento, encima del cielo. */
+.halo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
 /* Grano de película muy leve: la luz tiene textura, no es un degradado plano. */
 .grano {
   position: absolute;

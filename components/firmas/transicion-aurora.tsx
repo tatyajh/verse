@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { cieloEn } from "@/lib/cielo";
+import { cieloEn, colorCintaEn } from "@/lib/cielo";
 import { TONALIDADES } from "@/lib/products";
 import s from "./transicion-aurora.module.css";
 
@@ -19,6 +19,7 @@ export default function TransicionAurora({
 }) {
   const ref = useRef<HTMLElement>(null);
   const fondo = useRef<HTMLDivElement>(null);
+  const halo = useRef<HTMLDivElement>(null);
   const [momento, setMomento] = useState(0);
 
   useEffect(() => {
@@ -32,8 +33,15 @@ export default function TransicionAurora({
       const r = el.getBoundingClientRect();
       const recorrido = r.height - window.innerHeight;
       const p = Math.min(1, Math.max(0, -r.top / recorrido));
+      // cieloEn y colorCintaEn devuelven «r g b»: hay que envolverlos en rgb().
       const [a, b, c, d] = cieloEn(p);
-      f.style.background = `linear-gradient(180deg, ${a} 0%, ${b} 40%, ${c} 75%, ${d} 100%)`;
+      f.style.background = `linear-gradient(180deg, rgb(${a}) 0%, rgb(${b}) 40%, rgb(${c}) 75%, rgb(${d}) 100%)`;
+      // La luz propia del momento: oro en Noctis, magenta en Vigilia, jade y
+      // lila en Borealis, rosa en Prima Luce.
+      const { nucleo, pie } = colorCintaEn(p);
+      if (halo.current) {
+        halo.current.style.background = `radial-gradient(60% 38% at 50% 78%, rgb(${pie} / 0.5), transparent 70%), radial-gradient(45% 30% at 30% 30%, rgb(${nucleo} / 0.35), transparent 70%)`;
+      }
       setMomento(Math.min(3, Math.floor(p * 4)));
     };
     const alDesplazar = () => {
@@ -55,6 +63,7 @@ export default function TransicionAurora({
   return (
     <section ref={ref} className={s.recorrido}>
       <div ref={fondo} className={s.cielo}>
+        <div ref={halo} className={s.halo} aria-hidden="true" />
         <div className={s.grano} aria-hidden="true" />
         {TONALIDADES.map((t, i) => (
           <div
