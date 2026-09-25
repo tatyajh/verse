@@ -3,6 +3,7 @@ import ProductImage from "./product-image";
 import BotonFavorito from "./boton-favorito";
 import { formatCOP } from "@/lib/money";
 import { TIPO_LABEL, getTonalidad, type Product } from "@/lib/products";
+import { getColeccion } from "@/lib/colecciones";
 import s from "./product-card.module.css";
 
 export default function ProductCard({
@@ -17,7 +18,7 @@ export default function ProductCard({
   className?: string;
 }) {
   const etiqueta = TIPO_LABEL[producto.tipo];
-  const procedencia = `Aurora · ${getTonalidad(producto.tonalidad).nombre}`;
+  const procedencia = `${getColeccion(producto.coleccion).nombre} · ${getTonalidad(producto.tonalidad).nombre}`;
 
   return (
     // El enlace se estira sobre la tarjeta en vez de envolverla: así el

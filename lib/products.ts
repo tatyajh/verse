@@ -1,3 +1,4 @@
+import type { ColeccionId } from "@/lib/colecciones";
 import { PALETA_AURORA_DIURNA, PALETA_AURORA_NOCTURNA, type PaletaGrabado } from "@/components/lace-canvas";
 
 /**
@@ -15,6 +16,7 @@ export type TipoPieza = "conjunto" | "body" | "corset" | "complemento" | "bra" |
 export type Product = {
   slug: string;
   nombre: string;
+  coleccion: ColeccionId;
   tonalidad: Tonalidad;
   tipo: TipoPieza;
   piezas?: number;
@@ -119,7 +121,7 @@ const TALLAS: Talla[] = ["S", "M", "L", "XL"];
  *
  * Los slugs vienen de nombres anteriores; no se cambian para no romper enlaces.
  */
-export const PRODUCTS: Product[] = [
+const AURORA: Omit<Product, "coleccion">[] = [
   // ---------- NOCTIS: 2 conjuntos + 3 complementos ----------
   {
     slug: "aurora-eclipse",
@@ -251,6 +253,14 @@ export const PRODUCTS: Product[] = [
   // Complementos Prima Luce
   { slug: "aurora-vapor", nombre: "Vapor", tonalidad: "prima-luce", tipo: "complemento", tallas: ["Única"] },
 ];
+
+export const PRODUCTS: Product[] = [
+  ...AURORA.map((p) => ({ ...p, coleccion: "aurora" as const })),
+];
+
+export function porColeccion(coleccion: ColeccionId): Product[] {
+  return PRODUCTS.filter((p) => p.coleccion === coleccion);
+}
 
 export function getProduct(slug: string): Product | undefined {
   return PRODUCTS.find((p) => p.slug === slug);

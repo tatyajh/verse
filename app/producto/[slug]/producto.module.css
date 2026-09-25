@@ -143,3 +143,9 @@
     gap: 2.5rem;
   }
 }
+
+.masInfo {
+  display: inline-block;
+  margin-top: 0.8rem;
+  color: var(--muted);
+}

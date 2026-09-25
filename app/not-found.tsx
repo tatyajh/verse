@@ -13,7 +13,7 @@ export default function NotFound() {
             disponible.
           </p>
           <div className={s.acciones}>
-            <Link href="/#colecciones" className="btn btn-fg">
+            <Link href="/colecciones" className="btn btn-fg">
               Ver colecciones
             </Link>
             <Link href="/" className="label link">

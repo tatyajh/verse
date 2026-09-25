@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import ProductCard from "@/components/product-card";
+import GrupoPiezas from "@/components/grupo-piezas";
 import CieloAurora from "@/components/aurora/cielo-aurora";
 import CapituloVelo from "@/components/aurora/capitulo-velo";
 import UmbralVestidor from "@/components/aurora/umbral-vestidor";
 import {
+  porColeccion,
   porTonalidad,
-  getProduct,
   TIPO_PLURAL,
   TONALIDADES,
   type Tonalidad,
@@ -42,8 +42,6 @@ const DESCRIPCION_GRUPO: Partial<Record<TipoPieza, string>> = {
   complemento: "Para completar el conjunto: accesorios y capas para llevar encima.",
 };
 
-const TAMANOS = "(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw";
-
 function esTipoPieza(valor: string | undefined): valor is TipoPieza {
   return TIPOS_FILTRO.includes(valor as TipoPieza);
 }
@@ -60,9 +58,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
 
   // En la vista por momento y en «Todos» sin filtro se muestran las piezas
   // principales; las prendas sueltas aparecen bajo su conjunto o al filtrar.
-  const fuente = mostrarTodosProductos
-    ? TONALIDADES.flatMap((t) => porTonalidad(t.id))
-    : porTonalidad(activa);
+  const fuente = mostrarTodosProductos ? porColeccion("aurora") : porTonalidad(activa);
   const tipos: TipoPieza[] = filtroTipo ? [filtroTipo] : ["conjunto", "body", "complemento"];
   const grupos = tipos
     .map((tipo) => ({ tipo, productos: fuente.filter((p) => p.tipo === tipo) }))
@@ -234,45 +230,13 @@ export default async function Aurora(props: PageProps<"/aurora">) {
             )}
 
             {grupos.map(({ tipo, productos }) => (
-              <div key={tipo} className={s.grupo}>
-                <div className={`${s.grupoCinta} label`}>
-                  <div>
-                    <h2 className={s.grupoTitulo}>{TIPO_PLURAL[tipo]}</h2>
-                    {!mostrarTodosProductos && DESCRIPCION_GRUPO[tipo] && (
-                      <p className={s.grupoDescripcion}>{DESCRIPCION_GRUPO[tipo]}</p>
-                    )}
-                  </div>
-                  <span>{productos.length}</span>
-                </div>
-                <div className={s.rejilla}>
-                  {productos.map((p) =>
-                    !mostrarTodosProductos && p.componentes?.length ? (
-                      <div key={p.slug} className={s.conjuntoBloque}>
-                        <ProductCard producto={p} sizes={TAMANOS} />
-                        <div className={s.componentesSection}>
-                          <p className={`${s.componentesLabel} label`}>
-                            O por separado
-                          </p>
-                          <div className={s.componentesGrid}>
-                            {p.componentes
-                              .map((slug) => getProduct(slug))
-                              .filter((c) => c !== undefined)
-                              .map((c) => (
-                                <ProductCard
-                                  key={c.slug}
-                                  producto={c}
-                                  sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 25vw"
-                                />
-                              ))}
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <ProductCard key={p.slug} producto={p} sizes={TAMANOS} />
-                    ),
-                  )}
-                </div>
-              </div>
+              <GrupoPiezas
+                key={tipo}
+                tipo={tipo}
+                productos={productos}
+                descripcion={mostrarTodosProductos ? undefined : DESCRIPCION_GRUPO[tipo]}
+                conComponentes={!mostrarTodosProductos}
+              />
             ))}
           </div>
         )}

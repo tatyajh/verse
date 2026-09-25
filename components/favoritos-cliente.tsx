@@ -18,7 +18,7 @@ export default function FavoritosCliente() {
           Aún no has guardado ninguna pieza. Marca el corazón en las que quieras
           volver a ver.
         </p>
-        <Link href="/#colecciones" className="btn">
+        <Link href="/colecciones" className="btn">
           Ver colecciones
         </Link>
       </div>

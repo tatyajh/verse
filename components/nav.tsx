@@ -4,11 +4,10 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart";
 import { useFavoritos } from "@/lib/favoritos";
+import { COLECCIONES } from "@/lib/colecciones";
 import { VerseMark } from "./verse-mark";
 import s from "./nav.module.css";
 
-/** Cada colección nueva se agrega aquí y aparece en el menú. */
-const COLECCIONES = [{ id: "aurora", nombre: "Aurora" }];
 
 /**
  * El nav flota sobre paneles que alternan noche y seda, así que no puede tener
@@ -125,13 +124,20 @@ export default function Nav() {
               {COLECCIONES.map((col) => (
                 <Link
                   key={col.id}
-                  href={`/${col.id}`}
+                  href={col.ruta}
                   className={s.coleccionLink}
                   onClick={() => setColeccionesAbierto(false)}
                 >
                   {col.nombre}
                 </Link>
               ))}
+              <Link
+                href="/colecciones"
+                className={s.coleccionLink}
+                onClick={() => setColeccionesAbierto(false)}
+              >
+                Ver todas
+              </Link>
             </div>
           )}
         </div>

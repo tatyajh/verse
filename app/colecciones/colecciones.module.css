@@ -1,0 +1,77 @@
+.cabecera {
+  display: grid;
+  gap: 1.1rem;
+  padding-top: clamp(2rem, 6vw, 4rem);
+  margin-bottom: clamp(3rem, 7vw, 5rem);
+}
+
+.eyebrow {
+  color: var(--accent);
+}
+
+.titulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: var(--t-xl);
+  line-height: 0.98;
+}
+
+.lista {
+  display: grid;
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  padding-block: clamp(2.2rem, 5vw, 3.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.fila:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.numero {
+  color: var(--muted);
+  padding-top: 1rem;
+}
+
+.cuerpo {
+  display: grid;
+  gap: 0.9rem;
+  justify-items: start;
+}
+
+.nombre {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: var(--t-xl);
+  line-height: 1;
+}
+
+.descripcion {
+  color: var(--muted);
+  font-size: var(--t-m);
+  max-width: 40ch;
+}
+
+.dato {
+  color: var(--accent);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem 2rem;
+  margin-top: 0.8rem;
+}
+
+@media (max-width: 760px) {
+  .fila {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+  .numero {
+    padding-top: 0;
+  }
+}
