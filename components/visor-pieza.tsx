@@ -70,39 +70,61 @@ export default function VisorPieza({
 
   return (
     <div className={s.visor}>
-      <div
-        className={`${s.cuadro} ${giro ? s.giro : ""}`}
-        onPointerDown={alBajarPuntero}
-        onPointerMove={alMoverPuntero}
-        onPointerUp={alSoltarPuntero}
-        onPointerCancel={alSoltarPuntero}
-        onKeyDown={alTeclado}
-        tabIndex={giro ? 0 : undefined}
-        role={giro ? "img" : undefined}
-        aria-label={giro ? `${producto.nombre} — arrastra o usa las flechas para girar` : undefined}
-      >
-        {giro ? (
-          // eslint-disable-next-line @next/next/no-img-element -- secuencia local, no next/image
-          <img src={giro[cuadro]} alt="" draggable={false} />
-        ) : (
-          <ProductImage key={enFoto.slug} producto={enFoto} priority sizes={sizes} />
-        )}
+      {/* Marcas de corte en las esquinas, como en el patronaje. */}
+      <div className={s.molde}>
+        <div
+          className={`${s.cuadro} ${giro ? s.giro : ""}`}
+          onPointerDown={alBajarPuntero}
+          onPointerMove={alMoverPuntero}
+          onPointerUp={alSoltarPuntero}
+          onPointerCancel={alSoltarPuntero}
+          onKeyDown={alTeclado}
+          tabIndex={giro ? 0 : undefined}
+          role={giro ? "img" : undefined}
+          aria-label={
+            giro
+              ? `${producto.nombre} — arrastra o usa las flechas para girar`
+              : undefined
+          }
+        >
+          {giro ? (
+            // eslint-disable-next-line @next/next/no-img-element -- secuencia local, no next/image
+            <img src={giro[cuadro]} alt="" draggable={false} />
+          ) : (
+            <ProductImage
+              key={enFoto.slug}
+              producto={enFoto}
+              priority
+              sizes={sizes}
+            />
+          )}
 
-        {giro && (
-          <>
-            <span className={`${s.pista} label`}>Arrastra para girar</span>
-            <span className={s.aros} aria-hidden="true">
-              {giro.map((_, i) => (
-                <span key={i} className={`${s.aro} ${i === cuadro ? s.aroActivo : ""}`} />
-              ))}
-            </span>
-          </>
-        )}
+          {giro && (
+            <>
+              <span className={`${s.pista} label`}>Arrastra para girar</span>
+              <span className={s.aros} aria-hidden="true">
+                {giro.map((_, i) => (
+                  <span
+                    key={i}
+                    className={`${s.aro} ${i === cuadro ? s.aroActivo : ""}`}
+                  />
+                ))}
+              </span>
+            </>
+          )}
+        </div>
+        {["si", "sd", "ii", "id"].map((e) => (
+          <span key={e} className={`${s.marca} ${s[e]}`} aria-hidden="true" />
+        ))}
       </div>
 
       {conGaleria && (
         <div className={s.galeria}>
-          <div className={s.miniaturas} role="group" aria-label="Prendas del conjunto">
+          <div
+            className={s.miniaturas}
+            role="group"
+            aria-label="Prendas del conjunto"
+          >
             {conGaleria.map((p, i) => (
               <button
                 key={p.slug}
@@ -129,7 +151,9 @@ export default function VisorPieza({
             </p>
           ) : (
             <p className={s.prenda}>
-              <span>El conjunto completo. Cada prenda se vende también por separado.</span>
+              <span>
+                El conjunto completo. Cada prenda se vende también por separado.
+              </span>
             </p>
           )}
         </div>
@@ -139,7 +163,10 @@ export default function VisorPieza({
         <Comprar producto={producto} />
       ) : (
         <div className={s.proximamente}>
-          <p>Todavía no está a la venta. Deja tu correo y te avisamos cuando salga.</p>
+          <p>
+            Todavía no está a la venta. Deja tu correo y te avisamos cuando
+            salga.
+          </p>
           <ListaPrivada pieza={producto.slug} boton="Avísame" />
         </div>
       )}

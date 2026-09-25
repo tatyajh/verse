@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { cieloEn } from "@/lib/cielo";
 import { TONALIDADES } from "@/lib/products";
@@ -10,7 +11,12 @@ import s from "./transicion-aurora.module.css";
  * cuatro cielos (los mismos de la historia) y el nombre del momento cambia
  * en el centro. Con movimiento reducido se ven los cuatro en fila.
  */
-export default function TransicionAurora() {
+export default function TransicionAurora({
+  enlace,
+}: {
+  /** Si se pasa, cada momento enlaza a sus productos: `${enlace}&momento=id`. */
+  enlace?: string;
+}) {
   const ref = useRef<HTMLElement>(null);
   const fondo = useRef<HTMLDivElement>(null);
   const [momento, setMomento] = useState(0);
@@ -56,9 +62,15 @@ export default function TransicionAurora() {
             className={`${s.momento} ${i === momento ? s.visible : ""}`}
             style={{ color: claro ? "#2a1a3f" : "#f1eef0" }}
             aria-hidden={i !== momento}
+            inert={i !== momento}
           >
             <p className={s.nombre}>{t.nombre}</p>
             <p className={s.sensacion}>{t.sensacion}</p>
+            {enlace && (
+              <Link href={`${enlace}&momento=${t.id}`} className={`${s.ver} link`}>
+                Ver los productos de {t.nombre}
+              </Link>
+            )}
           </div>
         ))}
       </div>

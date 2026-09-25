@@ -25,10 +25,19 @@ Otros comandos: `npm run build` (producción), `npm run lint`, `npx tsc --noEmit
 
 ## Diseño
 
-Al entrar, una caja se abre una vez por sesión (`components/umbral.tsx`). En el hero, un
-encaje cubre una foto dentro del arco de la llave y el cursor la descubre (en celular, el
-scroll). Mientras
-no haya venta, la acción principal es la **lista privada** de la primera edición.
+Versé tiene cinco firmas visuales, probadas en `/laboratorio` y en `components/firmas/`:
+
+- **El hilo** (`hilo.tsx`): reemplaza las líneas rectas. Cuelga entre secciones, respira y se
+  deja llevar por el cursor.
+- **La tela** (`tela.tsx`, PixiJS): seda que ondula bajo el cursor, en momentos puntuales.
+- **La moldería** (`molderia.tsx`): patronaje con medidas reales, detrás de la guía de tallas.
+- **La seda** (`menu-seda.tsx` y la caja de entrada): el menú y la apertura son dos hojas de
+  seda que se cierran o se abren; al entrar, la seda ondea.
+- **Aurora como luz** (`transicion-aurora.tsx`): en la portada, el fondo recorre los cuatro
+  momentos al bajar.
+
+La llave del logo es la única forma de arco (el hero). Las fotos son rectangulares, con
+marcas de corte en las esquinas; en la tienda, cada producto lleva una etiqueta colgante.
 
 **Paleta.** Sale del moodboard de Aurora. Los tokens semánticos (`--bg`, `--fg`, `--muted`,
 `--line`, `--accent`) se reasignan según `data-panel`, así que cada componente se escribe

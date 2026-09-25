@@ -55,6 +55,11 @@
   opacity: 0.85;
 }
 
+.ver {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .recorrido {
     height: auto;

@@ -11,17 +11,17 @@ import {
   Sedan,
 } from "next/font/google";
 import Image from "next/image";
-import Hilo from "@/components/laboratorio/hilo";
-import HiloEnlace from "@/components/laboratorio/hilo-enlace";
-import Tela from "@/components/laboratorio/tela";
-import Molderia from "@/components/laboratorio/molderia";
-import MenuSeda from "@/components/laboratorio/menu-seda";
-import TransicionAurora from "@/components/laboratorio/transicion-aurora";
+import Hilo from "@/components/firmas/hilo";
+import HiloEnlace from "@/components/firmas/hilo-enlace";
+import Tela from "@/components/firmas/tela";
+import Molderia from "@/components/firmas/molderia";
+import MenuSeda from "@/components/firmas/menu-seda";
+import TransicionAurora from "@/components/firmas/transicion-aurora";
 import {
   TarjetaEditorial,
   TarjetaEtiqueta,
   TarjetaMolde,
-} from "@/components/laboratorio/tarjetas-sin-arco";
+} from "@/components/firmas/tarjetas-sin-arco";
 import { getProduct } from "@/lib/products";
 import { FOTO_PORTADA } from "@/lib/provisional";
 import s from "./laboratorio.module.css";

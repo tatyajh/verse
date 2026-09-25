@@ -18,8 +18,8 @@
   aspect-ratio: 4 / 5;
   overflow: hidden;
   background: var(--noche);
-  /* Arco de espejo: el mismo óvalo vertical del emblema. */
-  border-radius: 50% 50% 14% 14% / 32% 32% 7% 7%;
+  /* Rectangular: el arco queda reservado para la llave. */
+  border-radius: 2px;
 }
 
 .marco canvas,
@@ -96,19 +96,6 @@
   margin-right: -0.5rem;
 }
 
-.nombre {
-  font-family: var(--font-display), Georgia, serif;
-  font-size: 1.55rem;
-  letter-spacing: 0.04em;
-  line-height: 1.1;
-  transition: color 0.4s var(--ease-umbral);
-}
-
-.card:hover .nombre,
-.card:focus-within .nombre {
-  color: var(--accent);
-}
-
 .resumen {
   color: var(--muted);
   font-size: 1.02rem;
@@ -116,15 +103,71 @@
   max-width: 34ch;
 }
 
-/* El precio no es el argumento de venta: 11px, al final, sin peso. */
+/* ---------- Etiqueta colgante ---------- */
+
+.colgante {
+  position: absolute;
+  top: 0;
+  right: 1.1rem;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  max-width: 62%;
+  pointer-events: none;
+  transform-origin: 50% 0;
+  transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card:hover .colgante,
+.card:focus-within .colgante {
+  transform: rotate(-6deg);
+}
+
+.hilo {
+  width: 1px;
+  height: 2.2rem;
+  background: var(--rose);
+}
+
+.etiquetaPrenda {
+  position: relative;
+  display: grid;
+  gap: 0.1rem;
+  padding: 1.25rem 0.95rem 0.8rem;
+  min-width: 7rem;
+  background: var(--seda);
+  color: var(--tinta);
+  border-radius: 0.25rem 0.25rem 0.45rem 0.45rem;
+  box-shadow: 0 8px 18px rgb(6 6 8 / 0.3);
+}
+
+.ojal {
+  position: absolute;
+  top: 0.45rem;
+  left: 50%;
+  width: 0.42rem;
+  height: 0.42rem;
+  margin-left: -0.21rem;
+  border-radius: 50%;
+  border: 1px solid var(--rose-hondo);
+}
+
+.nombre {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.3rem;
+  line-height: 1.1;
+}
+
 .precio {
-  margin-top: 0.35rem;
-  color: var(--muted);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--tul-hondo);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .card:hover .marco canvas,
-  .card:hover .marco img {
+  .card:hover .marco img,
+  .card:hover .colgante {
     transform: none;
   }
 }

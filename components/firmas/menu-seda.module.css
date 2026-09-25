@@ -1,15 +1,16 @@
+/* Toma la letra y el color de donde esté (el nav o el laboratorio). */
 .boton {
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
-  padding: 0.5rem 0;
-  font-family: var(--font-display), Georgia, serif;
-  font-size: 1.3rem;
-  color: var(--fg);
+  font: inherit;
+  color: inherit;
+  transition: color 0.4s var(--ease-umbral);
 }
 
-.boton:hover span {
-  color: var(--rose);
+.boton:hover,
+.boton:focus-visible {
+  color: var(--fg);
 }
 
 .menu {

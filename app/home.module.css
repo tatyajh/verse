@@ -14,6 +14,7 @@
 }
 
 .heroRejilla {
+  position: relative;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: clamp(2.5rem, 7vw, 7rem);
@@ -135,12 +136,51 @@
   margin-top: 0.4rem;
 }
 
+/* Marcas de corte en las esquinas, como en el patronaje. */
+.coleccionMolde {
+  position: relative;
+  padding: 1rem;
+}
+
 .coleccionImagen {
   position: relative;
   aspect-ratio: 8 / 7;
   overflow: hidden;
-  /* Mismo arco que las tarjetas y la llave. */
-  border-radius: 50% 50% 6% 6% / 22% 22% 4% 4%;
+}
+
+.marca {
+  position: absolute;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 0 solid var(--color-hilo, var(--rose));
+}
+
+.si {
+  top: 0;
+  left: 0;
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+
+.sd {
+  top: 0;
+  right: 0;
+  border-top-width: 1px;
+  border-right-width: 1px;
+}
+
+.ii {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+
+.id {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
 }
 
 .coleccionImagen img {
@@ -157,68 +197,6 @@
   font-family: var(--font-display), Georgia, serif;
   font-size: var(--t-xl);
   line-height: 1;
-}
-
-/* Las franjas van a sangre, fuera de .wrap; el nombre sí respeta el margen. */
-.franjas {
-  display: grid;
-}
-
-/* Cada franja usa los colores del moodboard de su momento, no los del panel. */
-.franja {
-  display: grid;
-  grid-template-columns: 1fr minmax(0, 22rem) auto;
-  align-items: center;
-  gap: 1rem clamp(1.5rem, 4vw, 3rem);
-  padding-block: calc(clamp(1.6rem, 3vw, 2.4rem) + var(--intensidad) * clamp(2rem, 7vw, 6rem));
-  padding-right: var(--gutter);
-  background: var(--lado-bg);
-  color: var(--lado-fg);
-}
-
-.franjaNombre {
-  font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(2.2rem, 6vw, 4.5rem);
-  line-height: 1;
-  margin-inline: 0;
-  transition: color 0.4s var(--ease-umbral);
-}
-
-.franja:hover .franjaNombre,
-.franja:focus-visible .franjaNombre {
-  color: var(--lado-accent);
-}
-
-.franjaSensacion {
-  font-family: var(--font-body), Georgia, serif;
-  font-style: italic;
-}
-
-.franjaSwatches {
-  display: flex;
-  gap: 0.4rem;
-}
-
-.franjaSwatches span {
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  /* Algunos tonos coinciden con el fondo de su franja; el borde los separa. */
-  border: 1px solid color-mix(in srgb, var(--lado-fg) 35%, transparent);
-}
-
-@media (max-width: 720px) {
-  .franja {
-    grid-template-columns: 1fr auto;
-    padding-left: var(--gutter);
-  }
-  .franjaNombre {
-    padding-inline: 0;
-  }
-  .franjaSensacion {
-    grid-column: 1 / -1;
-    grid-row: 2;
-  }
 }
 
 /* ---------- 4. Tallas: banda ancha ---------- */
@@ -371,5 +349,59 @@
   .diario {
     grid-template-columns: 1fr;
     gap: 2.5rem;
+  }
+}
+
+/* ---------- Luz de aurora en el hero ---------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.luz {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(35% 30% at 72% 38%, rgb(52 97 90 / 0.28), transparent 70%),
+    radial-gradient(30% 28% at 40% 62%, rgb(73 59 99 / 0.3), transparent 70%);
+  animation: deriva 36s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes deriva {
+  to {
+    transform: translate3d(-6%, 4%, 0) scale(1.08);
+  }
+}
+
+/* ---------- La tela ---------- */
+
+.telaTexto {
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  color: var(--hueso);
+  text-shadow: 0 2px 20px rgb(6 6 8 / 0.7);
+}
+
+/* ---------- Moldería detrás de la guía de tallas ---------- */
+
+.tallasPanel {
+  overflow: hidden;
+}
+
+.tallasMolde {
+  position: absolute;
+  inset: 0;
+  width: min(1100px, 100%);
+  margin: auto;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .luz {
+    animation: none;
   }
 }

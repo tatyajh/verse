@@ -7,7 +7,7 @@
 
 .linea {
   fill: none;
-  stroke: var(--rose);
+  stroke: var(--color-hilo, var(--rose));
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
   stroke-opacity: 0.55;
@@ -26,7 +26,7 @@
 }
 
 .nota {
-  fill: var(--rose);
+  fill: var(--color-hilo, var(--rose));
   fill-opacity: 0;
   font-family: var(--font-body), Georgia, serif;
   font-style: italic;

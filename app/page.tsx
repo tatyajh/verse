@@ -1,24 +1,14 @@
-import type { CSSProperties } from "react";
 import Link from "next/link";
 import Panel from "@/components/panel";
 import KeyReveal from "@/components/key-reveal";
+import Tela from "@/components/firmas/tela";
+import Molderia from "@/components/firmas/molderia";
+import TransicionAurora from "@/components/firmas/transicion-aurora";
 import { FOTO_PORTADA, IMAGEN_COLECCION } from "@/lib/provisional";
 import { getColeccion } from "@/lib/colecciones";
 import Image from "next/image";
-import { TONALIDADES } from "@/lib/products";
 import { ENTRADAS, formatFecha } from "@/lib/blog";
-import { getCapitulo } from "@/lib/historia";
 import s from "./home.module.css";
-
-/** Rosa Oro: el acento cruzado del moodboard de Aurora, el mismo que usa /aurora.
-    Sobre la perla del amanecer se pierde: ahí manda el bronce hondo. */
-const ACENTO_AURORA = "#B76E79";
-const LADO_COLOR = {
-  noctis: { bg: "#060608", fg: "#e9e3db", accent: ACENTO_AURORA }, // Negro
-  vigilia: { bg: "#493B63", fg: "#e9e3db", accent: ACENTO_AURORA }, // Morado profundo
-  borealis: { bg: "#34615A", fg: "#f1eef0", accent: ACENTO_AURORA }, // Jade apagado
-  "prima-luce": { bg: "#E5E1E2", fg: "#493B63", accent: "#C4734A" }, // Perla
-} as const;
 
 export default function Home() {
 
@@ -26,6 +16,7 @@ export default function Home() {
     <>
       {/* 1 — Hero: la llave (el encaje que el cursor descubre). */}
       <Panel tono="noche" seam={false} padded={false} className={s.hero}>
+        <div className={s.luz} aria-hidden="true" />
         <div className={`${s.heroRejilla} wrap`}>
           <div className={s.heroTexto}>
             <h1 className={s.heroPalabra}>Versé</h1>
@@ -70,6 +61,11 @@ export default function Home() {
         </div>
       </Panel>
 
+      {/* La tela: seda que ondula bajo el cursor. */}
+      <Tela foto="/texturas/seda-noche.jpg">
+        <p className={s.telaTexto}>Una noche. Mil versiones.</p>
+      </Tela>
+
       {/* 3 — Colección vigente: los cuatro momentos de Aurora. */}
       <Panel tono="seda" id="colecciones" seam={false}>
         <div className="wrap">
@@ -89,50 +85,29 @@ export default function Home() {
               </div>
             </div>
             {IMAGEN_COLECCION.aurora && (
-              <div className={s.coleccionImagen}>
-                <Image
-                  src={IMAGEN_COLECCION.aurora}
-                  alt="Productos de la colección Aurora"
-                  fill
-                  sizes="(max-width: 760px) 100vw, 50vw"
-                />
+              <div className={s.coleccionMolde}>
+                <div className={s.coleccionImagen}>
+                  <Image
+                    src={IMAGEN_COLECCION.aurora}
+                    alt="Productos de la colección Aurora"
+                    fill
+                    sizes="(max-width: 760px) 100vw, 50vw"
+                  />
+                </div>
+                {["si", "sd", "ii", "id"].map((e) => (
+                  <span key={e} className={`${s.marca} ${s[e]}`} aria-hidden="true" />
+                ))}
               </div>
             )}
           </div>
         </div>
-        {/* Cuatro franjas a lo ancho, una por hora de la noche. La altura sigue
-            la intensidad de la historia: Borealis, el cielo encendido, es la
-            más alta. */}
-        <ul className={s.franjas}>
-          {TONALIDADES.map((t) => (
-            <li key={t.id}>
-              <Link
-                href={`/aurora?view=productos&momento=${t.id}`}
-                className={s.franja}
-                style={
-                  {
-                    "--lado-bg": LADO_COLOR[t.id].bg,
-                    "--lado-fg": LADO_COLOR[t.id].fg,
-                    "--lado-accent": LADO_COLOR[t.id].accent,
-                    "--intensidad": getCapitulo(t.id)?.intensidad ?? 0,
-                  } as CSSProperties
-                }
-              >
-                <span className={`${s.franjaNombre} wrap`}>{t.nombre}</span>
-                <span className={s.franjaSensacion}>{t.sensacion}</span>
-                <span className={s.franjaSwatches} aria-hidden="true">
-                  {t.paleta.map((c) => (
-                    <span key={c.hex} style={{ background: c.hex }} />
-                  ))}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {/* Aurora como luz: al bajar, el fondo recorre los cuatro momentos. */}
+        <TransicionAurora enlace="/aurora?view=productos" />
       </Panel>
 
       {/* 4 — Tallas: banda ancha, letras separadas por filetes. */}
-      <Panel tono="seda" id="tallas">
+      <Panel tono="seda" id="tallas" className={s.tallasPanel}>
+        <Molderia className={s.tallasMolde} />
         <div className="wrap">
           <div className={s.tallas}>
             <div className={s.tallasTexto}>

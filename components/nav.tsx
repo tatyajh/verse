@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "@/lib/cart";
 import { useFavoritos } from "@/lib/favoritos";
-import { COLECCIONES } from "@/lib/colecciones";
 import { VerseMark } from "./verse-mark";
+import MenuSeda from "./firmas/menu-seda";
 import s from "./nav.module.css";
 
 
@@ -71,29 +71,6 @@ export default function Nav() {
   const { tono, oculto, conFondo } = useNav();
   const { piezas, listo } = useCart();
   const { cuenta: favoritos, listo: favoritosListo } = useFavoritos();
-  const [coleccionesAbierto, setColeccionesAbierto] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const cerrarAlClicAfuera = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setColeccionesAbierto(false);
-      }
-    };
-
-    const cerrarConEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setColeccionesAbierto(false);
-    };
-
-    if (coleccionesAbierto) {
-      document.addEventListener("mousedown", cerrarAlClicAfuera);
-      document.addEventListener("keydown", cerrarConEscape);
-      return () => {
-        document.removeEventListener("mousedown", cerrarAlClicAfuera);
-        document.removeEventListener("keydown", cerrarConEscape);
-      };
-    }
-  }, [coleccionesAbierto]);
 
   return (
     <nav
@@ -116,39 +93,7 @@ export default function Nav() {
       </Link>
 
       <div className={`${s.menu} label`}>
-        <div className={s.coleccionesMenu} ref={menuRef}>
-          <button
-            className={`${s.coleccionesToggle} link`}
-            onClick={() => setColeccionesAbierto(!coleccionesAbierto)}
-            aria-expanded={coleccionesAbierto}
-          >
-            Colecciones
-          </button>
-          {coleccionesAbierto && (
-            <div className={s.coleccionesDropdown}>
-              {COLECCIONES.map((col) => (
-                <Link
-                  key={col.id}
-                  href={col.ruta}
-                  className={s.coleccionLink}
-                  onClick={() => setColeccionesAbierto(false)}
-                >
-                  {col.nombre}
-                </Link>
-              ))}
-              <Link
-                href="/productos"
-                className={s.coleccionLink}
-                onClick={() => setColeccionesAbierto(false)}
-              >
-                Todos los productos
-              </Link>
-            </div>
-          )}
-        </div>
-        <Link href="/blog" className="link">
-          Diario
-        </Link>
+        <MenuSeda conEmblema={false} />
         <Link href="/favoritos" className={`${s.carrito} link`} aria-label="Favoritos">
           <span className={s.etiqueta}>Favoritos</span>
           <svg viewBox="0 0 24 24" aria-hidden="true" className={s.iconoMovil}>

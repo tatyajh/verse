@@ -8,11 +8,12 @@
   padding-block: var(--paso);
 }
 
-/* Filete entre paneles. */
+/* El hilo entre paneles: se centra sobre el borde superior. */
 .seam {
   position: absolute;
   inset-inline: 0;
-  top: 0;
-  height: 1px;
-  background: var(--line-fuerte);
+  top: -18px;
+  height: 36px;
+  z-index: 1;
+  pointer-events: none;
 }

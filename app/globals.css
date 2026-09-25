@@ -74,6 +74,8 @@
   --line-fuerte: rgb(35 29 46 / 0.32);
   --accent: var(--morado);
   --vel: rgb(229 225 226 / 0.72);
+  /* Sobre fondo claro el hilo va en el bronce del logo. */
+  --color-hilo: var(--rose-hondo);
 }
 
 /* =========================================================

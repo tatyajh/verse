@@ -2,7 +2,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Panel from "@/components/panel";
-import ProductCard from "@/components/product-card";
+import { TarjetaEditorial } from "@/components/firmas/tarjetas-sin-arco";
 import VisorPieza from "@/components/visor-pieza";
 import BotonFavorito from "@/components/boton-favorito";
 import BotonWhatsApp from "@/components/boton-whatsapp";
@@ -151,11 +151,7 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
           </div>
           <div className={s.tambienRejilla}>
             {hermanas.slice(0, 3).map((p) => (
-              <ProductCard
-                key={p.slug}
-                producto={p}
-                sizes="(max-width: 560px) 100vw, 33vw"
-              />
+              <TarjetaEditorial key={p.slug} producto={p} />
             ))}
           </div>
         </section>

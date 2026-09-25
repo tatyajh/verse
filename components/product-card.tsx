@@ -36,20 +36,28 @@ export default function ProductCard({
           <ProductImage producto={producto} sizes={sizes} priority={priority} />
         </div>
       )}
+      {/* La etiqueta de la prenda cuelga de un hilo sobre la foto y se mece al
+          pasar el cursor. No recibe clics: el enlace de la tarjeta está debajo. */}
+      <div className={s.colgante}>
+        <span className={s.hilo} aria-hidden="true" />
+        <div className={s.etiquetaPrenda}>
+          <span className={s.ojal} aria-hidden="true" />
+          <h3 className={s.nombre}>{producto.nombre}</h3>
+          {precio && <p className={`${s.precio} num`}>{precio}</p>}
+        </div>
+      </div>
       <div className={s.pie}>
-        <p className={`${s.procedencia} label`}>
-          {etiqueta} de {procedencia}
-        </p>
-        <h3 className={s.nombre}>{producto.nombre}</h3>
-        {producto.resumen && <p className={s.resumen}>{producto.resumen}</p>}
         <div className={s.pieFila}>
-          {precio && <p className={`${s.precio} label num`}>{precio}</p>}
+          <p className={`${s.procedencia} label`}>
+            {etiqueta} de {procedencia}
+          </p>
           <BotonFavorito
             slug={producto.slug}
             nombre={producto.nombre}
             className={s.favorito}
           />
         </div>
+        {producto.resumen && <p className={s.resumen}>{producto.resumen}</p>}
       </div>
       <Link
         href={`/producto/${producto.slug}`}

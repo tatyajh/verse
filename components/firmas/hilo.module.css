@@ -5,7 +5,7 @@
 }
 
 .hilo path {
-  stroke: var(--rose);
+  stroke: var(--color-hilo, var(--rose));
   stroke-width: 1;
   stroke-linecap: round;
   vector-effect: non-scaling-stroke;
