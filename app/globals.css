@@ -38,7 +38,7 @@
   /* --- medida --- */
   --gutter: clamp(1.25rem, 4.5vw, 4rem);
   --maxw: 1440px;
-  --paso: clamp(5rem, 11vh, 9.5rem);
+  --paso: clamp(3.5rem, 8vh, 6rem);
 
   /* --- escala tipográfica --- */
   --t-hero: clamp(4.5rem, 21vw, 22rem);

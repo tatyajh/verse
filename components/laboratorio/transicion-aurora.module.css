@@ -1,7 +1,7 @@
-/* Cuatro pantallas de recorrido; el cielo se queda fijo mientras tanto. */
+/* Tres pantallas de recorrido; el cielo se queda fijo mientras tanto. */
 .recorrido {
   position: relative;
-  height: 400vh;
+  height: 300vh;
 }
 
 .cielo {

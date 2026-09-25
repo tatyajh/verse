@@ -223,14 +223,11 @@
 /* ---------- obertura ---------- */
 
 .obertura {
-  /* Descuenta la cabecera y el toggle que van encima: con 100svh el
-     contenido se centra en una pantalla entera y deja un hueco muerto. */
-  min-height: calc(100svh - 15rem);
   display: grid;
   /* Al inicio, no centrado: centrar dejaba un hueco muerto bajo el toggle. */
   align-content: start;
   gap: clamp(1.2rem, 3vw, 2rem);
-  padding-block: clamp(1rem, 4vh, 2.5rem) clamp(4rem, 10vh, 7rem);
+  padding-block: clamp(1rem, 4vh, 2.5rem) clamp(3rem, 7vh, 5rem);
   color: var(--fg);
 }
 
@@ -257,11 +254,12 @@
 
 /* ---------- capítulo ---------- */
 
+/* El alto lo da el texto, no la pantalla: con 100svh y mucho padding cada
+   capítulo dejaba huecos enormes. */
 .capitulo {
-  min-height: 100svh;
   display: grid;
   align-content: center;
-  padding-block: clamp(8rem, 18vh, 14rem);
+  padding-block: clamp(4.5rem, 10vh, 7.5rem);
   padding-inline: clamp(1.5rem, 4vw, 2.5rem);
   color: var(--fg);
 }
@@ -504,12 +502,11 @@
 /* ---------- cierre ---------- */
 
 .cierre {
-  min-height: 100svh;
   display: grid;
   align-content: center;
   justify-items: start;
   gap: clamp(1rem, 3vw, 2rem);
-  padding-block: clamp(6rem, 16vh, 12rem);
+  padding-block: clamp(5rem, 12vh, 8rem);
 }
 
 .cierreFrase {
