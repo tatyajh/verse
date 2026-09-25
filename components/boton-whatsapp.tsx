@@ -14,9 +14,8 @@ const Icono = () => (
  * Escribir por WhatsApp es como compra la mayoría de las clientas en Colombia:
  * el mensaje llega ya redactado con la pieza que estaban mirando.
  *
- * Mientras no haya número en lib/contacto.ts se pinta la maqueta, inerte y
- * sin href. Nunca un número de relleno: cualquier número inventado es el
- * WhatsApp real de alguien.
+ * Sin número en lib/contacto.ts no se muestra: un botón que no lleva a ningún
+ * lado es peor que no tenerlo. Nunca un número de relleno.
  */
 export default function BotonWhatsApp({
   mensaje,
@@ -29,18 +28,7 @@ export default function BotonWhatsApp({
 }) {
   const enlace = enlaceWhatsApp(mensaje);
 
-  if (!enlace) {
-    return (
-      <span
-        className={`${s.boton} ${s.pendiente} label ${className ?? ""}`}
-        aria-disabled="true"
-      >
-        <Icono />
-        <span>{texto}</span>
-        <span className={s.nota}>pronto</span>
-      </span>
-    );
-  }
+  if (!enlace) return null;
 
   return (
     <a

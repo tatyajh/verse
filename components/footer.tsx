@@ -74,22 +74,13 @@ export default function Footer() {
                   hola@verseintimates.com
                 </a>
               </li>
-              <li>
-                {whatsapp ? (
-                  <a
-                    href={whatsapp}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link"
-                  >
+              {whatsapp && (
+                <li>
+                  <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="link">
                     WhatsApp
                   </a>
-                ) : (
-                  <span className={s.pendiente} aria-disabled="true">
-                    WhatsApp <em>pronto</em>
-                  </span>
-                )}
-              </li>
+                </li>
+              )}
               <li>
                 <a
                   href="https://instagram.com/verse_intimates"

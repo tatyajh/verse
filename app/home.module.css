@@ -9,19 +9,10 @@
 .hero {
   min-height: 100svh;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 1fr auto;
   gap: 2rem;
   padding-block: 6rem 2.5rem;
   overflow: hidden;
-}
-
-/* Una sola línea desde que salió "Moda íntima": a la derecha, alineada con
-   el menú, en vez de amontonada bajo el lockup. */
-.heroCinta {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  color: var(--muted);
 }
 
 /* El wordmark se sangra a propósito y no lleva los márgenes de .wrap:
@@ -139,137 +130,86 @@
   }
 }
 
-/* ---------- 3. Aurora: dos paneles, uno por tonalidad ---------- */
+/* ---------- 3. Colección vigente: franjas de color a lo ancho ---------- */
 
-.duoCinta {
+.coleccionCabecera {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 1rem;
-  color: var(--muted);
-  padding-bottom: 1.5rem;
-}
-
-/* Cuatro tarjetas separadas, no un bloque partido por filetes: con esquinas
-   redondeadas el truco del gap de 1px dejaba ver la línea por detrás. */
-.duo {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(0.6rem, 1.5vw, 1rem);
-}
-
-/* Cada lado adopta sus propios colores —los del moodboard real de Aurora—,
-   no los tokens del panel: es un adelanto de lo que hace /aurora al elegir. */
-.lado {
-  border-radius: clamp(1.25rem, 3vw, 2rem);
-  padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 2.5rem);
-  display: grid;
-  gap: 1.1rem;
-  align-content: start;
-  background: var(--lado-bg);
-  color: var(--lado-fg);
-  transition: background-color 0.6s ease-out, color 0.6s ease-out;
-}
-
-.ladoIntencion {
-  color: var(--lado-accent);
-}
-
-.ladoNombre {
-  font-family: var(--font-display), "Didot", serif;
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  line-height: 0.95;
-}
-
-.ladoSensacion {
-  font-family: var(--font-body), Georgia, serif;
-  font-style: italic;
-  max-width: 30ch;
-}
-
-.ladoSwatches {
-  display: flex;
-  gap: 0.4rem;
-  margin-top: 0.3rem;
-}
-
-.ladoSwatches span {
-  width: 1.1rem;
-  height: 1.1rem;
-  border-radius: 50%;
-  /* un tono del moodboard (Crema Lunar) coincide con el fondo diurno;
-     el borde evita que ese swatch desaparezca contra su propio fondo */
-  border: 1px solid color-mix(in srgb, var(--lado-fg) 35%, transparent);
-}
-
-.ladoLink {
-  color: var(--lado-fg);
-  margin-top: 0.5rem;
-}
-
-/* el selector con "a." gana por especificidad a la regla global .link::after */
-a.ladoLink::after {
-  background: var(--lado-accent);
-}
-
-@media (max-width: 720px) {
-  .duo {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ---------- 4. Destacado: rejilla desfasada ---------- */
-
-.destacadoCinta {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 2rem;
   flex-wrap: wrap;
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  gap: 1rem 2rem;
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.destacadoTitulo {
+.coleccionTitulo {
   font-family: var(--font-display), "Didot", serif;
-  font-size: var(--t-l);
+  font-size: var(--t-xl);
   line-height: 1;
 }
 
-.vitrina {
+/* Las franjas van a sangre, fuera de .wrap; el nombre sí respeta el margen. */
+.franjas {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1.2rem, 3vw, 2.6rem);
-  align-items: start;
 }
 
-.vitrina > :nth-child(2) {
-  margin-top: clamp(2rem, 7vw, 6rem);
+/* Cada franja usa los colores del moodboard de su momento, no los del panel. */
+.franja {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 22rem) auto;
+  align-items: center;
+  gap: 1rem clamp(1.5rem, 4vw, 3rem);
+  padding-block: calc(clamp(1.6rem, 3vw, 2.4rem) + var(--intensidad) * clamp(2rem, 7vw, 6rem));
+  padding-right: var(--gutter);
+  background: var(--lado-bg);
+  color: var(--lado-fg);
 }
 
-.vitrina > :nth-child(3) {
-  margin-top: clamp(1rem, 3vw, 2.5rem);
+.franjaNombre {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  line-height: 1;
+  margin-inline: 0;
+  transition: color 0.4s var(--ease-umbral);
 }
 
-@media (max-width: 900px) {
-  .vitrina {
-    grid-template-columns: 1fr 1fr;
+.franja:hover .franjaNombre,
+.franja:focus-visible .franjaNombre {
+  color: var(--lado-accent);
+}
+
+.franjaSensacion {
+  font-family: var(--font-body), Georgia, serif;
+  font-style: italic;
+}
+
+.franjaSwatches {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.franjaSwatches span {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  /* Algunos tonos coinciden con el fondo de su franja; el borde los separa. */
+  border: 1px solid color-mix(in srgb, var(--lado-fg) 35%, transparent);
+}
+
+@media (max-width: 720px) {
+  .franja {
+    grid-template-columns: 1fr auto;
+    padding-left: var(--gutter);
   }
-  .vitrina > :nth-child(3) {
-    margin-top: 0;
+  .franjaNombre {
+    padding-inline: 0;
+  }
+  .franjaSensacion {
+    grid-column: 1 / -1;
+    grid-row: 2;
   }
 }
 
-@media (max-width: 560px) {
-  .vitrina {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  .vitrina > :nth-child(2) {
-    margin-top: 0;
-  }
-}
-
-/* ---------- 5. La llave ---------- */
+/* ---------- 4. La llave ---------- */
 
 .llave {
   display: grid;
@@ -311,57 +251,7 @@ a.ladoLink::after {
   }
 }
 
-/* ---------- 6. Detalle: lista tipográfica, sin tarjetas ---------- */
-
-.detalleTitulo {
-  font-family: var(--font-display), "Didot", serif;
-  font-size: var(--t-l);
-  line-height: 1.05;
-  max-width: 20ch;
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
-}
-
-.lista {
-  display: grid;
-}
-
-.fila {
-  display: grid;
-  grid-template-columns: 8rem 16rem 1fr;
-  gap: clamp(1rem, 3vw, 2.5rem);
-  align-items: baseline;
-  padding-block: 1.7rem;
-  border-top: 1px solid var(--line);
-}
-
-.fila:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-.filaClave {
-  color: var(--accent);
-}
-
-.filaTitulo {
-  font-family: var(--font-display), "Didot", serif;
-  font-size: 1.35rem;
-  line-height: 1.15;
-}
-
-.filaTexto {
-  color: var(--muted);
-  font-size: 0.95rem;
-  max-width: 52ch;
-}
-
-@media (max-width: 820px) {
-  .fila {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-}
-
-/* ---------- 7. Tallas: banda ancha ---------- */
+/* ---------- 5. Tallas: banda ancha ---------- */
 
 .tallas {
   display: grid;
@@ -452,30 +342,21 @@ a.ladoLink::after {
   }
 }
 
-.heroAcciones {
-  display: flex;
-  align-items: center;
-  gap: clamp(1.2rem, 3vw, 2rem);
-  flex-wrap: wrap;
-}
-
-.heroLeer {
-  font-family: var(--font-body), Georgia, serif;
-  font-style: italic;
-  color: var(--accent);
-  white-space: nowrap;
-}
-
-/* ---------- 7. Diario: dos entradas, sin tarjetas ---------- */
+/* ---------- 6. Diario: dos entradas, sin tarjetas ---------- */
 
 .diarioCinta {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: 2rem;
-  color: var(--muted);
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--line);
+}
+
+.diarioTitulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: var(--t-l);
+  line-height: 1;
 }
 
 .diario {

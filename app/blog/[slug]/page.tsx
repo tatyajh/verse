@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Panel from "@/components/panel";
 import BotonWhatsApp from "@/components/boton-whatsapp";
 import { ENTRADAS, getEntrada, formatFecha } from "@/lib/blog";
+import { WHATSAPP } from "@/lib/contacto";
 import s from "./entrada.module.css";
 
 export function generateStaticParams() {
@@ -78,11 +79,13 @@ export default async function EntradaBlog(props: PageProps<"/blog/[slug]">) {
             })}
           </div>
 
-          <footer className={s.cierre}>
-            <BotonWhatsApp
-              mensaje={`Hola Versé, leí "${entrada.titulo}" en el diario y quiero preguntarles algo.`}
-            />
-          </footer>
+          {WHATSAPP && (
+            <footer className={s.cierre}>
+              <BotonWhatsApp
+                mensaje={`Hola Versé, leí "${entrada.titulo}" en el diario y quiero preguntarles algo.`}
+              />
+            </footer>
+          )}
         </article>
 
         {otras.length > 0 && (

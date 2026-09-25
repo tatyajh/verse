@@ -6,10 +6,6 @@
   margin-bottom: clamp(3rem, 7vw, 5rem);
 }
 
-.eyebrow {
-  color: var(--accent);
-}
-
 .titulo {
   font-family: var(--font-display), "Didot", serif;
   font-size: var(--t-xl);

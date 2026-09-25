@@ -43,21 +43,6 @@
   transform: scale(1.035);
 }
 
-/* Chip oscuro detrás de la etiqueta: Aurora Diurna pinta el grabado en
-   tonos claros, y el texto necesita un fondo propio para leerse ahí también. */
-.linea {
-  position: absolute;
-  /* Centrado: la curva del arco se come la esquina superior izquierda. */
-  top: 1.1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  padding: 0.35rem 0.75rem;
-  border-radius: 999px;
-  background: rgb(20 14 14 / 0.55);
-  color: var(--rose);
-}
-
 .pie {
   display: grid;
   gap: 0.45rem;

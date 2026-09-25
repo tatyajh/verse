@@ -109,7 +109,6 @@ export default async function Aurora(props: PageProps<"/aurora">) {
             <CieloAurora />
 
             <header className={`${s.obertura} wrap`}>
-              <p className="label">La colección</p>
               <p className={s.lema}>{OBERTURA.lema}</p>
               <p className={s.cita}>{OBERTURA.cita}</p>
             </header>

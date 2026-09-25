@@ -15,7 +15,6 @@ export default function Blog() {
     <Panel tono="seda" seam={false}>
       <div className="wrap">
         <header className={s.cabecera}>
-          <p className={`${s.eyebrow} label`}>Versé Intimates</p>
           <h1 className={s.titulo}>Diario</h1>
           <p className={s.intro}>
             Lo que escribimos sobre las colecciones, las tallas y cómo

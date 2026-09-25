@@ -8,6 +8,7 @@ import BotonFavorito from "@/components/boton-favorito";
 import BotonWhatsApp from "@/components/boton-whatsapp";
 import { getProduct, getTonalidad, PRODUCTS } from "@/lib/products";
 import { getColeccion } from "@/lib/colecciones";
+import { WHATSAPP } from "@/lib/contacto";
 import s from "./producto.module.css";
 
 export function generateStaticParams() {
@@ -104,11 +105,14 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
 
             {/* Comprar y el aviso de "próximamente" los pinta <VisorPieza/>,
                 pegados a la imagen: aquí duplicarían el mismo llamado. */}
-            <BotonWhatsApp
-              mensaje={`Hola Versé, me interesa ${producto.nombre} de ${coleccion.nombre} ${tonalidad.nombre}.`}
-            />
-
-            <div className={s.separador} />
+            {WHATSAPP && (
+              <>
+                <BotonWhatsApp
+                  mensaje={`Hola Versé, me interesa ${producto.nombre} de ${coleccion.nombre} ${tonalidad.nombre}.`}
+                />
+                <div className={s.separador} />
+              </>
+            )}
 
             {/* La composición del tejido (producto.materiales) es ficha técnica
                 de producción, no contenido de venta: no se muestra aquí. */}

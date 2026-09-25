@@ -24,22 +24,3 @@
   flex: none;
 }
 
-/* Maqueta: se ve el lugar que ocupará, pero no es enlace ni se puede tocar. */
-.pendiente {
-  opacity: 0.55;
-  cursor: default;
-  border-style: dashed;
-}
-
-.pendiente:hover,
-.pendiente:focus-visible {
-  border-color: var(--line-fuerte);
-  color: var(--fg);
-}
-
-.nota {
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--fg) 12%, transparent);
-  font-size: 0.5625rem;
-}

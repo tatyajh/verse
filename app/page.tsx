@@ -4,6 +4,7 @@ import Panel from "@/components/panel";
 import KeyReveal from "@/components/key-reveal";
 import { TONALIDADES } from "@/lib/products";
 import { ENTRADAS, formatFecha } from "@/lib/blog";
+import { getCapitulo } from "@/lib/historia";
 import s from "./home.module.css";
 
 /** Rosa Oro: el acento cruzado del moodboard de Aurora, el mismo que usa /aurora.
@@ -23,10 +24,6 @@ export default function Home() {
       {/* 1 — Hero: el wordmark hace de imagen mientras no haya fotos. */}
       <Panel tono="noche" seam={false} padded={false} className={s.hero}>
         <div className={s.heroEje} />
-
-        <div className={`${s.heroCinta} wrap label`}>
-          <span>Medellín, Colombia</span>
-        </div>
 
         <div className={s.heroPalabraFila}>
           <h1 className={s.heroPalabra}>VERSÉ</h1>
@@ -73,37 +70,42 @@ export default function Home() {
       {/* 3 — Colección vigente: los cuatro momentos de Aurora. */}
       <Panel tono="seda" id="colecciones" seam={false}>
         <div className="wrap">
-          <div className={`${s.duoCinta} label`}>
-            <span>La colección</span>
-            <span>Aurora</span>
+          <div className={s.coleccionCabecera}>
+            <h2 className={s.coleccionTitulo}>Aurora</h2>
+            <Link href="/aurora?view=productos" className="label link">
+              Ver todas las piezas
+            </Link>
           </div>
-          <div className={s.duo}>
-            {TONALIDADES.map((t) => (
+        </div>
+        {/* Cuatro franjas a lo ancho, una por hora de la noche. La altura sigue
+            la intensidad de la historia: Borealis, el cielo encendido, es la
+            más alta. */}
+        <ul className={s.franjas}>
+          {TONALIDADES.map((t) => (
+            <li key={t.id}>
               <Link
-                key={t.id}
                 href={`/aurora?view=productos&momento=${t.id}`}
-                className={s.lado}
+                className={s.franja}
                 style={
                   {
                     "--lado-bg": LADO_COLOR[t.id].bg,
                     "--lado-fg": LADO_COLOR[t.id].fg,
                     "--lado-accent": LADO_COLOR[t.id].accent,
+                    "--intensidad": getCapitulo(t.id)?.intensidad ?? 0,
                   } as CSSProperties
                 }
               >
-                <p className={`${s.ladoIntencion} label`}>{t.nombre}</p>
-                <h3 className={s.ladoNombre}>Aurora {t.nombre}</h3>
-                <p className={s.ladoSensacion}>{t.sensacion}</p>
-                <div className={s.ladoSwatches} aria-hidden="true">
+                <span className={`${s.franjaNombre} wrap`}>{t.nombre}</span>
+                <span className={s.franjaSensacion}>{t.sensacion}</span>
+                <span className={s.franjaSwatches} aria-hidden="true">
                   {t.paleta.map((c) => (
                     <span key={c.hex} style={{ background: c.hex }} />
                   ))}
-                </div>
-                <span className={`${s.ladoLink} label link`}>Ver {t.nombre}</span>
+                </span>
               </Link>
-            ))}
-          </div>
-        </div>
+            </li>
+          ))}
+        </ul>
       </Panel>
 
       {/* 4 — La llave: el encaje que se descubre con el cursor. */}
@@ -186,9 +188,9 @@ export default function Home() {
       {/* 6 — El diario. */}
       <Panel tono="noche" id="diario">
         <div className="wrap">
-          <div className={`${s.diarioCinta} label`}>
-            <span>Del diario</span>
-            <Link href="/blog" className="link">
+          <div className={s.diarioCinta}>
+            <h2 className={s.diarioTitulo}>Diario</h2>
+            <Link href="/blog" className="label link">
               Ver todo
             </Link>
           </div>

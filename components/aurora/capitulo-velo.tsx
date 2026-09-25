@@ -24,7 +24,6 @@ function soportaMascara(): boolean {
 export default function CapituloVelo({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const reducido = useMedia("(prefers-reduced-motion: reduce)");
-  const fino = useMedia("(pointer: fine)");
   const conMascara = useSyncExternalStore(sinCambios, soportaMascara, () => false);
   const velar = conMascara && !reducido;
 
@@ -60,21 +59,6 @@ export default function CapituloVelo({ children }: { children: ReactNode }) {
       if (red !== undefined) clearTimeout(red);
     };
   }, [velar]);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || !velar || !fino) return;
-
-    // Parallax mínimo sobre la textura: se nota la mano, pero nunca toca
-    // la opacidad. La lectura no corre riesgo.
-    const mover = (e: PointerEvent) => {
-      const r = el.getBoundingClientRect();
-      const d = ((e.clientX - r.left) / r.width - 0.5) * 8;
-      el.style.setProperty("--deriva", `${d.toFixed(1)}px`);
-    };
-    el.addEventListener("pointermove", mover, { passive: true });
-    return () => el.removeEventListener("pointermove", mover);
-  }, [velar, fino]);
 
   return (
     <div ref={ref} className={s.velo} style={velar ? { "--avance": "0%" } as React.CSSProperties : undefined}>

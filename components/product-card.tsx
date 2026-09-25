@@ -19,6 +19,7 @@ export default function ProductCard({
 }) {
   const etiqueta = TIPO_LABEL[producto.tipo];
   const procedencia = `${getColeccion(producto.coleccion).nombre} · ${getTonalidad(producto.tonalidad).nombre}`;
+  const precio = producto.precio !== undefined ? formatCOP(producto.precio) : null;
 
   return (
     // El enlace se estira sobre la tarjeta en vez de envolverla: así el
@@ -26,14 +27,15 @@ export default function ProductCard({
     <div className={`${s.card} ${className ?? ""}`}>
       <div className={s.marco}>
         <ProductImage producto={producto} sizes={sizes} priority={priority} />
-        <span className={`${s.linea} label`}>{etiqueta}</span>
       </div>
       <div className={s.pie}>
-        <p className={`${s.procedencia} label`}>{procedencia}</p>
+        <p className={`${s.procedencia} label`}>
+          {procedencia} · {etiqueta}
+        </p>
         <h3 className={s.nombre}>{producto.nombre}</h3>
         {producto.resumen && <p className={s.resumen}>{producto.resumen}</p>}
         <div className={s.pieFila}>
-          <p className={`${s.precio} label num`}>{formatCOP(producto.precio)}</p>
+          {precio && <p className={`${s.precio} label num`}>{precio}</p>}
           <BotonFavorito
             slug={producto.slug}
             nombre={producto.nombre}
@@ -44,7 +46,7 @@ export default function ProductCard({
       <Link
         href={`/producto/${producto.slug}`}
         className={s.enlace}
-        aria-label={`${producto.nombre} — ${etiqueta} de ${procedencia} — ${formatCOP(producto.precio)}`}
+        aria-label={[producto.nombre, `${etiqueta} de ${procedencia}`, precio].filter(Boolean).join(", ")}
       />
     </div>
   );

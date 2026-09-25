@@ -15,7 +15,6 @@ export default function Colecciones() {
     <Panel tono="seda" seam={false}>
       <div className="wrap">
         <header className={s.cabecera}>
-          <p className={`${s.eyebrow} label`}>Versé Intimates</p>
           <h1 className={s.titulo}>Colecciones</h1>
         </header>
 
