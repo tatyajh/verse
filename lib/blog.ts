@@ -22,6 +22,48 @@ export type Entrada = {
 
 export const ENTRADAS: Entrada[] = [
   {
+    slug: "como-cuidar-tu-lenceria",
+    titulo: "Cómo cuidar tu lencería",
+    resumen:
+      "El encaje y el tul duran años si se lavan a mano y se secan a la sombra. Lo que conviene saber antes del primer lavado.",
+    fecha: "2026-09-24",
+    cuerpo: [
+      {
+        tipo: "parrafo",
+        texto:
+          "Una pieza de encaje no se daña por usarla sino por lavarla mal. El calor, la lavadora y el secado al sol le quitan forma y color mucho antes de tiempo.",
+      },
+      { tipo: "subtitulo", texto: "Lavado" },
+      {
+        tipo: "parrafo",
+        texto:
+          "Lava a mano, en agua fría o tibia, con un jabón suave para ropa delicada. Deja la pieza unos minutos en remojo y muévela con cuidado; no hace falta frotar. Enjuaga hasta que el agua salga limpia.",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Si alguna vez tienes que usar la lavadora, abrocha los ganchos del bra, mete la pieza en una bolsa de malla y elige el ciclo para prendas delicadas con agua fría.",
+      },
+      { tipo: "subtitulo", texto: "Secado" },
+      {
+        tipo: "parrafo",
+        texto:
+          "No la retuerzas. Presiónala entre dos toallas para sacar el agua y déjala secar extendida, a la sombra. La secadora y el sol directo encogen el elástico y apagan los tonos claros.",
+      },
+      { tipo: "subtitulo", texto: "Guardado" },
+      {
+        tipo: "parrafo",
+        texto:
+          "Guarda los bras con las copas una dentro de la otra, sin doblarlas por la mitad, y los herrajes lejos del encaje para que no lo enganchen. Si alternas entre dos o tres bras, el elástico descansa entre usos y dura bastante más.",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Cada pieza trae en la etiqueta sus indicaciones; si dicen algo distinto a esto, manda la etiqueta.",
+      },
+    ],
+  },
+  {
     slug: "por-que-aurora",
     titulo: "Por qué Aurora",
     resumen:

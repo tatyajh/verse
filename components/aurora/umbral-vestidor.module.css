@@ -45,24 +45,7 @@
   width: 3px;
 }
 
-.pie {
-  position: absolute;
-  left: 1.4rem;
-  bottom: 1.2rem;
-  right: 1.4rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-  color: rgb(233 227 219 / 0.95);
-  text-shadow: 0 1px 12px rgb(6 6 8 / 0.8);
-}
 
-/* Sobre el grabado crema de Alba y Amanecer, el texto se invierte. */
-.umbral[data-claro="si"] .pie {
-  color: #2b1c3d;
-  text-shadow: 0 1px 10px rgb(244 238 229 / 0.9);
-}
 
 .umbral[data-claro="si"] {
   border-color: rgb(43 28 61 / 0.22);

@@ -4,6 +4,7 @@ import "./globals.css";
 import Umbral from "@/components/umbral";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
+import { SITE } from "@/lib/sitio";
 
 /* Display: Bodoni Moda para títulos y el wordmark. */
 const display = Bodoni_Moda({
@@ -38,7 +39,6 @@ const ui = Archivo({
   display: "swap",
 });
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),

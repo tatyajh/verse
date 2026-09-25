@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Panel from "@/components/panel";
@@ -12,7 +12,11 @@ export function generateStaticParams() {
 
 export async function generateMetadata(
   props: PageProps<"/blog/[slug]">,
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
+  // Al definir openGraph aquí se reemplaza el de la raíz entero; la imagen
+  // para compartir se hereda a mano.
+  const imagenes = (await parent).openGraph?.images ?? [];
   const { slug } = await props.params;
   const entrada = getEntrada(slug);
   if (!entrada) return { title: "Entrada no encontrada" };
@@ -20,6 +24,7 @@ export async function generateMetadata(
     title: entrada.titulo,
     description: entrada.resumen,
     openGraph: {
+      images: imagenes,
       title: `${entrada.titulo} — Versé`,
       description: entrada.resumen,
       type: "article",

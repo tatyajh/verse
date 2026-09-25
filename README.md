@@ -37,7 +37,7 @@ Borealis, Prima Luce) en `app/aurora/aurora.module.css`.
 |---|---|---|
 | Fondo | `#140E0E` | `#E9E3DB` |
 | Texto | `#E9E3DB` | `#191413` |
-| Neutro | `#9C8A8C` | `#7A6A6C` |
+| Neutro | `#9C8A8C` | `#6B5C5E` |
 | Acento | oro rosa `#DEA193` | bronce `#C4734A` |
 
 **Tipografía.** Bodoni Moda (títulos), Pinyon Script (solo lema y citas), Spectral
@@ -55,12 +55,16 @@ encaje sobre cada capítulo. Todo se apaga con `prefers-reduced-motion`.
 ```
 app/
   page.tsx                 portada
+  colecciones/             índice de colecciones
   aurora/                  historia de la colección y tienda (?view=productos,
                            &momento=noctis|vigilia|borealis|prima-luce, &tipo=…)
   producto/[slug]/         ficha de pieza
   blog/  blog/[slug]/      diario
   carrito/  favoritos/     carrito y favoritos (localStorage)
   pedido/                  retorno de la pasarela de pago
+  legal/[slug]/            privacidad, términos, envíos y cambios
+  sitemap.ts  robots.ts    SEO
+  opengraph-image.tsx      imagen al compartir un enlace
   api/checkout/            firma el pago (solo servidor)
   api/wompi/webhook/       recibe y valida los eventos de Wompi
 components/
@@ -69,14 +73,35 @@ components/
   lace-canvas.tsx          grabado de encaje generativo (hace de foto)
   key-reveal.tsx           «La llave»
   aurora/                  cielo, velos y enlaces de la historia
+  grupo-piezas.tsx         un tipo de prenda del catálogo (reutilizable)
 lib/
+  colecciones.ts           registro de colecciones
   products.ts              catálogo: fuente de verdad
+  legal.ts                 textos legales (borrador) y datos de la empresa
   historia.ts              versos de la historia de Aurora
   blog.ts                  entradas del diario
   cart.tsx  favoritos.tsx  estado en localStorage
   orden.ts                 totales y envío
   wompi.ts                 firma de integridad y validación de eventos
 ```
+
+---
+
+## Agregar una colección
+
+1. Súmala a `COLECCIONES` en [`lib/colecciones.ts`](lib/colecciones.ts). Aparece sola en el
+   menú, el pie, `/colecciones` y el sitemap.
+2. Carga sus piezas en `lib/products.ts` con su `coleccion`.
+3. Crea su página en `app/<id>/page.tsx`. Para el catálogo puedes reutilizar
+   `components/grupo-piezas.tsx`.
+
+---
+
+## Textos legales
+
+Están en [`lib/legal.ts`](lib/legal.ts) y son **un borrador**: hay que revisarlos con un
+abogado antes de abrir la venta. Completa `EMPRESA` (razón social, NIT, dirección);
+mientras esté vacío, el sitio muestra «por definir».
 
 ---
 

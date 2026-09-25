@@ -55,15 +55,15 @@ export default function UmbralVestidor({ momento }: { momento: Tonalidad }) {
       href={`/aurora?view=productos&momento=${momento}`}
       prefetch
       className={s.umbral}
+      // El enlace con texto es el de debajo («Ver las piezas de…»); este es
+      // la misma puerta en imagen, así que no se repite para teclado ni lector.
+      tabIndex={-1}
+      aria-hidden="true"
       data-claro={claro ? "si" : undefined}
       style={{ "--luz": luz } as React.CSSProperties}
     >
       <LaceCanvas slug={`umbral-${momento}`} paleta={tonalidad.grabado} />
       <span className={s.rendija} aria-hidden="true" />
-      <span className={`${s.pie} label`}>
-        <span>Las piezas de esta noche</span>
-        <span aria-hidden="true">→</span>
-      </span>
     </Link>
   );
 }

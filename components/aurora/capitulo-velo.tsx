@@ -1,36 +1,32 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useSyncExternalStore, type ReactNode } from "react";
 import { useMedia } from "@/lib/media";
 import s from "./capitulo-velo.module.css";
 
 /**
- * El capítulo llega cubierto de encaje y se descubre a medida que se lee.
+ * Capa de encaje sobre el texto de cada capítulo que se retira con el scroll.
  *
- * La diferencia con «La llave» es deliberada: allí el cursor descubre una
- * figura; aquí hay prosa, y la prosa no puede depender de un efecto. El
- * texto va siempre entero y sin máscara en el DOM. El encaje es una capa
- * hermana, aria-hidden, que solo se renderiza cuando el cliente confirma
- * que puede abrirla. Sin JS, sin soporte de mask o con movimiento
- * reducido, el velo sencillamente no existe.
+ * El texto siempre está completo en el DOM; el encaje es una capa hermana
+ * aria-hidden. Sin JS, sin soporte de mask-image o con movimiento reducido,
+ * la capa no se dibuja.
  */
+// El soporte de mask-image no cambia durante la visita: no hay a qué suscribirse.
+const sinCambios = () => () => {};
+
+function soportaMascara(): boolean {
+  return (
+    CSS.supports("mask-image", "linear-gradient(#000, #000)") ||
+    CSS.supports("-webkit-mask-image", "linear-gradient(#000, #000)")
+  );
+}
+
 export default function CapituloVelo({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const reducido = useMedia("(prefers-reduced-motion: reduce)");
   const fino = useMedia("(pointer: fine)");
-  const [velar, setVelar] = useState(false);
-
-  useEffect(() => {
-    if (reducido) {
-      setVelar(false);
-      return;
-    }
-    setVelar(
-      typeof CSS !== "undefined" &&
-        (CSS.supports("mask-image", "linear-gradient(#000, #000)") ||
-          CSS.supports("-webkit-mask-image", "linear-gradient(#000, #000)")),
-    );
-  }, [reducido]);
+  const conMascara = useSyncExternalStore(sinCambios, soportaMascara, () => false);
+  const velar = conMascara && !reducido;
 
   useEffect(() => {
     const el = ref.current;
