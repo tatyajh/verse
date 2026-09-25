@@ -18,7 +18,7 @@ export default function Footer() {
             <VerseMark size={52} />
             <p className={s.nombre}>VERSÉ</p>
             <p className={s.frase}>
-              Lencería diseñada en Medellín. Enviamos a toda Colombia.
+              Ropa interior y lencería diseñadas en Medellín. Enviamos a toda Colombia.
             </p>
           </div>
 
@@ -27,14 +27,14 @@ export default function Footer() {
             <ul>
               {COLECCIONES.map((c) => (
                 <li key={c.id}>
-                  <Link href={c.piezas} className="link">
+                  <Link href={c.productos} className="link">
                     {c.nombre}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link href="/piezas" className="link">
-                  Todas las piezas
+                <Link href="/productos" className="link">
+                  Todos los productos
                 </Link>
               </li>
             </ul>

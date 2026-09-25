@@ -9,12 +9,12 @@ export default function NotFound() {
         <div className={s.contenedor}>
           <h1 className={s.titulo}>Esta página no existe</h1>
           <p className={s.descripcion}>
-            Puede que el enlace esté incompleto o que la pieza ya no esté
+            Puede que el enlace esté incompleto o que el producto ya no esté
             disponible.
           </p>
           <div className={s.acciones}>
-            <Link href="/piezas" className="btn btn-fg">
-              Ver las piezas
+            <Link href="/productos" className="btn btn-fg">
+              Ver los productos
             </Link>
             <Link href="/" className="label link">
               Volver al inicio

@@ -46,7 +46,7 @@ export async function POST(request: Request) {
         `Medio: ${t.payment_method_type ?? "—"}`,
         `Correo: ${t.customer_email ?? "—"}`,
         "",
-        "Las piezas y tallas están en el correo «Pedido iniciado» con la misma referencia.",
+        "Los productos y tallas están en el correo «Pedido iniciado» con la misma referencia.",
       ].join("\n"),
     );
   } else {

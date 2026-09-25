@@ -24,7 +24,7 @@ export async function generateMetadata(
   const imagenes = (await parent).openGraph?.images ?? [];
   const { slug } = await props.params;
   const producto = getProduct(slug);
-  if (!producto) return { title: "Pieza no encontrada" };
+  if (!producto) return { title: "Producto no encontrado" };
   return {
     title: producto.nombre,
     description: producto.resumen ??
@@ -66,13 +66,13 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
           <div className={s.ficha}>
             <nav className={`${s.migas} label`} aria-label="Ruta">
               <span className={s.miga}>
-                <Link href={coleccion.piezas} className="link">
+                <Link href={coleccion.productos} className="link">
                   {coleccion.nombre}
                 </Link>
               </span>
               <span className={s.miga}>
                 <span aria-hidden="true">/</span>
-                <Link href={`${coleccion.piezas}&momento=${tonalidad.id}`} className="link">
+                <Link href={`${coleccion.productos}&momento=${tonalidad.id}`} className="link">
                   {tonalidad.nombre}
                 </Link>
               </span>
@@ -85,7 +85,7 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
 
             {sinConfirmar ? (
               <p className={s.resumen}>
-                Pieza de la colección {coleccion.nombre}. La descripción completa se
+                Producto de la colección {coleccion.nombre}. La descripción completa se
                 publica con el lanzamiento.
               </p>
             ) : (
@@ -98,7 +98,7 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
             )}
 
             {producto.tipo === "conjunto" && producto.piezas && (
-              <p className={`${s.incluye} label`}>Conjunto de {producto.piezas} piezas</p>
+              <p className={`${s.incluye} label`}>Conjunto de {producto.piezas} prendas</p>
             )}
 
             <div className={s.separador} />
@@ -140,7 +140,7 @@ export default async function Pieza(props: PageProps<"/producto/[slug]">) {
         <section className={s.tambien}>
           <div className={`${s.tambienCinta} label`}>
             <span>También de {coleccion.nombre}</span>
-            <Link href={coleccion.piezas} className="link">
+            <Link href={coleccion.productos} className="link">
               Ver todo
             </Link>
           </div>

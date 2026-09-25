@@ -51,7 +51,7 @@ export default function ListaPrivada({
     return (
       <p className={`${s.listo} ${className ?? ""}`} role="status">
         {pieza
-          ? "Listo. Te escribimos cuando esta pieza salga."
+          ? "Listo. Te escribimos cuando este producto salga."
           : "Listo. Te escribimos antes de abrir la primera edición."}
       </p>
     );

@@ -35,13 +35,13 @@ export const metadata: Metadata = {
     template: "%s — Versé Intimates",
   },
   description:
-    "Lencería diseñada en Medellín. Conjuntos, bodies y piezas sueltas. Envíos a toda Colombia.",
+    "Ropa interior y lencería diseñadas en Medellín: comodidad para el día y sensualidad para la noche. Envíos a toda Colombia.",
   openGraph: {
     type: "website",
     locale: "es_CO",
     siteName: "Versé Intimates",
     title: "Versé Intimates",
-    description: "Lencería diseñada en Medellín.",
+    description: "Ropa interior y lencería diseñadas en Medellín.",
   },
   // Con fotos provisionales el sitio es de pruebas: no se indexa.
   robots: { index: !PROVISIONAL, follow: !PROVISIONAL },

@@ -93,7 +93,7 @@ export const DOCUMENTOS: Documento[] = [
       {
         tipo: "parrafo",
         texto:
-          "Los precios están en pesos colombianos e incluyen IVA. El costo del envío se muestra en el carrito antes de pagar. Si una pieza se agota después de tu pago, te escribimos para cambiarla por otra o devolverte el dinero completo.",
+          "Los precios están en pesos colombianos e incluyen IVA. El costo del envío se muestra en el carrito antes de pagar. Si un producto se agota después de tu pago, te escribimos para cambiarla por otra o devolverte el dinero completo.",
       },
       { tipo: "subtitulo", texto: "Pago" },
       {
@@ -105,24 +105,24 @@ export const DOCUMENTOS: Documento[] = [
       {
         tipo: "parrafo",
         texto:
-          "En las compras a distancia, el artículo 47 de la Ley 1480 de 2011 te permite retractarte dentro de los cinco días hábiles siguientes a la entrega. La misma norma exceptúa los bienes de uso personal, y la ropa interior lo es: por higiene, solo aceptamos devoluciones por retracto de piezas sin usar, con sus etiquetas y el sello protector intacto.",
+          "En las compras a distancia, el artículo 47 de la Ley 1480 de 2011 te permite retractarte dentro de los cinco días hábiles siguientes a la entrega. La misma norma exceptúa los bienes de uso personal, y la ropa interior lo es: por higiene, solo aceptamos devoluciones por retracto de productos sin usar, con sus etiquetas y el sello protector intacto.",
       },
       {
         tipo: "parrafo",
         texto:
-          "Cuando el retracto procede, devolvemos el dinero dentro de los 30 días calendario siguientes. El costo de enviarnos la pieza de vuelta corre por tu cuenta.",
+          "Cuando el retracto procede, devolvemos el dinero dentro de los 30 días calendario siguientes. El costo de enviarnos el producto de vuelta corre por tu cuenta.",
       },
       { tipo: "subtitulo", texto: "Reversión del pago" },
       {
         tipo: "parrafo",
         texto:
-          "Si pagaste con un medio electrónico y fuiste víctima de fraude, no hiciste la compra, no recibiste la pieza o te llegó una distinta o defectuosa, puedes pedir la reversión del pago dentro de los cinco días hábiles siguientes a que lo supiste, como lo prevé el artículo 51 de la Ley 1480. Escríbenos y avisa también a tu banco.",
+          "Si pagaste con un medio electrónico y fuiste víctima de fraude, no hiciste la compra, no recibiste el producto o te llegó uno distinto o defectuoso, puedes pedir la reversión del pago dentro de los cinco días hábiles siguientes a que lo supiste, como lo prevé el artículo 51 de la Ley 1480. Escríbenos y avisa también a tu banco.",
       },
       { tipo: "subtitulo", texto: "Garantía" },
       {
         tipo: "parrafo",
         texto:
-          "Cada pieza tiene garantía por defectos de fabricación, como costuras que se abren o herrajes que fallan con el uso normal. No cubre el desgaste natural ni los daños por lavado o secado distintos a los indicados en la etiqueta. Si algo llega mal, escríbenos con una foto y lo resolvemos con reparación, cambio o devolución del dinero.",
+          "Cada producto tiene garantía por defectos de fabricación, como costuras que se abren o herrajes que fallan con el uso normal. No cubre el desgaste natural ni los daños por lavado o secado distintos a los indicados en la etiqueta. Si algo llega mal, escríbenos con una foto y lo resolvemos con reparación, cambio o devolución del dinero.",
       },
       { tipo: "subtitulo", texto: "Ley aplicable" },
       {
@@ -152,7 +152,7 @@ export const DOCUMENTOS: Documento[] = [
       {
         tipo: "parrafo",
         texto:
-          "Si la talla no es la tuya, escríbenos dentro de los cinco días hábiles siguientes a recibir el pedido. La pieza debe estar sin usar, con sus etiquetas y el sello protector intacto. En tu primer pedido el envío del cambio corre por nuestra cuenta; en los siguientes, el de ida lo pagas tú y el de vuelta nosotros.",
+          "Si la talla no es la tuya, escríbenos dentro de los cinco días hábiles siguientes a recibir el pedido. El producto debe estar sin usar, con sus etiquetas y el sello protector intacto. En tu primer pedido el envío del cambio corre por nuestra cuenta; en los siguientes, el de ida lo pagas tú y el de vuelta nosotros.",
       },
       {
         tipo: "parrafo",

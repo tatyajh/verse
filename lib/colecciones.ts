@@ -20,7 +20,7 @@ export type Coleccion = {
   /** Página principal de la colección. */
   ruta: string;
   /** Catálogo de la colección. */
-  piezas: string;
+  productos: string;
 };
 
 export const COLECCIONES: Coleccion[] = [
@@ -29,7 +29,7 @@ export const COLECCIONES: Coleccion[] = [
     nombre: "Aurora",
     descripcion: "Una noche en la nieve, contada en cuatro momentos de color.",
     ruta: "/aurora",
-    piezas: "/aurora?view=productos",
+    productos: "/aurora?view=productos",
   },
 ];
 

@@ -31,18 +31,18 @@ export const ENTRADAS: Entrada[] = [
       {
         tipo: "parrafo",
         texto:
-          "Una pieza de encaje no se daña por usarla sino por lavarla mal. El calor, la lavadora y el secado al sol le quitan forma y color mucho antes de tiempo.",
+          "Una prenda de encaje no se daña por usarla sino por lavarla mal. El calor, la lavadora y el secado al sol le quitan forma y color mucho antes de tiempo.",
       },
       { tipo: "subtitulo", texto: "Lavado" },
       {
         tipo: "parrafo",
         texto:
-          "Lava a mano, en agua fría o tibia, con un jabón suave para ropa delicada. Deja la pieza unos minutos en remojo y muévela con cuidado; no hace falta frotar. Enjuaga hasta que el agua salga limpia.",
+          "Lava a mano, en agua fría o tibia, con un jabón suave para ropa delicada. Deja la prenda unos minutos en remojo y muévela con cuidado; no hace falta frotar. Enjuaga hasta que el agua salga limpia.",
       },
       {
         tipo: "parrafo",
         texto:
-          "Si alguna vez tienes que usar la lavadora, abrocha los ganchos del bra, mete la pieza en una bolsa de malla y elige el ciclo para prendas delicadas con agua fría.",
+          "Si alguna vez tienes que usar la lavadora, abrocha los ganchos del bra, mete la prenda en una bolsa de malla y elige el ciclo para prendas delicadas con agua fría.",
       },
       { tipo: "subtitulo", texto: "Secado" },
       {
@@ -59,7 +59,7 @@ export const ENTRADAS: Entrada[] = [
       {
         tipo: "parrafo",
         texto:
-          "Cada pieza trae en la etiqueta sus indicaciones; si dicen algo distinto a esto, manda la etiqueta.",
+          "Cada prenda trae en la etiqueta sus indicaciones; si dicen algo distinto a esto, manda la etiqueta.",
       },
     ],
   },
@@ -78,7 +78,7 @@ export const ENTRADAS: Entrada[] = [
       {
         tipo: "parrafo",
         texto:
-          "Noctis es la medianoche, en negro y oro. Vigilia, la hora azul en que el cielo empieza a cambiar. Borealis, el momento en que se enciende, en jade y lila. Prima Luce, la primera luz, en perla y rosa. En total son cuatro momentos y veinte piezas.",
+          "Noctis es la medianoche, en negro y oro. Vigilia, la hora azul en que el cielo empieza a cambiar. Borealis, el momento en que se enciende, en jade y lila. Prima Luce, la primera luz, en perla y rosa. En total son cuatro momentos y veinte productos.",
       },
       {
         tipo: "cita",

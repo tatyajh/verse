@@ -57,7 +57,7 @@ lado, resplandores y animaciones sin propósito.
 ```
 app/
   page.tsx                 portada
-  piezas/                  todas las piezas de todas las colecciones
+  productos/               todos los productos de todas las colecciones
   aurora/                  historia de la colección y tienda (?view=productos,
                            &momento=noctis|vigilia|borealis|prima-luce, &tipo=…)
   producto/[slug]/         ficha de pieza
@@ -96,7 +96,7 @@ lib/
 ## Agregar una colección
 
 1. Súmala a `COLECCIONES` en [`lib/colecciones.ts`](lib/colecciones.ts). Aparece sola en el
-   menú, el pie, el filtro de `/piezas` y el sitemap.
+   menú, el pie, el filtro de `/productos` y el sitemap.
 2. Carga sus piezas en `lib/products.ts` con su `coleccion`.
 3. Crea su página en `app/<id>/page.tsx`. Para el catálogo puedes reutilizar
    `components/grupo-piezas.tsx`.

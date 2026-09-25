@@ -37,7 +37,7 @@ export async function POST(request: Request) {
   const items = limpiarItems((cuerpo as { items?: unknown })?.items);
   if (items.length === 0) {
     return Response.json(
-      { error: "No hay piezas válidas en el carrito." },
+      { error: "No hay productos válidos en el carrito." },
       { status: 400 },
     );
   }
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
   const sinPrecio = items.find((i) => !getProduct(i.slug)?.precio);
   if (sinPrecio) {
     return Response.json(
-      { error: "Esta pieza todavía no está a la venta. Te avisamos cuando salga." },
+      { error: "Este producto todavía no está a la venta. Te avisamos cuando salga." },
       { status: 400 },
     );
   }

@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     pieza ? `Lista privada: ${pieza.nombre}` : "Lista privada: nueva inscripción",
     [
       `Correo: ${correo}`,
-      pieza ? `Pieza: ${pieza.nombre} (${pieza.slug})` : "Pieza: primera edición en general",
+      pieza ? `Producto: ${pieza.nombre} (${pieza.slug})` : "Producto: primera edición en general",
       `Fecha: ${new Date().toISOString()}`,
     ].join("\n"),
   );

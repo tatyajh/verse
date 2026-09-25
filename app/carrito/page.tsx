@@ -5,7 +5,7 @@ import s from "./carrito.module.css";
 
 export const metadata: Metadata = {
   title: "Carrito",
-  description: "Tus piezas Versé antes de pagar.",
+  description: "Tus productos Versé antes de pagar.",
   robots: { index: false, follow: false },
 };
 

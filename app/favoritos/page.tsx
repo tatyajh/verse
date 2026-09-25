@@ -5,7 +5,7 @@ import s from "./favoritos.module.css";
 
 export const metadata: Metadata = {
   title: "Favoritos",
-  description: "Las piezas Versé que guardaste.",
+  description: "Los productos Versé que guardaste.",
   robots: { index: false, follow: false },
 };
 

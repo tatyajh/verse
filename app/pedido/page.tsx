@@ -25,7 +25,7 @@ const COPY: Record<string, { titulo: string; texto: string }> = {
   DECLINED: {
     titulo: "El pago no se completó.",
     texto:
-      "El banco rechazó la transacción y no se hizo ningún cobro. Tus piezas siguen en el carrito por si quieres intentar con otro medio.",
+      "El banco rechazó la transacción y no se hizo ningún cobro. Tus productos siguen en el carrito por si quieres intentar con otro medio.",
   },
   VOIDED: {
     titulo: "El pago fue anulado.",
@@ -103,8 +103,8 @@ export default async function Pedido(props: PageProps<"/pedido">) {
           )}
 
           <div className={s.acciones}>
-            <Link href="/piezas" className="btn btn-fg">
-              Ver las piezas
+            <Link href="/productos" className="btn btn-fg">
+              Ver los productos
             </Link>
             <a href="mailto:hola@verseintimates.com" className="btn">
               Escribirnos

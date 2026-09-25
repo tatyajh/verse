@@ -137,11 +137,11 @@ export default function Nav() {
                 </Link>
               ))}
               <Link
-                href="/piezas"
+                href="/productos"
                 className={s.coleccionLink}
                 onClick={() => setColeccionesAbierto(false)}
               >
-                Todas las piezas
+                Todos los productos
               </Link>
             </div>
           )}
@@ -161,7 +161,7 @@ export default function Nav() {
             />
           </svg>
           {favoritosListo && favoritos > 0 && (
-            <span className={s.cuenta} aria-label={`${favoritos} piezas guardadas`}>
+            <span className={s.cuenta} aria-label={`${favoritos} productos guardados`}>
               {favoritos}
             </span>
           )}
@@ -178,7 +178,7 @@ export default function Nav() {
             />
           </svg>
           {listo && piezas > 0 && (
-            <span className={s.cuenta} aria-label={`${piezas} piezas`}>
+            <span className={s.cuenta} aria-label={`${piezas} productos en el carrito`}>
               {piezas}
             </span>
           )}

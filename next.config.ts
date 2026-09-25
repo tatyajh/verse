@@ -6,10 +6,13 @@ const nextConfig: NextConfig = {
     loader: "custom",
     loaderFile: "./lib/cargador-imagen.ts",
   },
-  // Con una sola colección, el índice de colecciones y el catálogo eran lo
-  // mismo: /piezas ya filtra por colección cuando haya más de una.
+  // /productos es el catálogo completo y filtra por colección cuando haya más
+  // de una; las direcciones anteriores llevan ahí.
   async redirects() {
-    return [{ source: "/colecciones", destination: "/piezas", permanent: false }];
+    return [
+      { source: "/colecciones", destination: "/productos", permanent: false },
+      { source: "/piezas", destination: "/productos", permanent: true },
+    ];
   },
 };
 

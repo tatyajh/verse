@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import LaceCanvas from "../lace-canvas";
 import { getTonalidad, type Tonalidad } from "@/lib/products";
 import { hexALab } from "@/lib/cielo";
@@ -13,7 +14,13 @@ import s from "./umbral-vestidor.module.css";
  * La rendija de luz se abre al entrar en pantalla (igual que <Seam/>, con un
  * atributo en el DOM y no con estado). Es decorativa y va aria-hidden.
  */
-export default function UmbralVestidor({ momento }: { momento: Tonalidad }) {
+export default function UmbralVestidor({
+  momento,
+  imagen,
+}: {
+  momento: Tonalidad;
+  imagen?: string;
+}) {
   const ref = useRef<HTMLAnchorElement>(null);
   const tonalidad = getTonalidad(momento);
 
@@ -62,7 +69,17 @@ export default function UmbralVestidor({ momento }: { momento: Tonalidad }) {
       data-claro={claro ? "si" : undefined}
       style={{ "--luz": luz } as React.CSSProperties}
     >
-      <LaceCanvas slug={`umbral-${momento}`} paleta={tonalidad.grabado} />
+      {imagen ? (
+        <Image
+          src={imagen}
+          alt=""
+          fill
+          sizes="(max-width: 700px) 100vw, 60vw"
+          className={s.imagen}
+        />
+      ) : (
+        <LaceCanvas slug={`umbral-${momento}`} paleta={tonalidad.grabado} />
+      )}
       <span className={s.rendija} aria-hidden="true" />
     </Link>
   );

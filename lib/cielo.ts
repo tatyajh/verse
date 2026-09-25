@@ -95,7 +95,7 @@ export function rampa(p: number, valores: number[]): number {
 export const CIELOS: string[][] = [
   ["#060608", "#08080c", "#0b0a10", "#141008"], // Noctis — negro, un rescoldo dorado
   ["#111A35", "#20284A", "#35345F", "#7B2D5F"], // Vigilia — azules hacia el magenta
-  ["#04120e", "#0a2b22", "#123f33", "#2e2747"], // Borealis — noche de jade, la luz la ponen las cintas
+  ["#0b3d31", "#0f5a47", "#16705a", "#4b4478"], // Borealis — jade encendido hacia el lila
   ["#B8D2DB", "#D1E3E7", "#E8B5C5", "#E5E1E2"], // Prima Luce — hielo, rosa, perla
 ];
 

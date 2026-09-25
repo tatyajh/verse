@@ -15,12 +15,13 @@ import {
   type TipoPieza,
 } from "@/lib/products";
 import { CAPITULOS, OBERTURA, CIERRE } from "@/lib/historia";
+import { IMAGEN_MOMENTO } from "@/lib/provisional";
 import s from "./aurora.module.css";
 
 export const metadata: Metadata = {
   title: "Aurora",
   description:
-    "Veinte piezas, cuatro momentos. La colección Aurora, de Versé Intimates.",
+    "Veinte productos en cuatro momentos. La colección Aurora, de Versé Intimates.",
 };
 
 function esTonalidad(valor: string | undefined): valor is Tonalidad {
@@ -54,7 +55,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
     // (el color real lo definen los tokens propios de .pagina, no este atributo).
     <section
       className={s.pagina}
-      data-panel={activa === "borealis" || activa === "prima-luce" ? "seda" : "noche"}
+      data-panel={activa === "prima-luce" ? "seda" : "noche"}
       data-tonalidad={activa}
     >
       <div className="wrap">
@@ -126,7 +127,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
                     </div>
                   </CapituloVelo>
 
-                  <UmbralVestidor momento={c.tonalidad} />
+                  <UmbralVestidor momento={c.tonalidad} imagen={IMAGEN_MOMENTO[c.tonalidad]} />
 
                   <Link
                     href={`/aurora?view=productos&momento=${c.tonalidad}`}
@@ -148,7 +149,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
                       <circle cx="12" cy="11.5" r="1.3" fill="currentColor" stroke="none" />
                       <path d="M11.4 12.6 9.2 18.6M12.6 12.6l2.2 6" />
                     </svg>
-                    <span>Ver las piezas de {c.latin}</span>
+                    <span>Ver los productos de {c.latin}</span>
                   </Link>
                 </section>
               );
@@ -190,11 +191,11 @@ export default async function Aurora(props: PageProps<"/aurora">) {
             <div className={s.alcance}>
               <p>
                 {mostrarTodosProductos
-                  ? "Todas las piezas de la colección Aurora."
-                  : `Las piezas de Aurora ${getTonalidad(activa).nombre}.`}
+                  ? "Todos los productos de la colección Aurora."
+                  : `Los productos de Aurora ${getTonalidad(activa).nombre}.`}
               </p>
-              <Link href="/piezas" className="link">
-                Ver todas las piezas de Versé
+              <Link href="/productos" className="link">
+                Ver todos los productos de Versé
               </Link>
             </div>
 

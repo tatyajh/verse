@@ -98,8 +98,8 @@ export default function CarritoCliente() {
     return (
       <div className={s.vacio}>
         <p>Tu carrito está vacío.</p>
-        <Link href="/piezas" className="btn btn-fg">
-          Ver las piezas
+        <Link href="/productos" className="btn btn-fg">
+          Ver los productos
         </Link>
       </div>
     );

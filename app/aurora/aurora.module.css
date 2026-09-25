@@ -28,10 +28,10 @@
 
 /* Borealis */
 .pagina[data-tonalidad="borealis"] {
-  --bg: linear-gradient(180deg, #04120e 0%, #2e2747 100%);
-  --bg-2: #1a5c4f;
-  --fg: #e9e3db;
-  --muted: #9D829E;
+  --bg: linear-gradient(180deg, #0f6e56 0%, #4b4478 100%);
+  --bg-2: #1a7a62;
+  --fg: #f1eef0;
+  --muted: #d6cfe0;
   --line: rgb(233 227 219 / 0.18);
   --accent: var(--rose);
   --line-fuerte: rgb(233 227 219 / 0.34);
@@ -276,20 +276,20 @@
 }
 
 /* Cuando amanece, el texto debe ser más oscuro para contraste contra fondo claro */
-/* Detrás de la columna de texto hay un encaje fijo, distinto en cada
-   capítulo —tul, festón, medallones, guipur— y en su tono. Cada velo tiene
+/* Detrás de la columna de texto hay un velo: un tinte del tono del capítulo
+   y encima el encaje de la marca. Cada velo tiene
    bordes propios: se difumina hacia la derecha donde el cielo sigue vivo, y
    arriba y abajo para que un capítulo no se lea pegado al siguiente. El
    cielo interpola entre centros de capítulo, así que al empezar cada uno va
    a medio camino desde el anterior: el encaje garantiza que la letra lea
    igual en los cuatro, esté el cielo como esté. */
-.capitulo::before {
+.capitulo::before,
+.capitulo::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-color: rgb(var(--velo) / 0.36);
 
   /* La máscara dibuja la tela: un cuerpo hasta --borde, con un festón de
      semicírculos en cada lado —el orillo de un encaje de verdad, no un
@@ -326,62 +326,48 @@
   mask-composite: intersect, add, add;
 }
 
-/* I. Noctis — tul fino: dos retículas diagonales apretadas y un punto en
-   cada cruce. La tela más cerrada de la noche. */
+/* El tinte que da lectura sobre el cielo. */
+.capitulo::before {
+  background-color: rgb(var(--velo) / 0.48);
+}
+
+/* El encaje de la marca (hilo marfil sobre negro). Con «screen» el negro
+   desaparece y solo queda el hilo. Prima Luce lo invierte más abajo. */
+.capitulo::after {
+  background: url("/texturas/encaje.jpg") 0 0 / 260px repeat;
+  mix-blend-mode: screen;
+  opacity: 0.16;
+}
+
+/* I. Noctis */
 .capitulo[data-tonalidad="noctis"] {
   --velo: 6 6 8;
   --hilo: 233 227 219;
 }
 
-.capitulo[data-tonalidad="noctis"]::before {
-  background-image:
-    repeating-linear-gradient(62deg, rgb(var(--hilo) / 0.08) 0 1px, transparent 1px 9px),
-    repeating-linear-gradient(-62deg, rgb(var(--hilo) / 0.08) 0 1px, transparent 1px 9px),
-    radial-gradient(circle at 4.5px 4.5px, rgb(var(--hilo) / 0.12) 0.8px, transparent 1.5px);
-  background-size: auto, auto, 9px 9px;
-}
 
-/* II. Vigilia — festón: arcos solapados en tresbolillo, como escamas. */
+/* II. Vigilia */
 .capitulo[data-tonalidad="vigilia"] {
   --velo: 17 26 53;
   --hilo: 233 227 219;
 }
 
-.capitulo[data-tonalidad="vigilia"]::before {
-  background-image:
-    radial-gradient(circle at 11px 0, transparent 9px, rgb(var(--hilo) / 0.16) 9.5px, transparent 11px),
-    radial-gradient(circle at 11px 22px, transparent 9px, rgb(var(--hilo) / 0.16) 9.5px, transparent 11px),
-    radial-gradient(circle at 0 11px, transparent 9px, rgb(var(--hilo) / 0.1) 9.5px, transparent 11px),
-    radial-gradient(circle at 22px 11px, transparent 9px, rgb(var(--hilo) / 0.1) 9.5px, transparent 11px);
-  background-size: 22px 22px;
-}
 
-/* III. Borealis — medallones: anillos concéntricos sobre una celosía. */
+/* III. Borealis */
 .capitulo[data-tonalidad="borealis"] {
-  --velo: 4 18 14;
+  --velo: 15 90 72;
   --hilo: 233 227 219;
 }
 
-.capitulo[data-tonalidad="borealis"]::before {
-  background-image:
-    radial-gradient(
-      circle at 14px 14px,
-      transparent 5px,
-      rgb(var(--hilo) / 0.16) 5.5px,
-      transparent 6.5px,
-      transparent 9px,
-      rgb(var(--hilo) / 0.1) 9.5px,
-      transparent 10.5px
-    ),
-    radial-gradient(circle at 14px 14px, rgb(var(--hilo) / 0.14) 1.2px, transparent 2px),
-    repeating-linear-gradient(45deg, rgb(var(--hilo) / 0.05) 0 1px, transparent 1px 14px),
-    repeating-linear-gradient(-45deg, rgb(var(--hilo) / 0.05) 0 1px, transparent 1px 14px);
-  background-size: 28px 28px, 28px 28px, auto, auto;
+
+/* IV. Prima Luce */
+/* Sobre la perla del amanecer el encaje se invierte: hilo oscuro. */
+.capitulo[data-tonalidad="prima-luce"]::after {
+  filter: invert(1);
+  mix-blend-mode: multiply;
+  opacity: 0.12;
 }
 
-/* IV. Prima Luce — punto de espíritu: motas suaves en tresbolillo sobre un
-   tul finísimo. La tela más aireada, para la primera luz. (Nunca rombos:
-   el moño y la curva son de la marca, el rombo no.) */
 .capitulo[data-tonalidad="prima-luce"] {
   --velo: 229 225 226;
   --hilo: 42 26 63;
@@ -392,24 +378,17 @@
   text-shadow: 0 1px 2px rgb(229 225 226 / 0.4);
 }
 
-.capitulo[data-tonalidad="prima-luce"]::before {
-  background-image:
-    radial-gradient(circle at 8px 8px, rgb(var(--hilo) / 0.2) 2.2px, transparent 3.2px),
-    radial-gradient(circle at 24px 24px, rgb(var(--hilo) / 0.2) 2.2px, transparent 3.2px),
-    radial-gradient(circle at 8px 8px, rgb(var(--hilo) / 0.06) 5px, transparent 5.6px),
-    radial-gradient(circle at 24px 24px, rgb(var(--hilo) / 0.06) 5px, transparent 5.6px),
-    repeating-linear-gradient(60deg, rgb(var(--hilo) / 0.035) 0 1px, transparent 1px 7px),
-    repeating-linear-gradient(-60deg, rgb(var(--hilo) / 0.035) 0 1px, transparent 1px 7px);
-  background-size: 32px 32px, 32px 32px, 32px 32px, 32px 32px, auto, auto;
-}
 
 /* En celular el texto ocupa todo el ancho: el encaje solo se difumina
    arriba y abajo, no de lado. */
 @media (max-width: 700px) {
-  .capitulo::before {
-    background-color: rgb(var(--velo) / 0.48);
+  .capitulo::before,
+  .capitulo::after {
     --borde: 100%;
     --r: 11px;
+  }
+  .capitulo::before {
+    background-color: rgb(var(--velo) / 0.58);
   }
 }
 

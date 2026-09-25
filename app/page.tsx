@@ -31,8 +31,8 @@ export default function Home() {
           <div className={s.heroTexto}>
             <h1 className={s.heroPalabra}>Versé</h1>
             <p className={s.heroFrase}>
-              Lencería diseñada en Medellín para el día entero o para una sola
-              noche.
+              Ropa interior para la comodidad de cada día y lencería para la
+              noche. Diseñada en Medellín.
             </p>
             <p className={s.heroInvitacion}>
               La primera edición de Aurora se ofrece primero a quienes estén en la
@@ -43,17 +43,14 @@ export default function Home() {
               <Link href="/aurora" className="btn btn-fg">
                 Ver Aurora
               </Link>
-              <Link href="/piezas" className="btn">
-                Ver todas las piezas
+              <Link href="/productos" className="btn">
+                Ver todos los productos
               </Link>
             </div>
           </div>
-          <figure className={s.heroFigura}>
+          <div className={s.heroFigura}>
             <KeyReveal foto={FOTO_PORTADA} />
-            <figcaption className={s.heroPie}>
-              La llave es el emblema de la casa: cada una decide qué abre y para quién.
-            </figcaption>
-          </figure>
+          </div>
         </div>
       </Panel>
 
@@ -66,12 +63,12 @@ export default function Home() {
             </h2>
             <div className={s.manifiestoCuerpo}>
               <p>
-                Versé diseña lencería para mujeres que no reservan lo bello para una
-                ocasión. Trabajamos el encaje y la transparencia para que acompañen el
-                día entero y también la noche que no estaba en los planes.
+                Versé diseña ropa interior y lencería. De día, prendas cómodas que
+                se olvidan puestas. De noche, la versión más sensual de la misma
+                mujer.
               </p>
               <p>
-                En cada pieza cuidamos lo que casi nadie ve: dónde apoya un tirante y
+                En cada prenda cuidamos lo que casi nadie ve: dónde apoya un tirante y
                 cómo termina un borde.
               </p>
             </div>
@@ -101,7 +98,7 @@ export default function Home() {
               <div className={s.coleccionImagen}>
                 <Image
                   src={IMAGEN_COLECCION.aurora}
-                  alt="Piezas de la colección Aurora"
+                  alt="Productos de la colección Aurora"
                   fill
                   sizes="(max-width: 760px) 100vw, 50vw"
                 />

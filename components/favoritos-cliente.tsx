@@ -15,11 +15,11 @@ export default function FavoritosCliente() {
     return (
       <div className={s.vacio}>
         <p>
-          Aún no has guardado ninguna pieza. Marca el corazón en las que quieras
+          Aún no has guardado ningún producto. Marca el corazón en los que quieras
           volver a ver.
         </p>
-        <Link href="/piezas" className="btn">
-          Ver las piezas
+        <Link href="/productos" className="btn">
+          Ver los productos
         </Link>
       </div>
     );
