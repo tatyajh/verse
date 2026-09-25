@@ -1,0 +1,33 @@
+.cabecera {
+  display: grid;
+  gap: 1rem;
+  padding-top: clamp(2rem, 6vw, 4rem);
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.titulo {
+  font-family: var(--font-display), "Didot", serif;
+  font-size: var(--t-xl);
+  line-height: 1;
+}
+
+.intro {
+  color: var(--muted);
+  font-size: var(--t-m);
+  max-width: 44ch;
+}
+
+.colecciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 2rem;
+  margin-bottom: 1.4rem;
+  color: var(--muted);
+}
+
+.colecciones a.activa {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 0.35em;
+  text-decoration-color: var(--accent);
+}

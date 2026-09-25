@@ -25,8 +25,9 @@ Otros comandos: `npm run build` (producción), `npm run lint`, `npx tsc --noEmit
 
 ## Diseño
 
-La portada tiene un solo gesto animado: en el hero, un encaje cubre una foto dentro del arco
-de la llave y el cursor la descubre (en celular, el scroll). Todo lo demás está quieto. Mientras
+Al entrar, una caja se abre una vez por sesión (`components/umbral.tsx`). En el hero, un
+encaje cubre una foto dentro del arco de la llave y el cursor la descubre (en celular, el
+scroll). Mientras
 no haya venta, la acción principal es la **lista privada** de la primera edición.
 
 **Paleta.** Sale del moodboard de Aurora. Los tokens semánticos (`--bg`, `--fg`, `--muted`,
@@ -57,6 +58,7 @@ lado, resplandores y animaciones sin propósito.
 app/
   page.tsx                 portada
   colecciones/             índice de colecciones
+  piezas/                  todas las piezas de todas las colecciones
   aurora/                  historia de la colección y tienda (?view=productos,
                            &momento=noctis|vigilia|borealis|prima-luce, &tipo=…)
   producto/[slug]/         ficha de pieza
@@ -70,12 +72,14 @@ app/
   api/lista/               inscripciones a la lista privada (llegan por correo)
   api/wompi/webhook/       recibe y valida los eventos de Wompi
 components/
+  umbral.tsx               la caja que se abre al entrar
   panel.tsx  seam.tsx      paneles a sangre y el filete entre ellos
   lace-canvas.tsx          grabado de encaje generativo (hace de foto)
   key-reveal.tsx           el encaje que el cursor descubre (hero)
   lista-privada.tsx        inscripción a la primera edición
   aurora/                  cielo, velos y enlaces de la historia
   grupo-piezas.tsx         un tipo de prenda del catálogo (reutilizable)
+  filtro-tipo.tsx          filtro por tipo de prenda
 lib/
   colecciones.ts           registro de colecciones
   products.ts              catálogo: fuente de verdad

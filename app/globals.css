@@ -44,9 +44,9 @@
   --t-hero: clamp(4.5rem, 21vw, 22rem);
   --t-xl: clamp(2.25rem, 6vw, 4.75rem);
   --t-l: clamp(1.6rem, 3.4vw, 2.6rem);
-  --t-m: clamp(1.15rem, 1.8vw, 1.5rem);
-  --t-body: clamp(0.95rem, 0.9rem + 0.2vw, 1.0625rem);
-  --t-label: 0.875rem;
+  --t-m: clamp(1.25rem, 2vw, 1.65rem);
+  --t-body: clamp(1.075rem, 1rem + 0.3vw, 1.25rem);
+  --t-label: 0.975rem;
 
   /* --- movimiento --- */
   --ease-umbral: cubic-bezier(0.76, 0, 0.24, 1);
@@ -90,12 +90,19 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Mientras la caja está cerrada no se puede desplazar. El atributo lo pone y
+   lo quita <Umbral/>; sin JS nunca se pone, así que nunca bloquea. */
+html[data-umbral="nuevo"],
+html[data-umbral="nuevo"] body {
+  overflow: hidden;
+}
+
 body {
   margin: 0;
   background: var(--noche);
   color: var(--fg);
   font-family: var(--font-body), Georgia, "Times New Roman", serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: var(--t-body);
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
@@ -233,7 +240,7 @@ textarea {
   border: 1px solid var(--line-fuerte);
   border-radius: 999px;
   font-family: var(--font-body), Georgia, serif;
-  font-size: 0.95rem;
+  font-size: 1.025rem;
   font-weight: 400;
   letter-spacing: 0.01em;
   background: transparent;

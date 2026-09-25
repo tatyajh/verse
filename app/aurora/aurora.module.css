@@ -133,33 +133,15 @@
   padding-bottom: 0.35rem;
 }
 
-/* Filtro por tipo de prenda, solo en «Todos». */
-.filtros {
+/* Qué se está viendo: la colección, no todo el catálogo de Versé. */
+.alcance {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-bottom: clamp(2rem, 4vw, 3rem);
-}
-
-.filtros a {
-  padding: 0.55rem 1rem;
-  border: 1px solid var(--line-fuerte);
-  border-radius: 999px;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.6rem 2rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.2rem);
   color: var(--muted);
-  transition:
-    color 0.3s var(--ease-umbral),
-    border-color 0.3s var(--ease-umbral);
-}
-
-.filtros a:hover,
-.filtros a:focus-visible {
-  color: var(--fg);
-  border-color: var(--fg);
-}
-
-.filtros a.filtroActivo {
-  color: var(--fg);
-  border-color: var(--accent);
 }
 
 @media (max-width: 560px) {

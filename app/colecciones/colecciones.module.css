@@ -16,9 +16,6 @@
 }
 
 .fila {
-  display: grid;
-  grid-template-columns: 12rem 1fr;
-  gap: clamp(1.5rem, 4vw, 3rem);
   padding-block: clamp(2.2rem, 5vw, 3.5rem);
   border-top: 1px solid var(--line);
 }
@@ -27,10 +24,6 @@
   border-bottom: 1px solid var(--line);
 }
 
-.numero {
-  color: var(--muted);
-  padding-top: 1rem;
-}
 
 .cuerpo {
   display: grid;
@@ -60,14 +53,4 @@
   align-items: center;
   gap: 1.2rem 2rem;
   margin-top: 0.8rem;
-}
-
-@media (max-width: 760px) {
-  .fila {
-    grid-template-columns: 1fr;
-    gap: 0.6rem;
-  }
-  .numero {
-    padding-top: 0;
-  }
 }

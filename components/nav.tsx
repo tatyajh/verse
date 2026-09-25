@@ -136,11 +136,14 @@ export default function Nav() {
                 className={s.coleccionLink}
                 onClick={() => setColeccionesAbierto(false)}
               >
-                Ver todas
+                Todas las colecciones
               </Link>
             </div>
           )}
         </div>
+        <Link href="/piezas" className="link">
+          Piezas
+        </Link>
         <Link href="/blog" className="link">
           Diario
         </Link>

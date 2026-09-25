@@ -38,11 +38,11 @@ export default function Home() {
             </p>
             <ListaPrivada />
             <p className={s.heroEnlaces}>
-              <Link href="/aurora?view=productos" className="link">
-                Ver las piezas
-              </Link>
               <Link href="/aurora" className="link">
-                Leer la historia
+                Ver la última colección: Aurora
+              </Link>
+              <Link href="/piezas" className="link">
+                Ver todas las piezas
               </Link>
             </p>
           </div>
@@ -83,7 +83,7 @@ export default function Home() {
           <div className={s.coleccionCabecera}>
             <h2 className={s.coleccionTitulo}>Aurora</h2>
             <Link href="/aurora?view=productos" className="label link">
-              Ver todas las piezas
+              Ver toda la colección
             </Link>
           </div>
         </div>

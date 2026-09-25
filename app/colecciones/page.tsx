@@ -16,17 +16,17 @@ export default function Colecciones() {
       <div className="wrap">
         <header className={s.cabecera}>
           <h1 className={s.titulo}>Colecciones</h1>
+          <Link href="/piezas" className="link">
+            O ver todas las piezas, de todas las colecciones
+          </Link>
         </header>
 
         <ul className={s.lista}>
-          {COLECCIONES.map((c, i) => {
+          {COLECCIONES.map((c) => {
             // Las prendas sueltas de un conjunto no cuentan como pieza aparte.
             const piezas = porColeccion(c.id).filter((p) => !p.componenteDe).length;
             return (
               <li key={c.id} className={s.fila}>
-                <p className={`${s.numero} label num`}>
-                  {String(i + 1).padStart(2, "0")}
-                </p>
                 <div className={s.cuerpo}>
                   <h2 className={s.nombre}>{c.nombre}</h2>
                   <p className={s.descripcion}>{c.descripcion}</p>

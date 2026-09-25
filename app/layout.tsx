@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bodoni_Moda, Spectral } from "next/font/google";
 import "./globals.css";
+import Umbral from "@/components/umbral";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import { SITE } from "@/lib/sitio";
@@ -46,17 +47,32 @@ export const metadata: Metadata = {
   robots: { index: !PROVISIONAL, follow: !PROVISIONAL },
 };
 
+/**
+ * Decide antes del primer pintado si esta visita ve abrirse la caja (una vez
+ * por sesión). Va en el layout, que es de servidor, para que corra al parsear
+ * el HTML; dentro de un componente cliente React no lo ejecutaría.
+ */
+const DECIDIR_UMBRAL = `(function(){try{
+var visto=sessionStorage.getItem("verse.umbral");
+var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+document.documentElement.dataset.umbral=(visto||reduce)?"visto":"nuevo";
+}catch(e){document.documentElement.dataset.umbral="visto";}})()`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es"
       data-scroll-behavior="smooth"
+      // el script de abajo escribe data-umbral antes de hidratar
+      suppressHydrationWarning
       className={`${display.variable} ${body.variable}`}
     >
       <body>
+        <script dangerouslySetInnerHTML={{ __html: DECIDIR_UMBRAL }} />
         <a className="skip" href="#contenido">
           Saltar al contenido
         </a>
+        <Umbral />
         <Nav />
         <main id="contenido">{children}</main>
         <Footer />

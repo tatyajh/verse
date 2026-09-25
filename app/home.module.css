@@ -218,7 +218,7 @@
 
 .tallasTexto p {
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 1.05rem;
 }
 
 /* Letras separadas por filetes, no cajas. */
@@ -246,7 +246,7 @@
 .tablaTallas table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
 }
 
 .tablaTallas th {
@@ -256,7 +256,7 @@
   color: var(--fg);
   font-weight: 500;
   font-family: var(--font-body), serif;
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 .tablaTallas td {
@@ -275,7 +275,7 @@
   }
 
   .tablaTallas {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
   }
 
   .tablaTallas th,

@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GrupoPiezas from "@/components/grupo-piezas";
+import FiltroTipo from "@/components/filtro-tipo";
+import { agruparPorTipo, esTipoPieza } from "@/lib/catalogo";
 import CieloAurora from "@/components/aurora/cielo-aurora";
 import CapituloVelo from "@/components/aurora/capitulo-velo";
 import UmbralVestidor from "@/components/aurora/umbral-vestidor";
 import {
   porColeccion,
   porTonalidad,
-  TIPO_PLURAL,
+  getTonalidad,
   TONALIDADES,
   type Tonalidad,
   type TipoPieza,
@@ -25,26 +27,12 @@ function esTonalidad(valor: string | undefined): valor is Tonalidad {
   return TONALIDADES.some((t) => t.id === valor);
 }
 
-const TIPOS_FILTRO: TipoPieza[] = [
-  "conjunto",
-  "body",
-  "corset",
-  "bra",
-  "panty",
-  "tanga",
-  "liguero",
-  "complemento",
-];
-
 const DESCRIPCION_GRUPO: Partial<Record<TipoPieza, string>> = {
   conjunto: "Tres o cuatro prendas pensadas juntas. Cada una se vende también por separado.",
   body: "Una sola pieza, del escote a la cadera.",
   complemento: "Para completar el conjunto: accesorios y capas para llevar encima.",
 };
 
-function esTipoPieza(valor: string | undefined): valor is TipoPieza {
-  return TIPOS_FILTRO.includes(valor as TipoPieza);
-}
 
 export default async function Aurora(props: PageProps<"/aurora">) {
   const query = await props.searchParams;
@@ -59,10 +47,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
   // En la vista por momento y en «Todos» sin filtro se muestran las piezas
   // principales; las prendas sueltas aparecen bajo su conjunto o al filtrar.
   const fuente = mostrarTodosProductos ? porColeccion("aurora") : porTonalidad(activa);
-  const tipos: TipoPieza[] = filtroTipo ? [filtroTipo] : ["conjunto", "body", "complemento"];
-  const grupos = tipos
-    .map((tipo) => ({ tipo, productos: fuente.filter((p) => p.tipo === tipo) }))
-    .filter((g) => g.productos.length > 0);
+  const grupos = agruparPorTipo(fuente, filtroTipo);
 
   return (
     // data-panel: solo para que <Nav/> sepa de qué color pintarse encima
@@ -73,16 +58,12 @@ export default async function Aurora(props: PageProps<"/aurora">) {
       data-tonalidad={activa}
     >
       <div className="wrap">
-        {mostraHistoria ? (
-          <header className={s.cabecera}>
-            <h1 className={s.marcaColeccion}>
-              <span className={s.marcaVerse}>Versé</span>{" "}
-              <span className={s.marcaAurora}>Aurora</span>
-            </h1>
-          </header>
-        ) : (
-          <h1 className="sr-only">Piezas de Aurora</h1>
-        )}
+        <header className={s.cabecera}>
+          <h1 className={s.marcaColeccion}>
+            <span className={s.marcaVerse}>Versé</span>{" "}
+            <span className={s.marcaAurora}>Aurora</span>
+          </h1>
+        </header>
 
         {/* Historia / Productos */}
         <nav className={s.togglePrincipal} aria-label="Vistas">
@@ -192,7 +173,7 @@ export default async function Aurora(props: PageProps<"/aurora">) {
                 className={mostrarTodosProductos ? s.toggleActivo : ""}
                 scroll={false}
               >
-                Todos
+                Todas
               </Link>
               {TONALIDADES.map((t) => (
                 <Link
@@ -206,26 +187,19 @@ export default async function Aurora(props: PageProps<"/aurora">) {
               ))}
             </nav>
 
+            <div className={s.alcance}>
+              <p>
+                {mostrarTodosProductos
+                  ? "Todas las piezas de la colección Aurora."
+                  : `Las piezas de Aurora ${getTonalidad(activa).nombre}.`}
+              </p>
+              <Link href="/piezas" className="link">
+                Ver todas las piezas de Versé
+              </Link>
+            </div>
+
             {mostrarTodosProductos && (
-              <nav className={`${s.filtros} label`} aria-label="Tipo de prenda">
-                <Link
-                  href="/aurora?view=productos"
-                  className={!filtroTipo ? s.filtroActivo : ""}
-                  scroll={false}
-                >
-                  Todo
-                </Link>
-                {TIPOS_FILTRO.map((tipo) => (
-                  <Link
-                    key={tipo}
-                    href={`/aurora?view=productos&tipo=${tipo}`}
-                    className={filtroTipo === tipo ? s.filtroActivo : ""}
-                    scroll={false}
-                  >
-                    {TIPO_PLURAL[tipo]}
-                  </Link>
-                ))}
-              </nav>
+              <FiltroTipo base="/aurora?view=productos" activo={filtroTipo} />
             )}
 
             {grupos.map(({ tipo, productos }) => (

@@ -103,8 +103,8 @@ export default async function Pedido(props: PageProps<"/pedido">) {
           )}
 
           <div className={s.acciones}>
-            <Link href="/colecciones" className="btn btn-fg">
-              Ver colecciones
+            <Link href="/piezas" className="btn btn-fg">
+              Ver las piezas
             </Link>
             <a href="mailto:hola@verseintimates.com" className="btn">
               Escribirnos
