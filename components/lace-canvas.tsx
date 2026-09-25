@@ -9,7 +9,7 @@ import { prng, semilla } from "@/lib/azar";
  *
  * Reemplaza la foto de producto mientras no exista. Cada pieza recibe un
  * grabado propio, sembrado con su slug (idéntico entre recargas), con
- * festón, roseta y retícula de tul sobre un fondo de dos tonos.
+ * festón, arcos de cerradura y retícula de tul sobre un fondo de dos tonos.
  *
  * La paleta por defecto es la noche del sitio. Aurora trae las suyas
  * propias (ver lib/products.ts) para que cada momento se distinga
@@ -118,36 +118,33 @@ function dibujar(
     }
   });
 
-  // --- roseta: repetición polar de pétalos elípticos, tres coronas ---
+  // --- cerradura: arcos concéntricos con la forma del emblema y, al centro,
+  //     el ojo de una cerradura. Geométrico a propósito: nada floral. ---
   const cx = w * (0.42 + r() * 0.16);
   const cy = h * (0.34 + r() * 0.08);
-  const petalos = 6 + Math.floor(r() * 7);
-  const coronas = [0.1, 0.165, 0.235];
+  const coronas = [0.11, 0.17, 0.235, 0.3];
 
   coronas.forEach((k, i) => {
-    const radio = min * k;
-    const desfase = i * (Math.PI / petalos);
-    ctx.strokeStyle = `rgba(${trazo}, ${0.48 - i * 0.13})`;
-    for (let p = 0; p < petalos; p++) {
-      const a = desfase + (p * Math.PI * 2) / petalos;
-      ctx.beginPath();
-      ctx.ellipse(
-        cx + Math.cos(a) * radio * 0.62,
-        cy + Math.sin(a) * radio * 0.62,
-        radio * 0.62,
-        radio * (0.17 + r() * 0.06),
-        a,
-        0,
-        Math.PI * 2,
-      );
-      ctx.stroke();
-    }
+    const ancho = min * k;
+    const alto = ancho * (1.5 + r() * 0.15);
+    ctx.strokeStyle = `rgba(${trazo}, ${0.5 - i * 0.1})`;
+    ctx.beginPath();
+    // Arco de medio punto sobre dos rectas, como el marco del emblema.
+    ctx.moveTo(cx - ancho, cy + alto * 0.55);
+    ctx.lineTo(cx - ancho, cy - alto * 0.15);
+    ctx.arc(cx, cy - alto * 0.15, ancho, Math.PI, 0);
+    ctx.lineTo(cx + ancho, cy + alto * 0.55);
+    ctx.stroke();
   });
 
-  // Corazón de la roseta.
-  ctx.strokeStyle = `rgba(${trazo}, 0.6)`;
+  // Ojo de la cerradura.
+  const ojo = min * 0.03;
+  ctx.strokeStyle = `rgba(${trazo}, 0.62)`;
   ctx.beginPath();
-  ctx.arc(cx, cy, min * 0.022, 0, Math.PI * 2);
+  ctx.arc(cx, cy - ojo * 0.4, ojo, Math.PI * 0.72, Math.PI * 2.28);
+  ctx.lineTo(cx + ojo * 0.55, cy + ojo * 2.2);
+  ctx.lineTo(cx - ojo * 0.55, cy + ojo * 2.2);
+  ctx.closePath();
   ctx.stroke();
 
   // --- viñeta: cierra los bordes para que el grabado no se corte en seco ---
