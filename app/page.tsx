@@ -53,7 +53,7 @@ export default function Home() {
         <div className="wrap">
           <div className={s.manifiesto}>
             <h2 className={s.manifiestoTitulo}>
-              Hecha para llevarse puesta, no para guardarse.
+              Lo que va debajo merece el mismo cuidado.
             </h2>
             <div className={s.manifiestoCuerpo}>
               <p>
@@ -113,11 +113,11 @@ export default function Home() {
             <div className={s.llaveTexto}>
               <h2 className={s.llaveTitulo}>Versé</h2>
               <p>
-                La llave es el emblema de la casa. Habla de lo que se guarda y de la
-                libertad de decidir a quién se le muestra.
+                La llave es el emblema de la casa: el herraje que abre lo que se
+                guarda.
               </p>
-              <p className={s.cita}>Lo íntimo no se esconde.</p>
-              <p className={`${s.cita} ${s.citaFirma}`}>Se elige.</p>
+              <p className={s.cita}>Cada una decide qué abre.</p>
+              <p className={`${s.cita} ${s.citaFirma}`}>Y para quién.</p>
             </div>
             <KeyReveal />
           </div>
