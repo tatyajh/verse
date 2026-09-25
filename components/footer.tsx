@@ -49,11 +49,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/#llave" className="link">
-                  La llave
-                </Link>
-              </li>
-              <li>
                 <Link href="/#tallas" className="link">
                   Guía de tallas
                 </Link>

@@ -1,10 +1,9 @@
 import Link from "next/link";
 import Panel from "@/components/panel";
-import KeyReveal from "@/components/key-reveal";
-import Tela from "@/components/firmas/tela";
+import LlaveViva from "@/components/llave-viva";
 import Molderia from "@/components/firmas/molderia";
 import TransicionAurora from "@/components/firmas/transicion-aurora";
-import { FOTO_PORTADA, IMAGEN_COLECCION } from "@/lib/provisional";
+import { IMAGEN_COLECCION } from "@/lib/provisional";
 import { getColeccion } from "@/lib/colecciones";
 import Image from "next/image";
 import { ENTRADAS, formatFecha } from "@/lib/blog";
@@ -14,7 +13,7 @@ export default function Home() {
 
   return (
     <>
-      {/* 1 — Hero: la llave (el encaje que el cursor descubre). */}
+      {/* 1 — Hero: la llave del logo, que se mueve y ondula con el cursor o el dedo. */}
       <Panel tono="noche" seam={false} padded={false} className={s.hero}>
         <div className={s.luz} aria-hidden="true" />
         <div className={`${s.heroRejilla} wrap`}>
@@ -34,7 +33,7 @@ export default function Home() {
             </div>
           </div>
           <div className={s.heroFigura}>
-            <KeyReveal foto={FOTO_PORTADA} />
+            <LlaveViva />
           </div>
         </div>
       </Panel>
@@ -60,11 +59,6 @@ export default function Home() {
           </div>
         </div>
       </Panel>
-
-      {/* La tela: seda que ondula bajo el cursor. */}
-      <Tela foto="/texturas/seda-noche.jpg">
-        <p className={s.telaTexto}>Una noche. Mil versiones.</p>
-      </Tela>
 
       {/* 3 — Colección vigente: los cuatro momentos de Aurora. */}
       <Panel tono="seda" id="colecciones" seam={false}>

@@ -25,11 +25,12 @@ Otros comandos: `npm run build` (producción), `npm run lint`, `npx tsc --noEmit
 
 ## Diseño
 
-Versé tiene cinco firmas visuales, en `components/firmas/`:
+Versé tiene cinco firmas visuales (la mayoría en `components/firmas/`):
 
 - **El hilo** (`hilo.tsx`): reemplaza las líneas rectas. Cuelga entre secciones, respira y se
   deja llevar por el cursor.
-- **La tela** (`tela.tsx`, PixiJS): seda que ondula bajo el cursor, en momentos puntuales.
+- **La llave viva** (`llave-viva.tsx`, PixiJS): la llave del logo (`public/verse-llave.svg`, el
+  emblema sin la cápsula) en el hero; sigue al cursor o al dedo y ondula como seda.
 - **La moldería** (`molderia.tsx`): patronaje con medidas reales, detrás de la guía de tallas.
 - **La seda** (`umbral.tsx`): una cortina de dos hojas de seda que se abre al entrar al
   sitio y en cada cambio de página; al entrar, la seda ondea.

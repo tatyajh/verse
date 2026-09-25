@@ -375,15 +375,6 @@
   }
 }
 
-/* ---------- La tela ---------- */
-
-.telaTexto {
-  font-family: var(--font-display), Georgia, serif;
-  font-style: italic;
-  font-size: clamp(2.2rem, 5vw, 4rem);
-  color: var(--hueso);
-  text-shadow: 0 2px 20px rgb(6 6 8 / 0.7);
-}
 
 /* ---------- Moldería detrás de la guía de tallas ---------- */
 

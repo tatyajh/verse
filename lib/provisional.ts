@@ -73,8 +73,6 @@ export const IMAGEN_MOMENTO: Partial<Record<Tonalidad, string>> = ACTIVO
     }
   : {};
 
-/** Foto del hero: detrás del encaje de la llave. */
-export const FOTO_PORTADA = ACTIVO ? U("photo-1768794521439-5315a232a0e4") : undefined;
 
 export function conProvisional(p: Product, indice: number): Product {
   if (!ACTIVO) return p;
