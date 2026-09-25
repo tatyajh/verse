@@ -1,0 +1,55 @@
+.molde {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.linea {
+  fill: none;
+  stroke: var(--rose);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  stroke-opacity: 0.55;
+  /* Sin dibujar: el trazo entero escondido detrás de su propio hueco. */
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 2.8s var(--ease-umbral);
+}
+
+/* El margen de costura: punteado, más tenue. Se muestra sin animar. */
+.margen {
+  stroke-dasharray: 0.006 0.008;
+  stroke-dashoffset: 0;
+  stroke-opacity: 0;
+  transition: stroke-opacity 1.6s ease 1.4s;
+}
+
+.nota {
+  fill: var(--rose);
+  fill-opacity: 0;
+  font-family: var(--font-body), Georgia, serif;
+  font-style: italic;
+  font-size: 15px;
+  transition: fill-opacity 1s ease 2s;
+}
+
+.dibujada .linea {
+  stroke-dashoffset: 0;
+}
+
+.dibujada .margen {
+  stroke-opacity: 0.4;
+}
+
+.dibujada .nota {
+  fill-opacity: 0.8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .linea,
+  .margen,
+  .nota {
+    transition: none;
+  }
+}

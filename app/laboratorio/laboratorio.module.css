@@ -188,3 +188,65 @@
     animation: none;
   }
 }
+
+/* ---------- 4. La tela ---------- */
+
+.telaTexto {
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  max-width: 20ch;
+  color: var(--hueso);
+  text-shadow: 0 2px 20px rgb(6 6 8 / 0.7);
+}
+
+/* ---------- 5. Moldería ---------- */
+
+.molderia {
+  position: relative;
+  display: grid;
+  min-height: 34rem;
+  align-items: center;
+}
+
+.molderiaFondo {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  max-width: 1100px;
+}
+
+.molderiaTexto {
+  position: relative;
+  display: grid;
+  gap: 1.5rem;
+  max-width: 34rem;
+  margin-left: auto;
+  padding: 2rem;
+  background: rgb(6 6 8 / 0.55);
+  color: var(--muted);
+}
+
+/* ---------- 6. Navegación ---------- */
+
+.barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.barraNota {
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ---------- 7. Tarjetas ---------- */
+
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 3rem;
+  align-items: start;
+}

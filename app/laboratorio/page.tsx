@@ -13,6 +13,16 @@ import {
 import Image from "next/image";
 import Hilo from "@/components/laboratorio/hilo";
 import HiloEnlace from "@/components/laboratorio/hilo-enlace";
+import Tela from "@/components/laboratorio/tela";
+import Molderia from "@/components/laboratorio/molderia";
+import MenuSeda from "@/components/laboratorio/menu-seda";
+import TransicionAurora from "@/components/laboratorio/transicion-aurora";
+import {
+  TarjetaEditorial,
+  TarjetaEtiqueta,
+  TarjetaMolde,
+} from "@/components/laboratorio/tarjetas-sin-arco";
+import { getProduct } from "@/lib/products";
 import { FOTO_PORTADA } from "@/lib/provisional";
 import s from "./laboratorio.module.css";
 
@@ -89,6 +99,7 @@ export const metadata: Metadata = {
  * Lo que sobreviva aquí pasa a los componentes reales.
  */
 export default function Laboratorio() {
+  const tarjetas = ["aurora-eclipse", "aurora-escarcha", "aurora-rocio"].map(getProduct);
   return (
     <div className={s.pagina}>
         <header className={`${s.intro} wrap`}>
@@ -169,6 +180,62 @@ export default function Laboratorio() {
           <Hilo caida={6} alto={60} />
         </section>
 
+        {/* Prueba 4 — La tela */}
+        <p className={`${s.nota} wrap`}>
+          4. La tela: la seda responde al cursor como tela bajo tensión, lenta y
+          sutil. Para momentos puntuales (un fondo de sección, una imagen grande),
+          no para todo el sitio.
+        </p>
+        <Tela foto="/texturas/seda-noche.jpg">
+          <p className={s.telaTexto}>De noche, la versión más sensual de la misma mujer.</p>
+        </Tela>
+
+        {/* Prueba 5 — Moldería */}
+        <p className={`${s.nota} wrap`}>
+          5. Moldería: el lenguaje del patronaje (piezas, margen de costura,
+          piquetes, hilo recto y medidas reales) detrás del texto. Se dibuja una
+          vez al aparecer.
+        </p>
+        <section className={`${s.molderia} wrap`}>
+          <Molderia className={s.molderiaFondo} />
+          <div className={s.molderiaTexto}>
+            <h2 className={s.hiloTitulo}>Lo que va debajo merece el mismo cuidado.</h2>
+            <p>
+              En cada prenda cuidamos lo que casi nadie ve: dónde apoya un tirante y
+              cómo termina un borde.
+            </p>
+          </div>
+        </section>
+
+        {/* Prueba 6 — Navegación */}
+        <p className={`${s.nota} wrap`}>
+          6. Navegación: en lugar de la fila de enlaces, un solo botón con el
+          emblema. Al abrirlo, la seda de la caja de entrada se cierra desde los
+          lados y deja el menú en letra grande.
+        </p>
+        <div className={`${s.barra} wrap`}>
+          <MenuSeda />
+          <span className={s.barraNota}>Toca «Menú»</span>
+        </div>
+
+        {/* Prueba 7 — Tarjetas sin arco */}
+        <p className={`${s.nota} wrap`}>
+          7. Tarjetas sin arco: A, etiqueta de prenda colgando de un hilo (se mece
+          al pasar el cursor); B, editorial, con el nombre cruzando el borde de la
+          foto; C, marcas de corte en las esquinas, como en el patronaje.
+        </p>
+        <section className={`${s.tarjetas} wrap`}>
+          {tarjetas[0] && <TarjetaEtiqueta producto={tarjetas[0]} />}
+          {tarjetas[1] && <TarjetaEditorial producto={tarjetas[1]} />}
+          {tarjetas[2] && <TarjetaMolde producto={tarjetas[2]} />}
+        </section>
+
+        {/* Prueba 8 — Aurora como luz */}
+        <p className={`${s.nota} wrap`}>
+          8. Aurora como luz: mientras bajas, el fondo recorre los cuatro momentos y
+          el nombre cambia en el centro. Aurora se siente antes de explicarse.
+        </p>
+        <TransicionAurora />
     </div>
   );
 }

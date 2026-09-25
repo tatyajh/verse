@@ -1,0 +1,74 @@
+/* Cuatro pantallas de recorrido; el cielo se queda fijo mientras tanto. */
+.recorrido {
+  position: relative;
+  height: 400vh;
+}
+
+.cielo {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: #060608;
+}
+
+/* Grano de película muy leve: la luz tiene textura, no es un degradado plano. */
+.grano {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.momento {
+  grid-area: 1 / 1;
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s var(--ease-umbral),
+    color 0.9s ease;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nombre {
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: clamp(3.5rem, 12vw, 10rem);
+  line-height: 1;
+}
+
+.sensacion {
+  font-size: var(--t-m);
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recorrido {
+    height: auto;
+  }
+  .cielo {
+    position: relative;
+    height: auto;
+    display: grid;
+    gap: 3rem;
+    padding: 4rem 0;
+  }
+  .momento {
+    grid-area: auto;
+    opacity: 1;
+    transform: none;
+  }
+}

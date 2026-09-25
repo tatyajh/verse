@@ -8,27 +8,39 @@
   display: block;
 }
 
+/* El filtro vive en un SVG sin tamaño. */
+.filtros {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
 .hoja {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 50.5vw; /* medio viewport + solape, para que no se vea una fisura */
+  /* Un poco más grandes que la pantalla: al ondear, los bordes se desplazan
+     y no deben dejar ver lo de atrás. */
+  top: -3vh;
+  bottom: -3vh;
+  /* Medio viewport más un solape fijo: la ondulación desplaza hasta ~70px y
+     no debe abrir una fisura en la costura. */
+  width: calc(50vw + 6rem);
+  filter: url(#umbral-ondas);
   z-index: 300;
   /* Las dos hojas son una sola tela de seda partida por la costura: cada una
      muestra su mitad de la misma imagen. */
   background: var(--noche) url("/texturas/seda-noche.jpg") no-repeat;
-  background-size: 101vw 100vh;
+  background-size: calc(100vw + 6rem) 106vh;
   transition: transform 1.4s var(--ease-umbral);
   will-change: transform;
 }
 
 .izq {
-  left: 0;
+  left: -3rem;
   background-position: left center;
 }
 
 .der {
-  right: 0;
+  right: -3rem;
   background-position: right center;
 }
 

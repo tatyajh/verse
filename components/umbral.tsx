@@ -60,6 +60,29 @@ export default function Umbral() {
       aria-hidden="true"
       inert
     >
+      {/* La seda ondea: ruido que se mueve y desplaza la imagen como tela al
+          aire. Se intensifica cuando las hojas se abren. Solo vive mientras
+          la caja está en pantalla (una vez por sesión). */}
+      <svg className={s.filtros} aria-hidden="true" focusable="false">
+        <filter id="umbral-ondas" x="-5%" y="-5%" width="110%" height="110%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.004 0.012" numOctaves="2" seed="7">
+            <animate
+              attributeName="baseFrequency"
+              dur="3.2s"
+              values="0.004 0.012;0.006 0.016;0.004 0.012"
+              repeatCount="indefinite"
+            />
+          </feTurbulence>
+          <feDisplacementMap in="SourceGraphic" scale={abierto ? 70 : 26}>
+            <animate
+              attributeName="scale"
+              dur="2.4s"
+              values={abierto ? "70;46;70" : "26;38;26"}
+              repeatCount="indefinite"
+            />
+          </feDisplacementMap>
+        </filter>
+      </svg>
       <div className={`${s.hoja} ${s.izq}`} />
       <div className={`${s.hoja} ${s.der}`} />
       <div className={s.costura} />
