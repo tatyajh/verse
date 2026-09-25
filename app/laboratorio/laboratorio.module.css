@@ -55,24 +55,30 @@
   }
 }
 
-/* El logo real, enorme y cortado por el borde derecho. */
+/* El logo real, completo, a todo el ancho disponible. */
 .wordmark {
   position: relative;
   display: block;
-  margin-left: 20vw;
-  width: 118vw;
-  max-width: none;
+  width: 100%;
+  max-width: 1400px;
   height: auto;
+  margin-inline: auto;
   pointer-events: none;
 }
 
-/* Foto pequeña, rectangular, que interrumpe el wordmark. */
+.heroFila {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 3rem;
+  margin-top: clamp(2.5rem, 6vw, 5rem);
+}
+
 .foto {
-  position: absolute;
-  right: 12vw;
-  /* Cae sobre la línea de INTIMATES del wordmark. */
-  top: calc(12vh + 22vw);
-  width: clamp(9rem, 17vw, 15rem);
+  position: relative;
+  flex: none;
+  width: clamp(10rem, 20vw, 17rem);
   aspect-ratio: 3 / 4;
   overflow: hidden;
 }
@@ -82,11 +88,9 @@
 }
 
 .heroTexto {
-  position: relative;
   display: grid;
   gap: 2rem;
   max-width: 24rem;
-  margin-top: clamp(2rem, 5vw, 4rem);
 }
 
 .heroFrase {
@@ -100,19 +104,68 @@
 }
 
 @media (max-width: 760px) {
-  .wordmark {
-    margin-left: 4vw;
-    width: 170vw;
+  .heroFila {
+    flex-direction: column-reverse;
+    align-items: stretch;
   }
   .foto {
-    position: relative;
-    right: auto;
-    top: auto;
-    margin: 2rem 0 0 auto;
+    width: 60%;
+    align-self: flex-end;
   }
 }
 
-/* ---------- 2. El hilo ---------- */
+/* ---------- 2. Tipografía ---------- */
+
+.tipos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+  gap: 3rem 4rem;
+}
+
+.tipo {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.tipoNombre {
+  color: var(--rose);
+  font-size: 0.95rem;
+}
+
+.tipoMarca {
+  font-size: clamp(3.5rem, 7vw, 5.5rem);
+  line-height: 1;
+  color: var(--rose);
+}
+
+.tipoTitulo {
+  font-size: clamp(1.7rem, 2.8vw, 2.3rem);
+  font-weight: 400;
+  line-height: 1.12;
+  max-width: 18ch;
+}
+
+.tipoCuerpo {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  max-width: 40ch;
+}
+
+.tipoCursiva {
+  font-style: italic;
+  font-size: 1.4rem;
+}
+
+.tipoNota {
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+/* ---------- 3. El hilo ---------- */
 
 .hiloDemo {
   display: grid;
@@ -134,25 +187,4 @@
   .luz {
     animation: none;
   }
-}
-
-/* ---------- 3. La llave ---------- */
-
-.llaveDemo {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem 5rem;
-  padding-block: 4rem;
-}
-
-.puerta {
-  font-family: var(--font-display), "Didot", serif;
-  font-size: clamp(2.4rem, 7vw, 5.5rem);
-  line-height: 1;
-  color: var(--fg);
-  transition: color 0.4s var(--ease-umbral);
-}
-
-.puerta:hover {
-  color: var(--rose);
 }
