@@ -34,7 +34,7 @@ export default function Home() {
 
         <div className={`${s.heroPie} wrap`}>
           <p className={s.heroFrase}>
-            Lencería diseñada en Medellín. Para el día entero, o para una sola
+            Lencería diseñada en Medellín para el día entero o para una sola
             noche.
           </p>
           <div className={s.heroBotones}>
@@ -58,12 +58,12 @@ export default function Home() {
             <div className={s.manifiestoCuerpo}>
               <p>
                 Versé diseña lencería para mujeres que no reservan lo bello para una
-                ocasión. Encaje, transparencias y herrajes pensados para acompañar el
-                día entero, y la noche que no estaba en los planes.
+                ocasión. Trabajamos el encaje y la transparencia para que acompañen el
+                día entero y también la noche que no estaba en los planes.
               </p>
               <p>
-                En cada pieza cuidamos lo que casi nadie ve: dónde apoya un tirante,
-                cómo termina un borde, qué se muestra y qué apenas se insinúa.
+                En cada pieza cuidamos lo que casi nadie ve: dónde apoya un tirante y
+                cómo termina un borde.
               </p>
             </div>
           </div>
@@ -116,8 +116,7 @@ export default function Home() {
                 La llave es el emblema de la casa: el herraje que abre lo que se
                 guarda.
               </p>
-              <p className={s.cita}>Cada una decide qué abre.</p>
-              <p className={`${s.cita} ${s.citaFirma}`}>Y para quién.</p>
+              <p className={s.cita}>Cada una decide qué abre y para quién.</p>
             </div>
             <KeyReveal />
           </div>

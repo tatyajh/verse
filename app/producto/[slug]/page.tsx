@@ -21,10 +21,10 @@ export async function generateMetadata(
   if (!producto) return { title: "Pieza no encontrada" };
   return {
     title: producto.nombre,
-    description: producto.resumen ?? `${producto.nombre} — Versé Intimates.`,
+    description: producto.resumen ?? `${producto.nombre}, de la colección Aurora de Versé Intimates.`,
     openGraph: {
       title: `${producto.nombre} — Versé`,
-      description: producto.resumen ?? `${producto.nombre} — Versé Intimates.`,
+      description: producto.resumen ?? `${producto.nombre}, de la colección Aurora de Versé Intimates.`,
     },
   };
 }

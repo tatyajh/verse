@@ -20,7 +20,7 @@ const COPY: Record<string, { titulo: string; texto: string }> = {
   PENDING: {
     titulo: "Tu pago está en proceso.",
     texto:
-      "Algunos medios —PSE entre ellos— tardan unos minutos en confirmar. Te avisamos por correo apenas el banco responda.",
+      "Algunos medios, como PSE, tardan unos minutos en confirmar. Te avisamos por correo apenas el banco responda.",
   },
   DECLINED: {
     titulo: "El pago no se completó.",

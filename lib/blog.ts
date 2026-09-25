@@ -36,7 +36,7 @@ export const ENTRADAS: Entrada[] = [
       {
         tipo: "parrafo",
         texto:
-          "Noctis es la medianoche, en negro y oro. Vigilia, la hora azul en que el cielo empieza a cambiar. Borealis, el momento en que se enciende, en jade y lila. Prima Luce, la primera luz, en perla y rosa. Cuatro momentos, veinte piezas.",
+          "Noctis es la medianoche, en negro y oro. Vigilia, la hora azul en que el cielo empieza a cambiar. Borealis, el momento en que se enciende, en jade y lila. Prima Luce, la primera luz, en perla y rosa. En total son cuatro momentos y veinte piezas.",
       },
       {
         tipo: "cita",
