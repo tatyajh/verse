@@ -43,6 +43,38 @@
   transform: scale(1.035);
 }
 
+/* Velo de tul sobre la foto, el mismo gesto de la llave a escala pequeña:
+   al pasar el cursor se levanta y deja ver la pieza. Solo con puntero que
+   puede posarse; en pantallas táctiles la foto se ve limpia. */
+@media (hover: hover) and (pointer: fine) {
+  .marco::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-color: rgb(6 6 8 / 0.28);
+    background-image:
+      radial-gradient(circle at 9px 0, transparent 8px, rgb(236 232 234 / 0.2) 8.4px, transparent 9.6px),
+      radial-gradient(circle at 9px 11px, rgb(236 232 234 / 0.16) 2px, transparent 2.4px),
+      repeating-linear-gradient(62deg, rgb(236 232 234 / 0.08) 0 1px, transparent 1px 11px),
+      repeating-linear-gradient(-62deg, rgb(236 232 234 / 0.08) 0 1px, transparent 1px 11px);
+    background-size: 18px 18px, 18px 18px, auto, auto;
+    clip-path: inset(0 0 0 0);
+    transition: clip-path 0.9s var(--ease-umbral);
+  }
+
+  .card:hover .marco::after,
+  .card:focus-within .marco::after {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marco::after {
+    display: none;
+  }
+}
+
 .pie {
   display: grid;
   gap: 0.45rem;

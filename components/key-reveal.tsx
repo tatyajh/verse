@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useMedia } from "@/lib/media";
 import { VerseMark } from "./verse-mark";
+import SedaPixi from "./seda-pixi";
 import s from "./key-reveal.module.css";
 
 /**
@@ -18,6 +19,10 @@ export default function KeyReveal({ foto }: { foto?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const reducido = useMedia("(prefers-reduced-motion: reduce)");
   const fino = useMedia("(pointer: fine)");
+  // Con PixiJS la foto ondula como seda; mientras carga (o si no hay WebGL)
+  // se ve la <Image> normal.
+  const [seda, setSeda] = useState(false);
+  const alListo = useCallback(() => setSeda(true), []);
 
   useEffect(() => {
     const el = ref.current;
@@ -85,12 +90,13 @@ export default function KeyReveal({ foto }: { foto?: string }) {
             fill
             priority
             sizes="(max-width: 860px) 90vw, 40vw"
-            className={s.foto}
+            className={`${s.foto} ${seda ? s.oculta : ""}`}
           />
         ) : (
           <VerseMark size="42%" />
         )}
       </div>
+      {foto && !reducido && <SedaPixi foto={foto} onListo={alListo} />}
       <div className={s.encaje} />
       <div className={s.filete} />
     </div>
