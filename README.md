@@ -25,7 +25,7 @@ Otros comandos: `npm run build` (producción), `npm run lint`, `npx tsc --noEmit
 
 ## Diseño
 
-Versé tiene cinco firmas visuales, probadas en `/laboratorio` y en `components/firmas/`:
+Versé tiene cinco firmas visuales, en `components/firmas/`:
 
 - **El hilo** (`hilo.tsx`): reemplaza las líneas rectas. Cuelga entre secciones, respira y se
   deja llevar por el cursor.
@@ -36,8 +36,9 @@ Versé tiene cinco firmas visuales, probadas en `/laboratorio` y en `components/
 - **Aurora como luz** (`transicion-aurora.tsx`): en la portada, el fondo recorre los cuatro
   momentos al bajar.
 
-La llave del logo es la única forma de arco (el hero). Las fotos son rectangulares, con
-marcas de corte en las esquinas; en la tienda, cada producto lleva una etiqueta colgante.
+Las fotos de producto van en arco de espejo, el óvalo del emblema; la foto de la
+colección, con marcas de corte en las esquinas. En la tienda, cada producto lleva una
+etiqueta colgante.
 
 **Paleta.** Sale del moodboard de Aurora. Los tokens semánticos (`--bg`, `--fg`, `--muted`,
 `--line`, `--accent`) se reasignan según `data-panel`, así que cada componente se escribe
@@ -55,7 +56,7 @@ El oro rosa y su versión honda `#C4734A` son el metal del logo y se reservan pa
 **Tipografía.** Dos cortes de los tipos Fell (imprenta inglesa, fines del siglo XVII):
 IM Fell French Canon para el nombre, títulos, lema y citas, e IM Fell Great Primer para todo
 lo demás, en minúscula normal. Solo existen en peso normal; su tinta irregular es parte del
-carácter. Se eligieron en `/laboratorio` entre candidatas poco usadas. Se cargan con `next/font`.
+carácter. Se eligieron entre candidatas poco usadas. Se cargan con `next/font`.
 
 **Qué evitar** (se ve genérico, hecho con AI): cuadrículas de tarjetas idénticas, etiquetas en
 mayúsculas espaciadas sobre los títulos, datos unidos con «·», botones que no llevan a ningún

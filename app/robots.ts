@@ -10,7 +10,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
       // Páginas personales o de proceso: no aportan nada en un buscador.
-      disallow: ["/api/", "/carrito", "/favoritos", "/pedido", "/laboratorio"],
+      disallow: ["/api/", "/carrito", "/favoritos", "/pedido"],
     },
     sitemap: `${SITE}/sitemap.xml`,
   };

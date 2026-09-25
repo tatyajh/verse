@@ -2,7 +2,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Panel from "@/components/panel";
-import { TarjetaEditorial } from "@/components/firmas/tarjetas-sin-arco";
+import { TarjetaEditorial } from "@/components/firmas/tarjeta-editorial";
 import VisorPieza from "@/components/visor-pieza";
 import BotonFavorito from "@/components/boton-favorito";
 import BotonWhatsApp from "@/components/boton-whatsapp";

@@ -10,7 +10,8 @@
   aspect-ratio: 4 / 5;
   overflow: hidden;
   background: var(--noche);
-  border-radius: 2px;
+  /* Arco de espejo: el mismo óvalo vertical del emblema. */
+  border-radius: 50% 50% 14% 14% / 32% 32% 7% 7%;
 }
 
 /* Marcas de corte en las esquinas: el lenguaje del patronaje. */

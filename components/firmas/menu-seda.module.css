@@ -1,4 +1,4 @@
-/* Toma la letra y el color de donde esté (el nav o el laboratorio). */
+/* Toma la letra y el color del nav. */
 .boton {
   display: inline-flex;
   align-items: center;
