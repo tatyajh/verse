@@ -2,7 +2,6 @@ import type { CSSProperties } from "react";
 import Link from "next/link";
 import Panel from "@/components/panel";
 import KeyReveal from "@/components/key-reveal";
-import ListaPrivada from "@/components/lista-privada";
 import { FOTO_PORTADA, IMAGEN_COLECCION } from "@/lib/provisional";
 import { getColeccion } from "@/lib/colecciones";
 import Image from "next/image";
@@ -25,7 +24,7 @@ export default function Home() {
 
   return (
     <>
-      {/* 1 — Hero: la llave (el encaje que el cursor descubre) y la lista privada. */}
+      {/* 1 — Hero: la llave (el encaje que el cursor descubre). */}
       <Panel tono="noche" seam={false} padded={false} className={s.hero}>
         <div className={`${s.heroRejilla} wrap`}>
           <div className={s.heroTexto}>
@@ -34,11 +33,6 @@ export default function Home() {
               Ropa interior para la comodidad de cada día y lencería para la
               noche. Diseñada en Medellín.
             </p>
-            <p className={s.heroInvitacion}>
-              La primera edición de Aurora se ofrece primero a quienes estén en la
-              lista.
-            </p>
-            <ListaPrivada />
             <div className={s.heroBotones}>
               <Link href="/aurora" className="btn btn-fg">
                 Ver Aurora
