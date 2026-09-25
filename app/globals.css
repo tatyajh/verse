@@ -176,7 +176,7 @@ textarea {
 
 /* nombre de familia, no de tamaño: display se usa en muchas escalas */
 .display {
-  font-family: var(--font-display), "Didot", "Times New Roman", serif;
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
   font-weight: 400;
   letter-spacing: 0.02em;
 }

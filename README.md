@@ -43,8 +43,10 @@ una vez y sirve en los dos fondos. `/aurora` define además sus propios tokens p
 
 El oro rosa y su versión honda `#C4734A` son el metal del logo y se reservan para la marca.
 
-**Tipografía.** Dos familias: Bodoni Moda (títulos y, en cursiva, lema y citas) y Spectral
-(todo lo demás, incluidas etiquetas y precios, en minúscula normal). Se cargan con `next/font`.
+**Tipografía.** Dos cortes de los tipos Fell (imprenta inglesa, fines del siglo XVII):
+IM Fell French Canon para el nombre, títulos, lema y citas, e IM Fell Great Primer para todo
+lo demás, en minúscula normal. Solo existen en peso normal; su tinta irregular es parte del
+carácter. Se eligieron en `/laboratorio` entre candidatas poco usadas. Se cargan con `next/font`.
 
 **Qué evitar** (se ve genérico, hecho con AI): cuadrículas de tarjetas idénticas, etiquetas en
 mayúsculas espaciadas sobre los títulos, datos unidos con «·», botones que no llevan a ningún

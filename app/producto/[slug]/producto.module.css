@@ -59,7 +59,7 @@
 }
 
 .nombre {
-  font-family: var(--font-display), "Didot", serif;
+  font-family: var(--font-display), Georgia, serif;
   font-size: clamp(2.4rem, 5.5vw, 4.25rem);
   line-height: 0.98;
   letter-spacing: 0.02em;

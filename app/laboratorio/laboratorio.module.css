@@ -14,7 +14,7 @@
 }
 
 .introTitulo {
-  font-family: var(--font-display), "Didot", serif;
+  font-family: var(--font-display), Georgia, serif;
   font-size: var(--t-xl);
   color: var(--fg);
 }
@@ -173,7 +173,7 @@
 }
 
 .hiloTitulo {
-  font-family: var(--font-display), "Didot", serif;
+  font-family: var(--font-display), Georgia, serif;
   font-size: var(--t-xl);
   max-width: 18ch;
 }

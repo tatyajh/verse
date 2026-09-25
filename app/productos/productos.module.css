@@ -6,7 +6,7 @@
 }
 
 .titulo {
-  font-family: var(--font-display), "Didot", serif;
+  font-family: var(--font-display), Georgia, serif;
   font-size: var(--t-xl);
   line-height: 1;
 }

@@ -20,7 +20,7 @@
 }
 
 .titulo {
-  font-family: var(--font-display), "Didot", serif;
+  font-family: var(--font-display), Georgia, serif;
   font-size: var(--t-xl);
   line-height: 1;
 }
@@ -42,7 +42,7 @@
 }
 
 .subtitulo {
-  font-family: var(--font-display), "Didot", serif;
+  font-family: var(--font-display), Georgia, serif;
   font-size: clamp(1.4rem, 2.6vw, 1.85rem);
   line-height: 1.15;
   margin-top: clamp(1rem, 3vw, 2rem);
@@ -50,7 +50,7 @@
 
 /* La única cursiva de la entrada: si hubiera dos, ninguna sería especial. */
 .cita {
-  font-family: var(--font-display), "Didot", serif;
+  font-family: var(--font-display), Georgia, serif;
   font-style: italic;
   font-size: clamp(1.5rem, 3vw, 2.1rem);
   line-height: 1.25;
@@ -88,7 +88,7 @@
 }
 
 .otraTitulo {
-  font-family: var(--font-display), "Didot", serif;
+  font-family: var(--font-display), Georgia, serif;
   font-size: clamp(1.3rem, 2.4vw, 1.7rem);
   line-height: 1.15;
   transition: color 0.4s var(--ease-umbral);

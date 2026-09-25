@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bodoni_Moda, Spectral } from "next/font/google";
+import { IM_Fell_French_Canon, IM_Fell_Great_Primer } from "next/font/google";
 import "./globals.css";
 import Umbral from "@/components/umbral";
 import Nav from "@/components/nav";
@@ -7,19 +7,20 @@ import Footer from "@/components/footer";
 import { SITE } from "@/lib/sitio";
 import { ACTIVO as PROVISIONAL } from "@/lib/provisional";
 
-/* Dos familias: Bodoni Moda para títulos y citas (su cursiva reemplaza a la
-   caligráfica), Spectral para todo lo demás, incluidas etiquetas y precios. */
-const display = Bodoni_Moda({
-  weight: ["400", "500"],
+/* Dos cortes de los tipos Fell, de una imprenta inglesa de finales del
+   siglo XVII: French Canon (cuerpo grande) para el nombre, títulos y citas;
+   Great Primer para todo lo demás. Solo existen en peso normal, con su tinta
+   irregular: es parte del carácter de la marca. */
+const display = IM_Fell_French_Canon({
+  weight: "400",
   style: ["normal", "italic"],
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
 });
 
-/* Cuerpo. */
-const body = Spectral({
-  weight: ["300", "400"],
+const body = IM_Fell_Great_Primer({
+  weight: "400",
   style: ["normal", "italic"],
   subsets: ["latin"],
   variable: "--font-body",

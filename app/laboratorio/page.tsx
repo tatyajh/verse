@@ -129,9 +129,8 @@ export default function Laboratorio() {
 
         {/* Prueba 2 — Tipografía */}
         <p className={`${s.nota} wrap`}>
-          2. Tipografía: ocho candidatas poco usadas, con el mismo texto. Elijan la
-          que suene a Versé (o combinen el título de una con el cuerpo de otra).
-          La elegida escribe «Versé» en grande en el hero.
+          2. Tipografía: ocho candidatas poco usadas, con el mismo texto. Elegida
+          la A (IM Fell French Canon + Great Primer), ya aplicada en todo el sitio.
         </p>
         <section className={`${s.tipos} wrap`}>
           {TIPOGRAFIAS.map((t, i) => (
